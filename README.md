@@ -125,4 +125,4 @@ See [LICENSES.md](LICENSES.md). In short:
 - Variant B can be used commercially, with attribution.
 - Variants A and C are non-commercial.
 - City names need GeoNames attribution.
-- The code license is for the repository owner to choose; none is set yet.
+- The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

@@ -13,7 +13,7 @@
 | `models/student_A` | trained on translations by Meta NLLB-200-distilled-600M | **CC BY-NC 4.0 derived: non-commercial** |
 | `models/student_B` | trained on translations by Helsinki-NLP OPUS-MT (CC BY 4.0) and facebook/m2m100_418M (MIT) | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP |
 | `models/student_C` | both teachers | **non-commercial** (it includes NLLB-derived training data) |
-| Product word list, rules, test sets | written for this project | owner's choice |
-| Code | this repository | **not set yet: the owner should add a LICENSE file** |
+| Product word list, rules, test sets | written for this project | MIT (see LICENSE) |
+| Code | this repository | MIT (see LICENSE) |
 
 Whether a model trained on a teacher's outputs inherits the teacher's license is not settled law. The table follows the cautious reading. For commercial use, ship `student_B` and get legal advice.

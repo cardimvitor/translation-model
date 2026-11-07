@@ -12,5 +12,5 @@
   "peerDependencies": { "onnxruntime-web": "1.20.1" },
   "peerDependenciesMeta": { "onnxruntime-web": { "optional": true } },
   "devDependencies": { "onnxruntime-web": "1.20.1" },
-  "license": "SEE LICENSES.md"
+  "license": "MIT"
 }
