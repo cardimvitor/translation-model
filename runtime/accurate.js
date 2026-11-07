@@ -1,0 +1,63 @@
+/* Accurate model (JS): Fast front end + student. Same routing as accurate.py.
+ * await Accurate.init(ENNormalizer, studentInstance, Student); await Accurate.process("translate", text) */
+(function (root) {
+  "use strict";
+  let N, S, ST;
+  function init(normalizer, studentInstance, studentModule) { N = normalizer; S = studentInstance; ST = studentModule; }
+  function addressLike(part, langs) {
+    const _ = N._;
+    if (Array.from(part).some(_.isDigit)) return true;
+    const keys = _.tokens(part).map(_.normKey);
+    for (const l of langs) {
+      const A = _.rules().address[l] || [];
+      const spaced = new Set(); for (const [forms, , kind] of A) if (kind !== "s" && kind !== "p") for (const f of forms) spaced.add(f);
+      if (keys.some((k) => spaced.has(k))) return true;
+      if (["zh", "ja", "ko", "th"].includes(l)) for (const [forms, , kind] of A) if (kind === "s" || kind === "p") for (const f of forms) if (Array.from(f).length > 1 && part.includes(f)) return true;
+    }
+    return false;
+  }
+  let GEN = null;
+  function glossEn() {
+    if (!GEN) { GEN = new Set(); const g = N._.gloss(); for (const l of Object.keys(g)) if (l[0] !== "_") for (const v of Object.values(g[l])) for (const w of N._.lower(v).split(" ")) if (w) GEN.add(w); }
+    return GEN;
+  }
+  function keepsKnown(studentOut, fastOut) {
+    const have = new Set(N._.lower(studentOut).split(" ").filter(Boolean));
+    for (const w of [...have]) if (w.endsWith("s")) have.add(w.slice(0, -1));
+    return N._.lower(fastOut).split(" ").filter((w) => w && glossEn().has(w))
+      .every((w) => have.has(w) || have.has(w + "s") || (w.endsWith("s") && have.has(w.slice(0, -1))));
+  }
+  async function process(op, text, asciiOut = false) {
+    const _ = N._; const fast = N.process(op, text, asciiOut);
+    if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });
+    const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+    const langs = fast.language.map((x) => x[0]);
+    const parts = s.split(/[,，、،]/).map((p) => p.trim()).filter(Boolean);
+    if (addressLike(s, langs)) return Object.assign({}, fast, { model: "accurate" });
+    const outs = [], methods = new Set(), confs = []; const G = _.gaz();
+    const whole = fast.output.split(", ");
+    const has = (k) => Object.prototype.hasOwnProperty.call(G, k);
+    for (let i = 0; i < parts.length; i++) {
+      const p = parts[i];
+      const kp = _.normKey(p);
+      if (has(kp) || has(_.foldLatin(kp))) { outs.push((has(kp) ? G[kp] : G[_.foldLatin(kp)])[0]); methods.add("gazetteer"); confs.push(0.95); continue; }
+      let r = N.process("translate", p, asciiOut);
+      if (whole.length === parts.length) r = Object.assign({}, r, { output: whole[i] });
+      const known = _.lower(r.output).split(" ").filter((w) => w && glossEn().has(w));
+      if (r.coverage >= 1 || !known.length) { outs.push(r.output); methods.add(r.method); confs.push(r.confidence); continue; }
+      const [o, c] = await S.translate(p);
+      if (!(ST.acceptable(o, c, _.EC()) && keepsKnown(o, r.output))) { outs.push(r.output); methods.add(r.method + "(neural rejected)"); confs.push(r.confidence); continue; }
+      outs.push(asciiOut ? _.trFallback(_.foldLatin(o)) : o); methods.add("neural"); confs.push(c);
+    }
+    return Object.assign({}, fast, { output: outs.filter(Boolean).join(", "), method: [...methods].sort().join("+"),
+      confidence: confs.length ? Math.round(Math.min(...confs) * 1000) / 1000 : 0.0, model: "accurate" });
+  }
+  async function normalize(items, asciiOut = false) {
+    if (N.ensure) await N.ensure(items);           // lazy-loaded tables (no-op when everything is preloaded)
+    const out = [];
+    for (const it of items) out.push(typeof it === "string" ? await process("translate", it, asciiOut) : await process(it[0], it[1], asciiOut));
+    return out;
+  }
+  const api = { init, process, normalize };
+  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.Accurate = api;
+})(typeof self !== "undefined" ? self : this);

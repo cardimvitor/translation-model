@@ -1,0 +1,23 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: pip install onnxruntime numpy
+      - run: npm ci || npm install
+      - name: Regression gate (tuned, blind, gold; fails on any drop)
+        run: python test/gate.py
+      - name: Python / JavaScript parity (Fast, lazy loading, English check)
+        run: |
+          python test/make_parity_inputs.py
+          npm test
+      - name: Accurate parity (student B)
+        run: |
+          NEURAL_DIR=student_B python test/make_parity_accurate.py
+          NEURAL_DIR=student_B node test/parity_accurate.js

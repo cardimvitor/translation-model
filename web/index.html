@@ -1,0 +1,214 @@
+<title>Label Normalizer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of stacked "label" cards on phones, a three-column comparison grid on wide screens. */
+:root{
+  --bg:#eef0f3; --card:#ffffff; --ink:#15212c; --muted:#5b6774; --line:#d5dae0;
+  --accent:#c2410c; --accent-ink:#ffffff; --ok:#15803d; --warn:#a16207; --bad:#b91c1c;
+  --chip:#e6e9ee; --code:#f6f7f9;
+  --display:"Archivo", "Arial Narrow", Arial, sans-serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f151b; --card:#17202a; --ink:#e6ebf0; --muted:#9aa6b2; --line:#2a3642;
+  --accent:#fb923c; --accent-ink:#1a0d03; --ok:#4ade80; --warn:#facc15; --bad:#f87171;
+  --chip:#22303d; --code:#121a22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f151b; --card:#17202a; --ink:#e6ebf0; --muted:#9aa6b2; --line:#2a3642;
+  --accent:#fb923c; --accent-ink:#1a0d03; --ok:#4ade80; --warn:#facc15; --bad:#f87171;
+  --chip:#22303d; --code:#121a22; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:18px 48px}
+main{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1{font:800 clamp(1.6rem,5vw,2.3rem)/1.05 var(--display);font-stretch:80%;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1 span{color:var(--accent)}
+.sub{color:var(--muted);margin:4px 0 0;max-width:65ch}
+.label{font:600 .72rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.model{display:flex;flex-direction:column;gap:4px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;min-width:0}
+.model b{font:700 1.02rem/1.2 var(--display);font-stretch:85%}
+.model .st{font:500 .82rem/1.3 var(--mono);color:var(--muted)}
+.model .st.ready{color:var(--ok)} .model .st.err{color:var(--bad)}
+textarea,input[type=text],select{font:14px/1.45 var(--mono);color:var(--ink);background:var(--code);border:1px solid var(--line);border-radius:6px;padding:10px;width:100%}
+textarea{min-height:170px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row > *{min-width:0}
+button{font:600 .9rem/1 var(--body);border-radius:6px;padding:11px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.summary div{background:var(--chip);border-radius:6px;padding:8px 10px;font:500 .85rem/1.35 var(--mono);font-variant-numeric:tabular-nums}
+.res{display:flex;flex-direction:column;gap:10px}
+.item{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.item .in{font:500 1rem/1.35 var(--mono);overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 .75rem/1 var(--mono);padding:5px 7px;border-radius:999px;background:var(--chip);color:var(--ink);white-space:nowrap}
+.chip.en{color:var(--ok)} .chip.no{color:var(--warn)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:620px){.cols{grid-template-columns:1fr}}
+.col{background:var(--code);border-radius:6px;padding:9px 10px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.col .out{font:500 1rem/1.35 var(--body);overflow-wrap:anywhere}
+.col .how{font:400 .75rem/1.3 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.diff{outline:2px dashed var(--warn);outline-offset:-2px}
+.note{color:var(--muted);font-size:.85rem;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.item{animation:in .18s ease-out}@keyframes in{from{transform:translateY(3px)}to{transform:none}}}
+</style>
+
+<main>
+  <header>
+    <h1>Label <span>Normalizer</span></h1>
+    <p class="sub">Test the three offline models on your phone. Everything runs in this page; no text leaves your device.</p>
+  </header>
+
+  <section class="panel" aria-label="Models">
+    <div class="label">Models</div>
+    <div class="models">
+      <div class="model"><b>English check</b><span class="st" id="st-check">loading…</span><span class="note">Is the input already English? 100 KB.</span></div>
+      <div class="model"><b>Fast</b><span class="st" id="st-fast">loading…</span><span class="note">Places, addresses, transliteration, product glossary. ~28 MB.</span></div>
+      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. +24 MB (13 MB model, 11 MB runtime).</span>
+        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_A">A: NLLB teacher (non-commercial)</option><option value="student_B" selected>B: OPUS-MT teacher (commercial use OK)</option><option value="student_C">C: both teachers (non-commercial)</option></select></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Input">
+    <div class="row" style="justify-content:space-between">
+      <span class="label">Input: JSON array of [operation, text]</span>
+      <select id="preset" aria-label="Example set">
+        <option value="mix">Examples: mixed</option>
+        <option value="places">Examples: places</option>
+        <option value="address">Examples: addresses</option>
+        <option value="product">Examples: products</option>
+        <option value="translit">Examples: transliterate</option>
+      </select>
+    </div>
+    <textarea id="input" spellcheck="false" aria-label="Items to normalize"></textarea>
+    <div class="row">
+      <input type="text" id="one" placeholder="Or type one word / phrase…" aria-label="Single item" style="flex:1 1 220px">
+      <select id="op" aria-label="Operation" style="width:auto"><option>translate</option><option>transliterate</option></select>
+    </div>
+    <div class="row">
+      <button class="primary" id="run" disabled>Run</button>
+      <label class="tog"><input type="checkbox" id="ascii"> ASCII only</label>
+      <label class="tog"><input type="checkbox" id="useAcc" checked> Accurate</label>
+      <button id="copy">Copy results JSON</button>
+    </div>
+  </section>
+
+  <section class="summary" id="summary" aria-live="polite"></section>
+  <section class="res" id="results" aria-label="Results"></section>
+  <p class="note">Methods: <b>gazetteer</b> known place name · <b>dictionary</b> glossary / address words · <b>transliteration</b> romanized · <b>neural</b> student model · <b>already-english</b> kept as is. A dashed outline marks items where Fast and Accurate differ.</p>
+</main>
+
+<script src="runtime/encheck.js"></script>
+<script src="runtime/normalizer.js"></script>
+<script src="runtime/student.js"></script>
+<script src="runtime/accurate.js"></script>
+<script src="ort/ort.wasm.min.js"></script>
+<script>
+const EX = {
+  places: [["translate","Москва"],["translate","東京"],["translate","München"],["translate","Hà Nội"],["translate","กรุงเทพมหานคร"],["translate","القاهرة"],["translate","Deutschland"],["translate","ドイツ"],["translate","서울"],["translate","मुंबई"],["translate","Warszawa"],["translate","İstanbul"]],
+  address: [["translate","ул. Ленина 5"],["translate","Calle Mayor 5, Madrid"],["translate","Rua Augusta 1500, São Paulo"],["translate","東京都新宿区西新宿2-8-1"],["translate","北京市朝阳区建国路88号"],["translate","서울특별시 중구 세종대로 110"],["translate","ถนนสุขุมวิท ซอย 11 กรุงเทพมหานคร"],["translate","Atatürk Caddesi No: 25, İstanbul"],["translate","Jl. Sudirman No. 1, Jakarta"],["translate","Đường Lê Lợi, Quận 1, Hồ Chí Minh"]],
+  product: [["translate","Кожаная сумка женская"],["translate","bolso de cuero negro para mujer"],["translate","真皮女士包包"],["translate","蓝牙耳机"],["translate","スマホケース"],["translate","schwarze Lederjacke"],["translate","kadın deri çanta"],["translate","sepatu olahraga pria"],["translate","túi da nữ màu đen"],["translate","ساعة ذهبية"],["translate","women's black leather bag"],["translate","Samsung Galaxy S23 Ultra"]],
+  translit: [["transliterate","ул. Ленина 5"],["transliterate","東京都新宿区西新宿"],["transliterate","서울특별시 중구 세종대로 110"],["transliterate","महात्मा गांधी मार्ग"],["transliterate","Екатеринбург"],["transliterate","ภูเก็ต"],["transliterate","上海市浦东新区世纪大道100号"]],
+};
+EX.mix = [EX.places[0], EX.places[1], EX.address[0], EX.address[3], EX.product[0], EX.product[2], EX.product[5], EX.translit[1], EX.product[10], EX.address[6]];
+const $ = (id) => document.getElementById(id);
+const fmt = (a) => "[\n" + a.map((x) => "  " + JSON.stringify(x)).join(",\n") + "\n]";
+function setPreset() { $("input").value = fmt(EX[$("preset").value]); }
+$("preset").addEventListener("change", setPreset); setPreset();
+const loadJson = (n) => fetch("data/" + n).then((r) => { if (!r.ok) throw new Error(n + " " + r.status); return r.json(); });
+let fastReady = false, accReady = false, lastResults = [];
+const mb = (bytes) => (bytes / 1e6).toFixed(1) + " MB";
+
+async function boot() {
+  const t0 = performance.now();
+  try {
+    await ENNormalizer.init(loadJson, ENCheck);
+    fastReady = true;
+    $("st-check").textContent = "ready"; $("st-check").className = "st ready";
+    $("st-fast").textContent = `ready in ${((performance.now() - t0) / 1000).toFixed(1)} s`; $("st-fast").className = "st ready";
+    $("run").disabled = false;
+  } catch (e) { $("st-fast").textContent = "failed: " + e.message; $("st-fast").className = "st err"; $("st-check").textContent = "failed"; return; }
+  try {
+    const t1 = performance.now();
+    ort.env.wasm.numThreads = 1; ort.env.wasm.wasmPaths = new URL("ort/", location.href).href;
+    const bin = (n) => fetch("models/" + n + (n.endsWith(".onnx") ? ".wasm" : ""))  /* published as .wasm: the host serves no .onnx */.then((r) => r.arrayBuffer());
+    const js = (n) => fetch("models/" + n).then((r) => r.json());
+    const S = await Student.create(ort, bin, js, ENNormalizer._.lower, $("variant").value);
+    Accurate.init(ENNormalizer, S, Student);
+    accReady = true;
+    $("st-acc").textContent = `ready in ${((performance.now() - t1) / 1000).toFixed(1)} s`; $("st-acc").className = "st ready";
+  } catch (e) { $("st-acc").textContent = "failed: " + e.message; $("st-acc").className = "st err"; }
+}
+
+function card(it, fast, acc, chk, tf, ta) {
+  const d = document.createElement("article"); d.className = "item";
+  const lang = fast.language && fast.language[0] ? `${fast.language[0][0]} ${Math.round(fast.language[0][1] * 100)}%` : "";
+  d.innerHTML = `<div class="in"></div>
+    <div class="meta"><span class="chip">${it[0]}</span><span class="chip">${lang}</span><span class="chip">${fast.script || "-"}</span>
+      <span class="chip ${chk.english ? "en" : "no"}">${chk.english ? "already English" : "not English"} · ${chk.score}</span></div>
+    <div class="cols"><div class="col"><span class="label">Fast</span><span class="out"></span><span class="how"></span></div>
+      <div class="col"><span class="label">Accurate</span><span class="out"></span><span class="how"></span></div></div>`;
+  d.querySelector(".in").textContent = it[1];
+  const cols = d.querySelectorAll(".col");
+  cols[0].querySelector(".out").textContent = fast.output;
+  cols[0].querySelector(".how").textContent = `${fast.method} · conf ${fast.confidence} · ${tf.toFixed(2)} ms`;
+  if (acc) {
+    cols[1].querySelector(".out").textContent = acc.output;
+    cols[1].querySelector(".how").textContent = `${acc.method} · conf ${acc.confidence} · ${ta.toFixed(0)} ms`;
+    if (acc.output !== fast.output) cols[1].classList.add("diff");
+  } else { cols[1].querySelector(".out").textContent = "—"; cols[1].querySelector(".how").textContent = accReady ? "off" : "not loaded"; }
+  return d;
+}
+
+async function run() {
+  let items;
+  const one = $("one").value.trim();
+  if (one) items = [[$("op").value, one]];
+  else {
+    try { items = JSON.parse($("input").value); if (!Array.isArray(items)) throw 0; }
+    catch { $("summary").innerHTML = `<div>Input must be a JSON array like [["translate","Москва"]].</div>`; return; }
+    items = items.map((x) => typeof x === "string" ? ["translate", x] : x);
+  }
+  $("run").disabled = true; $("results").innerHTML = ""; lastResults = [];
+  const ascii = $("ascii").checked, useAcc = $("useAcc").checked && accReady;
+  let sf = 0, sa = 0, sc = 0;
+  for (const it of items) {
+    let t = performance.now(); const chk = ENCheck.isEnglish(it[1], "strict"); sc += performance.now() - t;
+    t = performance.now(); const fast = ENNormalizer.process(it[0], it[1], ascii); const tf = performance.now() - t; sf += tf;
+    let acc = null, ta = 0;
+    if (useAcc) { t = performance.now(); acc = await Accurate.process(it[0], it[1], ascii); ta = performance.now() - t; sa += ta; }
+    $("results").appendChild(card(it, fast, acc, chk, tf, ta));
+    lastResults.push({ operation: it[0], input: it[1], english_check: chk, fast, accurate: acc });
+  }
+  const n = items.length;
+  $("summary").innerHTML = `<div>${n} item${n > 1 ? "s" : ""}</div><div>English check ${(sc * 1000 / n).toFixed(0)} µs/item</div>
+    <div>Fast ${(sf / n).toFixed(2)} ms/item</div><div>Accurate ${useAcc ? (sa / n).toFixed(0) + " ms/item" : "off"}</div>`;
+  $("run").disabled = false;
+}
+$("run").addEventListener("click", run);
+$("variant").addEventListener("change", async () => {   // swap the Accurate model
+  accReady = false; $("st-acc").textContent = "loading…"; $("st-acc").className = "st";
+  try {
+    const t1 = performance.now();
+    const bin = (n) => fetch("models/" + n + (n.endsWith(".onnx") ? ".wasm" : "")).then((r) => r.arrayBuffer());
+    const S = await Student.create(ort, bin, (n) => fetch("models/" + n).then((r) => r.json()), ENNormalizer._.lower, $("variant").value);
+    Accurate.init(ENNormalizer, S, Student); accReady = true;
+    $("st-acc").textContent = `ready in ${((performance.now() - t1) / 1000).toFixed(1)} s`; $("st-acc").className = "st ready";
+  } catch (e) { $("st-acc").textContent = "failed: " + e.message; $("st-acc").className = "st err"; }
+});
+$("one").addEventListener("keydown", (e) => { if (e.key === "Enter") run(); });
+$("copy").addEventListener("click", async () => {
+  const txt = JSON.stringify(lastResults, null, 1);
+  try { await navigator.clipboard.writeText(txt); $("copy").textContent = "Copied"; }
+  catch { $("input").value = txt; $("input").select(); $("copy").textContent = "Selected in box"; }
+  setTimeout(() => ($("copy").textContent = "Copy results JSON"), 1500);
+});
+boot();
+</script>

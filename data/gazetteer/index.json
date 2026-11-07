@@ -1,0 +1,35 @@
+{
+"parts": [
+"Arabic",
+"Cyrillic",
+"Devanagari",
+"Greek",
+"Han",
+"Hangul",
+"Kana",
+"Latin",
+"Other",
+"Thai"
+],
+"meta": {
+"countries_keys": 40349,
+"entries": 340797,
+"city_alt_names_seen": 311042,
+"sources": [
+"CLDR (Unicode License) via Babel",
+"GeoNames (CC BY 4.0) via geonamescache"
+]
+},
+"mb": {
+"Arabic": 1.47,
+"Cyrillic": 1.54,
+"Devanagari": 0.4,
+"Greek": 0.02,
+"Han": 0.65,
+"Hangul": 0.25,
+"Kana": 0.37,
+"Latin": 9.18,
+"Other": 0.5,
+"Thai": 0.13
+}
+}

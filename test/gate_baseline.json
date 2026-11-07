@@ -1,0 +1,19 @@
+{
+ "scores": {
+  "fast_tuned": 70,
+  "fast_blind": 43,
+  "fast_gold_exact": 0.1969,
+  "fast_gold_chrF": 42.54,
+  "student_A_gold_exact": 0.2406,
+  "student_A_gold_chrF": 44.93,
+  "student_B_gold_exact": 0.2094,
+  "student_B_gold_chrF": 43.24,
+  "student_C_gold_exact": 0.2469,
+  "student_C_gold_chrF": 45.42
+ },
+ "variants": [
+  "student_A",
+  "student_B",
+  "student_C"
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "runs": [
+  {
+   "minutes": 5.0,
+   "from_step": 0,
+   "to_step": 185,
+   "resume": false
+  },
+  {
+   "minutes": 235.0,
+   "from_step": 185,
+   "to_step": 8560,
+   "resume": true
+  }
+ ],
+ "evals": [
+  {
+   "bt_chrF": 18.82,
+   "bt_exact": 0.0022,
+   "gaz_chrF": 21.98,
+   "gaz_exact": 0.0267,
+   "step": 1295
+  },
+  {
+   "bt_chrF": 20.35,
+   "bt_exact": 0.0,
+   "gaz_chrF": 26.35,
+   "gaz_exact": 0.0333,
+   "step": 2344
+  },
+  {
+   "bt_chrF": 25.49,
+   "bt_exact": 0.0022,
+   "gaz_chrF": 27.44,
+   "gaz_exact": 0.0533,
+   "step": 3398
+  },
+  {
+   "bt_chrF": 30.37,
+   "bt_exact": 0.0133,
+   "gaz_chrF": 31.45,
+   "gaz_exact": 0.0667,
+   "step": 4438
+  },
+  {
+   "bt_chrF": 31.54,
+   "bt_exact": 0.02,
+   "gaz_chrF": 32.62,
+   "gaz_exact": 0.0667,
+   "step": 5486
+  },
+  {
+   "bt_chrF": 33.72,
+   "bt_exact": 0.0333,
+   "gaz_chrF": 33.49,
+   "gaz_exact": 0.0933,
+   "step": 6531
+  },
+  {
+   "bt_chrF": 33.66,
+   "bt_exact": 0.0289,
+   "gaz_chrF": 34.69,
+   "gaz_exact": 0.08,
+   "step": 7645
+  },
+  {
+   "bt_chrF": 33.63,
+   "bt_exact": 0.0333,
+   "gaz_chrF": 35.64,
+   "gaz_exact": 0.0933,
+   "step": 8560
+  },
+  {
+   "bt_chrF": 33.63,
+   "bt_exact": 0.0333,
+   "gaz_chrF": 35.64,
+   "gaz_exact": 0.0933,
+   "step": 8560
+  }
+ ],
+ "export": {
+  "chosen": "avg3",
+  "dev": {
+   "bt_chrF": 34.1,
+   "bt_exact": 0.0356,
+   "gaz_chrF": 34.33,
+   "gaz_exact": 0.0867
+  },
+  "step": 8560
+ }
+}
