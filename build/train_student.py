@@ -50,13 +50,18 @@ class Block(nn.Module):
 
 
 class Student(nn.Module):
-    def __init__(self, ns, nt, d=256, enc=4, dec=3, heads=4, ff=1024):
+    def __init__(self, ns, nt, d=256, enc=4, dec=3, heads=4, ff=1024, tie=False, max_s=MAX_S, max_t=MAX_T):
         super().__init__()
         self.se = nn.Embedding(ns, d, padding_idx=PAD); self.te = nn.Embedding(nt, d, padding_idx=PAD)
-        self.sp = nn.Embedding(MAX_S, d); self.tp = nn.Embedding(MAX_T, d)
+        self.sp = nn.Embedding(max_s, d); self.tp = nn.Embedding(max_t, d)
         self.enc = nn.ModuleList([Block(d, heads, ff, False) for _ in range(enc)])
         self.dec = nn.ModuleList([Block(d, heads, ff, True) for _ in range(dec)])
         self.ne = nn.LayerNorm(d); self.nd = nn.LayerNorm(d); self.out = nn.Linear(d, nt)
+        self.emb_scale = 1.0
+        if tie:     # v5: one word-piece vocabulary for input and output; source, target and output embeddings shared
+            assert ns == nt
+            nn.init.normal_(self.se.weight, std=d ** -0.5); self.te = self.se; self.out.weight = self.se.weight
+            self.emb_scale = d ** 0.5
 
     @staticmethod
     def pad_bias(src):
@@ -64,7 +69,7 @@ class Student(nn.Module):
 
     def encode(self, src):
         pos = torch.arange(src.shape[1]).unsqueeze(0)
-        x = self.se(src) + self.sp(pos); bias = self.pad_bias(src)
+        x = self.se(src) * self.emb_scale + self.sp(pos); bias = self.pad_bias(src)
         for b in self.enc:
             x = b(x, bias)
         return self.ne(x)
@@ -72,7 +77,7 @@ class Student(nn.Module):
     def decode(self, tgt, mem, src):
         T = tgt.shape[1]; pos = torch.arange(T).unsqueeze(0)
         causal = torch.triu(torch.ones(T, T), 1) * -1e9
-        x = self.te(tgt) + self.tp(pos); mb = self.pad_bias(src)
+        x = self.te(tgt) * self.emb_scale + self.tp(pos); mb = self.pad_bias(src)
         for b in self.dec:
             x = b(x, causal[None, None], mem, mb)
         return self.out(self.nd(x))

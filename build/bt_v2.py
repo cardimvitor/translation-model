@@ -36,6 +36,8 @@ def main(teacher):
         for line in open(out, encoding="utf-8"):
             r = json.loads(line); done.add((r["en"], r["lang"]))
     J = [j for j in J if j not in done]
+    if os.environ.get("NEW_TITLES_ONLY"):          # v5: only titles that have no translation yet, in any language
+        have = {e for e, _ in done}; J = [j for j in J if j[0] not in have]
     if teacher == "nllb":                          # titles already translated into 8 languages by v3 (bt.jsonl)
         v3 = {json.loads(l)["en"] for l in open(os.path.join(W, "bt.jsonl"), encoding="utf-8")}
         J = [j for j in J if j[0] not in v3]

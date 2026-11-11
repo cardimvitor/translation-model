@@ -3,10 +3,15 @@
 (function (root) {
   "use strict";
   let N, S, ST;
-  function init(normalizer, studentInstance, studentModule) { N = normalizer; S = studentInstance; ST = studentModule; }
+  // decision rule: "v2" (default, tuned on held-out names) or "v1" (v4 behaviour); same as accurate.py
+  const POLICY = { name: "v2", tau: 0.0, digitsAreAddress: false };
+  function init(normalizer, studentInstance, studentModule, policy) { N = normalizer; S = studentInstance; ST = studentModule; if (policy) Object.assign(POLICY, policy); }
   function addressLike(part, langs) {
+    if (Array.from(part).some(N._.isDigit)) return true;
+    return addressWords(part, langs);
+  }
+  function addressWords(part, langs) {
     const _ = N._;
-    if (Array.from(part).some(_.isDigit)) return true;
     const keys = _.tokens(part).map(_.normKey);
     for (const l of langs) {
       const A = _.rules().address[l] || [];
@@ -27,7 +32,30 @@
     return N._.lower(fastOut).split(" ").filter((w) => w && glossEn().has(w))
       .every((w) => have.has(w) || have.has(w + "s") || (w.endsWith("s") && have.has(w.slice(0, -1))));
   }
+  let AEN = null;
+  function addressEn() {
+    if (!AEN) { AEN = new Set(); for (const A of Object.values(N._.rules().address)) for (const [, en] of A) for (const w of N._.lower(en).replace(/^-+/, "").split(" ")) if (w.length > 2) AEN.add(w); }
+    return AEN;
+  }
+  function isAddressV2(s, langs, fast) {
+    if (addressWords(s, langs)) return true;
+    if (Array.from(s).some(N._.isDigit))
+      return fast.method.includes("gazetteer") || N._.lower(fast.output).split(" ").some((w) => addressEn().has(w.replace(/^[,.]+|[,.]+$/g, "")));
+    return false;
+  }
+  async function processV2(op, text, asciiOut) {
+    const _ = N._; const fast = N.process(op, text, asciiOut);
+    if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });
+    const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+    const langs = fast.language.map((x) => x[0]);
+    if ((fast.coverage || 0) >= 1 || isAddressV2(s, langs, fast) || (POLICY.digitsAreAddress && addressLike(s, langs))) return Object.assign({}, fast, { model: "accurate" });
+    const [o, c] = await S.translate(s);
+    if (o && c >= POLICY.tau && ST.acceptable(o, 1.0, _.EC()) && keepsKnown(o, fast.output))
+      return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o)) : o, method: "neural", confidence: Math.round(c * 1000) / 1000, model: "accurate" });
+    return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });
+  }
   async function process(op, text, asciiOut = false) {
+    if (POLICY.name === "v2") return processV2(op, text, asciiOut);
     const _ = N._; const fast = N.process(op, text, asciiOut);
     if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });
     const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
@@ -58,6 +86,6 @@
     for (const it of items) out.push(typeof it === "string" ? await process("translate", it, asciiOut) : await process(it[0], it[1], asciiOut));
     return out;
   }
-  const api = { init, process, normalize };
+  const api = { init, process, normalize, POLICY };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.Accurate = api;
 })(typeof self !== "undefined" ? self : this);

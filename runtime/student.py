@@ -3,9 +3,10 @@ import json, os, re, unicodedata
 import numpy as np
 import onnxruntime as ort
 import normalizer as F
+import bpe as BPE
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_B"))   # student_A / student_B / student_C
+MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_MAX"))   # student_MAX (default) / _B2 / _C2 / _A / _B / _C
 
 
 class Student:
@@ -23,7 +24,8 @@ class Student:
 
     def translate(self, text):
         v = self.v
-        ids = [self.si.get(c, v["unk"]) for c in list(self.prep(text))[: v["max_src"]]]
+        pieces = BPE.encode(self.prep(text), v["bpe"]["src"]) if v.get("bpe") else list(self.prep(text))
+        ids = [self.si.get(c, v["unk"]) for c in pieces[: v["max_src"]]]
         if not ids:
             return "", 0.0
         src = np.array([ids], np.int64)
@@ -65,7 +67,7 @@ def _translate_kv(self, src):
         if nxt == v["eos"]:
             break
         out.append(nxt); lps.append(lp); tok = nxt
-    txt = "".join(self.tv[i] for i in out)
+    txt = BPE.decode([self.tv[i] for i in out]) if v.get("bpe") else "".join(self.tv[i] for i in out)
     conf = float(np.exp(np.mean(lps))) if lps else 0.0
     return txt, round(conf, 3)
 

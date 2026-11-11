@@ -16,6 +16,17 @@ import train_student as TS
 from train_student import Student, PAD, UNK, BOS, EOS, MAX_S, MAX_T
 from analyze_student import greedy, clean, chrf
 W = os.path.join(HERE, "work")
+sys.path.insert(0, os.path.join(ROOT, "runtime"))
+import bpe as BPE
+TOK = {"src": None, "tgt": None}          # v5: word-piece merges (--bpe); None = one token per character
+
+
+def tok(s, side):
+    return BPE.encode(s, TOK[side]) if TOK[side] else s
+
+
+def detok(s):
+    return BPE.decode([s]) if TOK["tgt"] else s
 
 
 def load(v, split):
@@ -25,7 +36,7 @@ def load(v, split):
 def dev_score(model, dev, si, tv):
     model.eval()
     with torch.no_grad():
-        outs = greedy(model, [p["src"] for p in dev], si, tv)
+        outs = [detok(o) for o in greedy(model, [tok(p["src"], "src") for p in dev], si, tv)]
     model.train(); r = {}
     for kind in ("bt", "gaz"):
         idx = [i for i, p in enumerate(dev) if p["kind"] == kind]
@@ -58,9 +69,17 @@ def main():
     ap.add_argument("--ckpt-min", type=float, default=30); ap.add_argument("--dev-n", type=int, default=600)
     ap.add_argument("--resume", action="store_true"); ap.add_argument("--export-only", action="store_true")
     ap.add_argument("--total-min", type=float, default=None); ap.add_argument("--latest-min", type=float, default=5)
+    ap.add_argument("--enc-lr-scale", type=float, default=1.0, help="learning-rate factor for the encoder (JEPA-Gen: 0.3)")
+    ap.add_argument("--init-enc", default=None, help="JEPA-Gen: start the encoder (and source vocabulary) from models/jepa_*/jepa.pt")
+    ap.add_argument("--max-len", type=int, default=MAX_S, help="longest input/output in characters (or pieces)")
+    ap.add_argument("--tie", action="store_true", help="share input/output embeddings (needs a joint --bpe)")
+    ap.add_argument("--bpe", default=None, help="build/work/bpe_<V>.json (v5 word pieces)")
     ap.add_argument("--avg", type=int, default=3); ap.add_argument("--threads", type=int, default=4)
     a = ap.parse_args()
     torch.set_num_threads(a.threads); torch.manual_seed(0); rng = random.Random(0)
+    BP = json.load(open(a.bpe, encoding="utf-8")) if a.bpe else None
+    if BP:
+        TOK["src"], TOK["tgt"] = BP["src"]["merges"], BP["tgt"]["merges"]
     OUT = os.path.join(ROOT, "models", f"student_{a.variant}"); CK = os.path.join(OUT, "ckpt"); os.makedirs(CK, exist_ok=True)
     logp = os.path.join(OUT, "train_log.json"); log = json.load(open(logp)) if os.path.exists(logp) else {"runs": [], "evals": []}
     dev_all = load(a.variant, "dev"); random.Random(5).shuffle(dev_all)
@@ -83,20 +102,36 @@ def main():
         sv = ["<pad>", "<unk>", "<s>", "</s>"] + [c for c, n in cs.most_common() if n >= 3]
         tv = ["<pad>", "<unk>", "<s>", "</s>"] + [c for c, n in ct.most_common() if n >= 3]
         cfg = dict(d=a.d, enc=a.enc, dec=a.dec, heads=a.heads, ff=a.ff); step0 = 0
+        if a.max_len != MAX_S:
+            cfg["max_s"] = cfg["max_t"] = a.max_len
+        if a.tie:
+            cfg["tie"] = True
+        if BP:
+            sv, tv = BP["src"]["tokens"], BP["tgt"]["tokens"]
+        if a.init_enc:
+            JE = torch.load(a.init_enc, map_location="cpu"); sv = JE["vocab"]; jc = JE["cfg"]
+            cfg.update(d=jc["d"], enc=jc["layers"], heads=jc["heads"], ff=jc["ff"])
     si = {c: i for i, c in enumerate(sv)}; ti = {c: i for i, c in enumerate(tv)}
     model = Student(len(sv), len(tv), **cfg)
     if a.resume or a.export_only:
         model.load_state_dict(ck["model"])
+    elif a.init_enc:                                # JEPA context encoder -> student encoder (same parameter names)
+        miss = model.load_state_dict({k: v for k, v in JE["E"].items() if not k.startswith("sp.") or v.shape == model.sp.weight.shape}, strict=False)
+        print("encoder from JEPA:", a.init_enc, "| not loaded:", len(miss.missing_keys), "decoder/output tensors", flush=True)
     print(f"variant {a.variant} | params {sum(p.numel() for p in model.parameters()) / 1e6:.1f}M | cfg {cfg} | src vocab {len(sv)} tgt {len(tv)}", flush=True)
 
     if not a.export_only:
         train = load(a.variant, "train")
-        enc_s = lambda s: [si.get(c, UNK) for c in s[:MAX_S]]
-        enc_t = lambda s: [BOS] + [ti.get(c, UNK) for c in s[:MAX_T - 2]] + [EOS]
-        weights = {"bt": 2, "gloss": 2, "gaz": 1, "noise": 1}
+        ML_S, ML_T = cfg.get("max_s", MAX_S), cfg.get("max_t", MAX_T)
+        enc_s = lambda s: [si.get(c, UNK) for c in tok(s, "src")[:ML_S]]
+        enc_t = lambda s: [BOS] + [ti.get(c, UNK) for c in tok(s, "tgt")[:ML_T - 2]] + [EOS]
+        weights = {"bt": 2, "gloss": 2, "gaz": 1, "noise": 1, "kd": 1, "real": 3}
         data = [(enc_s(p["src"]), enc_t(p["tgt"])) for p in train if p["src"] and p["tgt"] for _ in range(weights.get(p["kind"], 1))]
         print("training pairs (weighted)", len(data), flush=True)
-        opt = torch.optim.AdamW(model.parameters(), lr=a.lr, weight_decay=0.01)
+        enc_names = ("se.", "sp.", "enc.", "ne.")       # a pretrained (JEPA) encoder learns more gently
+        pe = [p for n, p in model.named_parameters() if n.startswith(enc_names)]
+        pd = [p for n, p in model.named_parameters() if not n.startswith(enc_names)]
+        opt = torch.optim.AdamW([{"params": pe, "scale": a.enc_lr_scale}, {"params": pd, "scale": 1.0}], lr=a.lr, weight_decay=0.01)
         if a.resume and "opt" in ck:
             opt.load_state_dict(ck["opt"])
         lossf = nn.CrossEntropyLoss(ignore_index=PAD, label_smoothing=0.1)
@@ -117,7 +152,7 @@ def main():
                 frac = min(1, (done_min + (now - t_start) / 60) / total) if total else (now - t_start) / (a.minutes * 60)
                 lr = peak * min(1, (step - step0 + 1) / max(1, warm)) * (0.05 + 0.95 * 0.5 * (1 + math.cos(math.pi * frac)))
                 for g in opt.param_groups:
-                    g["lr"] = lr
+                    g["lr"] = lr * g.get("scale", 1.0)
                 S = max(len(x[0]) for x in b); T = max(len(x[1]) for x in b)
                 src = torch.tensor([x[0] + [PAD] * (S - len(x[0])) for x in b]); tgt = torch.tensor([x[1] + [PAD] * (T - len(x[1])) for x in b])
                 logits = model(src, tgt[:, :-1]); loss = lossf(logits.reshape(-1, logits.shape[-1]), tgt[:, 1:].reshape(-1))
@@ -156,13 +191,17 @@ def main():
     log["export"] = {"chosen": chosen, "dev": r_ch, "step": last["step"]}; json.dump(log, open(logp, "w"), indent=1)
     torch.save({"model": model.state_dict(), "svocab": sv, "tvocab": tv, "cfg": cfg}, os.path.join(OUT, "student.pt"))
     export(model, sv, tv, OUT)
+    if BP:                                          # the runtimes need the merges to split the input the same way
+        vp = os.path.join(OUT, "vocab.json"); v = json.load(open(vp, encoding="utf-8"))
+        v["bpe"] = {"src": BP["src"]["merges"], "tgt": BP["tgt"]["merges"]}
+        json.dump(v, open(vp, "w", encoding="utf-8"), ensure_ascii=False)
 
 
 def save(model, opt, sv, tv, cfg, step, CK):
     torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "svocab": sv, "tvocab": tv, "cfg": cfg, "step": step},
                os.path.join(CK, f"step_{step}.pt"))
     cks = sorted(glob.glob(os.path.join(CK, "step_*.pt")), key=lambda p: int(p.split("_")[-1][:-3]))
-    for p in cks[:-5]:
+    for p in cks[:-3]:                      # the last 3 are averaged at export; older ones only take disk
         os.remove(p)
 
 
@@ -187,7 +226,7 @@ class DecStep(nn.Module):
     def __init__(self, m): super().__init__(); self.m = m
 
     def forward(self, tok, pos, ck, cv, src_bias, pk, pv):
-        m = self.m; x = m.te(tok) + m.tp(pos); nk, nv = [], []
+        m = self.m; x = m.te(tok) * m.emb_scale + m.tp(pos); nk, nv = [], []
         for l, b in enumerate(m.dec):
             y = b.n1(x); sa = b.sa
             q = _heads(sa.q(y), sa); k = torch.cat([pk[l], _heads(sa.k(y), sa)], 2); v = torch.cat([pv[l], _heads(sa.v(y), sa)], 2)
@@ -219,7 +258,7 @@ def export(model, sv, tv, OUT):
     for n in ("encoder", "decoder"):
         quantize_dynamic(os.path.join(OUT, f"{n}.onnx"), os.path.join(OUT, f"{n}_int8.onnx"), weight_type=QuantType.QInt8)
         os.replace(os.path.join(OUT, f"{n}.onnx"), os.path.join(OUT, f"{n}_fp32.onnx.bak"))
-    json.dump({"src": sv, "tgt": tv, "max_src": MAX_S, "max_tgt": MAX_T, "pad": PAD, "unk": UNK, "bos": BOS, "eos": EOS,
+    json.dump({"src": sv, "tgt": tv, "max_src": model.sp.num_embeddings, "max_tgt": model.tp.num_embeddings, "pad": PAD, "unk": UNK, "bos": BOS, "eos": EOS,
                "kv": True, "layers": L, "heads": h, "head_dim": hd},
               open(os.path.join(OUT, "vocab.json"), "w", encoding="utf-8"), ensure_ascii=False)
     for f in sorted(os.listdir(OUT)):

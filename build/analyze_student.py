@@ -31,15 +31,21 @@ def chrf(hyp, ref, n=6, beta=2):
     return 0.0 if P + R == 0 else (1 + beta ** 2) * P * R / (beta ** 2 * P + R) * 100
 
 
+TOK = None                                   # word-piece merges of the loaded model (v5), set by load()
+
+
 @torch.no_grad()
 def greedy(model, srcs, si, tv, bs=64, max_t=64):
+    if TOK and srcs and isinstance(srcs[0], str):          # v5 models: split strings into word pieces, join the output
+        import bpe as BPE
+        return [BPE.decode([o]) for o in greedy(model, [BPE.encode(s, TOK["src"]) for s in srcs], si, tv, bs, max_t)]
     outs = []
     for i in range(0, len(srcs), bs):
         b = srcs[i:i + bs]
-        ids = [[si.get(c, TS.UNK) for c in s[:TS.MAX_S]] or [TS.UNK] for s in b]
+        ids = [[si.get(c, TS.UNK) for c in s[:model.sp.num_embeddings]] or [TS.UNK] for s in b]
         S = max(map(len, ids)); src = torch.tensor([x + [TS.PAD] * (S - len(x)) for x in ids])
         mem = model.encode(src); tgt = torch.full((len(b), 1), TS.BOS); done = torch.zeros(len(b), dtype=torch.bool)
-        for _ in range(max_t - 1):
+        for _ in range(model.tp.num_embeddings - 1):        # one step per target position
             lg = model.decode(tgt, mem, src)[:, -1]; lg[:, [TS.PAD, TS.UNK, TS.BOS]] = -1e9
             nx = lg.argmax(-1); nx[done] = TS.PAD; tgt = torch.cat([tgt, nx[:, None]], 1); done |= nx == TS.EOS
             if done.all(): break
@@ -60,6 +66,9 @@ def score(model, items, si, tv):
 
 
 def load(md):
+    global TOK
+    vp = os.path.join(md, "vocab.json")
+    TOK = json.load(open(vp, encoding="utf-8")).get("bpe") if os.path.exists(vp) else None
     ck = torch.load(os.path.join(md, "student.pt"), map_location="cpu")
     sv, tv = ck["svocab"], ck["tvocab"]; cfg = ck.get("cfg", {})
     m = TS.Student(len(sv), len(tv), **cfg); m.load_state_dict(ck["model"]); m.eval()

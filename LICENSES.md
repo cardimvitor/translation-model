@@ -10,10 +10,15 @@
 | Fallback transliteration | any-ascii | ISC |
 | Language-ID training text | NLTK data (UDHR, Europarl) | free use |
 | English product titles (training only, not shipped) | Amazon ESCI (tasksource/esci); Shopify/product-catalogue; Qdrant/hm_ecommerce_products | Apache-2.0; Apache-2.0; CC BY 4.0 |
+| Multilingual product names (training and held-out test, not shipped) | Amazon Berkeley Objects (ABO) | CC BY 4.0, **attribution required** |
+| Teacher answers for H / ALL3 / HY / MAX (training only) | Tencent Hy-MT2-1.8B (GGUF via llama.cpp) | Apache-2.0 |
 | `models/student_A` | trained on translations by Meta NLLB-200-distilled-600M | **CC BY-NC 4.0 derived: non-commercial** |
 | `models/student_B` | trained on translations by Helsinki-NLP OPUS-MT (CC BY 4.0) and facebook/m2m100_418M (MIT) | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP |
 | `models/student_C` | both teachers | **non-commercial** (it includes NLLB-derived training data) |
+| `models/student_B2` | trained on OPUS-MT translations and OPUS-MT answers | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP |
+| `models/student_C2` | OPUS-MT + NLLB | **non-commercial** (NLLB-derived) |
+| `models/student_MAX` | OPUS-MT translations and answers; Tencent Hy-MT2-1.8B answers (Apache-2.0); Amazon Berkeley Objects product names (CC BY 4.0) | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP and Amazon Berkeley Objects; Hy-MT2 Apache-2.0 notice |
 | Product word list, rules, test sets | written for this project | MIT (see LICENSE) |
 | Code | this repository | MIT (see LICENSE) |
 
-Whether a model trained on a teacher's outputs inherits the teacher's license is not settled law. The table follows the cautious reading. For commercial use, ship `student_B` and get legal advice.
+Whether a model trained on a teacher's outputs inherits the teacher's license is not settled law. The table follows the cautious reading. For commercial use, ship `student_MAX`, `student_B2` or `student_B` and get legal advice.

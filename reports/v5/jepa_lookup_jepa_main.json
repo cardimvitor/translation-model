@@ -1,0 +1,49 @@
+{
+ "threshold": 1.01,
+ "gold": {
+  "lookup_alone": {
+   "exact": 0.0031,
+   "chrF": 10.53
+  },
+  "fast": {
+   "exact": 0.2,
+   "chrF": 42.62
+  },
+  "fast+lookup": {
+   "exact": 0.2,
+   "chrF": 42.62
+  },
+  "lookup_used": 0.0,
+  "accurate": {
+   "exact": 0.2656,
+   "chrF": 48.2
+  },
+  "accurate+lookup": {
+   "exact": 0.2656,
+   "chrF": 48.2
+  }
+ },
+ "abo": {
+  "lookup_alone": {
+   "exact": 0.0,
+   "chrF": 30.07
+  },
+  "fast": {
+   "exact": 0.006,
+   "chrF": 39.13
+  },
+  "fast+lookup": {
+   "exact": 0.006,
+   "chrF": 39.13
+  },
+  "lookup_used": 0.0,
+  "accurate": {
+   "exact": 0.0282,
+   "chrF": 46.32
+  },
+  "accurate+lookup": {
+   "exact": 0.0282,
+   "chrF": 46.32
+  }
+ }
+}

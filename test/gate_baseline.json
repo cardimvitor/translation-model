@@ -1,19 +1,28 @@
 {
  "scores": {
   "fast_tuned": 70,
-  "fast_blind": 43,
-  "fast_gold_exact": 0.1969,
-  "fast_gold_chrF": 42.54,
-  "student_A_gold_exact": 0.2406,
-  "student_A_gold_chrF": 44.93,
-  "student_B_gold_exact": 0.2094,
-  "student_B_gold_chrF": 43.24,
-  "student_C_gold_exact": 0.2469,
-  "student_C_gold_chrF": 45.42
+  "fast_blind": 44,
+  "fast_gold_exact": 0.2,
+  "fast_gold_chrF": 42.62,
+  "student_A_gold_exact": 0.2812,
+  "student_A_gold_chrF": 49.55,
+  "student_B_gold_exact": 0.2406,
+  "student_B_gold_chrF": 46.54,
+  "student_C_gold_exact": 0.3063,
+  "student_C_gold_chrF": 51.02,
+  "student_B2_gold_exact": 0.2812,
+  "student_B2_gold_chrF": 49.83,
+  "student_C2_gold_exact": 0.2906,
+  "student_C2_gold_chrF": 51.04,
+  "student_MAX_gold_exact": 0.2844,
+  "student_MAX_gold_chrF": 49.07
  },
  "variants": [
   "student_A",
   "student_B",
-  "student_C"
+  "student_C",
+  "student_B2",
+  "student_C2",
+  "student_MAX"
  ]
 }

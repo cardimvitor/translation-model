@@ -1,0 +1,31 @@
+{
+ "model": "student_B2",
+ "chosen": {
+  "tau": 0.0,
+  "digits_are_address": false
+ },
+ "dev": {
+  "exact": 0.0417,
+  "chrF": 43.06
+ },
+ "gold": {
+  "rule_v1": {
+   "exact": 0.2406,
+   "chrF": 44.6
+  },
+  "rule_v2": {
+   "exact": 0.2812,
+   "chrF": 49.83
+  }
+ },
+ "abo": {
+  "rule_v1": {
+   "exact": 0.006,
+   "chrF": 39.13
+  },
+  "rule_v2": {
+   "exact": 0.004,
+   "chrF": 38.44
+  }
+ }
+}

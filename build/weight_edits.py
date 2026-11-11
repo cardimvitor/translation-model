@@ -65,7 +65,12 @@ def finetune(model, edits, train, si, ti, minutes, lr=1e-4):
             else: m[:, sl] = 0
             masks.append((p, m))
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01); lossf = nn.CrossEntropyLoss(ignore_index=PAD, label_smoothing=0.1)
-    data = [([si.get(c, UNK) for c in p["src"][:MAX_S]], [BOS] + [ti.get(c, UNK) for c in p["tgt"][:MAX_T - 2]] + [EOS]) for p in train]
+    if AS.TOK:                                     # v5 word-piece model
+        import bpe as BPE
+        ts = lambda x: BPE.encode(x, AS.TOK["src"]); tt = lambda x: BPE.encode(x, AS.TOK["tgt"])
+    else:
+        ts = tt = lambda x: x
+    data = [([si.get(c, UNK) for c in ts(p["src"])[:model.sp.num_embeddings]], [BOS] + [ti.get(c, UNK) for c in tt(p["tgt"])[:model.tp.num_embeddings - 2]] + [EOS]) for p in train]
     rng = random.Random(1); t_end = time.time() + minutes * 60; model.train(); steps = 0
     while time.time() < t_end:
         b = rng.sample(data, 64); S = max(len(x[0]) for x in b); T = max(len(x[1]) for x in b)
@@ -90,7 +95,8 @@ def main():
     an = json.load(open(a.analysis or os.path.join(HERE, "work", f"analysis_{name}.json")))
     dev = [json.loads(l) for l in open(os.path.join(HERE, "work", a.dev), encoding="utf-8")]; random.Random(5).shuffle(dev)
     bt = [p for p in dev if p["kind"] == "bt"]; gz = [p for p in dev if p["kind"] == "gaz"]
-    confirm = bt[600:1500] + gz[200:500]                       # not the slice the analysis used
+    lo = 600 if len(bt) >= 900 else 350                         # analysis used bt[:350] / bt[:600]
+    confirm = bt[lo:1500] + gz[200:500]                       # not the slice the analysis used
     gold = gold_items(); base_sd = copy.deepcopy(model.state_dict())
     rep = {"model": name, "base": {**AS.score(model, confirm, si, tv), **gold_score(model, si, tv, gold)}, "tried": []}
     print("base", rep["base"], flush=True)
@@ -124,6 +130,9 @@ def main():
         torch.save({"model": model.state_dict(), "svocab": ck["svocab"], "tvocab": ck["tvocab"], "cfg": ck.get("cfg", {}), "edits": kept},
                    os.path.join(out, "student.pt"))
         T2.export(model, ck["svocab"], ck["tvocab"], out)
+        if AS.TOK:                                 # keep the word-piece merges with the edited model
+            vp = os.path.join(out, "vocab.json"); v = json.load(open(vp, encoding="utf-8")); v["bpe"] = AS.TOK
+            json.dump(v, open(vp, "w", encoding="utf-8"), ensure_ascii=False)
 
 
 if __name__ == "__main__":

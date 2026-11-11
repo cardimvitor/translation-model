@@ -1,0 +1,99 @@
+{
+ "runs": [
+  {
+   "minutes": 300.0,
+   "from_step": 0,
+   "to_step": 8173,
+   "resume": false
+  }
+ ],
+ "evals": [
+  {
+   "bt_chrF": 15.75,
+   "bt_exact": 0.0,
+   "gaz_chrF": 12.14,
+   "gaz_exact": 0.0,
+   "step": 812
+  },
+  {
+   "bt_chrF": 22.09,
+   "bt_exact": 0.0,
+   "gaz_chrF": 17.07,
+   "gaz_exact": 0.0,
+   "step": 1618
+  },
+  {
+   "bt_chrF": 27.45,
+   "bt_exact": 0.0044,
+   "gaz_chrF": 24.16,
+   "gaz_exact": 0.0267,
+   "step": 2406
+  },
+  {
+   "bt_chrF": 31.46,
+   "bt_exact": 0.0044,
+   "gaz_chrF": 26.06,
+   "gaz_exact": 0.0533,
+   "step": 3165
+  },
+  {
+   "bt_chrF": 34.13,
+   "bt_exact": 0.0156,
+   "gaz_chrF": 27.88,
+   "gaz_exact": 0.0667,
+   "step": 3997
+  },
+  {
+   "bt_chrF": 36.09,
+   "bt_exact": 0.0222,
+   "gaz_chrF": 33.2,
+   "gaz_exact": 0.08,
+   "step": 4830
+  },
+  {
+   "bt_chrF": 37.78,
+   "bt_exact": 0.0378,
+   "gaz_chrF": 31.82,
+   "gaz_exact": 0.08,
+   "step": 5615
+  },
+  {
+   "bt_chrF": 39.5,
+   "bt_exact": 0.0311,
+   "gaz_chrF": 32.53,
+   "gaz_exact": 0.0867,
+   "step": 6489
+  },
+  {
+   "bt_chrF": 39.56,
+   "bt_exact": 0.0356,
+   "gaz_chrF": 35.31,
+   "gaz_exact": 0.1067,
+   "step": 7357
+  },
+  {
+   "bt_chrF": 40.77,
+   "bt_exact": 0.04,
+   "gaz_chrF": 33.85,
+   "gaz_exact": 0.0933,
+   "step": 8173
+  },
+  {
+   "bt_chrF": 40.77,
+   "bt_exact": 0.04,
+   "gaz_chrF": 33.85,
+   "gaz_exact": 0.0933,
+   "step": 8173
+  }
+ ],
+ "export": {
+  "chosen": "last",
+  "dev": {
+   "bt_chrF": 40.77,
+   "bt_exact": 0.04,
+   "gaz_chrF": 33.85,
+   "gaz_exact": 0.0933
+  },
+  "step": 8173
+ }
+}

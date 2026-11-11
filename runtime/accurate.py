@@ -87,7 +87,7 @@ _MT = {}
 
 
 def mt(variant=None):
-    """Neural part: a phone student (models/<variant>, default NEURAL_DIR or "student_B");
+    """Neural part: a phone student (models/<variant>, default NEURAL_DIR or "student");
     NEURAL=nllb-600m uses NLLB instead, for comparison."""
     key = variant or "default"
     if key not in _MT:
@@ -130,7 +130,65 @@ def keeps_known(student_out, fast_out):
                for w in F.lower(fast_out).split() if w in gloss_en())
 
 
+POLICY = {"name": os.environ.get("ACC_POLICY", "v2"), "tau": float(os.environ.get("ACC_TAU", 0.0)),
+          "digits_are_address": os.environ.get("ACC_DIGITS", "0") == "1"}
+
+
+def address_words(part, langs):
+    """address_like without the "any digit" rule: only real address words (street, district ...) count."""
+    toks = F._tokens(part); keys = [F.norm_key(t) for t in toks]
+    for l in langs:
+        A = F.rules()["address"].get(l, [])
+        spaced = {f for forms, en, kind in A if kind not in ("s", "p") for f in forms}
+        if any(k in spaced for k in keys):
+            return True
+        if l in ("zh", "ja", "ko", "th") and any(f in part for forms, en, kind in A if kind in ("s", "p") for f in forms if len(f) > 1):
+            return True
+    return False
+
+
+_AEN = []
+
+
+def address_en():
+    """English words the address rules produce (Street, Ward, District ...)."""
+    if not _AEN:
+        _AEN.append({w for A in F.rules()["address"].values() for forms, en, kind in A for w in F.lower(en).lstrip("-").split() if len(w) > 2})
+    return _AEN[0]
+
+
+def is_address_v2(s, langs, fast):
+    """Address words in the input, or a number together with a place name / address word in Fast's answer
+    (product sizes like "38.5 EU" have numbers but no place)."""
+    if address_words(s, langs):
+        return True
+    if any(F.is_digit(c) for c in s):
+        return "gazetteer" in fast["method"] or any(w.strip(",.") in address_en() for w in F.lower(fast["output"]).split())
+    return False
+
+
+def process_v2(op, text, ascii_out=False, variant=None):
+    """Decision rule v2 (tuned on held-out names): the student sees the whole label and its answer is used when
+    it is confident (>= tau), English, and keeps every word Fast took from the dictionary. Places, addresses
+    (address words; digits alone do not make an address) and labels already in English stay with Fast."""
+    fast = F.process(op, text, ascii_out)
+    if fast["operation"] != "translate" or fast["method"] in ("gazetteer", "already-english") or not fast["output"]:
+        return dict(fast, model="accurate")
+    s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text)).strip()
+    langs = [l for l, _ in fast["language"]]
+    if fast.get("coverage", 0) >= 1 or is_address_v2(s, langs, fast) or (POLICY["digits_are_address"] and address_like(s, langs)):
+        return dict(fast, model="accurate")               # every word known, or an address: Fast
+    o, c = mt(variant).translate(s)
+    import student
+    if o and c >= POLICY["tau"] and student.acceptable(o, 1.0) and keeps_known(o, fast["output"]):
+        out = F.tr_fallback(F.fold_latin(o)) if ascii_out else o
+        return dict(fast, output=out, method="neural", confidence=F.r3(c), model="accurate")
+    return dict(fast, method=fast["method"] + "(neural rejected)", model="accurate")
+
+
 def process(op, text, ascii_out=False, variant=None):
+    if POLICY["name"] == "v2" and MODEL_NAME == "student":
+        return process_v2(op, text, ascii_out, variant)
     fast = F.process(op, text, ascii_out)
     if fast["operation"] != "translate" or fast["method"] in ("gazetteer", "already-english") or not fast["output"]:
         return dict(fast, model="accurate")

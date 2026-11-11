@@ -1,0 +1,52 @@
+{
+ "model": "student_B2",
+ "base": {
+  "bt_chrF": 41.78,
+  "bt_exact": 0.05,
+  "gaz_chrF": 30.64,
+  "gaz_exact": 0.0633,
+  "gold_exact": 0.1594,
+  "gold_chrF": 36.37
+ },
+ "tried": [
+  {
+   "edit": "enc5.self.head4",
+   "with": [],
+   "bt_chrF": 41.73,
+   "bt_exact": 0.0478,
+   "gaz_chrF": 31.29,
+   "gaz_exact": 0.07,
+   "kept": false
+  },
+  {
+   "edit": "dec0.self.head1",
+   "with": [],
+   "bt_chrF": 41.59,
+   "bt_exact": 0.0489,
+   "gaz_chrF": 30.23,
+   "gaz_exact": 0.0633,
+   "kept": false
+  }
+ ],
+ "kept": [],
+ "edited": {
+  "bt_chrF": 41.78,
+  "bt_exact": 0.05,
+  "gaz_chrF": 30.64,
+  "gaz_exact": 0.0633,
+  "gold_exact": 0.1594,
+  "gold_chrF": 36.37
+ },
+ "finetuned": {
+  "bt_chrF": 41.51,
+  "bt_exact": 0.0478,
+  "gaz_chrF": 32.04,
+  "gaz_exact": 0.0767,
+  "gold_exact": 0.1531,
+  "gold_chrF": 36.52,
+  "steps": 572,
+  "minutes": 15.0,
+  "used": true
+ },
+ "decision": "keep original weights"
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Label Normalizer Report</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5b616b;--line:#e3e1db;--card:#ffffff;--accent:#2f6fb3;--accent2:#9cb9dc;--good:#1f7a4a;--bad:#a8402c;--code:#f1efe9;--s1:#2f6fb3;--s2:#c4622d;--s3:#7a7f87}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15171a;--fg:#e7e7e4;--muted:#a0a5ad;--line:#2d3136;--card:#1c1f23;--accent:#6ea6e4;--accent2:#3b5878;--good:#5cc28a;--bad:#e38a74;--code:#24282d;--s1:#6ea6e4;--s2:#e8935f;--s3:#9aa0a8}}
+:root[data-theme="dark"]{--bg:#15171a;--fg:#e7e7e4;--muted:#a0a5ad;--line:#2d3136;--card:#1c1f23;--accent:#6ea6e4;--accent2:#3b5878;--good:#5cc28a;--bad:#e38a74;--code:#24282d;--s1:#6ea6e4;--s2:#e8935f;--s3:#9aa0a8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:30px;line-height:1.2;margin:0 0 6px}
+h2{font-size:22px;margin:44px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:24px 0 6px}
+p,li{max-width:72ch}
+.sub{color:var(--muted);margin:0 0 20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:20px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi b{display:block;font-size:24px}
+.kpi span{color:var(--muted);font-size:14px}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+table.wide td{white-space:nowrap}
+table.wide td:nth-child(2){white-space:normal;min-width:180px}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;margin:12px 0}
+.chart svg{width:100%;height:auto;display:block}
+.bar{fill:var(--accent2)} .bar.hi{fill:var(--accent)}
+.bl{font-size:12px;fill:var(--fg);text-anchor:end} .bv{font-size:12px;fill:var(--muted)}
+.grid{stroke:var(--line)} .tk{font-size:11px;fill:var(--muted);text-anchor:middle}
+.ln{fill:none;stroke-width:2} .ln.c1{stroke:var(--s1)} .ln.c2{stroke:var(--s2)} .ln.c3{stroke:var(--s3)} .pt.c1{fill:var(--s1)} .pt.c2{fill:var(--s2)} .pt.c3{fill:var(--s3)} .lab{font-size:12px} .lab.c1{fill:var(--s1)} .lab.c2{fill:var(--s2)} .lab.c3{fill:var(--s3)} .sw.c1{background:var(--s1)} .sw.c2{background:var(--s2)} .sw.c3{background:var(--s3)} .legend span{margin-right:14px}
+.legend{font-size:13px;color:var(--muted)} .sw{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+.note{background:var(--card);border-left:4px solid var(--accent);padding:10px 14px;border-radius:6px;margin:14px 0}
+.tl{list-style:none;padding:0} .tl li{padding:6px 0 6px 16px;border-left:2px solid var(--line);margin-left:6px}
+.tl b{color:var(--accent)}
+</style>
+</head>
+<body><main>
+<h1>Label normalizer: what we built and how the models compare</h1>
+<p class="sub">Product names, item labels and addresses in 16 languages turned into English, offline, on a phone. From the first version (Nov 4) to the JEPA experiment (Nov 11).</p>
+
+<div class="kpis">
+{{KPIS}}
+</div>
+
+<div class="note"><b>How to read the scores.</b> <i>Exact</i> is the share of outputs that match a reference English name word for word (after lowercasing). <i>chrF</i> (0–100) is a character-overlap score that gives partial credit, e.g. "cotton t-shirt" vs "cotton tee shirt". Two test sets, never used in training: <b>Labels</b> = 320 product labels I wrote by hand in 16 languages; <b>Real names</b> = 993 real marketplace product names from the Amazon Berkeley Objects set, held out before training. <i>Accurate</i> is the full system (Fast rules, then the small neural model when Fast is unsure); <i>model alone</i> is the neural model without Fast.</div>
+
+<h2>1. Every model compared</h2>
+<p>Darker bars: teachers allow commercial use. Hover a bar for the value.</p>
+<h3>Hand-written labels, Accurate system (chrF)</h3>
+{{GOLD_CHART}}
+<h3>Real marketplace names, Accurate system (chrF)</h3>
+{{ABO_CHART}}
+{{MAIN_TABLE}}
+<p class="legend">Cases = 70 tuned address and label cases; unseen = 48 blind cases written after tuning. Size = int8 encoder + decoder files (Fast's data files are shared by every model). Training = CPU time on 4 cores.</p>
+
+<h2>2. Big teacher models vs our small models</h2>
+<p>The small models learn from bigger translation models ("teachers"). Same 320 labels, teachers run on their own:</p>
+{{TEACHERS}}
+<p>Hy-MT2-7B is clearly the best translator of product labels, but at 4.6 GB and over a second per label it can't run on a phone. Our best phone model is about 200× smaller. The gap is largest on rare product words; the Fast rules close part of it for addresses and common words.</p>
+
+<h2>3. What we did, in order</h2>
+<ul class="tl">
+<li><b>v1–v2 (Nov 4–5).</b> Fast: place-name gazetteer (GeoNames), transliteration for 9 scripts, a product word list, an English check. Runs in ~2 ms per label, in Python and in the browser with identical output.</li>
+<li><b>v3 (Nov 5–6).</b> First neural model (7M parameters, NLLB teacher, 100 min). Weight study: removing one decoder attention head helped, so it was kept.</li>
+<li><b>v4 (Nov 6–8).</b> Three models: A (NLLB), B (OPUS-MT + M2M100, commercial use OK), C (both). 81k product titles, back-translation into 16 languages, restart-safe training, checkpoint averaging, weight edits per model.</li>
+<li><b>v5 (Nov 8–10).</b> Teachers' own English answers added as training targets (knowledge distillation, filtered), Tencent Hy-MT2 added as a third teacher, models B2, C2, H, ALL3, HY. Then MAX: no size limit on data, 35k real multilingual product names (ABO), 60k more titles, 10 h training.</li>
+<li><b>Products and word combinations (Nov 10).</b> 952 new product words and 2–3 word phrases mined from the Amazon ESCI and ABO catalogues, translated and round-trip checked, added to every model's word list (1,841 automatic terms in total).</li>
+<li><b>New decision rule (Nov 10).</b> When to trust the neural model instead of Fast, tuned on held-out training data. Biggest single gain of v5.</li>
+<li><b>JEPA (Nov 10–11).</b> A self-supervised encoder pretrained to predict the meaning of a label from another language, used two ways, compared against a baseline trained the same total time.</li>
+</ul>
+
+<h2>4. Changing the weights after training</h2>
+<p>After each model finished, I tested switching off each attention head and each feed-forward block one at a time on one held-out slice, kept a change only if it also helped on a second, separate slice, then tried a 15-minute retraining with the change in place. The final call needs the held-out score up and the hand-written labels not down. Checkpoint averaging (mean of the last 3 saved weights) was tested on every model too.</p>
+{{EDITS}}
+<p class="legend">Scores are model-alone chrF: held-out slice / hand-written labels. "Changes tested" counts single head or block switch-offs that looked useful in the first pass.</p>
+<p>What this showed: switching off one or two heads gives small, real gains on about half the models (they had a head that hurt). Short retraining helps when the model is undertrained (MAX, ALL3) and hurts when it is already settled (C2). Bigger cuts (whole layers, more heads) always hurt.</p>
+
+<h2>5. Deciding when to use the neural model</h2>
+<p>Old rule: use the neural model only for the words Fast could not translate. New rule: if Fast understood the label (at least one known word) or it looks like an address, keep Fast; otherwise let the neural model translate the whole label, and keep its answer if it is English and keeps the words Fast was sure of. Tuned on the held-out training split, not on the test sets.</p>
+{{RULE}}
+
+<h2>6. JEPA</h2>
+<p><b>What it is.</b> A Joint-Embedding Predictive Architecture learns by predicting the <i>meaning vector</i> of hidden or translated text instead of the text itself. Here: an encoder reads a label in one language; a predictor must output the vector that a slowly-updated copy of the encoder (EMA target) gives for the English name, and for masked-out spans of the label. No characters are generated, so it learns meaning, not spelling.</p>
+<p><b>Making it work.</b> The first run collapsed: every label got the same vector. Fixed with centering of the target vectors and a variance/covariance penalty (VICReg). Measured by retrieval: among 1,000 held-out pairs, how often the English name nearest to a foreign label's vector is the right one (chance = 0.1%).</p>
+{{JEPA_TUNE}}
+<p>Main run (3 h, best settings): {{JEPA_CURVE}}.</p>
+<h3>Use 1: JEPA-Gen, a translator built on the JEPA encoder</h3>
+<p>Same model size and data as the baseline; the encoder starts from JEPA and learns at 0.3× the decoder's speed. Fair comparison: 3 h JEPA + 3 h translation vs 6 h translation.</p>
+{{CURVES}}
+<p class="legend">Held-out score (model alone, chrF) every 30 minutes of training. JEPA-Gen's steps are translation steps only; its 3 h of JEPA pretraining come before step 0.</p>
+{{JEPA_GEN}}
+<h3>Use 2: JEPA-Lookup, translation by nearest known name</h3>
+<p>Embed 150k known English names once; for a label, return the nearest one when similarity is above a threshold tuned on held-out training data.</p>
+{{JEPA_LOOKUP}}
+<div class="note">{{JEPA_VERDICT}}</div>
+
+<h2>7. What didn't work</h2>
+<ul>
+<li><b>Word pieces (BPE) instead of characters.</b> Shorter sequences, but on 4 CPU cores the models stayed stuck repeating common words after hours. Characters learn much faster at this size.</li>
+<li><b>A 52M-parameter MAX.</b> About 3× slower per step; in the time available it would have seen too little data. The 22M design wins on CPU.</li>
+<li><b>Picking one teacher per language.</b> The held-out data was written by OPUS-MT and NLLB, which biases the choice toward them. Using every teacher's filtered answers works better.</li>
+<li><b>Hy-MT2 as main data source (HY).</b> Best teacher, but at ~2.5 s per title only 8k pairs were affordable, and its answers in the mixed models (H, ALL3) did not beat OPUS-MT alone.</li>
+<li><b>Large weight cuts and long post-edit retraining.</b> See section 4.</li>
+</ul>
+
+<h2>8. Data and licenses</h2>
+{{DATA}}
+
+<h2>9. Recommendation</h2>
+{{RECO}}
+
+<h2>10. Time spent</h2>
+{{TIME}}
+<p class="legend">Generated by build/make_report.py from the result files in build/work and models/.</p>
+</main></body></html>

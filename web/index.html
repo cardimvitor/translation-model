@@ -63,7 +63,7 @@ label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
 <main>
   <header>
     <h1>Label <span>Normalizer</span></h1>
-    <p class="sub">Test the three offline models on your phone. Everything runs in this page; no text leaves your device.</p>
+    <p class="sub">Test the offline models on your phone. Everything runs in this page; no text leaves your device.</p>
   </header>
 
   <section class="panel" aria-label="Models">
@@ -71,8 +71,8 @@ label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
     <div class="models">
       <div class="model"><b>English check</b><span class="st" id="st-check">loading…</span><span class="note">Is the input already English? 100 KB.</span></div>
       <div class="model"><b>Fast</b><span class="st" id="st-fast">loading…</span><span class="note">Places, addresses, transliteration, product glossary. ~28 MB.</span></div>
-      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. +24 MB (13 MB model, 11 MB runtime).</span>
-        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_A">A: NLLB teacher (non-commercial)</option><option value="student_B" selected>B: OPUS-MT teacher (commercial use OK)</option><option value="student_C">C: both teachers (non-commercial)</option></select></div>
+      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. +24–33 MB (13–22 MB model, 11 MB runtime).</span>
+        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_MAX" selected>v5 MAX: best on real product names (commercial use OK)</option><option value="student_B2">v5 B2: OPUS-MT teacher (commercial use OK)</option><option value="student_C">v4 C: best on short labels (non-commercial)</option></select></div>
     </div>
   </section>
 
@@ -107,6 +107,7 @@ label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
 
 <script src="runtime/encheck.js"></script>
 <script src="runtime/normalizer.js"></script>
+<script src="runtime/bpe.js"></script>
 <script src="runtime/student.js"></script>
 <script src="runtime/accurate.js"></script>
 <script src="ort/ort.wasm.min.js"></script>
