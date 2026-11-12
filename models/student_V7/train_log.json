@@ -1,0 +1,52 @@
+{
+ "evals": [
+  {
+   "bt_experts": 64.04,
+   "step": 0
+  },
+  {
+   "bt_experts": 63.49,
+   "step": 1761
+  },
+  {
+   "bt_experts": 64.39,
+   "step": 3571
+  },
+  {
+   "bt_experts": 64.03,
+   "step": 5281
+  },
+  {
+   "bt_experts": 64.63,
+   "step": 5866
+  },
+  {
+   "bt_experts": 64.29,
+   "step": 7662
+  },
+  {
+   "bt_experts": 64.21,
+   "step": 9591
+  },
+  {
+   "bt_experts": 64.18,
+   "step": 11523
+  },
+  {
+   "bt_experts": 64.56,
+   "step": 13406
+  }
+ ],
+ "args": {
+  "mode": "train",
+  "tag": "moe_v7",
+  "rank": 64,
+  "minutes": 240.0,
+  "total_min": 240.0,
+  "lr": 0.001,
+  "max_tok": 1400,
+  "ckpt_min": 30,
+  "threads": 4,
+  "resume": true
+ }
+}

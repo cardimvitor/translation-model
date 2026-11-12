@@ -13,6 +13,22 @@
     SPM = SPM || root.SPM;
     if (v.spm && !SPM) throw new Error("this model uses SentencePiece: load runtime/spm.js before student.js");
     const sp = v.spm ? SPM.create(await loadJson(dir + "/spm_src.json")) : null;
+    // v7 language experts: one small file per language, fetched the first time that language is seen
+    const NRM = typeof module !== "undefined" && module.exports ? require("./normalizer.js") : root.ENNormalizer;
+    const EX = new Map();
+    async function expert(text) {
+      const e = v.experts; const r = NRM.process("translate", text).language;
+      const lang = r && r.length && e.langs.includes(r[0][0]) && r[0][1] >= e.min_conf ? r[0][0] : null;
+      if (!EX.has(lang)) {
+        const shapes = [[e.enc_layers, e.d, e.rank], [e.enc_layers, e.rank, e.d], [e.dec_layers, e.d, e.rank], [e.dec_layers, e.rank, e.d]];
+        const total = shapes.reduce((a, sh) => a + sh[0] * sh[1] * sh[2], 0);
+        const a = lang ? new Float32Array(await loadBinary(dir + "/experts/" + lang + ".bin")) : new Float32Array(total);
+        if (a.length !== total) throw new Error("bad expert file for " + lang);
+        let o = 0; const out = shapes.map((sh) => { const n = sh[0] * sh[1] * sh[2]; const t = new ort.Tensor("float32", a.slice(o, o + n), sh); o += n; return t; });
+        EX.set(lang, out);
+      }
+      return EX.get(lang);
+    }
     const opts = { executionProviders: ["wasm"], graphOptimizationLevel: "all" };
     const enc = await ort.InferenceSession.create(new Uint8Array(await loadBinary(dir + "/encoder_int8.onnx")), opts);
     const dec = await ort.InferenceSession.create(new Uint8Array(await loadBinary(dir + "/decoder_int8.onnx")), opts);
@@ -30,7 +46,7 @@
       }
       if (!ids.length) return ["", 0.0];
       const src = T(ids, [1, ids.length]);
-      if (v.kv) return translateKv(src);
+      if (v.kv) return translateKv(src, v.experts ? await expert(prep(text)) : null);
       const mem = (await enc.run({ src })).mem;
       const out = [v.bos]; const lps = [];
       for (let k = 0; k < v.max_tgt - 1; k++) {
@@ -53,12 +69,13 @@
       let z = 0; for (let i = 0; i < lg.length; i++) z += Math.exp(lg[i] - m);
       return [arg, lg[arg] - (m + Math.log(z))];
     }
-    async function translateKv(src) {
-      const e = await enc.run({ src });
+    async function translateKv(src, ex) {
+      const e = await enc.run(ex ? { src, ed: ex[0], eu: ex[1] } : { src });
+      const dex = ex ? { dd: ex[2], du: ex[3] } : {};
       let pk = new ort.Tensor("float32", new Float32Array(0), [v.layers, 1, v.heads, 0, v.head_dim]); let pv = pk;
       let tok = v.bos; const out = []; const lps = [];
       for (let t = 0; t < v.max_tgt - 1; t++) {
-        const r = await dec.run({ tok: T([tok], [1, 1]), pos: T([t], [1, 1]), ck: e.ck, cv: e.cv, src_bias: e.src_bias, pk, pv });
+        const r = await dec.run({ tok: T([tok], [1, 1]), pos: T([t], [1, 1]), ck: e.ck, cv: e.cv, src_bias: e.src_bias, pk, pv, ...dex });
         const [arg, lp] = pick(r.logits.data);
         if (arg === v.eos) break;
         out.push(arg); lps.push(lp); tok = arg; pk = r.nk; pv = r.nv;

@@ -22,14 +22,16 @@ META = {
     "student_JG": ("JEPA-Gen", "MAX data, encoder pretrained with JEPA", True, 360),
     "student_BASE_edited": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
     "student_V6": ("v6", "pretrained OPUS-MT mul-en (77M) fine-tuned on MAX data + 58k short labels", True, 510),
+    "student_V7": ("v7", "v6 + one 3 MB expert per language (only the detected language's expert is active)", True, 240),
     "student_BASE": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
 }
 
 
 def parse_final():
     txt = open(os.path.join(W, "final_eval.txt"), encoding="utf-8").read()
-    if os.path.exists(os.path.join(W, "final_eval_V6.txt")):
-        txt += open(os.path.join(W, "final_eval_V6.txt"), encoding="utf-8").read()
+    for extra in ("final_eval_V6.txt", "final_eval_V7.txt"):
+        if os.path.exists(os.path.join(W, extra)):
+            txt += open(os.path.join(W, extra), encoding="utf-8").read()
     rows = {}
     for block in txt.split("== ")[1:]:
         name, *lines = block.strip().split("\n"); r = {}
@@ -107,12 +109,12 @@ def v6_section(F):
     SS = load(os.path.join(W, "seen_split.json"), {}); Q = load(os.path.join(W, "quant_student_V6.json"), {}); R3 = load(os.path.join(W, "routing3_student_V6.json"), {})
     if "student_V6" not in SS:
         return "<p>Pending.</p>"
-    lab = {"student_V6": "v6", "student_MAX_edited": "v5 MAX", "student_C": "v4 C"}
+    lab = {"student_V6": "v6", "student_MAX_edited": "v5 MAX", "student_C": "v4 C", "student_V7": "v7 (v6 + language experts)"}
     c = lambda d, k: f'{pct(d[k]["exact"] * 100)} / {d[k]["chrF"]:.1f}'
     rows = [["Fast only"] + [c(SS["student_V6"][s], "fast") for s in ("gold_all", "gold_unseen", "abo_all", "abo_unseen")]]
-    for m in ("student_C", "student_MAX_edited", "student_V6"):
+    for m in ("student_C", "student_MAX_edited", "student_V6", "student_V7"):
         if m in SS:
-            rows.append([f"<b>{lab[m]}</b>" if m == "student_V6" else lab[m]] + [c(SS[m][s], "accurate") for s in ("gold_all", "gold_unseen", "abo_all", "abo_unseen")])
+            rows.append([f"<b>{lab[m]}</b>" if m in ("student_V6", "student_V7") else lab[m]] + [c(SS[m][s], "accurate") for s in ("gold_all", "gold_unseen", "abo_all", "abo_unseen")])
     n = SS["student_V6"]
     h = table(["Full system", f'Labels, all {n["gold_all"]["n"]}', f'Labels, unseen {n["gold_unseen"]["n"]}',
                f'Real names, all {n["abo_all"]["n"]}', f'Real names, unseen {n["abo_unseen"]["n"]}'], rows)
@@ -136,6 +138,19 @@ def v6_section(F):
               + ("The English check on the neural answer was dropped: it rejected good answers full of brand names. " if not pol.get("need_english") else "")
               + (f'A label longer than {pol.get("addr_max_words")} words is treated as an address only if Fast knew most of its words; long product names with a number and a place word were being mistaken for addresses. ' if pol.get("addr_max_words") else "")
               + f'Tuning score: labels {R3["dev"]["labels"]["chrF"]:.1f}, titles {R3["dev"]["titles"]["chrF"]:.1f} chrF. These settings ship inside the model file, so Python and JavaScript apply the same rule.</p>')
+
+    ME = load(os.path.join(W, "moe_eval_moe_v7.json"), {})
+    if ME:
+        mr = [[n, f'{pct(ME[k]["plain_v6"]["exact"] * 100)} / {ME[k]["plain_v6"]["chrF"]:.1f}', f'{pct(ME[k]["experts"]["exact"] * 100)} / {ME[k]["experts"]["chrF"]:.1f}',
+               pct(ME[k]["routed"] * 100), pct(ME[k]["route_is_true_language"] * 100)] for k, n in (("gold", "Test labels (320)"), ("dev_labels", "Tuning labels (192)"), ("abo", "Real names (993)"))]
+        h += ("<h3>v7: one expert per language (mixture of experts)</h3>"
+              "<p>v6 stays frozen as the shared base. Each of the 16 languages gets its own small expert: an extra pair of matrices (512 → 64 → 512) added to the output of all 12 layers, "
+              "786k parameters or 3.15 MB per language. The language detector of the Fast model picks the expert, so only the needed language's parameters are loaded and active; "
+              "when the detector is unsure, no expert is used and the output is exactly v6. Experts were trained for 4 hours on the labels the detector routes to them, which keeps routing identical in training and on the phone.</p>"
+              + table(["Model alone, full precision", "Plain v6", "v6 + experts", "Labels given an expert", "Detector picked the true language"], mr)
+              + "<p>The gain is real but small and uneven: about +2 chrF on the test labels, nothing on the tuning labels or real names. As a full system (8-bit, with Fast) v7 adds about +1 chrF on labels over v6. "
+              "Two things limit it. The experts learn from the same data v6 already fitted, so they add capacity but no new knowledge; and the detector is often wrong on short Latin-script labels "
+              "(it picks the true language for about 87% of the test labels and 76% of real names). The design pays off more when each language has its own extra data or a better teacher.</p>")
     return h
 
 
@@ -294,12 +309,13 @@ def main():
     hours = sum(META[k][3] for k in META if k in F or k.replace("_edited", "") in F) / 60
     time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 12 12:50 UTC: about 202 hours (8.4 days) from the first message to this report"],
                  ["v6: short-label data + fine-tuning + export, quantization and routing tests", "1 h + 8.5 h + 1.5 h"],
+                 ["v7: language experts (training, export, tests)", "4 h + 1 h"],
                  ["Training the final neural models (sum)", f"{hours:.0f} h on 4 CPU cores"],
                  ["Teacher data generation", "~25 h (OPUS-MT, NLLB, M2M100, Hy-MT2 back-translation and answers)"],
                  ["JEPA pretraining and tuning", "2 h tuning (4 × 30 min) + 3 h main run"],
                  ["Weight testing and edits", "~25–30 h in total (about 2–3 h per model: switch-off tests, edits, 15-min retraining)"],
                  ["Total compute spent training and changing models", "≈ 130–135 h; the rest was evaluation, packaging, restarts and idle time"]]
-    reco = ("<ul><li><b>Ship v6</b> wherever a 106 MB model is acceptable: it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
+    reco = ("<ul><li><b>Ship v6 or v7</b> wherever a 106 MB model is acceptable (v7 = v6 plus a 3 MB expert per language, about +1 chrF on labels; v6 is simpler): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
             "<li><b>Ship v5 MAX</b> (22 MB) when download size or speed matters more: about 10 ms per short label.</li>"
             "<li><b>Fast alone</b> stays the right choice for addresses and place names (~2 ms); every Accurate model keeps using it for those.</li>"
             "<li><b>Next gains:</b> (1) Hy-MT2-7B scores 95 on the labels, so distilling its answers into v6 on a GPU should close much of the remaining gap; "
@@ -336,6 +352,7 @@ def main():
              "<li><b>Data that looks like the task beats more data.</b> 35k real product-name pairs lifted real-name scores by 7 points in v5; 58k short labels were a large part of v6's jump on short labels.</li>"
              "<li><b>The rules (Fast) remain necessary.</b> Place names and addresses are where the neural models are weakest (about 25 chrF on held-out place names) and Fast is near-perfect, so every system keeps Fast for those.</li>"
              "<li><b>Weight edits help a little, never a lot.</b> Switching off one or two attention heads gained 0.2–1 chrF on about half the small models. For v6 the weight change that mattered was the 8-bit conversion method (+3 chrF over the default).</li>"
+             "<li><b>Language experts (v7) work, with a small gain.</b> Only the detected language's 3 MB expert is active; labels improve by about 1 chrF over v6. They would matter more with language-specific extra data.</li>"
              "<li><b>JEPA worked technically but did not pay off</b> with this much translated data: the same hours spent on ordinary training gave a better model.</li>"
              "<li><b>Against the base models:</b> v6 beats every base model on real product names, including the 7B one (it learned the catalogue's naming style), and beats all but Hy-MT2-7B on short labels. Hy-MT2-7B scores 95 there; distilling it into v6 on a GPU is the clearest path to further gains.</li>"
              "</ol>")

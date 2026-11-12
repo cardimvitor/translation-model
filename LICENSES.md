@@ -19,6 +19,7 @@
 | `models/student_C2` | OPUS-MT + NLLB | **non-commercial** (NLLB-derived) |
 | `models/student_MAX` | OPUS-MT translations and answers; Tencent Hy-MT2-1.8B answers (Apache-2.0); Amazon Berkeley Objects product names (CC BY 4.0) | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP and Amazon Berkeley Objects; Hy-MT2 Apache-2.0 notice |
 | `models/student_V6` | fine-tuned from Helsinki-NLP/opus-mt-mul-en (CC BY 4.0) on the `student_MAX` data plus Amazon ESCI search queries (Apache-2.0) translated by OPUS-MT | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP and Amazon Berkeley Objects; Hy-MT2 Apache-2.0 notice |
+| `models/student_V7` | `student_V6` plus per-language experts trained on the same data | same as `student_V6` |
 | Product word list, rules, test sets | written for this project | MIT (see LICENSE) |
 | Code | this repository | MIT (see LICENSE) |
 

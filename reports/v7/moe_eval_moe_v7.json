@@ -1,0 +1,38 @@
+{
+ "dev_labels": {
+  "experts": {
+   "exact": 0.6302,
+   "chrF": 79.8
+  },
+  "plain_v6": {
+   "exact": 0.6302,
+   "chrF": 79.86
+  },
+  "routed": 1.0,
+  "route_is_true_language": 0.891
+ },
+ "gold": {
+  "experts": {
+   "exact": 0.7125,
+   "chrF": 82.04
+  },
+  "plain_v6": {
+   "exact": 0.6844,
+   "chrF": 79.92
+  },
+  "routed": 0.966,
+  "route_is_true_language": 0.872
+ },
+ "abo": {
+  "experts": {
+   "exact": 0.138,
+   "chrF": 69.22
+  },
+  "plain_v6": {
+   "exact": 0.1319,
+   "chrF": 69.03
+  },
+  "routed": 0.941,
+  "route_is_true_language": 0.755
+ }
+}

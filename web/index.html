@@ -71,8 +71,8 @@ label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
     <div class="models">
       <div class="model"><b>English check</b><span class="st" id="st-check">loading…</span><span class="note">Is the input already English? 100 KB.</span></div>
       <div class="model"><b>Fast</b><span class="st" id="st-fast">loading…</span><span class="note">Places, addresses, transliteration, product glossary. ~28 MB.</span></div>
-      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. 13–106 MB model + 11 MB runtime. v6 takes 0.1–0.5 s per label on a phone.</span>
-        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_V6" selected>v6: best quality (106 MB, commercial use OK)</option><option value="student_MAX">v5 MAX: small and quick (22 MB, commercial use OK)</option><option value="student_C">v4 C: smallest (13 MB, non-commercial)</option></select></div>
+      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. 13–106 MB model + 11 MB runtime. v7 takes 0.1–0.5 s per label on a phone and fetches a language expert the first time a language appears.</span>
+        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_V7" selected>v7: best quality, v6 + language experts (106 MB + 3 MB per language used, commercial use OK)</option><option value="student_MAX">v5 MAX: small and quick (22 MB, commercial use OK)</option><option value="student_C">v4 C: smallest (13 MB, non-commercial)</option></select></div>
     </div>
   </section>
 
@@ -133,7 +133,7 @@ let PARTS = null;
 async function modelBin(n) {
   if (!PARTS) PARTS = fetch("models/parts.json").then((r) => r.ok ? r.json() : {}).catch(() => ({}));
   const k = (await PARTS)[n];
-  if (!k) return fetch("models/" + n + (n.endsWith(".onnx") ? ".wasm" : "")).then((r) => r.arrayBuffer());
+  if (!k) return fetch("models/" + n + (n.endsWith(".onnx") || n.endsWith(".bin") ? ".wasm" : "")).then((r) => { if (!r.ok) throw new Error("missing " + n); return r.arrayBuffer(); });
   const bufs = await Promise.all(Array.from({ length: k }, (_, i) => fetch(`models/${n}.part${i}.wasm`).then((r) => { if (!r.ok) throw new Error("missing model piece " + i); return r.arrayBuffer(); })));
   const out = new Uint8Array(bufs.reduce((a, b) => a + b.byteLength, 0)); let o = 0;
   for (const b of bufs) { out.set(new Uint8Array(b), o); o += b.byteLength; }

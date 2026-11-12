@@ -15,6 +15,7 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
 | `student_V6` (default, v6) | pretrained OPUS-MT mul-en (77M parameters) fine-tuned on the MAX data plus 58k short labels from Amazon ESCI search queries | **commercial use OK** (attribution required) |
+| `student_V7` (v7) | v6 frozen, plus one 3 MB expert per language (mixture of experts); the language detector picks the expert, so only that language's extra parameters are loaded and used | **commercial use OK** (attribution required) |
 | `student_MAX` (v5) | OPUS-MT + Tencent Hy-MT2-1.8B answers + 35k real multilingual product names (Amazon Berkeley Objects) | **commercial use OK** (attribution required) |
 | `student_B2` (v5) | OPUS-MT, with its own English answers as extra targets | **commercial use OK** (attribution required) |
 | `student_C2` (v5) | OPUS-MT + NLLB | **non-commercial** |
@@ -42,7 +43,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 B2 | 28.1% | 49.8 | 38.4 | yes |
 | v5 C2 | 29.1% | 51.0 | 38.6 | no |
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
-| **v6** | **65.6%** | **79.6** | **66.9** | yes |
+| **v6** | 65.6% | 79.6 | 66.9 | yes |
+| **v7** (v6 + language experts) | **65.9%** | **80.8** | **67.2** | yes |
 
 Some test items also appear, by coincidence, as source text in the training data (60 of the 320 labels, 103 of the 993 real names; common labels such as "phone case" are in catalogues too). On the strictly unseen items v6 scores 60.8% / 76.3 on labels and 66.8 chrF on real names; v5 MAX scores 18.1% / 41.3 and 45.7.
 
@@ -111,7 +113,7 @@ GitHub Actions runs the gate and both parity checks on every push (`.github/work
 
 The scripts in `build/` regenerate every file in `data/` and `models/`. They need Python 3.12, plus torch, transformers, sentencepiece and onnxruntime.
 
-`build/pipeline.sh` (v4) and `build/pipeline5.sh` → `pipeline6.sh` → `pipeline7.sh` (v5 and the JEPA experiment) and `pipeline8.sh` (v6: `bt_queries.py`, `ft_marian.py`, then `export_marian.py`, `quant_marian.py`, `tune_routing3.py`) run these steps, and resume after a restart:
+`build/pipeline.sh` (v4) and `build/pipeline5.sh` → `pipeline6.sh` → `pipeline7.sh` (v5 and the JEPA experiment) and `pipeline8.sh` (v7 language experts: `pipeline10.sh`, `ft_moe.py`, `export_moe.py`; v6: `bt_queries.py`, `ft_marian.py`, then `export_marian.py`, `quant_marian.py`, `tune_routing3.py`) run these steps, and resume after a restart:
 
 1. Back-translation with each teacher.
 2. Growing the product word list. The automatic additions are kept only if no test case gets worse.
@@ -132,7 +134,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V6`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).
