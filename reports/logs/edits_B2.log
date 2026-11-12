@@ -1,0 +1,6 @@
+base {'bt_chrF': 41.78, 'bt_exact': 0.05, 'gaz_chrF': 30.64, 'gaz_exact': 0.0633, 'gold_exact': 0.1594, 'gold_chrF': 36.37}
+enc5.self.head4 {'bt_chrF': 41.73, 'bt_exact': 0.0478, 'gaz_chrF': 31.29, 'gaz_exact': 0.07} drop
+dec0.self.head1 {'bt_chrF': 41.59, 'bt_exact': 0.0489, 'gaz_chrF': 30.23, 'gaz_exact': 0.0633} drop
+edited [] {'bt_chrF': 41.78, 'bt_exact': 0.05, 'gaz_chrF': 30.64, 'gaz_exact': 0.0633, 'gold_exact': 0.1594, 'gold_chrF': 36.37}
+fine-tuned {'bt_chrF': 41.51, 'bt_exact': 0.0478, 'gaz_chrF': 32.04, 'gaz_exact': 0.0767, 'gold_exact': 0.1531, 'gold_chrF': 36.52}
+DECISION: keep original weights

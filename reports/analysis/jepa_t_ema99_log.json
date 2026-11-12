@@ -1,0 +1,41 @@
+{
+ "runs": [
+  {
+   "minutes": 30.0,
+   "to_step": 489
+  }
+ ],
+ "evals": [
+  {
+   "retrieval@1": 0.009,
+   "spread": 0.918,
+   "step": 251
+  },
+  {
+   "retrieval@1": 0.027,
+   "spread": 0.809,
+   "step": 489
+  }
+ ],
+ "args": {
+  "mode": "pretrain",
+  "data": "MAX",
+  "tag": "t_ema99",
+  "minutes": 30.0,
+  "total_min": 30.0,
+  "d": 384,
+  "layers": 6,
+  "heads": 6,
+  "ff": 1536,
+  "pred_layers": 2,
+  "lr": 0.0005,
+  "tokens": 4000,
+  "ema": 0.99,
+  "mask": 0.3,
+  "w_mask": 1.0,
+  "vic": 0.1,
+  "ckpt_min": 15,
+  "threads": 4,
+  "resume": false
+ }
+}

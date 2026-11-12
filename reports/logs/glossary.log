@@ -1,0 +1,23 @@
+terms 1050 ['led', 'water', 'steel', 'classic', 'storage', 'body', 'big', 'power', 'oil', 'high', 'home', 'short', 'long', 'party', 'full', 'clear', 'round', 'paper', 'game', 'christmas', 'heavy', 'tool', 'travel', 'tree', 'professional', 'standard', 'hand', 'solid', 'dry', 'door'] ['jersey short', 'bottle cap', 'oil by', 'carpet cleaner', 'light grey', 'white large', 'black size', 'fish oil', 'baby infant', 'purpose cleaner', 'black one', 'glass water', 'game party', 'support belt', 'book ends', 'sneakers shoes', 'grey white', 'black seed', 'playing cards', 'paper towel']
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+zh confirmed 512 / 1050
+es confirmed 709 / 1050
+pt confirmed 683 / 1050
+ar confirmed 589 / 1050
+ru confirmed 599 / 1050
+ja confirmed 477 / 1050
+ko confirmed 475 / 1050
+de confirmed 642 / 1050
+fr confirmed 676 / 1050
+hi confirmed 478 / 1050
+tr confirmed 651 / 1050
+id confirmed 614 / 1050
+vi confirmed 432 / 1050
+it confirmed 688 / 1050
+pl confirmed 622 / 1050
+th confirmed 268 / 1050
+kept terms 889
+auto glossary terms 889 entries added 8746
+kana 135 | address langs 16 | glossary terms 91 | entries per lang {'zh': 638, 'es': 829, 'pt': 786, 'ar': 703, 'ru': 760, 'ja': 594, 'ko': 592, 'de': 731, 'fr': 779, 'hi': 571, 'tr': 741, 'id': 683, 'vi': 519, 'it': 792, 'pl': 759, 'th': 355, '_rank': 980, '_drop': 11}
+kana 135 | address langs 16 | glossary terms 91 | entries per lang {'zh': 149, 'es': 142, 'pt': 129, 'ar': 133, 'ru': 183, 'ja': 142, 'ko': 138, 'de': 120, 'fr': 128, 'hi': 117, 'tr': 111, 'id': 106, 'vi': 111, 'it': 124, 'pl': 150, 'th': 103, '_rank': 91, '_drop': 11}
+Fast           exact 44/320 (13.8%)  chrF  37.0  2.0 ms/item

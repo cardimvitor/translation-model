@@ -1,0 +1,41 @@
+{
+ "runs": [
+  {
+   "minutes": 30.0,
+   "to_step": 397
+  }
+ ],
+ "evals": [
+  {
+   "retrieval@1": 0.035,
+   "spread": 0.95,
+   "step": 205
+  },
+  {
+   "retrieval@1": 0.074,
+   "spread": 0.951,
+   "step": 397
+  }
+ ],
+ "args": {
+  "mode": "pretrain",
+  "data": "MAX",
+  "tag": "t_pred4",
+  "minutes": 30.0,
+  "total_min": 30.0,
+  "d": 384,
+  "layers": 6,
+  "heads": 6,
+  "ff": 1536,
+  "pred_layers": 4,
+  "lr": 0.0005,
+  "tokens": 4000,
+  "ema": 0.996,
+  "mask": 0.3,
+  "w_mask": 1.0,
+  "vic": 0.1,
+  "ckpt_min": 15,
+  "threads": 4,
+  "resume": false
+ }
+}

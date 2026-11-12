@@ -1,0 +1,44 @@
+base {'bt_chrF': 42.33, 'bt_exact': 0.0567, 'gaz_chrF': 35.61, 'gaz_exact': 0.1067, 'gold_exact': 0.1844, 'gold_chrF': 39.59}
+dec3.self.head1 {'bt_chrF': 42.03, 'bt_exact': 0.0578, 'gaz_chrF': 35.19, 'gaz_exact': 0.1067} drop
+dec2.cross.head2 {'bt_chrF': 41.93, 'bt_exact': 0.0544, 'gaz_chrF': 36.35, 'gaz_exact': 0.11} drop
+enc0.self.head4 {'bt_chrF': 42.11, 'bt_exact': 0.0567, 'gaz_chrF': 36.72, 'gaz_exact': 0.1067} drop
+dec0.cross.head1 {'bt_chrF': 42.17, 'bt_exact': 0.0567, 'gaz_chrF': 36.29, 'gaz_exact': 0.0967} drop
+enc0.self.head3 {'bt_chrF': 42.18, 'bt_exact': 0.0533, 'gaz_chrF': 36.01, 'gaz_exact': 0.1033} drop
+enc2.self.head2 {'bt_chrF': 41.99, 'bt_exact': 0.0533, 'gaz_chrF': 35.54, 'gaz_exact': 0.1067} drop
+dec1.self.head3 {'bt_chrF': 42.09, 'bt_exact': 0.0522, 'gaz_chrF': 35.59, 'gaz_exact': 0.1033} drop
+enc5.self.head5 {'bt_chrF': 42.24, 'bt_exact': 0.0544, 'gaz_chrF': 35.6, 'gaz_exact': 0.1033} drop
+enc1.self.head2 {'bt_chrF': 42.33, 'bt_exact': 0.0556, 'gaz_chrF': 35.9, 'gaz_exact': 0.1067} drop
+enc0.self.head0 {'bt_chrF': 41.99, 'bt_exact': 0.0544, 'gaz_chrF': 36.81, 'gaz_exact': 0.1067} drop
+enc4.self.head1 {'bt_chrF': 42.08, 'bt_exact': 0.0567, 'gaz_chrF': 35.93, 'gaz_exact': 0.1033} drop
+enc4.self.head0 {'bt_chrF': 42.16, 'bt_exact': 0.0567, 'gaz_chrF': 36.21, 'gaz_exact': 0.1067} drop
+dec2.self.head4 {'bt_chrF': 42.02, 'bt_exact': 0.0578, 'gaz_chrF': 36.12, 'gaz_exact': 0.1067} drop
+enc3.self.head4 {'bt_chrF': 42.1, 'bt_exact': 0.0556, 'gaz_chrF': 36.13, 'gaz_exact': 0.1067} drop
+enc4.ffn {'bt_chrF': 42.06, 'bt_exact': 0.0489, 'gaz_chrF': 34.7, 'gaz_exact': 0.0933} drop
+enc4.self.head3 {'bt_chrF': 42.08, 'bt_exact': 0.0578, 'gaz_chrF': 35.99, 'gaz_exact': 0.1033} drop
+dec1.self.head5 {'bt_chrF': 42.39, 'bt_exact': 0.0533, 'gaz_chrF': 35.5, 'gaz_exact': 0.1067} drop
+enc4.self.head4 {'bt_chrF': 42.25, 'bt_exact': 0.0556, 'gaz_chrF': 35.69, 'gaz_exact': 0.1067} drop
+enc5.self.head0 {'bt_chrF': 42.18, 'bt_exact': 0.0567, 'gaz_chrF': 36.04, 'gaz_exact': 0.1067} drop
+enc2.self.head1 {'bt_chrF': 41.91, 'bt_exact': 0.0567, 'gaz_chrF': 35.57, 'gaz_exact': 0.1033} drop
+enc0.self.head1 {'bt_chrF': 41.94, 'bt_exact': 0.0533, 'gaz_chrF': 36.32, 'gaz_exact': 0.1067} drop
+enc2.self.head0 {'bt_chrF': 42.47, 'bt_exact': 0.0578, 'gaz_chrF': 35.98, 'gaz_exact': 0.1033} KEEP
+enc3.whole {'bt_chrF': 40.86, 'bt_exact': 0.0456, 'gaz_chrF': 35.01, 'gaz_exact': 0.0933} drop
+enc3.ffn {'bt_chrF': 41.98, 'bt_exact': 0.0522, 'gaz_chrF': 34.36, 'gaz_exact': 0.0933} drop
+enc2.self.head4 {'bt_chrF': 42.05, 'bt_exact': 0.0544, 'gaz_chrF': 36.14, 'gaz_exact': 0.1033} drop
+enc1.self.head0 {'bt_chrF': 42.08, 'bt_exact': 0.0578, 'gaz_chrF': 36.04, 'gaz_exact': 0.1067} drop
+enc3.self.head3 {'bt_chrF': 41.8, 'bt_exact': 0.0556, 'gaz_chrF': 35.82, 'gaz_exact': 0.1033} drop
+dec3.cross.head4 {'bt_chrF': 42.13, 'bt_exact': 0.0533, 'gaz_chrF': 36.21, 'gaz_exact': 0.1} drop
+enc3.self.head0 {'bt_chrF': 42.2, 'bt_exact': 0.0556, 'gaz_chrF': 36.34, 'gaz_exact': 0.1067} drop
+enc2.self.head5 {'bt_chrF': 42.44, 'bt_exact': 0.0589, 'gaz_chrF': 36.55, 'gaz_exact': 0.1033} drop
+enc1.self.head5 {'bt_chrF': 42.11, 'bt_exact': 0.0578, 'gaz_chrF': 35.87, 'gaz_exact': 0.1033} drop
+dec0.cross.head3 {'bt_chrF': 42.26, 'bt_exact': 0.0589, 'gaz_chrF': 36.53, 'gaz_exact': 0.1033} drop
+enc3.self.head5 {'bt_chrF': 42.1, 'bt_exact': 0.0567, 'gaz_chrF': 35.98, 'gaz_exact': 0.1033} drop
+enc0.self.head5 {'bt_chrF': 41.15, 'bt_exact': 0.0456, 'gaz_chrF': 35.92, 'gaz_exact': 0.1} drop
+dec3.self.head4 {'bt_chrF': 42.24, 'bt_exact': 0.0556, 'gaz_chrF': 35.85, 'gaz_exact': 0.1033} drop
+edited ['enc2.self.head0'] {'bt_chrF': 42.47, 'bt_exact': 0.0578, 'gaz_chrF': 35.98, 'gaz_exact': 0.1033, 'gold_exact': 0.1844, 'gold_chrF': 39.65}
+fine-tuned {'bt_chrF': 42.6, 'bt_exact': 0.0522, 'gaz_chrF': 36.44, 'gaz_exact': 0.1067, 'gold_exact': 0.1594, 'gold_chrF': 38.99}
+DECISION: use edited model
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+decoder_int8.onnx 8.63 MB
+encoder_int8.onnx 13.66 MB
+vocab.json 0.03 MB

@@ -1,0 +1,4 @@
+encoder from JEPA: models/jepa_main/jepa.pt | not loaded: 110 decoder/output tensors
+variant JG | params 22.0M | cfg {'d': 384, 'enc': 6, 'dec': 4, 'heads': 6, 'ff': 1536, 'max_s': 96, 'max_t': 96} | src vocab 4261 tgt 222
+training pairs (weighted) 661805
+step 200 loss 3.514 lr 2.66e-04 173 min left

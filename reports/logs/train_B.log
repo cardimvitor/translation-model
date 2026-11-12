@@ -1,0 +1,73 @@
+variant B | params 13.5M | cfg {'d': 320, 'enc': 6, 'dec': 3, 'heads': 4, 'ff': 1280} | src vocab 3165 tgt 177
+training pairs (weighted) 191921
+step 200 loss 3.569 lr 2.66e-04 234 min left
+variant B | params 13.5M | cfg {'d': 320, 'enc': 6, 'dec': 3, 'heads': 4, 'ff': 1280} | src vocab 3165 tgt 177
+training pairs (weighted) 191921
+step 200 loss 3.569 lr 2.66e-04 235 min left
+variant B | params 13.5M | cfg {'d': 320, 'enc': 6, 'dec': 3, 'heads': 4, 'ff': 1280} | src vocab 3165 tgt 177
+training pairs (weighted) 191921
+resume from latest.pt step 185
+variant B | params 13.5M | cfg {'d': 320, 'enc': 6, 'dec': 3, 'heads': 4, 'ff': 1280} | src vocab 3165 tgt 177
+training pairs (weighted) 191921
+step 200 loss 3.059 lr 7.99e-04 235 min left
+step 400 loss 2.786 lr 7.96e-04 229 min left
+step 600 loss 2.511 lr 7.92e-04 224 min left
+step 800 loss 2.381 lr 7.85e-04 218 min left
+step 1000 loss 2.270 lr 7.77e-04 213 min left
+step 1200 loss 2.179 lr 7.66e-04 208 min left
+dev {'bt_chrF': 18.82, 'bt_exact': 0.0022, 'gaz_chrF': 21.98, 'gaz_exact': 0.0267, 'step': 1295}
+step 1400 loss 2.119 lr 7.53e-04 202 min left
+step 1600 loss 2.083 lr 7.39e-04 196 min left
+step 1800 loss 2.051 lr 7.23e-04 191 min left
+step 2000 loss 2.018 lr 7.05e-04 185 min left
+step 2200 loss 1.987 lr 6.85e-04 179 min left
+dev {'bt_chrF': 20.35, 'bt_exact': 0.0, 'gaz_chrF': 26.35, 'gaz_exact': 0.0333, 'step': 2344}
+step 2400 loss 1.935 lr 6.62e-04 173 min left
+step 2600 loss 1.914 lr 6.41e-04 167 min left
+step 2800 loss 1.893 lr 6.19e-04 162 min left
+step 3000 loss 1.905 lr 5.95e-04 157 min left
+step 3200 loss 1.843 lr 5.69e-04 151 min left
+dev {'bt_chrF': 25.49, 'bt_exact': 0.0022, 'gaz_chrF': 27.44, 'gaz_exact': 0.0533, 'step': 3398}
+step 3400 loss 1.768 lr 5.38e-04 144 min left
+step 3600 loss 1.742 lr 5.10e-04 138 min left
+step 3800 loss 1.725 lr 4.83e-04 133 min left
+step 4000 loss 1.682 lr 4.55e-04 127 min left
+step 4200 loss 1.638 lr 4.27e-04 121 min left
+step 4400 loss 1.604 lr 4.00e-04 116 min left
+dev {'bt_chrF': 30.37, 'bt_exact': 0.0133, 'gaz_chrF': 31.45, 'gaz_exact': 0.0667, 'step': 4438}
+step 4600 loss 1.590 lr 3.69e-04 110 min left
+step 4800 loss 1.591 lr 3.41e-04 104 min left
+step 5000 loss 1.572 lr 3.13e-04 98 min left
+step 5200 loss 1.515 lr 2.87e-04 93 min left
+step 5400 loss 1.502 lr 2.62e-04 87 min left
+dev {'bt_chrF': 31.54, 'bt_exact': 0.02, 'gaz_chrF': 32.62, 'gaz_exact': 0.0667, 'step': 5486}
+step 5600 loss 1.504 lr 2.34e-04 81 min left
+step 5800 loss 1.502 lr 2.08e-04 75 min left
+step 6000 loss 1.479 lr 1.85e-04 69 min left
+step 6200 loss 1.437 lr 1.64e-04 63 min left
+step 6400 loss 1.422 lr 1.45e-04 58 min left
+dev {'bt_chrF': 33.72, 'bt_exact': 0.0333, 'gaz_chrF': 33.49, 'gaz_exact': 0.0933, 'step': 6531}
+step 6600 loss 1.427 lr 1.25e-04 52 min left
+step 6800 loss 1.419 lr 1.08e-04 47 min left
+step 7000 loss 1.409 lr 9.44e-05 41 min left
+step 7200 loss 1.371 lr 8.19e-05 36 min left
+step 7400 loss 1.362 lr 7.10e-05 31 min left
+step 7600 loss 1.392 lr 6.17e-05 26 min left
+dev {'bt_chrF': 33.66, 'bt_exact': 0.0289, 'gaz_chrF': 34.69, 'gaz_exact': 0.08, 'step': 7645}
+step 7800 loss 1.361 lr 5.26e-05 20 min left
+step 8000 loss 1.359 lr 4.65e-05 14 min left
+step 8200 loss 1.334 lr 4.27e-05 9 min left
+step 8400 loss 1.346 lr 4.05e-05 4 min left
+dev {'bt_chrF': 33.63, 'bt_exact': 0.0333, 'gaz_chrF': 35.64, 'gaz_exact': 0.0933, 'step': 8560}
+dev (end) {'bt_chrF': 33.63, 'bt_exact': 0.0333, 'gaz_chrF': 35.64, 'gaz_exact': 0.0933, 'step': 8560}
+last {'bt_chrF': 33.63, 'bt_exact': 0.0333, 'gaz_chrF': 35.64, 'gaz_exact': 0.0933} | average of 3 {'bt_chrF': 34.1, 'bt_exact': 0.0356, 'gaz_chrF': 34.33, 'gaz_exact': 0.0867}
+/home/user/en-normalizer/build/train_student2.py:210: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(enc, (src,), os.path.join(OUT, "encoder.onnx"), input_names=["src"], output_names=["ck", "cv", "src_bias"],
+/home/user/en-normalizer/build/train_student2.py:213: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(dec, (tok, pos, ck, cv, sb, pk, pv), os.path.join(OUT, "decoder.onnx"),
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+decoder_int8.onnx 4.56 MB
+encoder_int8.onnx 9.25 MB
+train_log.json 0.0 MB
+vocab.json 0.02 MB

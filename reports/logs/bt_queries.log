@@ -1,0 +1,126 @@
+queries 45000 jobs left 180000
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7069.56it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6641.16it/s]
+64/180000 done, 528 ms/item, lang zh
+1344/180000 done, 71 ms/item, lang zh
+2624/180000 done, 60 ms/item, lang zh
+queries 30000 jobs left 90000
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7184.60it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6869.36it/s]
+64/90000 done, 181 ms/item, lang zh
+1344/90000 done, 58 ms/item, lang zh
+2624/90000 done, 47 ms/item, lang zh
+3904/90000 done, 45 ms/item, lang zh
+5184/90000 done, 45 ms/item, lang zh
+6429/90000 done, 45 ms/item, lang zh
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 8259.91it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6010.63it/s]
+6493/90000 done, 49 ms/item, lang es
+7773/90000 done, 44 ms/item, lang es
+9053/90000 done, 42 ms/item, lang es
+10333/90000 done, 40 ms/item, lang es
+11613/90000 done, 39 ms/item, lang es
+12858/90000 done, 39 ms/item, lang es
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6997.33it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6477.22it/s]
+12922/90000 done, 40 ms/item, lang ar
+14202/90000 done, 39 ms/item, lang ar
+15482/90000 done, 38 ms/item, lang ar
+16762/90000 done, 37 ms/item, lang ar
+18042/90000 done, 37 ms/item, lang ar
+19287/90000 done, 37 ms/item, lang ar
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6779.16it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 9088.87it/s]
+19351/90000 done, 38 ms/item, lang ru
+20631/90000 done, 38 ms/item, lang ru
+21911/90000 done, 38 ms/item, lang ru
+23191/90000 done, 38 ms/item, lang ru
+24471/90000 done, 38 ms/item, lang ru
+25716/90000 done, 38 ms/item, lang ru
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7477.77it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 5854.80it/s]
+25780/90000 done, 39 ms/item, lang de
+27060/90000 done, 40 ms/item, lang de
+28340/90000 done, 39 ms/item, lang de
+29620/90000 done, 38 ms/item, lang de
+30900/90000 done, 38 ms/item, lang de
+32145/90000 done, 38 ms/item, lang de
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7650.65it/s]
+Loading weights:   0%|          | 0/256 [00:00<?, ?it/s]Loading weights:   2%|▏         | 4/256 [00:00<00:10, 24.25it/s]Loading weights:   3%|▎         | 7/256 [00:00<00:12, 20.32it/s]Loading weights:   5%|▍         | 12/256 [00:00<00:09, 25.01it/s]Loading weights:   6%|▌         | 15/256 [00:00<00:09, 24.21it/s]Loading weights:   7%|▋         | 19/256 [00:00<00:09, 24.62it/s]Loading weights:   9%|▊         | 22/256 [00:01<00:11, 20.22it/s]Loading weights:  10%|▉         | 25/256 [00:01<00:11, 19.87it/s]Loading weights:  11%|█         | 28/256 [00:01<00:11, 20.72it/s]Loading weights:  14%|█▍        | 36/256 [00:01<00:08, 24.81it/s]Loading weights:  16%|█▋        | 42/256 [00:02<00:11, 18.85it/s]Loading weights:  18%|█▊        | 45/256 [00:02<00:12, 17.19it/s]Loading weights:  18%|█▊        | 47/256 [00:02<00:13, 15.23it/s]Loading weights:  20%|██        | 52/256 [00:02<00:11, 17.66it/s]Loading weights:  23%|██▎       | 58/256 [00:02<00:08, 22.88it/s]Loading weights:  26%|██▌       | 66/256 [00:02<00:06, 28.59it/s]Loading weights:  28%|██▊       | 72/256 [00:03<00:05, 32.59it/s]Loading weights:  30%|███       | 77/256 [00:03<00:05, 33.92it/s]Loading weights:  32%|███▏      | 81/256 [00:03<00:07, 22.89it/s]Loading weights:  33%|███▎      | 84/256 [00:03<00:09, 18.46it/s]Loading weights:  35%|███▍      | 89/256 [00:04<00:08, 18.75it/s]Loading weights:  37%|███▋      | 94/256 [00:04<00:07, 22.02it/s]Loading weights:  38%|███▊      | 97/256 [00:05<00:16,  9.83it/s]Loading weights:  42%|████▏     | 107/256 [00:05<00:08, 16.79it/s]Loading weights:  46%|████▌     | 118/256 [00:05<00:06, 20.52it/s]Loading weights:  48%|████▊     | 124/256 [00:06<00:06, 21.05it/s]Loading weights:  50%|█████     | 128/256 [00:06<00:05, 21.63it/s]Loading weights:  51%|█████     | 131/256 [00:06<00:06, 20.36it/s]Loading weights:  52%|█████▏    | 134/256 [00:06<00:05, 21.08it/s]Loading weights:  54%|█████▍    | 138/256 [00:06<00:05, 22.98it/s]Loading weights:  55%|█████▌    | 141/256 [00:06<00:06, 16.90it/s]Loading weights:  57%|█████▋    | 145/256 [00:07<00:06, 18.48it/s]Loading weights:  58%|█████▊    | 149/256 [00:07<00:05, 18.58it/s]Loading weights:  60%|██████    | 154/256 [00:07<00:05, 19.41it/s]Loading weights:  61%|██████▏   | 157/256 [00:07<00:04, 20.73it/s]Loading weights:  63%|██████▎   | 161/256 [00:07<00:04, 23.01it/s]Loading weights:  64%|██████▍   | 164/256 [00:08<00:04, 21.27it/s]Loading weights:  66%|██████▌   | 169/256 [00:08<00:04, 20.36it/s]Loading weights:  70%|██████▉   | 178/256 [00:08<00:03, 25.72it/s]Loading weights:  71%|███████   | 181/256 [00:08<00:03, 23.59it/s]Loading weights:  73%|███████▎  | 186/256 [00:08<00:02, 26.64it/s]Loading weights: 100%|██████████| 256/256 [00:08<00:00, 28.72it/s]
+32209/90000 done, 39 ms/item, lang fr
+33489/90000 done, 38 ms/item, lang fr
+34769/90000 done, 38 ms/item, lang fr
+36049/90000 done, 38 ms/item, lang fr
+37329/90000 done, 37 ms/item, lang fr
+38574/90000 done, 37 ms/item, lang fr
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7063.10it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 5617.37it/s]
+38638/90000 done, 38 ms/item, lang hi
+39918/90000 done, 37 ms/item, lang hi
+41198/90000 done, 37 ms/item, lang hi
+42478/90000 done, 37 ms/item, lang hi
+43758/90000 done, 37 ms/item, lang hi
+45003/90000 done, 37 ms/item, lang hi
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7065.41it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6619.75it/s]
+45067/90000 done, 37 ms/item, lang id
+46347/90000 done, 36 ms/item, lang id
+47627/90000 done, 36 ms/item, lang id
+48907/90000 done, 36 ms/item, lang id
+50187/90000 done, 35 ms/item, lang id
+51432/90000 done, 35 ms/item, lang id
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7712.81it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6874.51it/s]
+51496/90000 done, 35 ms/item, lang vi
+52776/90000 done, 35 ms/item, lang vi
+54056/90000 done, 35 ms/item, lang vi
+55336/90000 done, 35 ms/item, lang vi
+56616/90000 done, 35 ms/item, lang vi
+57860/90000 done, 35 ms/item, lang vi
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6916.47it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6459.82it/s]
+57924/90000 done, 35 ms/item, lang it
+59204/90000 done, 35 ms/item, lang it
+60484/90000 done, 35 ms/item, lang it
+61764/90000 done, 35 ms/item, lang it
+63044/90000 done, 35 ms/item, lang it
+64288/90000 done, 35 ms/item, lang it
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6222.61it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7375.23it/s]
+64352/90000 done, 35 ms/item, lang pt
+65632/90000 done, 35 ms/item, lang pt
+66912/90000 done, 35 ms/item, lang pt
+68192/90000 done, 35 ms/item, lang pt
+69472/90000 done, 35 ms/item, lang pt
+70716/90000 done, 35 ms/item, lang pt
+Loading weights:   0%|          | 0/257 [00:00<?, ?it/s]Loading weights: 100%|██████████| 257/257 [00:00<00:00, 12507.09it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6409.21it/s]
+70780/90000 done, 36 ms/item, lang tr
+72060/90000 done, 35 ms/item, lang tr
+73340/90000 done, 35 ms/item, lang tr
+74620/90000 done, 35 ms/item, lang tr
+75900/90000 done, 35 ms/item, lang tr
+77144/90000 done, 35 ms/item, lang tr
+/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 155.00 MB. The target location /root/.cache/huggingface/hub/models--Helsinki-NLP--opus-tatoeba-en-ja/blobs only has 80.39 MB free disk space.
+  warnings.warn(
+Loading weights:   0%|          | 0/257 [00:00<?, ?it/s]Loading weights: 100%|██████████| 257/257 [00:00<00:00, 6359.43it/s]
+/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 303.27 MB. The target location /root/.cache/huggingface/hub/models--Helsinki-NLP--opus-mt-ja-en/blobs only has 80.33 MB free disk space.
+  warnings.warn(
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6431.57it/s]
+77208/90000 done, 36 ms/item, lang ja
+78488/90000 done, 36 ms/item, lang ja
+79768/90000 done, 35 ms/item, lang ja
+81048/90000 done, 35 ms/item, lang ja
+82328/90000 done, 36 ms/item, lang ja
+83572/90000 done, 36 ms/item, lang ja
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6640.22it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7315.55it/s]
+83636/90000 done, 36 ms/item, lang pl
+84916/90000 done, 36 ms/item, lang pl
+86196/90000 done, 36 ms/item, lang pl
+87476/90000 done, 36 ms/item, lang pl
+88756/90000 done, 36 ms/item, lang pl
+90000/90000 done, 36 ms/item, lang pl
+short pairs kept 57729 of 90000

@@ -1,0 +1,91 @@
+{
+ "runs": [
+  {
+   "minutes": 57.56338192224503,
+   "to_step": 3201
+  }
+ ],
+ "evals": [
+  {
+   "retrieval@1": 0.023,
+   "spread": 0.952,
+   "step": 258
+  },
+  {
+   "retrieval@1": 0.034,
+   "spread": 0.908,
+   "step": 509
+  },
+  {
+   "retrieval@1": 0.096,
+   "spread": 0.911,
+   "step": 779
+  },
+  {
+   "retrieval@1": 0.092,
+   "spread": 0.901,
+   "step": 1045
+  },
+  {
+   "retrieval@1": 0.143,
+   "spread": 0.943,
+   "step": 1306
+  },
+  {
+   "retrieval@1": 0.139,
+   "spread": 0.913,
+   "step": 1563
+  },
+  {
+   "retrieval@1": 0.151,
+   "spread": 0.954,
+   "step": 1840
+  },
+  {
+   "retrieval@1": 0.164,
+   "spread": 0.959,
+   "step": 2129
+  },
+  {
+   "retrieval@1": 0.179,
+   "spread": 0.863,
+   "step": 2414
+  },
+  {
+   "retrieval@1": 0.184,
+   "spread": 0.945,
+   "step": 2694
+  },
+  {
+   "retrieval@1": 0.198,
+   "spread": 0.937,
+   "step": 2979
+  },
+  {
+   "retrieval@1": 0.192,
+   "spread": 0.941,
+   "step": 3201
+  }
+ ],
+ "args": {
+  "mode": "pretrain",
+  "data": "MAX",
+  "tag": "main",
+  "minutes": 180.0,
+  "total_min": 180.0,
+  "d": 384,
+  "layers": 6,
+  "heads": 6,
+  "ff": 1536,
+  "pred_layers": 2,
+  "lr": 0.0005,
+  "tokens": 4000,
+  "ema": 0.996,
+  "mask": 0.5,
+  "w_mask": 1.0,
+  "vic": 0.1,
+  "ckpt_min": 15,
+  "threads": 4,
+  "resume": false
+ }
+}

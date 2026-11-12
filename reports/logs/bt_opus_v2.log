@@ -1,0 +1,552 @@
+jobs left 117021
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/117021 fwd, 165 ms/item, lang tr
+672/117021 fwd, 29 ms/item, lang tr
+1312/117021 fwd, 28 ms/item, lang tr
+1952/117021 fwd, 29 ms/item, lang tr
+2592/117021 fwd, 30 ms/item, lang tr
+3232/117021 fwd, 32 ms/item, lang tr
+3872/117021 fwd, 34 ms/item, lang tr
+4512/117021 fwd, 35 ms/item, lang tr
+5152/117021 fwd, 38 ms/item, lang tr
+5792/117021 fwd, 41 ms/item, lang tr
+6432/117021 fwd, 45 ms/item, lang tr
+7072/117021 fwd, 47 ms/item, lang tr
+lang tr written, 7255/117021, 76 ms/item overall
+7287/117021 fwd, 76 ms/item, lang pt
+7927/117021 fwd, 71 ms/item, lang pt
+8567/117021 fwd, 68 ms/item, lang pt
+9207/117021 fwd, 64 ms/item, lang pt
+9847/117021 fwd, 62 ms/item, lang pt
+10487/117021 fwd, 60 ms/item, lang pt
+11127/117021 fwd, 58 ms/item, lang pt
+11767/117021 fwd, 57 ms/item, lang pt
+12407/117021 fwd, 56 ms/item, lang pt
+13047/117021 fwd, 56 ms/item, lang pt
+13687/117021 fwd, 55 ms/item, lang pt
+14327/117021 fwd, 55 ms/item, lang pt
+lang pt written, 14579/117021, 80 ms/item overall
+14611/117021 fwd, 80 ms/item, lang ko
+15251/117021 fwd, 81 ms/item, lang ko
+15891/117021 fwd, 84 ms/item, lang ko
+16531/117021 fwd, 90 ms/item, lang ko
+17171/117021 fwd, 95 ms/item, lang ko
+17811/117021 fwd, 101 ms/item, lang ko
+18451/117021 fwd, 109 ms/item, lang ko
+19091/117021 fwd, 115 ms/item, lang ko
+19731/117021 fwd, 121 ms/item, lang ko
+20371/117021 fwd, 125 ms/item, lang ko
+21011/117021 fwd, 131 ms/item, lang ko
+21651/117021 fwd, 135 ms/item, lang ko
+jobs left 102442
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+jobs left 102442
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/102442 done, 4913 ms/item, lang ko
+672/102442 done, 390 ms/item, lang ko
+jobs left 101514
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/101514 done, 530 ms/item, lang ko
+672/101514 done, 223 ms/item, lang ko
+1312/101514 done, 219 ms/item, lang ko
+1952/101514 done, 223 ms/item, lang ko
+2592/101514 done, 229 ms/item, lang ko
+3232/101514 done, 246 ms/item, lang ko
+3872/101514 done, 248 ms/item, lang ko
+4512/101514 done, 246 ms/item, lang ko
+5152/101514 done, 245 ms/item, lang ko
+5792/101514 done, 246 ms/item, lang ko
+6310/101514 done, 257 ms/item, lang es
+6950/101514 done, 235 ms/item, lang es
+7590/101514 done, 217 ms/item, lang es
+8230/101514 done, 202 ms/item, lang es
+8870/101514 done, 190 ms/item, lang es
+9510/101514 done, 179 ms/item, lang es
+10150/101514 done, 170 ms/item, lang es
+10790/101514 done, 162 ms/item, lang es
+11430/101514 done, 155 ms/item, lang es
+12070/101514 done, 150 ms/item, lang es
+12710/101514 done, 145 ms/item, lang es
+13350/101514 done, 140 ms/item, lang es
+13678/101514 done, 141 ms/item, lang th
+14318/101514 done, 139 ms/item, lang th
+14958/101514 done, 138 ms/item, lang th
+15598/101514 done, 140 ms/item, lang th
+16238/101514 done, 145 ms/item, lang th
+16878/101514 done, 148 ms/item, lang th
+17518/101514 done, 152 ms/item, lang th
+18158/101514 done, 154 ms/item, lang th
+18798/101514 done, 157 ms/item, lang th
+19438/101514 done, 163 ms/item, lang th
+20078/101514 done, 168 ms/item, lang th
+20718/101514 done, 173 ms/item, lang th
+20914/101514 done, 175 ms/item, lang it
+21554/101514 done, 171 ms/item, lang it
+22194/101514 done, 167 ms/item, lang it
+22834/101514 done, 163 ms/item, lang it
+23474/101514 done, 160 ms/item, lang it
+24114/101514 done, 156 ms/item, lang it
+24754/101514 done, 153 ms/item, lang it
+25394/101514 done, 151 ms/item, lang it
+26034/101514 done, 148 ms/item, lang it
+26674/101514 done, 146 ms/item, lang it
+27314/101514 done, 144 ms/item, lang it
+27954/101514 done, 142 ms/item, lang it
+28239/101514 done, 144 ms/item, lang ar
+28879/101514 done, 141 ms/item, lang ar
+29519/101514 done, 139 ms/item, lang ar
+30159/101514 done, 136 ms/item, lang ar
+30799/101514 done, 134 ms/item, lang ar
+31439/101514 done, 133 ms/item, lang ar
+32079/101514 done, 131 ms/item, lang ar
+32719/101514 done, 129 ms/item, lang ar
+33359/101514 done, 128 ms/item, lang ar
+33999/101514 done, 127 ms/item, lang ar
+34639/101514 done, 125 ms/item, lang ar
+35279/101514 done, 124 ms/item, lang ar
+35611/101514 done, 125 ms/item, lang ja
+36251/101514 done, 123 ms/item, lang ja
+36891/101514 done, 122 ms/item, lang ja
+37531/101514 done, 121 ms/item, lang ja
+38171/101514 done, 119 ms/item, lang ja
+38811/101514 done, 118 ms/item, lang ja
+39451/101514 done, 117 ms/item, lang ja
+40091/101514 done, 116 ms/item, lang ja
+40731/101514 done, 116 ms/item, lang ja
+41371/101514 done, 115 ms/item, lang ja
+42011/101514 done, 114 ms/item, lang ja
+42651/101514 done, 114 ms/item, lang ja
+42925/101514 done, 115 ms/item, lang hi
+43565/101514 done, 114 ms/item, lang hi
+44205/101514 done, 113 ms/item, lang hi
+44845/101514 done, 111 ms/item, lang hi
+45485/101514 done, 110 ms/item, lang hi
+46125/101514 done, 110 ms/item, lang hi
+46765/101514 done, 109 ms/item, lang hi
+47405/101514 done, 108 ms/item, lang hi
+48045/101514 done, 107 ms/item, lang hi
+48685/101514 done, 106 ms/item, lang hi
+49325/101514 done, 105 ms/item, lang hi
+49965/101514 done, 105 ms/item, lang hi
+50260/101514 done, 106 ms/item, lang pl
+50900/101514 done, 105 ms/item, lang pl
+51540/101514 done, 104 ms/item, lang pl
+52180/101514 done, 103 ms/item, lang pl
+52820/101514 done, 102 ms/item, lang pl
+53460/101514 done, 101 ms/item, lang pl
+54100/101514 done, 100 ms/item, lang pl
+54740/101514 done, 100 ms/item, lang pl
+55380/101514 done, 99 ms/item, lang pl
+56020/101514 done, 98 ms/item, lang pl
+56660/101514 done, 98 ms/item, lang pl
+57300/101514 done, 97 ms/item, lang pl
+57548/101514 done, 98 ms/item, lang fr
+58188/101514 done, 97 ms/item, lang fr
+58828/101514 done, 96 ms/item, lang fr
+59468/101514 done, 95 ms/item, lang fr
+60108/101514 done, 94 ms/item, lang fr
+60748/101514 done, 94 ms/item, lang fr
+61388/101514 done, 93 ms/item, lang fr
+62028/101514 done, 92 ms/item, lang fr
+62668/101514 done, 92 ms/item, lang fr
+63308/101514 done, 91 ms/item, lang fr
+63948/101514 done, 91 ms/item, lang fr
+64588/101514 done, 90 ms/item, lang fr
+64963/101514 done, 91 ms/item, lang zh
+65603/101514 done, 90 ms/item, lang zh
+66243/101514 done, 90 ms/item, lang zh
+66883/101514 done, 89 ms/item, lang zh
+67523/101514 done, 89 ms/item, lang zh
+68163/101514 done, 88 ms/item, lang zh
+68803/101514 done, 88 ms/item, lang zh
+69443/101514 done, 87 ms/item, lang zh
+70083/101514 done, 87 ms/item, lang zh
+70723/101514 done, 87 ms/item, lang zh
+71363/101514 done, 86 ms/item, lang zh
+72003/101514 done, 86 ms/item, lang zh
+/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 297.93 MB. The target location /root/.cache/huggingface/hub/models--Helsinki-NLP--opus-mt-en-de/blobs only has 17.77 MB free disk space.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/transformers/modeling_utils.py", line 700, in _get_resolved_checkpoint_files
+    resolved_archive_file = cached_file(
+        pretrained_model_name_or_path, filename, **cached_file_kwargs
+    )
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/transformers/utils/hub.py", line 370, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/transformers/utils/hub.py", line 634, in cached_files
+    raise e
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/transformers/utils/hub.py", line 537, in cached_files
+    hf_hub_download(
+    ~~~~~~~~~~~~~~~^
+        path_or_repo_id,
+        ^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+    return fn(*args, **kwargs)
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+        # Destination
+    ...<15 lines>...
+        dry_run=dry_run,
+    )
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        incomplete_path=Path(blob_path + ".incomplete"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 2017, in _download_to_tmp_and_move
+    xet_get(
+    ~~~~~~~^
+        incomplete_path=tmp_path,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+    with session.new_file_download_group(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        endpoint=connection_info.endpoint,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        progress_callback=progress.update_progress,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as group:
+    ^
+RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/en-normalizer/build/bt_v2.py", line 72, in <module>
+    main(sys.argv[1])
+    ~~~~^^^^^^^^^^^^^
+  File "/home/user/en-normalizer/build/bt_v2.py", line 59, in main
+    batch = ts[i:i + B]; res = fwd(batch, l)
+                               ~~~^^^^^^^^^^
+  File "/home/user/en-normalizer/build/opus_gen.py", line 73, in fwd
+    return m2m(texts, p) if name == "m2m100" else translate(texts, name, p)
+                                                  ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 158, in inference_mode
+    return func(*args, **kwargs)
+  File "/home/user/en-normalizer/build/opus_gen.py", line 33, in translate
+    tok, m = _load(model)
+             ~~~~~^^^^^^^
+  File "/home/user/en-normalizer/build/opus_gen.py", line 25, in _load
+    tok = MarianTokenizer.from_pretrained(H + name); m = MarianMTModel.from_pretrained(H + name).eval()
+                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/transformers/modeling_utils.py", line 4251, in from_pretrained
+    checkpoint_files, sharded_metadata = _get_resolved_checkpoint_files(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        pretrained_model_name_or_path=pretrained_model_name_or_path,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/transformers/modeling_utils.py", line 753, in _get_resolved_checkpoint_files
+    raise OSError(
+    ...<4 lines>...
+    ) from e
+OSError: Can't load the model for 'Helsinki-NLP/opus-mt-en-de'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Helsinki-NLP/opus-mt-en-de' is the correct path to a directory containing a file named pytorch_model.bin.
+jobs left 29315
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/29315 done, 380 ms/item, lang de
+672/29315 done, 37 ms/item, lang de
+1312/29315 done, 32 ms/item, lang de
+1952/29315 done, 30 ms/item, lang de
+2592/29315 done, 29 ms/item, lang de
+3232/29315 done, 29 ms/item, lang de
+3872/29315 done, 30 ms/item, lang de
+4512/29315 done, 31 ms/item, lang de
+5152/29315 done, 32 ms/item, lang de
+5792/29315 done, 33 ms/item, lang de
+6432/29315 done, 34 ms/item, lang de
+7072/29315 done, 35 ms/item, lang de
+7518/29315 done, 38 ms/item, lang vi
+8158/29315 done, 37 ms/item, lang vi
+8798/29315 done, 36 ms/item, lang vi
+9438/29315 done, 36 ms/item, lang vi
+10078/29315 done, 35 ms/item, lang vi
+10718/29315 done, 35 ms/item, lang vi
+11358/29315 done, 35 ms/item, lang vi
+11998/29315 done, 35 ms/item, lang vi
+12638/29315 done, 36 ms/item, lang vi
+13278/29315 done, 38 ms/item, lang vi
+13918/29315 done, 39 ms/item, lang vi
+14558/29315 done, 40 ms/item, lang vi
+14843/29315 done, 42 ms/item, lang ru
+15483/29315 done, 41 ms/item, lang ru
+16123/29315 done, 41 ms/item, lang ru
+16763/29315 done, 41 ms/item, lang ru
+17403/29315 done, 41 ms/item, lang ru
+18043/29315 done, 41 ms/item, lang ru
+18683/29315 done, 42 ms/item, lang ru
+19323/29315 done, 42 ms/item, lang ru
+19963/29315 done, 42 ms/item, lang ru
+20603/29315 done, 43 ms/item, lang ru
+21243/29315 done, 44 ms/item, lang ru
+21883/29315 done, 44 ms/item, lang ru
+22084/29315 done, 45 ms/item, lang id
+22724/29315 done, 45 ms/item, lang id
+23364/29315 done, 44 ms/item, lang id
+24004/29315 done, 43 ms/item, lang id
+24644/29315 done, 43 ms/item, lang id
+25284/29315 done, 43 ms/item, lang id
+25924/29315 done, 42 ms/item, lang id
+26564/29315 done, 42 ms/item, lang id
+27204/29315 done, 42 ms/item, lang id
+27844/29315 done, 42 ms/item, lang id
+28484/29315 done, 42 ms/item, lang id
+29124/29315 done, 42 ms/item, lang id
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 0
+jobs left 202304
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/202304 done, 2875 ms/item, lang ko
+jobs left 135303
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/135303 done, 242 ms/item, lang ko
+672/135303 done, 101 ms/item, lang ko
+1312/135303 done, 139 ms/item, lang ko
+1952/135303 done, 212 ms/item, lang ko
+2592/135303 done, 311 ms/item, lang ko
+3232/135303 done, 294 ms/item, lang ko
+3872/135303 done, 576 ms/item, lang ko
+4512/135303 done, 599 ms/item, lang ko
+5152/135303 done, 554 ms/item, lang ko
+5792/135303 done, 550 ms/item, lang ko
+6432/135303 done, 617 ms/item, lang ko
+7072/135303 done, 584 ms/item, lang ko
+7712/135303 done, 558 ms/item, lang ko
+8246/135303 done, 540 ms/item, lang zh
+8886/135303 done, 504 ms/item, lang zh
+9526/135303 done, 473 ms/item, lang zh
+10166/135303 done, 446 ms/item, lang zh
+10806/135303 done, 422 ms/item, lang zh
+11446/135303 done, 400 ms/item, lang zh
+12086/135303 done, 382 ms/item, lang zh
+12726/135303 done, 365 ms/item, lang zh
+13366/135303 done, 350 ms/item, lang zh
+14006/135303 done, 336 ms/item, lang zh
+14646/135303 done, 324 ms/item, lang zh
+15286/135303 done, 312 ms/item, lang zh
+15926/135303 done, 302 ms/item, lang zh
+16566/135303 done, 293 ms/item, lang zh
+16731/135303 done, 291 ms/item, lang th
+17371/135303 done, 284 ms/item, lang th
+18011/135303 done, 278 ms/item, lang th
+18651/135303 done, 274 ms/item, lang th
+19291/135303 done, 270 ms/item, lang th
+19931/135303 done, 268 ms/item, lang th
+20571/135303 done, 266 ms/item, lang th
+21211/135303 done, 267 ms/item, lang th
+21851/135303 done, 267 ms/item, lang th
+22491/135303 done, 266 ms/item, lang th
+23131/135303 done, 267 ms/item, lang th
+23771/135303 done, 267 ms/item, lang th
+24411/135303 done, 267 ms/item, lang th
+25051/135303 done, 269 ms/item, lang th
+25183/135303 done, 269 ms/item, lang de
+25823/135303 done, 263 ms/item, lang de
+26463/135303 done, 257 ms/item, lang de
+27103/135303 done, 252 ms/item, lang de
+27743/135303 done, 247 ms/item, lang de
+28383/135303 done, 242 ms/item, lang de
+29023/135303 done, 237 ms/item, lang de
+29663/135303 done, 233 ms/item, lang de
+30303/135303 done, 229 ms/item, lang de
+30943/135303 done, 225 ms/item, lang de
+31583/135303 done, 221 ms/item, lang de
+32223/135303 done, 218 ms/item, lang de
+32863/135303 done, 214 ms/item, lang de
+33485/135303 done, 212 ms/item, lang es
+34125/135303 done, 208 ms/item, lang es
+34765/135303 done, 205 ms/item, lang es
+35405/135303 done, 201 ms/item, lang es
+36045/135303 done, 198 ms/item, lang es
+36685/135303 done, 196 ms/item, lang es
+37325/135303 done, 193 ms/item, lang es
+37965/135303 done, 190 ms/item, lang es
+38605/135303 done, 188 ms/item, lang es
+39245/135303 done, 185 ms/item, lang es
+39885/135303 done, 183 ms/item, lang es
+40525/135303 done, 181 ms/item, lang es
+41165/135303 done, 179 ms/item, lang es
+41805/135303 done, 177 ms/item, lang es
+41885/135303 done, 177 ms/item, lang it
+42525/135303 done, 175 ms/item, lang it
+43165/135303 done, 173 ms/item, lang it
+43805/135303 done, 171 ms/item, lang it
+44445/135303 done, 169 ms/item, lang it
+45085/135303 done, 167 ms/item, lang it
+45725/135303 done, 165 ms/item, lang it
+46365/135303 done, 163 ms/item, lang it
+47005/135303 done, 162 ms/item, lang it
+47645/135303 done, 160 ms/item, lang it
+48285/135303 done, 159 ms/item, lang it
+48925/135303 done, 158 ms/item, lang it
+49565/135303 done, 156 ms/item, lang it
+50205/135303 done, 155 ms/item, lang it
+50478/135303 done, 155 ms/item, lang vi
+51118/135303 done, 153 ms/item, lang vi
+51758/135303 done, 152 ms/item, lang vi
+52398/135303 done, 150 ms/item, lang vi
+53038/135303 done, 149 ms/item, lang vi
+53678/135303 done, 148 ms/item, lang vi
+54318/135303 done, 146 ms/item, lang vi
+54958/135303 done, 145 ms/item, lang vi
+55598/135303 done, 144 ms/item, lang vi
+56238/135303 done, 143 ms/item, lang vi
+56878/135303 done, 142 ms/item, lang vi
+57518/135303 done, 141 ms/item, lang vi
+58158/135303 done, 140 ms/item, lang vi
+58798/135303 done, 139 ms/item, lang vi
+59000/135303 done, 139 ms/item, lang ja
+59640/135303 done, 137 ms/item, lang ja
+60280/135303 done, 136 ms/item, lang ja
+60920/135303 done, 135 ms/item, lang ja
+61560/135303 done, 134 ms/item, lang ja
+62200/135303 done, 133 ms/item, lang ja
+62840/135303 done, 133 ms/item, lang ja
+63480/135303 done, 132 ms/item, lang ja
+64120/135303 done, 131 ms/item, lang ja
+64760/135303 done, 131 ms/item, lang ja
+65400/135303 done, 130 ms/item, lang ja
+66040/135303 done, 129 ms/item, lang ja
+66680/135303 done, 129 ms/item, lang ja
+67320/135303 done, 129 ms/item, lang ja
+67614/135303 done, 129 ms/item, lang pt
+68254/135303 done, 128 ms/item, lang pt
+68894/135303 done, 127 ms/item, lang pt
+69534/135303 done, 126 ms/item, lang pt
+70174/135303 done, 125 ms/item, lang pt
+70814/135303 done, 124 ms/item, lang pt
+71454/135303 done, 124 ms/item, lang pt
+72094/135303 done, 123 ms/item, lang pt
+72734/135303 done, 122 ms/item, lang pt
+73374/135303 done, 121 ms/item, lang pt
+74014/135303 done, 121 ms/item, lang pt
+74654/135303 done, 120 ms/item, lang pt
+75294/135303 done, 120 ms/item, lang pt
+75934/135303 done, 119 ms/item, lang pt
+76081/135303 done, 119 ms/item, lang ru
+76721/135303 done, 119 ms/item, lang ru
+77361/135303 done, 118 ms/item, lang ru
+78001/135303 done, 117 ms/item, lang ru
+78641/135303 done, 117 ms/item, lang ru
+79281/135303 done, 116 ms/item, lang ru
+79921/135303 done, 116 ms/item, lang ru
+80561/135303 done, 115 ms/item, lang ru
+81201/135303 done, 115 ms/item, lang ru
+81841/135303 done, 114 ms/item, lang ru
+82481/135303 done, 114 ms/item, lang ru
+83121/135303 done, 113 ms/item, lang ru
+83761/135303 done, 113 ms/item, lang ru
+84401/135303 done, 113 ms/item, lang ru
+84628/135303 done, 113 ms/item, lang hi
+85268/135303 done, 112 ms/item, lang hi
+85908/135303 done, 111 ms/item, lang hi
+86548/135303 done, 111 ms/item, lang hi
+87188/135303 done, 110 ms/item, lang hi
+87828/135303 done, 110 ms/item, lang hi
+88468/135303 done, 109 ms/item, lang hi
+89108/135303 done, 109 ms/item, lang hi
+89748/135303 done, 109 ms/item, lang hi
+90388/135303 done, 108 ms/item, lang hi
+91028/135303 done, 108 ms/item, lang hi
+91668/135303 done, 107 ms/item, lang hi
+92308/135303 done, 107 ms/item, lang hi
+92948/135303 done, 107 ms/item, lang hi
+92989/135303 done, 107 ms/item, lang pl
+93629/135303 done, 107 ms/item, lang pl
+94269/135303 done, 106 ms/item, lang pl
+94909/135303 done, 106 ms/item, lang pl
+95549/135303 done, 105 ms/item, lang pl
+96189/135303 done, 105 ms/item, lang pl
+96829/135303 done, 104 ms/item, lang pl
+97469/135303 done, 104 ms/item, lang pl
+98109/135303 done, 104 ms/item, lang pl
+98749/135303 done, 103 ms/item, lang pl
+99389/135303 done, 103 ms/item, lang pl
+100029/135303 done, 103 ms/item, lang pl
+100669/135303 done, 102 ms/item, lang pl
+101309/135303 done, 102 ms/item, lang pl
+101547/135303 done, 102 ms/item, lang id
+102187/135303 done, 102 ms/item, lang id
+102827/135303 done, 101 ms/item, lang id
+103467/135303 done, 101 ms/item, lang id
+104107/135303 done, 100 ms/item, lang id
+104747/135303 done, 100 ms/item, lang id
+105387/135303 done, 99 ms/item, lang id
+106027/135303 done, 99 ms/item, lang id
+106667/135303 done, 99 ms/item, lang id
+107307/135303 done, 98 ms/item, lang id
+107947/135303 done, 98 ms/item, lang id
+108587/135303 done, 98 ms/item, lang id
+109227/135303 done, 97 ms/item, lang id
+109867/135303 done, 97 ms/item, lang id
+110075/135303 done, 97 ms/item, lang fr
+110715/135303 done, 97 ms/item, lang fr
+111355/135303 done, 96 ms/item, lang fr
+111995/135303 done, 96 ms/item, lang fr
+112635/135303 done, 96 ms/item, lang fr
+113275/135303 done, 95 ms/item, lang fr
+113915/135303 done, 95 ms/item, lang fr
+114555/135303 done, 95 ms/item, lang fr
+115195/135303 done, 94 ms/item, lang fr
+115835/135303 done, 94 ms/item, lang fr
+116475/135303 done, 94 ms/item, lang fr
+117115/135303 done, 94 ms/item, lang fr
+117755/135303 done, 93 ms/item, lang fr
+118395/135303 done, 93 ms/item, lang fr
+118468/135303 done, 93 ms/item, lang ar
+119108/135303 done, 93 ms/item, lang ar
+119748/135303 done, 93 ms/item, lang ar
+120388/135303 done, 92 ms/item, lang ar
+121028/135303 done, 92 ms/item, lang ar
+121668/135303 done, 92 ms/item, lang ar
+122308/135303 done, 91 ms/item, lang ar
+122948/135303 done, 91 ms/item, lang ar
+123588/135303 done, 91 ms/item, lang ar
+124228/135303 done, 91 ms/item, lang ar
+124868/135303 done, 91 ms/item, lang ar
+125508/135303 done, 91 ms/item, lang ar
+126148/135303 done, 90 ms/item, lang ar
+126765/135303 done, 90 ms/item, lang ar
+126797/135303 done, 91 ms/item, lang tr
+127437/135303 done, 90 ms/item, lang tr
+128077/135303 done, 90 ms/item, lang tr
+128717/135303 done, 90 ms/item, lang tr
+129357/135303 done, 89 ms/item, lang tr
+129997/135303 done, 89 ms/item, lang tr
+130637/135303 done, 89 ms/item, lang tr
+131277/135303 done, 89 ms/item, lang tr
+131917/135303 done, 89 ms/item, lang tr
+132557/135303 done, 88 ms/item, lang tr
+133197/135303 done, 88 ms/item, lang tr
+133837/135303 done, 88 ms/item, lang tr
+134477/135303 done, 88 ms/item, lang tr
+135117/135303 done, 88 ms/item, lang tr
+jobs left 0
+jobs left 0

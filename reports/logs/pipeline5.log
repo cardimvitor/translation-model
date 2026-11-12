@@ -1,0 +1,45 @@
+[12:11] s1: OPUS-MT back-translation of all 81k ESCI titles
+[12:13] s1: OPUS-MT back-translation of all 81k ESCI titles
+[15:31] s2: OPUS-MT targets for NLLB-made sources
+[15:53] s3: NLLB targets in NLLB-best languages
+[16:13] s1: OPUS-MT back-translation of all 81k ESCI titles
+[16:13] s2: OPUS-MT targets for NLLB-made sources
+[16:13] s3: NLLB targets in NLLB-best languages
+[18:33] t1: three teachers on the same held-out sample
+Terminated
+[18:44] s1: OPUS-MT back-translation of all 81k ESCI titles
+[18:44] s2: OPUS-MT targets for NLLB-made sources
+[18:44] s3: NLLB targets in NLLB-best languages
+[18:44] t1: three teachers on the same held-out sample
+[19:13] t1: three teachers on the same held-out sample
+[19:13] data B2
+[19:14] word pieces B2
+[19:14] train B2: 300 min
+[20:13] train B2: 300 min
+[20:51] word pieces B2
+[20:51] train B2: 300 min
+[21:31] train B2: 300 min
+[02:34] weight analysis B2
+[03:42] weight edits B2
+[04:07]    B2: DECISION: keep original weights
+[04:07] data C2
+[04:08] train C2: 300 min
+[09:12] weight analysis C2
+[10:24] weight edits C2
+[11:46]    C2: DECISION: use edited model
+[11:46] t2: Hy-MT2 English answers for 60k OPUS-made sources
+[11:56] t2: Hy-MT2 English answers for 30k OPUS-made sources
+[11:59] t2: Hy-MT2 English answers for 30k OPUS-made sources
+[18:13] data H
+[18:14] train H: 300 min
+[23:18] weight analysis H
+[00:27] weight edits H
+[00:55]    H: DECISION: keep original weights
+[00:55] data ALL3
+[00:56] train ALL3: 300 min
+[02:15] train ALL3: resume for 239 min
+[06:18] weight analysis ALL3
+[09:36] weight analysis ALL3
+[11:26] weight edits ALL3
+[11:51]    ALL3: DECISION: use edited model
+[11:51] t3: pure Hy-MT2 data (20k titles)

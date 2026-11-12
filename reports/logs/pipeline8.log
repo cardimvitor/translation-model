@@ -1,0 +1,7 @@
+[20:16] v6 fine-tune (total 480 min)
+[20:27] v6 short-label data (ESCI queries, OPUS-MT)
+[21:20] v6 fine-tune (total 510 min)
+[21:41] v6 fine-tune (total 510 min)
+[22:42] v6 fine-tune (total 510 min)
+[05:42] v6 eval
+[05:42] pipeline 8 done

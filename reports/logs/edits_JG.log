@@ -1,0 +1,13 @@
+base {'bt_chrF': 30.15, 'bt_exact': 0.0078, 'gaz_chrF': 22.24, 'gaz_exact': 0.0233, 'gold_exact': 0.0219, 'gold_chrF': 19.37}
+dec2.ffn {'bt_chrF': 29.91, 'bt_exact': 0.0067, 'gaz_chrF': 25.11, 'gaz_exact': 0.0433} KEEP
+dec1.ffn {'bt_chrF': 28.78, 'bt_exact': 0.0022, 'gaz_chrF': 27.14, 'gaz_exact': 0.05} drop
+enc0.self.head5 {'bt_chrF': 29.86, 'bt_exact': 0.0056, 'gaz_chrF': 25.33, 'gaz_exact': 0.0467} drop
+enc3.self.head2 {'bt_chrF': 30.25, 'bt_exact': 0.0056, 'gaz_chrF': 25.29, 'gaz_exact': 0.0467} KEEP
+enc0.self.head2 {'bt_chrF': 30.17, 'bt_exact': 0.0056, 'gaz_chrF': 25.09, 'gaz_exact': 0.0467} drop
+dec1.self.head0 {'bt_chrF': 30.06, 'bt_exact': 0.0078, 'gaz_chrF': 25.32, 'gaz_exact': 0.0467} drop
+enc1.self.head2 {'bt_chrF': 29.82, 'bt_exact': 0.0022, 'gaz_chrF': 25.3, 'gaz_exact': 0.05} drop
+dec0.cross.head4 {'bt_chrF': 30.41, 'bt_exact': 0.0044, 'gaz_chrF': 24.88, 'gaz_exact': 0.0367} drop
+enc0.self.head1 {'bt_chrF': 29.99, 'bt_exact': 0.0056, 'gaz_chrF': 25.79, 'gaz_exact': 0.0567} drop
+edited ['dec2.ffn', 'enc3.self.head2'] {'bt_chrF': 30.25, 'bt_exact': 0.0056, 'gaz_chrF': 25.29, 'gaz_exact': 0.0467, 'gold_exact': 0.0125, 'gold_chrF': 17.99}
+fine-tuned {'bt_chrF': 29.95, 'bt_exact': 0.01, 'gaz_chrF': 25.68, 'gaz_exact': 0.0433, 'gold_exact': 0.0156, 'gold_chrF': 18.6}
+DECISION: keep original weights

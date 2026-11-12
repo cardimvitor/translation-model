@@ -1,0 +1,53 @@
+JEPA main: encoder 12.3M, predictor 3.6M, vocab 4261, pairs 399382
+/home/user/en-normalizer/build/jepa.py:212: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  L.append((l_cross.item(), l_mask.item(), float(l_var)))
+step 100 cross 1.796 mask 6.248 var 1.471 lr 9.98e-05 ema 0.9960 174 min left
+step 200 cross 1.269 mask 4.040 var 1.551 lr 1.98e-04 ema 0.9960 168 min left
+dev {'retrieval@1': 0.023, 'spread': 0.952, 'step': 258}
+step 300 cross 1.091 mask 3.114 var 1.528 lr 2.93e-04 ema 0.9961 162 min left
+step 400 cross 0.958 mask 3.056 var 1.564 lr 3.84e-04 ema 0.9962 156 min left
+step 500 cross 0.883 mask 2.987 var 1.519 lr 4.69e-04 ema 0.9963 150 min left
+dev {'retrieval@1': 0.034, 'spread': 0.908, 'step': 509}
+step 600 cross 0.797 mask 2.866 var 1.463 lr 4.54e-04 ema 0.9964 144 min left
+step 700 cross 0.787 mask 2.805 var 1.414 lr 4.40e-04 ema 0.9965 138 min left
+dev {'retrieval@1': 0.096, 'spread': 0.911, 'step': 779}
+step 800 cross 0.740 mask 2.811 var 1.350 lr 4.24e-04 ema 0.9966 133 min left
+step 900 cross 0.730 mask 2.710 var 1.352 lr 4.06e-04 ema 0.9968 127 min left
+step 1000 cross 0.746 mask 2.701 var 1.301 lr 3.87e-04 ema 0.9970 122 min left
+dev {'retrieval@1': 0.092, 'spread': 0.901, 'step': 1045}
+step 1100 cross 0.702 mask 2.749 var 1.297 lr 3.65e-04 ema 0.9971 116 min left
+step 1200 cross 0.714 mask 2.700 var 1.262 lr 3.43e-04 ema 0.9973 110 min left
+step 1300 cross 0.811 mask 2.716 var 1.220 lr 3.20e-04 ema 0.9975 104 min left
+dev {'retrieval@1': 0.143, 'spread': 0.943, 'step': 1306}
+step 1400 cross 0.695 mask 2.743 var 1.252 lr 2.96e-04 ema 0.9977 98 min left
+step 1500 cross 0.688 mask 2.757 var 1.243 lr 2.72e-04 ema 0.9979 92 min left
+dev {'retrieval@1': 0.139, 'spread': 0.913, 'step': 1563}
+step 1600 cross 0.743 mask 2.756 var 1.217 lr 2.47e-04 ema 0.9981 86 min left
+step 1700 cross 0.733 mask 2.737 var 1.203 lr 2.24e-04 ema 0.9983 81 min left
+step 1800 cross 0.630 mask 2.712 var 1.248 lr 2.02e-04 ema 0.9985 75 min left
+dev {'retrieval@1': 0.151, 'spread': 0.954, 'step': 1840}
+step 1900 cross 0.680 mask 2.697 var 1.212 lr 1.80e-04 ema 0.9987 70 min left
+step 2000 cross 0.704 mask 2.704 var 1.193 lr 1.59e-04 ema 0.9989 64 min left
+step 2100 cross 0.649 mask 2.758 var 1.207 lr 1.41e-04 ema 0.9990 59 min left
+dev {'retrieval@1': 0.164, 'spread': 0.959, 'step': 2129}
+resume from step 2129, 122 min done, 58 min left
+JEPA main: encoder 12.3M, predictor 3.6M, vocab 4261, pairs 399382
+/home/user/en-normalizer/build/jepa.py:214: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  L.append((l_cross.item(), l_mask.item(), float(l_var)))
+step 2200 cross 0.714 mask 2.698 var 1.174 lr 1.22e-04 ema 0.9992 54 min left
+step 2300 cross 0.670 mask 2.689 var 1.186 lr 1.05e-04 ema 0.9993 49 min left
+step 2400 cross 0.739 mask 2.738 var 1.160 lr 8.96e-05 ema 0.9995 43 min left
+dev {'retrieval@1': 0.179, 'spread': 0.863, 'step': 2414}
+step 2500 cross 0.706 mask 2.665 var 1.168 lr 7.45e-05 ema 0.9996 38 min left
+step 2600 cross 0.666 mask 2.709 var 1.180 lr 6.15e-05 ema 0.9997 32 min left
+dev {'retrieval@1': 0.184, 'spread': 0.945, 'step': 2694}
+step 2700 cross 0.712 mask 2.702 var 1.156 lr 5.03e-05 ema 0.9998 27 min left
+step 2800 cross 0.718 mask 2.699 var 1.150 lr 4.13e-05 ema 0.9999 21 min left
+step 2900 cross 0.688 mask 2.729 var 1.161 lr 3.43e-05 ema 0.9999 16 min left
+dev {'retrieval@1': 0.198, 'spread': 0.937, 'step': 2979}
+step 3000 cross 0.674 mask 2.670 var 1.160 lr 2.90e-05 ema 1.0000 11 min left
+step 3100 cross 0.684 mask 2.707 var 1.159 lr 2.61e-05 ema 1.0000 5 min left
+step 3200 cross 0.643 mask 2.717 var 1.170 lr 2.50e-05 ema 1.0000 0 min left
+dev (end) {'retrieval@1': 0.192, 'spread': 0.941, 'step': 3201}

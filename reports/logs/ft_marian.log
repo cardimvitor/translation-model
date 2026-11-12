@@ -1,0 +1,546 @@
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 1483.23it/s]
+train pairs 399382 | step 0 | done 0 min | this run 30 min of 480
+step 50 loss 15.831 lr 1.67e-05 29 min left
+step 100 loss 8.283 lr 3.33e-05 28 min left
+step 150 loss 5.396 lr 5.00e-05 27 min left
+step 200 loss 4.280 lr 6.67e-05 25 min left
+step 250 loss 3.848 lr 8.33e-05 24 min left
+step 300 loss 3.628 lr 1.00e-04 23 min left
+step 350 loss 3.436 lr 9.99e-05 22 min left
+step 400 loss 3.386 lr 9.99e-05 21 min left
+step 450 loss 3.347 lr 9.99e-05 19 min left
+step 500 loss 3.326 lr 9.99e-05 18 min left
+step 550 loss 3.342 lr 9.98e-05 17 min left
+step 600 loss 3.229 lr 9.98e-05 16 min left
+dev {'bt_chrF': 47.67, 'bt_exact': 0.0433, 'gaz_chrF': 26.01, 'gaz_exact': 0.0533, 'step': 638}
+step 650 loss 3.255 lr 9.98e-05 14 min left
+step 700 loss 3.216 lr 9.97e-05 11 min left
+step 750 loss 3.261 lr 9.96e-05 9 min left
+step 800 loss 3.136 lr 9.94e-05 6 min left
+step 850 loss 3.182 lr 9.93e-05 2 min left
+dev {'bt_chrF': 48.88, 'bt_exact': 0.04, 'gaz_chrF': 24.9, 'gaz_exact': 0.0467, 'step': 894}
+run done
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 2101.35it/s]
+train pairs 399382 | step 894 | done 30 min | this run 450 min of 480
+step 900 loss 3.583 lr 9.91e-05 449 min left
+step 950 loss 3.271 lr 9.90e-05 448 min left
+step 1000 loss 3.184 lr 9.89e-05 446 min left
+step 1050 loss 3.138 lr 9.88e-05 445 min left
+step 1100 loss 3.093 lr 9.87e-05 444 min left
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 1596.72it/s]
+train pairs 457111 | step 1055 | done 35 min | this run 475 min of 510
+step 1100 loss 2.881 lr 9.89e-05 474 min left
+step 1150 loss 3.080 lr 9.88e-05 473 min left
+step 1200 loss 3.099 lr 9.87e-05 472 min left
+step 1250 loss 3.127 lr 9.87e-05 470 min left
+Traceback (most recent call last):
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/torch/serialization.py", line 1004, in save
+    _save(
+    ~~~~~^
+        obj,
+        ^^^^
+    ...<3 lines>...
+        _disable_byteorder_record,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/torch/serialization.py", line 1313, in _save
+    zip_file.write_record(name, storage, num_bytes)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: basic_ios::clear: iostream error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/user/en-normalizer/build/ft_marian.py", line 249, in <module>
+    a = ap.parse_args(); {"prep": prep, "train": train, "eval": evaluate}[a.mode](a)
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/user/en-normalizer/build/ft_marian.py", line 221, in train
+    save_latest(); last_save = now
+    ~~~~~~~~~~~^^
+  File "/home/user/en-normalizer/build/ft_marian.py", line 198, in save_latest
+    torch.save({"model": m.state_dict(), "opt": opt.state_dict(), "step": step, "minutes": done + (time.time() - t0) / 60, "rng": rng.getstate()}, tmp)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/torch/serialization.py", line 1003, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+         ~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/torch/serialization.py", line 835, in __exit__
+    self.file_like.write_end_of_file()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: [enforce fail at inline_container.cc:671] . unexpected pos 266432 vs 266348
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 1523.89it/s]
+train pairs 457111 | step 1055 | done 35 min | this run 475 min of 510
+step 1100 loss 2.883 lr 9.89e-05 474 min left
+step 1150 loss 3.076 lr 9.88e-05 472 min left
+step 1200 loss 3.099 lr 9.87e-05 471 min left
+step 1250 loss 3.123 lr 9.86e-05 470 min left
+step 1300 loss 3.126 lr 9.86e-05 469 min left
+step 1350 loss 3.082 lr 9.85e-05 468 min left
+step 1400 loss 3.157 lr 9.84e-05 467 min left
+step 1450 loss 3.086 lr 9.83e-05 466 min left
+step 1500 loss 3.129 lr 9.83e-05 465 min left
+step 1550 loss 3.059 lr 9.82e-05 464 min left
+step 1600 loss 3.042 lr 9.81e-05 462 min left
+step 1650 loss 3.065 lr 9.80e-05 461 min left
+step 1700 loss 3.018 lr 9.79e-05 460 min left
+step 1750 loss 3.026 lr 9.78e-05 459 min left
+step 1800 loss 3.019 lr 9.77e-05 458 min left
+step 1850 loss 3.045 lr 9.77e-05 457 min left
+step 1900 loss 3.015 lr 9.76e-05 456 min left
+step 1950 loss 3.018 lr 9.75e-05 455 min left
+step 2000 loss 2.983 lr 9.74e-05 454 min left
+step 2050 loss 2.962 lr 9.73e-05 453 min left
+step 2100 loss 3.023 lr 9.72e-05 452 min left
+step 2150 loss 2.993 lr 9.71e-05 452 min left
+step 2200 loss 2.932 lr 9.70e-05 451 min left
+step 2250 loss 2.935 lr 9.69e-05 450 min left
+step 2300 loss 2.919 lr 9.68e-05 449 min left
+step 2350 loss 2.990 lr 9.67e-05 448 min left
+step 2400 loss 2.987 lr 9.66e-05 447 min left
+step 2450 loss 3.008 lr 9.65e-05 446 min left
+step 2500 loss 2.928 lr 9.64e-05 445 min left
+dev {'bt_chrF': 54.61, 'bt_exact': 0.0967, 'gaz_chrF': 25.44, 'gaz_exact': 0.04, 'step': 2510}
+step 2550 loss 2.945 lr 9.61e-05 442 min left
+step 2600 loss 2.878 lr 9.58e-05 440 min left
+step 2650 loss 2.921 lr 9.55e-05 437 min left
+step 2700 loss 2.945 lr 9.52e-05 434 min left
+step 2750 loss 2.903 lr 9.48e-05 431 min left
+step 2800 loss 2.882 lr 9.45e-05 429 min left
+step 2850 loss 2.919 lr 9.41e-05 426 min left
+step 2900 loss 2.914 lr 9.37e-05 423 min left
+step 2950 loss 2.918 lr 9.33e-05 421 min left
+step 3000 loss 2.927 lr 9.29e-05 418 min left
+step 3050 loss 2.892 lr 9.25e-05 415 min left
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 1927.69it/s]
+train pairs 457111 | step 2974 | done 91 min | this run 419 min of 510
+step 3000 loss 2.972 lr 9.31e-05 419 min left
+step 3050 loss 2.946 lr 9.29e-05 418 min left
+step 3100 loss 2.915 lr 9.28e-05 417 min left
+step 3150 loss 2.887 lr 9.26e-05 416 min left
+step 3200 loss 2.884 lr 9.25e-05 415 min left
+step 3250 loss 2.912 lr 9.23e-05 414 min left
+step 3300 loss 2.900 lr 9.22e-05 413 min left
+step 3350 loss 2.923 lr 9.21e-05 412 min left
+step 3400 loss 2.841 lr 9.19e-05 411 min left
+step 3450 loss 2.872 lr 9.17e-05 410 min left
+step 3500 loss 2.866 lr 9.16e-05 409 min left
+step 3550 loss 2.824 lr 9.14e-05 408 min left
+step 3600 loss 2.821 lr 9.12e-05 407 min left
+step 3650 loss 2.867 lr 9.11e-05 406 min left
+step 3700 loss 2.869 lr 9.09e-05 405 min left
+step 3750 loss 2.896 lr 9.07e-05 404 min left
+step 3800 loss 2.834 lr 9.06e-05 403 min left
+step 3850 loss 2.845 lr 9.04e-05 402 min left
+step 3900 loss 2.817 lr 9.02e-05 401 min left
+step 3950 loss 2.840 lr 9.01e-05 400 min left
+step 4000 loss 2.810 lr 8.99e-05 399 min left
+step 4050 loss 2.856 lr 8.97e-05 398 min left
+step 4100 loss 2.905 lr 8.96e-05 397 min left
+step 4150 loss 2.820 lr 8.94e-05 396 min left
+step 4200 loss 2.822 lr 8.92e-05 395 min left
+step 4250 loss 2.776 lr 8.91e-05 394 min left
+step 4300 loss 2.834 lr 8.89e-05 393 min left
+step 4350 loss 2.758 lr 8.87e-05 392 min left
+step 4400 loss 2.774 lr 8.85e-05 391 min left
+step 4450 loss 2.797 lr 8.83e-05 390 min left
+step 4500 loss 2.850 lr 8.81e-05 389 min left
+dev {'bt_chrF': 56.66, 'bt_exact': 0.1267, 'gaz_chrF': 23.27, 'gaz_exact': 0.0467, 'step': 4510}
+step 4550 loss 2.753 lr 8.79e-05 388 min left
+step 4600 loss 2.750 lr 8.77e-05 387 min left
+step 4650 loss 2.801 lr 8.76e-05 386 min left
+step 4700 loss 2.788 lr 8.74e-05 385 min left
+step 4750 loss 2.805 lr 8.72e-05 384 min left
+step 4800 loss 2.808 lr 8.70e-05 383 min left
+step 4850 loss 2.781 lr 8.68e-05 382 min left
+step 4900 loss 2.758 lr 8.66e-05 381 min left
+step 4950 loss 2.739 lr 8.64e-05 380 min left
+step 5000 loss 2.748 lr 8.62e-05 379 min left
+step 5050 loss 2.790 lr 8.60e-05 378 min left
+step 5100 loss 2.724 lr 8.58e-05 377 min left
+step 5150 loss 2.751 lr 8.56e-05 376 min left
+step 5200 loss 2.784 lr 8.54e-05 375 min left
+step 5250 loss 2.757 lr 8.52e-05 374 min left
+step 5300 loss 2.774 lr 8.50e-05 373 min left
+step 5350 loss 2.777 lr 8.48e-05 372 min left
+step 5400 loss 2.729 lr 8.46e-05 371 min left
+step 5450 loss 2.769 lr 8.43e-05 370 min left
+step 5500 loss 2.731 lr 8.41e-05 369 min left
+step 5550 loss 2.737 lr 8.39e-05 368 min left
+step 5600 loss 2.705 lr 8.37e-05 367 min left
+step 5650 loss 2.730 lr 8.35e-05 366 min left
+step 5700 loss 2.725 lr 8.32e-05 365 min left
+step 5750 loss 2.689 lr 8.30e-05 364 min left
+step 5800 loss 2.697 lr 8.28e-05 363 min left
+step 5850 loss 2.681 lr 8.26e-05 362 min left
+step 5900 loss 2.665 lr 8.23e-05 361 min left
+step 5950 loss 2.745 lr 8.21e-05 360 min left
+dev {'bt_chrF': 56.55, 'bt_exact': 0.12, 'gaz_chrF': 23.02, 'gaz_exact': 0.0267, 'step': 5984}
+step 6000 loss 2.713 lr 8.18e-05 359 min left
+step 6050 loss 2.673 lr 8.16e-05 358 min left
+step 6100 loss 2.715 lr 8.14e-05 357 min left
+step 6150 loss 2.716 lr 8.11e-05 356 min left
+step 6200 loss 2.723 lr 8.09e-05 354 min left
+step 6250 loss 2.721 lr 8.06e-05 353 min left
+step 6300 loss 2.706 lr 8.04e-05 352 min left
+step 6350 loss 2.687 lr 8.02e-05 351 min left
+step 6400 loss 2.714 lr 7.99e-05 350 min left
+step 6450 loss 2.714 lr 7.97e-05 349 min left
+step 6500 loss 2.687 lr 7.94e-05 348 min left
+step 6550 loss 2.706 lr 7.92e-05 347 min left
+step 6600 loss 2.698 lr 7.90e-05 346 min left
+step 6650 loss 2.696 lr 7.88e-05 345 min left
+step 6700 loss 2.750 lr 7.85e-05 344 min left
+step 6750 loss 2.665 lr 7.83e-05 343 min left
+step 6800 loss 2.724 lr 7.81e-05 342 min left
+step 6850 loss 2.650 lr 7.78e-05 341 min left
+step 6900 loss 2.732 lr 7.76e-05 340 min left
+step 6950 loss 2.699 lr 7.74e-05 340 min left
+step 7000 loss 2.742 lr 7.71e-05 339 min left
+step 7050 loss 2.731 lr 7.69e-05 338 min left
+step 7100 loss 2.673 lr 7.67e-05 337 min left
+step 7150 loss 2.656 lr 7.65e-05 336 min left
+step 7200 loss 2.718 lr 7.62e-05 335 min left
+step 7250 loss 2.734 lr 7.60e-05 334 min left
+step 7300 loss 2.681 lr 7.58e-05 333 min left
+step 7350 loss 2.603 lr 7.55e-05 332 min left
+step 7400 loss 2.718 lr 7.53e-05 331 min left
+step 7450 loss 2.615 lr 7.51e-05 330 min left
+step 7500 loss 2.652 lr 7.49e-05 329 min left
+dev {'bt_chrF': 58.16, 'bt_exact': 0.1367, 'gaz_chrF': 23.7, 'gaz_exact': 0.0467, 'step': 7513}
+step 7550 loss 2.629 lr 7.46e-05 328 min left
+step 7600 loss 2.684 lr 7.43e-05 327 min left
+step 7650 loss 2.674 lr 7.41e-05 326 min left
+step 7700 loss 2.641 lr 7.39e-05 325 min left
+step 7750 loss 2.675 lr 7.36e-05 324 min left
+step 7800 loss 2.685 lr 7.34e-05 323 min left
+step 7850 loss 2.662 lr 7.32e-05 322 min left
+step 7900 loss 2.594 lr 7.29e-05 321 min left
+step 7950 loss 2.661 lr 7.27e-05 320 min left
+step 8000 loss 2.693 lr 7.24e-05 320 min left
+step 8050 loss 2.702 lr 7.21e-05 318 min left
+step 8100 loss 2.682 lr 7.19e-05 317 min left
+step 8150 loss 2.676 lr 7.16e-05 316 min left
+step 8200 loss 2.625 lr 7.13e-05 315 min left
+step 8250 loss 2.629 lr 7.11e-05 314 min left
+step 8300 loss 2.604 lr 7.08e-05 313 min left
+step 8350 loss 2.643 lr 7.06e-05 312 min left
+step 8400 loss 2.630 lr 7.03e-05 311 min left
+step 8450 loss 2.638 lr 7.00e-05 310 min left
+step 8500 loss 2.632 lr 6.98e-05 309 min left
+step 8550 loss 2.632 lr 6.95e-05 308 min left
+step 8600 loss 2.618 lr 6.93e-05 307 min left
+step 8650 loss 2.578 lr 6.90e-05 306 min left
+step 8700 loss 2.590 lr 6.87e-05 305 min left
+step 8750 loss 2.623 lr 6.85e-05 304 min left
+step 8800 loss 2.607 lr 6.82e-05 303 min left
+step 8850 loss 2.607 lr 6.79e-05 302 min left
+step 8900 loss 2.603 lr 6.76e-05 301 min left
+step 8950 loss 2.605 lr 6.74e-05 300 min left
+step 9000 loss 2.695 lr 6.71e-05 299 min left
+dev {'bt_chrF': 59.69, 'bt_exact': 0.1467, 'gaz_chrF': 27.69, 'gaz_exact': 0.06, 'step': 9019}
+step 9050 loss 2.656 lr 6.68e-05 298 min left
+step 9100 loss 2.628 lr 6.65e-05 297 min left
+step 9150 loss 2.576 lr 6.63e-05 296 min left
+step 9200 loss 2.627 lr 6.60e-05 295 min left
+step 9250 loss 2.613 lr 6.57e-05 294 min left
+step 9300 loss 2.619 lr 6.55e-05 293 min left
+step 9350 loss 2.634 lr 6.52e-05 292 min left
+step 9400 loss 2.620 lr 6.50e-05 291 min left
+step 9450 loss 2.560 lr 6.47e-05 290 min left
+step 9500 loss 2.608 lr 6.44e-05 289 min left
+step 9550 loss 2.611 lr 6.42e-05 288 min left
+step 9600 loss 2.562 lr 6.39e-05 287 min left
+step 9650 loss 2.615 lr 6.36e-05 286 min left
+step 9700 loss 2.608 lr 6.34e-05 285 min left
+step 9750 loss 2.671 lr 6.31e-05 284 min left
+step 9800 loss 2.580 lr 6.28e-05 283 min left
+step 9850 loss 2.548 lr 6.25e-05 282 min left
+step 9900 loss 2.580 lr 6.22e-05 281 min left
+step 9950 loss 2.629 lr 6.19e-05 280 min left
+step 10000 loss 2.551 lr 6.17e-05 279 min left
+step 10050 loss 2.578 lr 6.14e-05 278 min left
+step 10100 loss 2.576 lr 6.11e-05 277 min left
+step 10150 loss 2.596 lr 6.08e-05 276 min left
+step 10200 loss 2.563 lr 6.06e-05 275 min left
+step 10250 loss 2.529 lr 6.03e-05 274 min left
+step 10300 loss 2.602 lr 6.01e-05 273 min left
+step 10350 loss 2.529 lr 5.98e-05 272 min left
+step 10400 loss 2.583 lr 5.95e-05 271 min left
+step 10450 loss 2.593 lr 5.93e-05 270 min left
+step 10500 loss 2.555 lr 5.90e-05 269 min left
+dev {'bt_chrF': 59.78, 'bt_exact': 0.1367, 'gaz_chrF': 24.62, 'gaz_exact': 0.0467, 'step': 10536}
+step 10550 loss 2.578 lr 5.87e-05 268 min left
+step 10600 loss 2.522 lr 5.84e-05 267 min left
+step 10650 loss 2.576 lr 5.82e-05 266 min left
+step 10700 loss 2.571 lr 5.79e-05 265 min left
+step 10750 loss 2.531 lr 5.76e-05 264 min left
+step 10800 loss 2.556 lr 5.73e-05 263 min left
+step 10850 loss 2.527 lr 5.70e-05 262 min left
+step 10900 loss 2.529 lr 5.68e-05 261 min left
+step 10950 loss 2.571 lr 5.65e-05 260 min left
+step 11000 loss 2.570 lr 5.62e-05 259 min left
+step 11050 loss 2.540 lr 5.59e-05 258 min left
+step 11100 loss 2.529 lr 5.56e-05 257 min left
+step 11150 loss 2.524 lr 5.54e-05 256 min left
+step 11200 loss 2.540 lr 5.51e-05 255 min left
+step 11250 loss 2.559 lr 5.48e-05 254 min left
+step 11300 loss 2.535 lr 5.45e-05 253 min left
+step 11350 loss 2.598 lr 5.42e-05 252 min left
+step 11400 loss 2.538 lr 5.39e-05 251 min left
+step 11450 loss 2.589 lr 5.36e-05 250 min left
+step 11500 loss 2.535 lr 5.33e-05 249 min left
+step 11550 loss 2.527 lr 5.31e-05 248 min left
+step 11600 loss 2.531 lr 5.28e-05 247 min left
+step 11650 loss 2.564 lr 5.25e-05 246 min left
+step 11700 loss 2.558 lr 5.22e-05 245 min left
+step 11750 loss 2.574 lr 5.19e-05 244 min left
+step 11800 loss 2.540 lr 5.16e-05 243 min left
+step 11850 loss 2.534 lr 5.13e-05 242 min left
+step 11900 loss 2.542 lr 5.10e-05 241 min left
+step 11950 loss 2.508 lr 5.07e-05 240 min left
+step 12000 loss 2.506 lr 5.05e-05 239 min left
+dev {'bt_chrF': 60.52, 'bt_exact': 0.16, 'gaz_chrF': 26.32, 'gaz_exact': 0.06, 'step': 12002}
+step 12050 loss 2.496 lr 5.02e-05 238 min left
+step 12100 loss 2.522 lr 4.99e-05 237 min left
+step 12150 loss 2.486 lr 4.96e-05 236 min left
+step 12200 loss 2.523 lr 4.94e-05 235 min left
+step 12250 loss 2.553 lr 4.91e-05 234 min left
+step 12300 loss 2.559 lr 4.88e-05 233 min left
+step 12350 loss 2.472 lr 4.85e-05 232 min left
+step 12400 loss 2.471 lr 4.83e-05 231 min left
+step 12450 loss 2.533 lr 4.80e-05 230 min left
+step 12500 loss 2.513 lr 4.78e-05 229 min left
+step 12550 loss 2.501 lr 4.75e-05 228 min left
+step 12600 loss 2.490 lr 4.72e-05 227 min left
+step 12650 loss 2.483 lr 4.69e-05 226 min left
+step 12700 loss 2.497 lr 4.66e-05 225 min left
+step 12750 loss 2.532 lr 4.64e-05 224 min left
+step 12800 loss 2.433 lr 4.61e-05 223 min left
+step 12850 loss 2.491 lr 4.58e-05 222 min left
+step 12900 loss 2.482 lr 4.55e-05 221 min left
+step 12950 loss 2.519 lr 4.52e-05 219 min left
+step 13000 loss 2.503 lr 4.49e-05 218 min left
+step 13050 loss 2.535 lr 4.47e-05 217 min left
+step 13100 loss 2.543 lr 4.44e-05 216 min left
+step 13150 loss 2.526 lr 4.41e-05 215 min left
+step 13200 loss 2.528 lr 4.38e-05 214 min left
+step 13250 loss 2.529 lr 4.36e-05 213 min left
+step 13300 loss 2.505 lr 4.33e-05 212 min left
+step 13350 loss 2.474 lr 4.30e-05 211 min left
+step 13400 loss 2.460 lr 4.28e-05 210 min left
+step 13450 loss 2.505 lr 4.25e-05 209 min left
+dev {'bt_chrF': 60.86, 'bt_exact': 0.15, 'gaz_chrF': 27.3, 'gaz_exact': 0.0733, 'step': 13494}
+step 13500 loss 2.550 lr 4.22e-05 208 min left
+step 13550 loss 2.501 lr 4.20e-05 207 min left
+step 13600 loss 2.549 lr 4.17e-05 206 min left
+step 13650 loss 2.482 lr 4.14e-05 205 min left
+step 13700 loss 2.491 lr 4.12e-05 204 min left
+step 13750 loss 2.530 lr 4.09e-05 203 min left
+step 13800 loss 2.460 lr 4.07e-05 202 min left
+step 13850 loss 2.490 lr 4.04e-05 201 min left
+step 13900 loss 2.505 lr 4.01e-05 200 min left
+step 13950 loss 2.508 lr 3.99e-05 199 min left
+step 14000 loss 2.489 lr 3.96e-05 198 min left
+step 14050 loss 2.511 lr 3.94e-05 197 min left
+step 14100 loss 2.454 lr 3.91e-05 196 min left
+step 14150 loss 2.506 lr 3.89e-05 195 min left
+step 14200 loss 2.449 lr 3.86e-05 195 min left
+step 14250 loss 2.469 lr 3.84e-05 194 min left
+step 14300 loss 2.481 lr 3.81e-05 193 min left
+step 14350 loss 2.467 lr 3.79e-05 192 min left
+step 14400 loss 2.458 lr 3.76e-05 191 min left
+step 14450 loss 2.451 lr 3.74e-05 190 min left
+step 14500 loss 2.444 lr 3.71e-05 189 min left
+step 14550 loss 2.453 lr 3.68e-05 188 min left
+step 14600 loss 2.437 lr 3.66e-05 187 min left
+step 14650 loss 2.501 lr 3.64e-05 186 min left
+step 14700 loss 2.501 lr 3.61e-05 185 min left
+step 14750 loss 2.402 lr 3.59e-05 184 min left
+step 14800 loss 2.433 lr 3.57e-05 183 min left
+step 14850 loss 2.455 lr 3.54e-05 182 min left
+step 14900 loss 2.471 lr 3.52e-05 181 min left
+step 14950 loss 2.452 lr 3.50e-05 180 min left
+step 15000 loss 2.464 lr 3.47e-05 179 min left
+step 15050 loss 2.416 lr 3.45e-05 178 min left
+dev {'bt_chrF': 61.57, 'bt_exact': 0.17, 'gaz_chrF': 25.27, 'gaz_exact': 0.0467, 'step': 15051}
+step 15100 loss 2.467 lr 3.43e-05 177 min left
+step 15150 loss 2.454 lr 3.41e-05 176 min left
+step 15200 loss 2.447 lr 3.38e-05 175 min left
+step 15250 loss 2.453 lr 3.36e-05 175 min left
+step 15300 loss 2.458 lr 3.34e-05 174 min left
+step 15350 loss 2.450 lr 3.31e-05 173 min left
+step 15400 loss 2.397 lr 3.29e-05 172 min left
+step 15450 loss 2.387 lr 3.27e-05 171 min left
+step 15500 loss 2.445 lr 3.24e-05 170 min left
+step 15550 loss 2.405 lr 3.22e-05 169 min left
+step 15600 loss 2.465 lr 3.20e-05 168 min left
+step 15650 loss 2.469 lr 3.17e-05 167 min left
+step 15700 loss 2.444 lr 3.15e-05 166 min left
+step 15750 loss 2.414 lr 3.13e-05 165 min left
+step 15800 loss 2.416 lr 3.10e-05 164 min left
+step 15850 loss 2.467 lr 3.08e-05 163 min left
+step 15900 loss 2.441 lr 3.06e-05 162 min left
+step 15950 loss 2.424 lr 3.04e-05 161 min left
+step 16000 loss 2.491 lr 3.01e-05 160 min left
+step 16050 loss 2.372 lr 2.99e-05 159 min left
+step 16100 loss 2.378 lr 2.97e-05 158 min left
+step 16150 loss 2.454 lr 2.94e-05 157 min left
+step 16200 loss 2.446 lr 2.92e-05 156 min left
+step 16250 loss 2.429 lr 2.90e-05 155 min left
+step 16300 loss 2.431 lr 2.87e-05 154 min left
+step 16350 loss 2.418 lr 2.85e-05 153 min left
+step 16400 loss 2.453 lr 2.83e-05 152 min left
+step 16450 loss 2.452 lr 2.80e-05 151 min left
+step 16500 loss 2.481 lr 2.78e-05 150 min left
+step 16550 loss 2.415 lr 2.76e-05 149 min left
+dev {'bt_chrF': 62.5, 'bt_exact': 0.1667, 'gaz_chrF': 26.29, 'gaz_exact': 0.06, 'step': 16572}
+step 16600 loss 2.426 lr 2.73e-05 147 min left
+step 16650 loss 2.433 lr 2.71e-05 146 min left
+step 16700 loss 2.422 lr 2.69e-05 145 min left
+step 16750 loss 2.455 lr 2.66e-05 144 min left
+step 16800 loss 2.472 lr 2.64e-05 143 min left
+step 16850 loss 2.432 lr 2.62e-05 142 min left
+step 16900 loss 2.465 lr 2.60e-05 141 min left
+step 16950 loss 2.420 lr 2.58e-05 140 min left
+step 17000 loss 2.449 lr 2.56e-05 139 min left
+step 17050 loss 2.401 lr 2.53e-05 138 min left
+step 17100 loss 2.457 lr 2.51e-05 137 min left
+step 17150 loss 2.420 lr 2.49e-05 136 min left
+step 17200 loss 2.431 lr 2.47e-05 135 min left
+step 17250 loss 2.391 lr 2.45e-05 134 min left
+step 17300 loss 2.465 lr 2.43e-05 133 min left
+step 17350 loss 2.396 lr 2.41e-05 132 min left
+step 17400 loss 2.438 lr 2.39e-05 131 min left
+step 17450 loss 2.438 lr 2.37e-05 130 min left
+step 17500 loss 2.486 lr 2.35e-05 129 min left
+step 17550 loss 2.402 lr 2.33e-05 128 min left
+step 17600 loss 2.400 lr 2.31e-05 127 min left
+step 17650 loss 2.372 lr 2.29e-05 126 min left
+step 17700 loss 2.404 lr 2.27e-05 125 min left
+step 17750 loss 2.432 lr 2.25e-05 124 min left
+step 17800 loss 2.484 lr 2.23e-05 123 min left
+step 17850 loss 2.427 lr 2.21e-05 122 min left
+step 17900 loss 2.400 lr 2.19e-05 121 min left
+step 17950 loss 2.358 lr 2.17e-05 120 min left
+step 18000 loss 2.448 lr 2.15e-05 119 min left
+dev {'bt_chrF': 63.02, 'bt_exact': 0.17, 'gaz_chrF': 25.73, 'gaz_exact': 0.06, 'step': 18046}
+step 18050 loss 2.356 lr 2.13e-05 118 min left
+step 18100 loss 2.390 lr 2.12e-05 117 min left
+step 18150 loss 2.405 lr 2.10e-05 116 min left
+step 18200 loss 2.438 lr 2.08e-05 115 min left
+step 18250 loss 2.419 lr 2.06e-05 114 min left
+step 18300 loss 2.410 lr 2.04e-05 113 min left
+step 18350 loss 2.410 lr 2.02e-05 112 min left
+step 18400 loss 2.402 lr 2.01e-05 111 min left
+step 18450 loss 2.389 lr 1.99e-05 110 min left
+step 18500 loss 2.404 lr 1.97e-05 109 min left
+step 18550 loss 2.413 lr 1.96e-05 108 min left
+step 18600 loss 2.404 lr 1.94e-05 107 min left
+step 18650 loss 2.399 lr 1.92e-05 106 min left
+step 18700 loss 2.389 lr 1.91e-05 105 min left
+step 18750 loss 2.416 lr 1.89e-05 104 min left
+step 18800 loss 2.373 lr 1.87e-05 103 min left
+step 18850 loss 2.417 lr 1.86e-05 102 min left
+step 18900 loss 2.391 lr 1.84e-05 101 min left
+step 18950 loss 2.428 lr 1.83e-05 100 min left
+step 19000 loss 2.446 lr 1.81e-05 99 min left
+step 19050 loss 2.405 lr 1.80e-05 98 min left
+step 19100 loss 2.426 lr 1.78e-05 97 min left
+step 19150 loss 2.392 lr 1.77e-05 96 min left
+step 19200 loss 2.425 lr 1.75e-05 95 min left
+step 19250 loss 2.357 lr 1.73e-05 94 min left
+step 19300 loss 2.435 lr 1.72e-05 93 min left
+step 19350 loss 2.445 lr 1.70e-05 92 min left
+step 19400 loss 2.461 lr 1.69e-05 91 min left
+step 19450 loss 2.439 lr 1.68e-05 90 min left
+step 19500 loss 2.385 lr 1.66e-05 89 min left
+step 19550 loss 2.343 lr 1.65e-05 88 min left
+dev {'bt_chrF': 63.19, 'bt_exact': 0.1667, 'gaz_chrF': 27.63, 'gaz_exact': 0.0667, 'step': 19564}
+step 19600 loss 2.399 lr 1.63e-05 87 min left
+step 19650 loss 2.399 lr 1.62e-05 86 min left
+step 19700 loss 2.406 lr 1.61e-05 85 min left
+step 19750 loss 2.332 lr 1.59e-05 84 min left
+step 19800 loss 2.374 lr 1.58e-05 83 min left
+step 19850 loss 2.417 lr 1.57e-05 82 min left
+step 19900 loss 2.408 lr 1.55e-05 81 min left
+step 19950 loss 2.435 lr 1.54e-05 80 min left
+step 20000 loss 2.359 lr 1.53e-05 80 min left
+step 20050 loss 2.371 lr 1.52e-05 79 min left
+step 20100 loss 2.358 lr 1.51e-05 78 min left
+step 20150 loss 2.411 lr 1.49e-05 77 min left
+step 20200 loss 2.443 lr 1.48e-05 76 min left
+step 20250 loss 2.439 lr 1.47e-05 75 min left
+step 20300 loss 2.384 lr 1.46e-05 74 min left
+step 20350 loss 2.456 lr 1.44e-05 73 min left
+step 20400 loss 2.406 lr 1.43e-05 71 min left
+step 20450 loss 2.427 lr 1.42e-05 70 min left
+step 20500 loss 2.440 lr 1.40e-05 69 min left
+step 20550 loss 2.387 lr 1.39e-05 68 min left
+step 20600 loss 2.351 lr 1.38e-05 67 min left
+step 20650 loss 2.349 lr 1.37e-05 66 min left
+step 20700 loss 2.412 lr 1.35e-05 65 min left
+step 20750 loss 2.389 lr 1.34e-05 64 min left
+step 20800 loss 2.410 lr 1.33e-05 63 min left
+step 20850 loss 2.416 lr 1.32e-05 62 min left
+step 20900 loss 2.369 lr 1.31e-05 61 min left
+step 20950 loss 2.375 lr 1.30e-05 60 min left
+step 21000 loss 2.394 lr 1.29e-05 59 min left
+step 21050 loss 2.371 lr 1.28e-05 58 min left
+dev {'bt_chrF': 64.23, 'bt_exact': 0.19, 'gaz_chrF': 27.92, 'gaz_exact': 0.0867, 'step': 21059}
+step 21100 loss 2.445 lr 1.27e-05 57 min left
+step 21150 loss 2.411 lr 1.26e-05 56 min left
+step 21200 loss 2.369 lr 1.25e-05 55 min left
+step 21250 loss 2.390 lr 1.24e-05 54 min left
+step 21300 loss 2.412 lr 1.23e-05 53 min left
+step 21350 loss 2.410 lr 1.22e-05 52 min left
+step 21400 loss 2.426 lr 1.22e-05 50 min left
+step 21450 loss 2.334 lr 1.21e-05 50 min left
+step 21500 loss 2.354 lr 1.20e-05 49 min left
+step 21550 loss 2.419 lr 1.19e-05 48 min left
+step 21600 loss 2.412 lr 1.18e-05 46 min left
+step 21650 loss 2.418 lr 1.17e-05 45 min left
+step 21700 loss 2.400 lr 1.17e-05 44 min left
+step 21750 loss 2.386 lr 1.16e-05 43 min left
+step 21800 loss 2.374 lr 1.15e-05 42 min left
+step 21850 loss 2.435 lr 1.15e-05 41 min left
+step 21900 loss 2.398 lr 1.14e-05 40 min left
+step 21950 loss 2.387 lr 1.13e-05 39 min left
+step 22000 loss 2.354 lr 1.12e-05 38 min left
+step 22050 loss 2.398 lr 1.12e-05 37 min left
+step 22100 loss 2.345 lr 1.11e-05 36 min left
+step 22150 loss 2.341 lr 1.11e-05 35 min left
+step 22200 loss 2.343 lr 1.10e-05 34 min left
+step 22250 loss 2.386 lr 1.09e-05 33 min left
+step 22300 loss 2.405 lr 1.09e-05 32 min left
+step 22350 loss 2.371 lr 1.08e-05 31 min left
+step 22400 loss 2.399 lr 1.08e-05 30 min left
+step 22450 loss 2.374 lr 1.07e-05 29 min left
+step 22500 loss 2.365 lr 1.07e-05 28 min left
+dev {'bt_chrF': 63.83, 'bt_exact': 0.1933, 'gaz_chrF': 27.49, 'gaz_exact': 0.0733, 'step': 22519}
+step 22550 loss 2.356 lr 1.06e-05 27 min left
+step 22600 loss 2.387 lr 1.06e-05 26 min left
+step 22650 loss 2.433 lr 1.05e-05 25 min left
+step 22700 loss 2.399 lr 1.05e-05 23 min left
+step 22750 loss 2.336 lr 1.04e-05 22 min left
+step 22800 loss 2.371 lr 1.04e-05 21 min left
+step 22850 loss 2.389 lr 1.03e-05 20 min left
+step 22900 loss 2.408 lr 1.03e-05 19 min left
+step 22950 loss 2.373 lr 1.03e-05 18 min left
+step 23000 loss 2.360 lr 1.02e-05 17 min left
+step 23050 loss 2.400 lr 1.02e-05 16 min left
+step 23100 loss 2.375 lr 1.02e-05 15 min left
+step 23150 loss 2.351 lr 1.02e-05 13 min left
+step 23200 loss 2.358 lr 1.01e-05 12 min left
+step 23250 loss 2.409 lr 1.01e-05 11 min left
+step 23300 loss 2.397 lr 1.01e-05 10 min left
+step 23350 loss 2.391 lr 1.01e-05 9 min left
+step 23400 loss 2.372 lr 1.01e-05 8 min left
+step 23450 loss 2.360 lr 1.00e-05 7 min left
+step 23500 loss 2.378 lr 1.00e-05 6 min left
+step 23550 loss 2.451 lr 1.00e-05 5 min left
+step 23600 loss 2.403 lr 1.00e-05 4 min left
+step 23650 loss 2.362 lr 1.00e-05 3 min left
+step 23700 loss 2.387 lr 1.00e-05 1 min left
+step 23750 loss 2.393 lr 1.00e-05 0 min left
+dev {'bt_chrF': 63.77, 'bt_exact': 0.1867, 'gaz_chrF': 25.62, 'gaz_exact': 0.0533, 'step': 23766}
+run done

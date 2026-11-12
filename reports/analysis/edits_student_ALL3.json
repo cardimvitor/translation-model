@@ -1,0 +1,43 @@
+{
+ "model": "student_ALL3",
+ "base": {
+  "bt_chrF": 38.74,
+  "bt_exact": 0.0467,
+  "gaz_chrF": 33.66,
+  "gaz_exact": 0.1167,
+  "gold_exact": 0.1,
+  "gold_chrF": 32.55
+ },
+ "tried": [
+  {
+   "edit": "dec1.self.head5",
+   "with": [],
+   "bt_chrF": 38.55,
+   "bt_exact": 0.0389,
+   "gaz_chrF": 34.37,
+   "gaz_exact": 0.1133,
+   "kept": false
+  }
+ ],
+ "kept": [],
+ "edited": {
+  "bt_chrF": 38.74,
+  "bt_exact": 0.0467,
+  "gaz_chrF": 33.66,
+  "gaz_exact": 0.1167,
+  "gold_exact": 0.1,
+  "gold_chrF": 32.55
+ },
+ "finetuned": {
+  "bt_chrF": 39.28,
+  "bt_exact": 0.0478,
+  "gaz_chrF": 34.86,
+  "gaz_exact": 0.11,
+  "gold_exact": 0.1125,
+  "gold_chrF": 32.98,
+  "steps": 470,
+  "minutes": 15.0,
+  "used": true
+ },
+ "decision": "use edited model"
+}

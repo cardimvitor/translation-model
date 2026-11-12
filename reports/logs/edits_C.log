@@ -1,0 +1,15 @@
+base {'bt_chrF': 40.74, 'bt_exact': 0.07, 'gaz_chrF': 35.12, 'gaz_exact': 0.0833, 'gold_exact': 0.1844, 'gold_chrF': 40.29}
+dec1.self.head1 {'bt_chrF': 40.57, 'bt_exact': 0.0667, 'gaz_chrF': 35.46, 'gaz_exact': 0.0833} drop
+dec1.self.head3 {'bt_chrF': 40.95, 'bt_exact': 0.06, 'gaz_chrF': 34.64, 'gaz_exact': 0.0833} drop
+enc1.self.head2 {'bt_chrF': 40.15, 'bt_exact': 0.0644, 'gaz_chrF': 34.28, 'gaz_exact': 0.0733} drop
+enc4.self.head1 {'bt_chrF': 40.82, 'bt_exact': 0.0667, 'gaz_chrF': 34.92, 'gaz_exact': 0.0833} drop
+dec0.self.head0 {'bt_chrF': 40.86, 'bt_exact': 0.0722, 'gaz_chrF': 35.48, 'gaz_exact': 0.0867} KEEP
+enc5.self.head1 {'bt_chrF': 40.31, 'bt_exact': 0.0678, 'gaz_chrF': 35.18, 'gaz_exact': 0.0867} drop
+edited ['dec0.self.head0'] {'bt_chrF': 40.86, 'bt_exact': 0.0722, 'gaz_chrF': 35.48, 'gaz_exact': 0.0867, 'gold_exact': 0.2, 'gold_chrF': 40.56}
+fine-tuned {'bt_chrF': 40.55, 'bt_exact': 0.0689, 'gaz_chrF': 35.6, 'gaz_exact': 0.09, 'gold_exact': 0.1969, 'gold_chrF': 40.37}
+DECISION: use edited model
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+decoder_int8.onnx 4.57 MB
+encoder_int8.onnx 9.38 MB
+vocab.json 0.03 MB

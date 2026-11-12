@@ -1,0 +1,82 @@
+variant C | params 13.6M | cfg {'d': 320, 'enc': 6, 'dec': 3, 'heads': 4, 'ff': 1280} | src vocab 3567 tgt 194
+training pairs (weighted) 361322
+step 200 loss 3.588 lr 2.66e-04 295 min left
+step 400 loss 2.881 lr 5.32e-04 289 min left
+step 600 loss 2.600 lr 7.95e-04 284 min left
+step 800 loss 2.426 lr 7.91e-04 279 min left
+step 1000 loss 2.319 lr 7.86e-04 274 min left
+dev {'bt_chrF': 17.81, 'bt_exact': 0.0, 'gaz_chrF': 14.91, 'gaz_exact': 0.0067, 'step': 1142}
+step 1200 loss 2.202 lr 7.79e-04 268 min left
+step 1400 loss 2.080 lr 7.71e-04 263 min left
+step 1600 loss 2.039 lr 7.63e-04 257 min left
+step 1800 loss 1.969 lr 7.53e-04 252 min left
+step 2000 loss 1.891 lr 7.42e-04 247 min left
+step 2200 loss 1.854 lr 7.31e-04 241 min left
+dev {'bt_chrF': 25.76, 'bt_exact': 0.0067, 'gaz_chrF': 23.92, 'gaz_exact': 0.04, 'step': 2250}
+step 2400 loss 1.841 lr 7.16e-04 235 min left
+step 2600 loss 1.792 lr 7.03e-04 230 min left
+step 2800 loss 1.771 lr 6.89e-04 225 min left
+step 3000 loss 1.741 lr 6.74e-04 220 min left
+step 3200 loss 1.724 lr 6.56e-04 214 min left
+dev {'bt_chrF': 28.94, 'bt_exact': 0.0, 'gaz_chrF': 26.43, 'gaz_exact': 0.04, 'step': 3350}
+step 3400 loss 1.700 lr 6.37e-04 208 min left
+step 3600 loss 1.680 lr 6.19e-04 203 min left
+step 3800 loss 1.697 lr 6.00e-04 197 min left
+step 4000 loss 1.651 lr 5.81e-04 192 min left
+step 4200 loss 1.603 lr 5.59e-04 186 min left
+step 4400 loss 1.612 lr 5.39e-04 180 min left
+dev {'bt_chrF': 30.55, 'bt_exact': 0.0111, 'gaz_chrF': 27.37, 'gaz_exact': 0.04, 'step': 4418}
+step 4600 loss 1.614 lr 5.15e-04 174 min left
+step 4800 loss 1.609 lr 4.93e-04 168 min left
+step 5000 loss 1.584 lr 4.71e-04 163 min left
+step 5200 loss 1.559 lr 4.49e-04 157 min left
+step 5400 loss 1.554 lr 4.26e-04 151 min left
+dev {'bt_chrF': 33.9, 'bt_exact': 0.0267, 'gaz_chrF': 33.71, 'gaz_exact': 0.0733, 'step': 5457}
+step 5600 loss 1.538 lr 4.00e-04 145 min left
+step 5800 loss 1.525 lr 3.77e-04 139 min left
+step 6000 loss 1.508 lr 3.54e-04 133 min left
+step 6200 loss 1.476 lr 3.33e-04 128 min left
+step 6400 loss 1.474 lr 3.12e-04 122 min left
+dev {'bt_chrF': 37.33, 'bt_exact': 0.0356, 'gaz_chrF': 34.2, 'gaz_exact': 0.0933, 'step': 6494}
+step 6600 loss 1.452 lr 2.88e-04 116 min left
+step 6800 loss 1.444 lr 2.70e-04 111 min left
+step 7000 loss 1.448 lr 2.53e-04 106 min left
+step 7200 loss 1.462 lr 2.36e-04 102 min left
+step 7400 loss 1.435 lr 2.20e-04 97 min left
+resume from latest.pt step 7374
+variant C | params 13.6M | cfg {'d': 320, 'enc': 6, 'dec': 3, 'heads': 4, 'ff': 1280} | src vocab 3567 tgt 194
+training pairs (weighted) 361322
+step 7400 loss 1.395 lr 2.20e-04 97 min left
+step 7600 loss 1.403 lr 2.03e-04 92 min left
+step 7800 loss 1.401 lr 1.86e-04 87 min left
+step 8000 loss 1.379 lr 1.70e-04 82 min left
+step 8200 loss 1.386 lr 1.52e-04 76 min left
+step 8400 loss 1.382 lr 1.36e-04 70 min left
+dev {'bt_chrF': 39.35, 'bt_exact': 0.0422, 'gaz_chrF': 34.8, 'gaz_exact': 0.1, 'step': 8460}
+step 8600 loss 1.387 lr 1.20e-04 63 min left
+step 8800 loss 1.350 lr 1.06e-04 58 min left
+step 9000 loss 1.370 lr 9.49e-05 52 min left
+step 9200 loss 1.355 lr 8.39e-05 47 min left
+step 9400 loss 1.343 lr 7.36e-05 41 min left
+dev {'bt_chrF': 39.82, 'bt_exact': 0.0533, 'gaz_chrF': 36.71, 'gaz_exact': 0.1333, 'step': 9496}
+step 9600 loss 1.316 lr 6.40e-05 34 min left
+step 9800 loss 1.327 lr 5.70e-05 29 min left
+step 10000 loss 1.322 lr 5.18e-05 24 min left
+step 10200 loss 1.316 lr 4.76e-05 19 min left
+step 10400 loss 1.311 lr 4.40e-05 14 min left
+step 10600 loss 1.311 lr 4.14e-05 9 min left
+dev {'bt_chrF': 40.18, 'bt_exact': 0.0578, 'gaz_chrF': 37.43, 'gaz_exact': 0.1067, 'step': 10623}
+step 10800 loss 1.304 lr 4.01e-05 3 min left
+dev {'bt_chrF': 39.94, 'bt_exact': 0.0556, 'gaz_chrF': 37.05, 'gaz_exact': 0.1133, 'step': 10890}
+dev (end) {'bt_chrF': 39.94, 'bt_exact': 0.0556, 'gaz_chrF': 37.05, 'gaz_exact': 0.1133, 'step': 10890}
+last {'bt_chrF': 39.94, 'bt_exact': 0.0556, 'gaz_chrF': 37.05, 'gaz_exact': 0.1133} | average of 3 {'bt_chrF': 40.06, 'bt_exact': 0.0533, 'gaz_chrF': 37.09, 'gaz_exact': 0.12}
+/home/user/en-normalizer/build/train_student2.py:210: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(enc, (src,), os.path.join(OUT, "encoder.onnx"), input_names=["src"], output_names=["ck", "cv", "src_bias"],
+/home/user/en-normalizer/build/train_student2.py:213: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(dec, (tok, pos, ck, cv, sb, pk, pv), os.path.join(OUT, "decoder.onnx"),
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+decoder_int8.onnx 4.57 MB
+encoder_int8.onnx 9.38 MB
+train_log.json 0.0 MB
+vocab.json 0.03 MB
