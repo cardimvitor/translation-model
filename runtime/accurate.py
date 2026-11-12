@@ -186,7 +186,44 @@ def process_v2(op, text, ascii_out=False, variant=None):
     return dict(fast, method=fast["method"] + "(neural rejected)", model="accurate")
 
 
+def is_address_v3(s, langs, fast, pol):
+    if not is_address_v2(s, langs, fast):
+        return False
+    mw = pol.get("addr_max_words", 0)
+    return not (mw and len(s.split()) > mw and fast.get("coverage", 0) < pol.get("addr_long_cov", 0.6))
+
+
+def process_v3(op, text, ascii_out, variant, pol):
+    """Decision rule v3, for a strong neural model (v6). Its settings ship with the model (vocab.json "policy"):
+      keep_cov    stay with Fast when Fast knew every word of the label
+      need_known  the neural answer must keep the words Fast took from the dictionary
+      tau         minimum neural confidence
+      need_english    the neural answer must pass the English check
+      keep_gaz        a short label in which Fast found a known place name stays with Fast
+      addr_max_words  a label with more words than this counts as an address only if Fast knew at least
+                      addr_long_cov of its words (long product names often contain a number and a place word)
+    Places, addresses and labels already in English always stay with Fast."""
+    fast = F.process(op, text, ascii_out)
+    if fast["operation"] != "translate" or fast["method"] in ("gazetteer", "already-english") or not fast["output"]:
+        return dict(fast, model="accurate")
+    s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text)).strip()
+    langs = [l for l, _ in fast["language"]]
+    if is_address_v3(s, langs, fast, pol) or (pol.get("keep_cov") and fast.get("coverage", 0) >= 1) \
+            or (pol.get("keep_gaz") and "gazetteer" in fast["method"] and len(s.split()) <= pol.get("addr_max_words", 8)):
+        return dict(fast, model="accurate")               # address, every word known, or a short label with a known place
+    o, c = mt(variant).translate(s)
+    import student
+    if o and c >= pol.get("tau", 0.0) and student.acceptable(o, 1.0, pol.get("need_english", True)) and (not pol.get("need_known") or keeps_known(o, fast["output"])):
+        out = F.tr_fallback(F.fold_latin(o)) if ascii_out else o
+        return dict(fast, output=out, method="neural", confidence=F.r3(c), model="accurate")
+    return dict(fast, method=fast["method"] + "(neural rejected)", model="accurate")
+
+
 def process(op, text, ascii_out=False, variant=None):
+    if MODEL_NAME == "student" and POLICY["name"] != "v1":
+        pol = getattr(mt(variant), "v", {}).get("policy")
+        if pol:
+            return process_v3(op, text, ascii_out, variant, pol)
     if POLICY["name"] == "v2" and MODEL_NAME == "student":
         return process_v2(op, text, ascii_out, variant)
     fast = F.process(op, text, ascii_out)

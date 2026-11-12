@@ -42,7 +42,7 @@ code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px}
 </head>
 <body><main>
 <h1>Label normalizer: what we built and how the models compare</h1>
-<p class="sub">Product names, item labels and addresses in 16 languages turned into English, offline, on a phone. From the first version (Nov 4) to the JEPA experiment (Nov 11).</p>
+<p class="sub">Product names, item labels and addresses in 16 languages turned into English, offline, on a phone. From the first version (Nov 4) to the final model, v6 (Nov 12).</p>
 
 <div class="kpis">
 {{KPIS}}
@@ -50,6 +50,9 @@ code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px}
 
 <div class="note"><b>How to read the scores.</b> <i>Exact</i> is the share of outputs that match a reference English name word for word (after lowercasing). <i>chrF</i> (0–100) is a character-overlap score that gives partial credit, e.g. "cotton t-shirt" vs "cotton tee shirt". Two test sets, never used in training: <b>Labels</b> = 320 product labels I wrote by hand in 16 languages; <b>Real names</b> = 993 real marketplace product names from the Amazon Berkeley Objects set, held out before training. <i>Accurate</i> is the full system (Fast rules, then the small neural model when Fast is unsure); <i>model alone</i> is the neural model without Fast.</div>
 
+<h2>The final model: v6</h2>
+<p><b>What changed.</b> Reviewing everything showed one weak point: the neural part was trained from nothing on 4 CPU cores, and alone it scored about 32 on the labels while the big translators score 76–95. v6 does not start from nothing. It takes a compact pretrained translator (OPUS-MT mul-en, 77M parameters, CC BY 4.0), trims its vocabulary to our 16 languages (adding the Korean pieces it lacked), and fine-tunes it for 8.5 hours on everything we had built: the v5 MAX data plus 58k new short-label pairs made from Amazon search queries. After 30 minutes it already beat every earlier model.</p>
+{{V6}}
 <h2>1. Every model compared</h2>
 <p>Darker bars: teachers allow commercial use. Hover a bar for the value.</p>
 <h3>Hand-written labels, Accurate system (chrF)</h3>
@@ -62,7 +65,7 @@ code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px}
 <h2>2. Big teacher models vs our small models</h2>
 <p>The small models learn from bigger translation models ("teachers"). Same 320 labels, teachers run on their own:</p>
 {{TEACHERS}}
-<p>Hy-MT2-7B is clearly the best translator of product labels, but at 4.6 GB and over a second per label it can't run on a phone. Our best phone model is about 200× smaller. The gap is largest on rare product words; the Fast rules close part of it for addresses and common words.</p>
+<p>Hy-MT2-7B is clearly the best translator of product labels, but at 4.6 GB and over a second per label it can't run on a phone. v6 is about 40× smaller and now scores above the OPUS-MT teachers that wrote most of its training data, and level with Hy-MT2-1.8B: it learned from real English titles, real product-name pairs and two teachers at once. The earlier from-scratch models (13–22 MB) stayed near 50.</p>
 
 <h2>3. What we did, in order</h2>
 <ul class="tl">
@@ -72,6 +75,7 @@ code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px}
 <li><b>v5 (Nov 8–10).</b> Teachers' own English answers added as training targets (knowledge distillation, filtered), Tencent Hy-MT2 added as a third teacher, models B2, C2, H, ALL3, HY. Then MAX: no size limit on data, 35k real multilingual product names (ABO), 60k more titles, 10 h training.</li>
 <li><b>Products and word combinations (Nov 10).</b> 952 new product words and 2–3 word phrases mined from the Amazon ESCI and ABO catalogues, translated and round-trip checked, added to every model's word list (1,841 automatic terms in total).</li>
 <li><b>New decision rule (Nov 10).</b> When to trust the neural model instead of Fast, tuned on held-out training data. Biggest single gain of v5.</li>
+<li><b>v6 (Nov 11–12).</b> Review of the whole project, then the final model: a pretrained compact translator fine-tuned on all our data, new short-label data, a SentencePiece tokenizer written for the phone runtime, better 8-bit conversion, a new decision rule.</li>
 <li><b>JEPA (Nov 10–11).</b> A self-supervised encoder pretrained to predict the meaning of a label from another language, used two ways, compared against a baseline trained the same total time.</li>
 </ul>
 
@@ -107,6 +111,8 @@ code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px}
 <li><b>Picking one teacher per language.</b> The held-out data was written by OPUS-MT and NLLB, which biases the choice toward them. Using every teacher's filtered answers works better.</li>
 <li><b>Hy-MT2 as main data source (HY).</b> Best teacher, but at ~2.5 s per title only 8k pairs were affordable, and its answers in the mixed models (H, ALL3) did not beat OPUS-MT alone.</li>
 <li><b>Large weight cuts and long post-edit retraining.</b> See section 4.</li>
+<li><b>Training small models from nothing.</b> The biggest lesson of the review: ten hours of from-scratch CPU training reached 38 on held-out titles; fine-tuning a pretrained model passed that in under 15 minutes and ended at 64.</li>
+<li><b>Default 8-bit conversion and 7-bit weights for v6.</b> Both lost too much accuracy; see the v6 section.</li>
 </ul>
 
 <h2>8. Data and licenses</h2>

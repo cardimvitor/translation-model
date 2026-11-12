@@ -54,7 +54,22 @@
       return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o)) : o, method: "neural", confidence: Math.round(c * 1000) / 1000, model: "accurate" });
     return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });
   }
+  // rule v3 (strong neural model, v6): settings ship with the model (vocab.json "policy"); same as accurate.py
+  async function processV3(op, text, asciiOut, pol) {
+    const _ = N._; const fast = N.process(op, text, asciiOut);
+    if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });
+    const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+    const langs = fast.language.map((x) => x[0]);
+    const longLabel = pol.addr_max_words && s.split(" ").length > pol.addr_max_words && (fast.coverage || 0) < (pol.addr_long_cov === undefined ? 0.6 : pol.addr_long_cov);
+    const shortPlace = pol.keep_gaz && fast.method.includes("gazetteer") && s.split(" ").length <= (pol.addr_max_words === undefined ? 8 : pol.addr_max_words);
+    if ((isAddressV2(s, langs, fast) && !longLabel) || (pol.keep_cov && (fast.coverage || 0) >= 1) || shortPlace) return Object.assign({}, fast, { model: "accurate" });
+    const [o, c] = await S.translate(s);
+    if (o && c >= (pol.tau || 0) && ST.acceptable(o, 1.0, _.EC(), pol.need_english !== false) && (!pol.need_known || keepsKnown(o, fast.output)))
+      return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o)) : o, method: "neural", confidence: Math.round(c * 1000) / 1000, model: "accurate" });
+    return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });
+  }
   async function process(op, text, asciiOut = false) {
+    if (S && S.policy && POLICY.name !== "v1") return processV3(op, text, asciiOut, S.policy);
     if (POLICY.name === "v2") return processV2(op, text, asciiOut);
     const _ = N._; const fast = N.process(op, text, asciiOut);
     if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });

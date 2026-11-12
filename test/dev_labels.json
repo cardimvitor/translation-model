@@ -1,0 +1,305 @@
+{
+ "about": "Hand-written product labels in 16 languages for TUNING decisions (e.g. when the neural answer replaces Fast). Different products from test/gold_products.json; never used for training.",
+ "items": [
+  {
+   "en": [
+    "hair dryer",
+    "hairdryer"
+   ],
+   "src": {
+    "zh": "吹风机",
+    "es": "secador de pelo",
+    "pt": "secador de cabelo",
+    "ar": "مجفف شعر",
+    "ru": "фен для волос",
+    "ja": "ヘアドライヤー",
+    "ko": "헤어 드라이어",
+    "de": "Haartrockner",
+    "fr": "sèche-cheveux",
+    "hi": "हेयर ड्रायर",
+    "tr": "saç kurutma makinesi",
+    "id": "pengering rambut",
+    "vi": "máy sấy tóc",
+    "it": "asciugacapelli",
+    "pl": "suszarka do włosów",
+    "th": "ไดร์เป่าผม"
+   }
+  },
+  {
+   "en": [
+    "electric kettle",
+    "kettle"
+   ],
+   "src": {
+    "zh": "电热水壶",
+    "es": "hervidor eléctrico",
+    "pt": "chaleira elétrica",
+    "ar": "غلاية كهربائية",
+    "ru": "электрический чайник",
+    "ja": "電気ケトル",
+    "ko": "전기 주전자",
+    "de": "Wasserkocher",
+    "fr": "bouilloire électrique",
+    "hi": "इलेक्ट्रिक केतली",
+    "tr": "elektrikli su ısıtıcısı",
+    "id": "ketel listrik",
+    "vi": "ấm đun nước điện",
+    "it": "bollitore elettrico",
+    "pl": "czajnik elektryczny",
+    "th": "กาต้มน้ำไฟฟ้า"
+   }
+  },
+  {
+   "en": [
+    "sunglasses"
+   ],
+   "src": {
+    "zh": "太阳镜",
+    "es": "gafas de sol",
+    "pt": "óculos de sol",
+    "ar": "نظارات شمسية",
+    "ru": "солнцезащитные очки",
+    "ja": "サングラス",
+    "ko": "선글라스",
+    "de": "Sonnenbrille",
+    "fr": "lunettes de soleil",
+    "hi": "धूप का चश्मा",
+    "tr": "güneş gözlüğü",
+    "id": "kacamata hitam",
+    "vi": "kính râm",
+    "it": "occhiali da sole",
+    "pl": "okulary przeciwsłoneczne",
+    "th": "แว่นกันแดด"
+   }
+  },
+  {
+   "en": [
+    "mechanical keyboard"
+   ],
+   "src": {
+    "zh": "机械键盘",
+    "es": "teclado mecánico",
+    "pt": "teclado mecânico",
+    "ar": "لوحة مفاتيح ميكانيكية",
+    "ru": "механическая клавиатура",
+    "ja": "メカニカルキーボード",
+    "ko": "기계식 키보드",
+    "de": "mechanische Tastatur",
+    "fr": "clavier mécanique",
+    "hi": "मैकेनिकल कीबोर्ड",
+    "tr": "mekanik klavye",
+    "id": "keyboard mekanik",
+    "vi": "bàn phím cơ",
+    "it": "tastiera meccanica",
+    "pl": "klawiatura mechaniczna",
+    "th": "คีย์บอร์ดเมคานิคอล"
+   }
+  },
+  {
+   "en": [
+    "children's bicycle",
+    "kids bike",
+    "kids bicycle",
+    "children's bike",
+    "child bicycle",
+    "bicycle for children",
+    "kids' bike"
+   ],
+   "src": {
+    "zh": "儿童自行车",
+    "es": "bicicleta para niños",
+    "pt": "bicicleta infantil",
+    "ar": "دراجة أطفال",
+    "ru": "детский велосипед",
+    "ja": "子供用自転車",
+    "ko": "어린이 자전거",
+    "de": "Kinderfahrrad",
+    "fr": "vélo pour enfant",
+    "hi": "बच्चों की साइकिल",
+    "tr": "çocuk bisikleti",
+    "id": "sepeda anak",
+    "vi": "xe đạp trẻ em",
+    "it": "bicicletta per bambini",
+    "pl": "rower dziecięcy",
+    "th": "จักรยานเด็ก"
+   }
+  },
+  {
+   "en": [
+    "vacuum cleaner",
+    "vacuum"
+   ],
+   "src": {
+    "zh": "吸尘器",
+    "es": "aspiradora",
+    "pt": "aspirador de pó",
+    "ar": "مكنسة كهربائية",
+    "ru": "пылесос",
+    "ja": "掃除機",
+    "ko": "진공청소기",
+    "de": "Staubsauger",
+    "fr": "aspirateur",
+    "hi": "वैक्यूम क्लीनर",
+    "tr": "elektrikli süpürge",
+    "id": "penyedot debu",
+    "vi": "máy hút bụi",
+    "it": "aspirapolvere",
+    "pl": "odkurzacz",
+    "th": "เครื่องดูดฝุ่น"
+   }
+  },
+  {
+   "en": [
+    "bath towel"
+   ],
+   "src": {
+    "zh": "浴巾",
+    "es": "toalla de baño",
+    "pt": "toalha de banho",
+    "ar": "منشفة حمام",
+    "ru": "банное полотенце",
+    "ja": "バスタオル",
+    "ko": "목욕 수건",
+    "de": "Badetuch",
+    "fr": "serviette de bain",
+    "hi": "नहाने का तौलिया",
+    "tr": "banyo havlusu",
+    "id": "handuk mandi",
+    "vi": "khăn tắm",
+    "it": "asciugamano da bagno",
+    "pl": "ręcznik kąpielowy",
+    "th": "ผ้าเช็ดตัว"
+   }
+  },
+  {
+   "en": [
+    "women's handbag",
+    "ladies handbag",
+    "handbag for women",
+    "women's bag",
+    "women's purse",
+    "ladies' handbag"
+   ],
+   "src": {
+    "zh": "女士手提包",
+    "es": "bolso de mujer",
+    "pt": "bolsa feminina",
+    "ar": "حقيبة يد نسائية",
+    "ru": "женская сумка",
+    "ja": "レディースハンドバッグ",
+    "ko": "여성 핸드백",
+    "de": "Damenhandtasche",
+    "fr": "sac à main femme",
+    "hi": "महिलाओं का हैंडबैग",
+    "tr": "kadın el çantası",
+    "id": "tas tangan wanita",
+    "vi": "túi xách nữ",
+    "it": "borsa da donna",
+    "pl": "torebka damska",
+    "th": "กระเป๋าถือผู้หญิง"
+   }
+  },
+  {
+   "en": [
+    "usb charging cable",
+    "usb charger cable",
+    "usb charge cable"
+   ],
+   "src": {
+    "zh": "USB充电线",
+    "es": "cable de carga USB",
+    "pt": "cabo de carregamento USB",
+    "ar": "كابل شحن USB",
+    "ru": "USB-кабель для зарядки",
+    "ja": "USB充電ケーブル",
+    "ko": "USB 충전 케이블",
+    "de": "USB-Ladekabel",
+    "fr": "câble de charge USB",
+    "hi": "यूएसबी चार्जिंग केबल",
+    "tr": "USB şarj kablosu",
+    "id": "kabel pengisi daya USB",
+    "vi": "cáp sạc USB",
+    "it": "cavo di ricarica USB",
+    "pl": "kabel do ładowania USB",
+    "th": "สายชาร์จ USB"
+   }
+  },
+  {
+   "en": [
+    "camping tent",
+    "tent"
+   ],
+   "src": {
+    "zh": "露营帐篷",
+    "es": "tienda de campaña",
+    "pt": "barraca de camping",
+    "ar": "خيمة تخييم",
+    "ru": "палатка для кемпинга",
+    "ja": "キャンプ用テント",
+    "ko": "캠핑 텐트",
+    "de": "Campingzelt",
+    "fr": "tente de camping",
+    "hi": "कैम्पिंग टेंट",
+    "tr": "kamp çadırı",
+    "id": "tenda kemah",
+    "vi": "lều cắm trại",
+    "it": "tenda da campeggio",
+    "pl": "namiot kempingowy",
+    "th": "เต็นท์แคมป์ปิ้ง"
+   }
+  },
+  {
+   "en": [
+    "moisturizing face cream",
+    "face moisturizer",
+    "moisturising face cream",
+    "facial moisturizer",
+    "moisturizing facial cream"
+   ],
+   "src": {
+    "zh": "保湿面霜",
+    "es": "crema facial hidratante",
+    "pt": "creme facial hidratante",
+    "ar": "كريم مرطب للوجه",
+    "ru": "увлажняющий крем для лица",
+    "ja": "保湿フェイスクリーム",
+    "ko": "수분 페이스 크림",
+    "de": "feuchtigkeitsspendende Gesichtscreme",
+    "fr": "crème hydratante pour le visage",
+    "hi": "मॉइस्चराइजिंग फेस क्रीम",
+    "tr": "nemlendirici yüz kremi",
+    "id": "krim wajah pelembap",
+    "vi": "kem dưỡng ẩm da mặt",
+    "it": "crema viso idratante",
+    "pl": "nawilżający krem do twarzy",
+    "th": "ครีมบำรุงผิวหน้า"
+   }
+  },
+  {
+   "en": [
+    "wooden bookshelf",
+    "wood bookshelf",
+    "wooden bookcase",
+    "wooden book shelf"
+   ],
+   "src": {
+    "zh": "木制书架",
+    "es": "estantería de madera",
+    "pt": "estante de madeira",
+    "ar": "رف كتب خشبي",
+    "ru": "деревянная книжная полка",
+    "ja": "木製本棚",
+    "ko": "원목 책장",
+    "de": "Bücherregal aus Holz",
+    "fr": "bibliothèque en bois",
+    "hi": "लकड़ी की किताबों की अलमारी",
+    "tr": "ahşap kitaplık",
+    "id": "rak buku kayu",
+    "vi": "kệ sách gỗ",
+    "it": "libreria in legno",
+    "pl": "drewniany regał na książki",
+    "th": "ชั้นวางหนังสือไม้"
+   }
+  }
+ ]
+}

@@ -4,11 +4,15 @@
 (function (root) {
   "use strict";
   let BPE = typeof module !== "undefined" && module.exports ? require("./bpe.js") : root.BPE;
+  let SPM = typeof module !== "undefined" && module.exports ? require("./spm.js") : root.SPM;
   async function create(ort, loadBinary, loadJson, lower, dir) {
-    dir = dir || "student_MAX";
+    dir = dir || "student_V6";
     const v = await loadJson(dir + "/vocab.json");
     BPE = BPE || root.BPE;
     if (v.bpe && !BPE) throw new Error("this model splits words into pieces: load runtime/bpe.js before student.js");
+    SPM = SPM || root.SPM;
+    if (v.spm && !SPM) throw new Error("this model uses SentencePiece: load runtime/spm.js before student.js");
+    const sp = v.spm ? SPM.create(await loadJson(dir + "/spm_src.json")) : null;
     const opts = { executionProviders: ["wasm"], graphOptimizationLevel: "all" };
     const enc = await ort.InferenceSession.create(new Uint8Array(await loadBinary(dir + "/encoder_int8.onnx")), opts);
     const dec = await ort.InferenceSession.create(new Uint8Array(await loadBinary(dir + "/decoder_int8.onnx")), opts);
@@ -16,8 +20,14 @@
     const prep = (s) => lower(s.normalize("NFKC")).replace(/\s+/g, " ").trim();
     const T = (arr, dims) => new ort.Tensor("int64", BigInt64Array.from(arr.map(BigInt)), dims);
     async function translate(text) {
-      const pieces = v.bpe ? BPE.encode(prep(text), v.bpe.src) : Array.from(prep(text));
-      const ids = pieces.slice(0, v.max_src).map((c) => si.has(c) ? si.get(c) : v.unk);
+      let ids;
+      if (sp) {            // pretrained translator (v6): SentencePiece pieces, then the end mark
+        ids = sp.encode(prep(text)).slice(0, v.max_src - 1).map((c) => si.has(c) ? si.get(c) : v.unk);
+        if (ids.length) ids.push(v.eos);
+      } else {
+        const pieces = v.bpe ? BPE.encode(prep(text), v.bpe.src) : Array.from(prep(text));
+        ids = pieces.slice(0, v.max_src).map((c) => si.has(c) ? si.get(c) : v.unk);
+      }
       if (!ids.length) return ["", 0.0];
       const src = T(ids, [1, ids.length]);
       if (v.kv) return translateKv(src);
@@ -53,17 +63,18 @@
         if (arg === v.eos) break;
         out.push(arg); lps.push(lp); tok = arg; pk = r.nk; pv = r.nv;
       }
-      const txt = v.bpe ? BPE.decode(out.map((i) => v.tgt[i])) : out.map((i) => v.tgt[i]).join("");
+      const txt = sp ? out.map((i) => v.tgt[i]).join("").split(SPM.SP).join(" ").split(/\s+/).filter(Boolean).join(" ")
+        : v.bpe ? BPE.decode(out.map((i) => v.tgt[i])) : out.map((i) => v.tgt[i]).join("");
       const conf = lps.length ? Math.exp(lps.reduce((a, b) => a + b, 0) / lps.length) : 0.0;
       return [txt, Math.round(conf * 1000) / 1000];
     }
-    return { translate, kv: !!v.kv, dir };
+    return { translate, kv: !!v.kv, dir, policy: v.policy || null };
   }
-  function acceptable(out, conf, EC) {
+  function acceptable(out, conf, EC, english) {
     if (!out || conf < 0.5) return false;
     const w = out.split(/\s+/).filter(Boolean);
     if (w.length >= 6 && new Set(w).size <= Math.floor(w.length / 2)) return false;
-    return EC.isEnglish(out, "relaxed").english;
+    return english === false ? true : EC.isEnglish(out, "relaxed").english;
   }
   const api = { create, acceptable };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.Student = api;

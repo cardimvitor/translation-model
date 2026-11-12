@@ -71,8 +71,8 @@ label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
     <div class="models">
       <div class="model"><b>English check</b><span class="st" id="st-check">loading…</span><span class="note">Is the input already English? 100 KB.</span></div>
       <div class="model"><b>Fast</b><span class="st" id="st-fast">loading…</span><span class="note">Places, addresses, transliteration, product glossary. ~28 MB.</span></div>
-      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. +24–33 MB (13–22 MB model, 11 MB runtime).</span>
-        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_MAX" selected>v5 MAX: best on real product names (commercial use OK)</option><option value="student_B2">v5 B2: OPUS-MT teacher (commercial use OK)</option><option value="student_C">v4 C: best on short labels (non-commercial)</option></select></div>
+      <div class="model"><b>Accurate</b><span class="st" id="st-acc">loading…</span><span class="note">Fast + small neural translator for product text. 13–106 MB model + 11 MB runtime. v6 takes 0.1–0.5 s per label on a phone.</span>
+        <select id="variant" aria-label="Accurate model" style="width:auto;margin-top:6px"><option value="student_V6" selected>v6: best quality (106 MB, commercial use OK)</option><option value="student_MAX">v5 MAX: small and quick (22 MB, commercial use OK)</option><option value="student_C">v4 C: smallest (13 MB, non-commercial)</option></select></div>
     </div>
   </section>
 
@@ -108,6 +108,7 @@ label.tog{display:flex;gap:6px;align-items:center;font-size:.9rem}
 <script src="runtime/encheck.js"></script>
 <script src="runtime/normalizer.js"></script>
 <script src="runtime/bpe.js"></script>
+<script src="runtime/spm.js"></script>
 <script src="runtime/student.js"></script>
 <script src="runtime/accurate.js"></script>
 <script src="ort/ort.wasm.min.js"></script>
@@ -127,6 +128,17 @@ const loadJson = (n) => fetch("data/" + n).then((r) => { if (!r.ok) throw new Er
 let fastReady = false, accReady = false, lastResults = [];
 const mb = (bytes) => (bytes / 1e6).toFixed(1) + " MB";
 
+// Model files are published as .wasm (the host serves no .onnx); files over 14 MB come in pieces listed in models/parts.json.
+let PARTS = null;
+async function modelBin(n) {
+  if (!PARTS) PARTS = fetch("models/parts.json").then((r) => r.ok ? r.json() : {}).catch(() => ({}));
+  const k = (await PARTS)[n];
+  if (!k) return fetch("models/" + n + (n.endsWith(".onnx") ? ".wasm" : "")).then((r) => r.arrayBuffer());
+  const bufs = await Promise.all(Array.from({ length: k }, (_, i) => fetch(`models/${n}.part${i}.wasm`).then((r) => { if (!r.ok) throw new Error("missing model piece " + i); return r.arrayBuffer(); })));
+  const out = new Uint8Array(bufs.reduce((a, b) => a + b.byteLength, 0)); let o = 0;
+  for (const b of bufs) { out.set(new Uint8Array(b), o); o += b.byteLength; }
+  return out.buffer;
+}
 async function boot() {
   const t0 = performance.now();
   try {
@@ -139,7 +151,7 @@ async function boot() {
   try {
     const t1 = performance.now();
     ort.env.wasm.numThreads = 1; ort.env.wasm.wasmPaths = new URL("ort/", location.href).href;
-    const bin = (n) => fetch("models/" + n + (n.endsWith(".onnx") ? ".wasm" : ""))  /* published as .wasm: the host serves no .onnx */.then((r) => r.arrayBuffer());
+    const bin = modelBin;
     const js = (n) => fetch("models/" + n).then((r) => r.json());
     const S = await Student.create(ort, bin, js, ENNormalizer._.lower, $("variant").value);
     Accurate.init(ENNormalizer, S, Student);
@@ -198,8 +210,7 @@ $("variant").addEventListener("change", async () => {   // swap the Accurate mod
   accReady = false; $("st-acc").textContent = "loading…"; $("st-acc").className = "st";
   try {
     const t1 = performance.now();
-    const bin = (n) => fetch("models/" + n + (n.endsWith(".onnx") ? ".wasm" : "")).then((r) => r.arrayBuffer());
-    const S = await Student.create(ort, bin, (n) => fetch("models/" + n).then((r) => r.json()), ENNormalizer._.lower, $("variant").value);
+    const S = await Student.create(ort, modelBin, (n) => fetch("models/" + n).then((r) => r.json()), ENNormalizer._.lower, $("variant").value);
     Accurate.init(ENNormalizer, S, Student); accReady = true;
     $("st-acc").textContent = `ready in ${((performance.now() - t1) / 1000).toFixed(1)} s`; $("st-acc").className = "st ready";
   } catch (e) { $("st-acc").textContent = "failed: " + e.message; $("st-acc").className = "st err"; }

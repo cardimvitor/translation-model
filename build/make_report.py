@@ -21,12 +21,15 @@ META = {
     "student_JG_edited": ("JEPA-Gen", "MAX data, encoder pretrained with JEPA", True, 360),
     "student_JG": ("JEPA-Gen", "MAX data, encoder pretrained with JEPA", True, 360),
     "student_BASE_edited": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
+    "student_V6": ("v6", "pretrained OPUS-MT mul-en (77M) fine-tuned on MAX data + 58k short labels", True, 510),
     "student_BASE": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
 }
 
 
 def parse_final():
     txt = open(os.path.join(W, "final_eval.txt"), encoding="utf-8").read()
+    if os.path.exists(os.path.join(W, "final_eval_V6.txt")):
+        txt += open(os.path.join(W, "final_eval_V6.txt"), encoding="utf-8").read()
     rows = {}
     for block in txt.split("== ")[1:]:
         name, *lines = block.strip().split("\n"); r = {}
@@ -40,6 +43,9 @@ def parse_final():
             m = re.match(r"size (\S+) (\S+)", l)
             if m:
                 r["size"] = sum(float(x.rstrip("M")) for x in m.groups())
+                md = os.path.join(ROOT, "models", name.strip())
+                if os.path.exists(os.path.join(md, "encoder_int8.onnx")):       # exact size in MB (10^6 bytes)
+                    r["size"] = sum(os.path.getsize(os.path.join(md, f"{n}_int8.onnx")) for n in ("encoder", "decoder")) / 1e6
         rows[name.strip()] = r
     return rows
 
@@ -96,6 +102,43 @@ def curves():
             f'<text x="{W_ - 20}" y="{H_ - 2}" class="tk" style="text-anchor:end">training step</text></svg><div class="legend">{leg}</div></div>')
 
 
+def v6_section(F):
+    """The final model: seen / unseen split, 8-bit settings, routing rule (all read from result files)."""
+    SS = load(os.path.join(W, "seen_split.json"), {}); Q = load(os.path.join(W, "quant_student_V6.json"), {}); R3 = load(os.path.join(W, "routing3_student_V6.json"), {})
+    if "student_V6" not in SS:
+        return "<p>Pending.</p>"
+    lab = {"student_V6": "v6", "student_MAX_edited": "v5 MAX", "student_C": "v4 C"}
+    c = lambda d, k: f'{pct(d[k]["exact"] * 100)} / {d[k]["chrF"]:.1f}'
+    rows = [["Fast only"] + [c(SS["student_V6"][s], "fast") for s in ("gold_all", "gold_unseen", "abo_all", "abo_unseen")]]
+    for m in ("student_C", "student_MAX_edited", "student_V6"):
+        if m in SS:
+            rows.append([f"<b>{lab[m]}</b>" if m == "student_V6" else lab[m]] + [c(SS[m][s], "accurate") for s in ("gold_all", "gold_unseen", "abo_all", "abo_unseen")])
+    n = SS["student_V6"]
+    h = table(["Full system", f'Labels, all {n["gold_all"]["n"]}', f'Labels, unseen {n["gold_unseen"]["n"]}',
+               f'Real names, all {n["abo_all"]["n"]}', f'Real names, unseen {n["abo_unseen"]["n"]}'], rows)
+    h += ('<p class="legend">Exact match / chrF. "Unseen" leaves out test items whose source text also appears somewhere in the training data. '
+          "That overlap is coincidence (common labels like \"phone case\" are also in catalogues and in the mined word list), it applied to every earlier model too, "
+          "and the test files themselves were never trained on. The unseen columns are the strict measure.</p>")
+    if Q:
+        names = {"fp32": "full precision (reference)", "default": "8-bit, default", "per_channel": "8-bit, per channel (chosen)", "unsigned": "8-bit, unsigned weights",
+                 "matmul_only": "8-bit, only matrix products", "matmul_only_per_channel": "8-bit, only matrix products, per channel", "no_embed_lmhead": "8-bit, embeddings and output layer kept full"}
+        qr = [[names[k], f'{Q[k]["labels"]:.1f}', f'{Q[k]["titles"]:.1f}', f'{Q[k]["MB"]:.0f} MB', f'{Q[k]["ms"]:.0f} ms'] for k in names if k in Q and "labels" in Q[k]]
+        h += "<h3>Changing the weights: 8-bit versions</h3><p>Scored on tuning data only (the new hand-written tuning labels and held-out titles), model alone, one server core.</p>"
+        h += table(["Version", "Tuning labels (chrF)", "Held-out titles (chrF)", "Size", "Time per label"], qr)
+        h += ("<p>The default 8-bit conversion cost about 5 chrF on short labels. Scaling each output channel separately recovers most of it at the same size and speed. "
+              "A 7-bit range (which would make the browser and server round identically) lost too much, so the 8-bit version stays and the two runtimes differ on a few low-confidence answers. "
+              "Averaging the last three checkpoints was also tested and made no difference on the tuning data, so the final weights are used.</p>")
+    if R3:
+        pol = R3["policy"]
+        h += ("<h3>When the neural answer is used (rule v3)</h3><p>Chosen on tuning data (hand-written tuning labels, held-out titles, held-out place names): "
+              f'Fast keeps the label when it is a place, an address, or already English{", or when Fast knew every word" if pol.get("keep_cov") else ""}. '
+              f'Otherwise the neural answer is used if its confidence is at least {pol.get("tau")}. '
+              + ("The English check on the neural answer was dropped: it rejected good answers full of brand names. " if not pol.get("need_english") else "")
+              + (f'A label longer than {pol.get("addr_max_words")} words is treated as an address only if Fast knew most of its words; long product names with a number and a place word were being mistaken for addresses. ' if pol.get("addr_max_words") else "")
+              + f'Tuning score: labels {R3["dev"]["labels"]["chrF"]:.1f}, titles {R3["dev"]["titles"]["chrF"]:.1f} chrF. These settings ship inside the model file, so Python and JavaScript apply the same rule.</p>')
+    return h
+
+
 def table(head, rows, cls=""):
     th = "".join(f"<th>{E(h)}</th>" for h in head)
     tr = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
@@ -125,9 +168,9 @@ def main():
                           f"{r.get('cases', '-')}/70 · {r.get('blind', '-')}/48", f"{r['size']:.0f} MB" if "size" in r else "data 21 MB",
                           f"{mins / 60:.1f} h" if mins else "-"])
     gold_chart = bars([(META[k][0], F[k].get(("gold", "Accurate"), F[k].get(("gold", "Fast")))[1], "commercial use OK" if META[k][2] else "")
-                       for k in order], 60, "chrF")
+                       for k in order], 90, "chrF")
     abo_chart = bars([(META[k][0], F[k].get(("abo", "Accurate"), F[k].get(("abo", "Fast")))[1], "commercial use OK" if META[k][2] else "")
-                      for k in order], 60, "chrF")
+                      for k in order], 90, "chrF")
 
     # --- teachers
     best_small = max((F[k][("gold", "Accurate")][1], META[k][0]) for k in order if ("gold", "Accurate") in F[k])
@@ -136,7 +179,7 @@ def main():
         ("hy18", "Hy-MT2-1.8B (Tencent)", "1.8B, ~1.1 GB at 4-bit, ~0.4-0.8 s per label", "Apache-2.0"),
         ("opus", "OPUS-MT (Helsinki-NLP)", "75M per language, ~300 MB each", "CC BY 4.0"),
         ("nllb", "NLLB-200-distilled-600M (Meta)", "600M, one model for all languages", "CC BY-NC 4.0")]]
-    teach_rows.append([f"<b>best small model ({E(best_small[1])})</b>", "", f"{best_small[0]:.1f}", "13-22 MB, ~10 ms per label on a phone CPU", ""])
+    teach_rows.append([f"<b>best small model ({E(best_small[1])})</b>", "", f"{best_small[0]:.1f}", "106 MB at 8-bit; 15-75 ms per label on a server core, 0.1-0.5 s in a single-thread browser", "commercial use OK"])
 
     # --- weight testing and changes
     edit_rows = []
@@ -230,20 +273,23 @@ def main():
                  ["Hy-MT2-1.8B and 7B (Tencent)", "teacher for H, ALL3, HY, MAX; 7B used only as a reference score", "Apache-2.0"],
                  ["Sudachi dictionary", "Japanese readings", "Apache-2.0"]]
     hours = sum(META[k][3] for k in META if k in F or k.replace("_edited", "") in F) / 60
-    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 11 (about 7 days, much of it waiting on CPU training)"],
+    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 12 (about 8.5 days, much of it waiting on CPU training)"],
+                 ["v6: short-label data + fine-tuning + export, quantization and routing tests", "1 h + 8.5 h + 1.5 h"],
                  ["Training the final neural models (sum)", f"{hours:.0f} h on 4 CPU cores"],
                  ["Teacher data generation", "~25 h (OPUS-MT, NLLB, M2M100, Hy-MT2 back-translation and answers)"],
                  ["JEPA pretraining and tuning", "2 h tuning (4 × 30 min) + 3 h main run"],
                  ["Weight testing and edits", "~1 h per model"]]
-    reco = (f"<ul><li><b>Ship {E(META[bc][0])}</b> as the Accurate model when commercial use matters: best total score among models whose teachers allow it.</li>"
-            f"<li><b>Best scores overall</b> on hand-written labels: {E(META[bg][0])} (NLLB-derived, non-commercial).</li>"
-            "<li><b>Keep Fast as the default</b> on phones: ~2 ms per label, and the best Accurate models add +6 to +8 chrF for 5–60 ms more per label.</li>"
-            "<li><b>Next gains</b> come from real paired data (the ABO names moved real-name chrF by +7), not from bigger models or longer CPU training. "
-            "A GPU run distilling Hy-MT2-7B answers on 200k+ titles is the clear next step.</li></ul>")
+    reco = ("<ul><li><b>Ship v6</b> wherever a 106 MB model is acceptable: it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
+            "<li><b>Ship v5 MAX</b> (22 MB) when download size or speed matters more: about 10 ms per short label.</li>"
+            "<li><b>Fast alone</b> stays the right choice for addresses and place names (~2 ms); every Accurate model keeps using it for those.</li>"
+            "<li><b>Next gains:</b> (1) Hy-MT2-7B scores 95 on the labels, so distilling its answers into v6 on a GPU should close much of the remaining gap; "
+            "(2) Korean is still the weakest language (its word pieces were new to the pretrained model); "
+            "(3) a smaller v6 by sharing the output layer with the embeddings (about 20 MB less).</li></ul>")
+    v6 = v6_section(F)
     tpl = open(os.path.join(HERE, "report_template.html"), encoding="utf-8").read()
     page = (tpl.replace("{{MAIN_TABLE}}", table(["Model", "Teachers / data", "Commercial use", "Labels: Accurate", "Labels: model alone",
                                                  "Real names: Accurate", "Real names: model alone", "Cases · unseen", "Size", "Training"], main_rows, "wide"))
-            .replace("{{KPIS}}", kp).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
+            .replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
             .replace("{{DATA}}", table(["Source", "Used for", "License"], data_rows))
             .replace("{{TIME}}", table(["What", "Time"], time_rows)).replace("{{RECO}}", reco)
             .replace("{{GOLD_CHART}}", gold_chart).replace("{{ABO_CHART}}", abo_chart)

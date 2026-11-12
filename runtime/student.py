@@ -4,9 +4,10 @@ import numpy as np
 import onnxruntime as ort
 import normalizer as F
 import bpe as BPE
+import spm as SPM
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_MAX"))   # student_MAX (default) / _B2 / _C2 / _A / _B / _C
+MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V6"))   # student_V6 (default) / _MAX / _B2 / _C2 / _A / _B / _C
 
 
 class Student:
@@ -17,6 +18,7 @@ class Student:
         self.dec = ort.InferenceSession(os.path.join(path, f"decoder{suf}.onnx"), o, providers=["CPUExecutionProvider"])
         v = json.load(open(os.path.join(path, "vocab.json"), encoding="utf-8"))
         self.si = {c: i for i, c in enumerate(v["src"])}; self.tv = v["tgt"]; self.v = v
+        self.spm = SPM.Unigram(json.load(open(os.path.join(path, "spm_src.json"), encoding="utf-8"))) if v.get("spm") else None
 
     @staticmethod
     def prep(s):
@@ -24,8 +26,12 @@ class Student:
 
     def translate(self, text):
         v = self.v
-        pieces = BPE.encode(self.prep(text), v["bpe"]["src"]) if v.get("bpe") else list(self.prep(text))
-        ids = [self.si.get(c, v["unk"]) for c in pieces[: v["max_src"]]]
+        if self.spm:                        # pretrained translator (v6): SentencePiece pieces, then the end mark
+            ids = [self.si.get(c, v["unk"]) for c in self.spm.encode(self.prep(text))[: v["max_src"] - 1]]
+            ids = ids + [v["eos"]] if ids else ids
+        else:
+            pieces = BPE.encode(self.prep(text), v["bpe"]["src"]) if v.get("bpe") else list(self.prep(text))
+            ids = [self.si.get(c, v["unk"]) for c in pieces[: v["max_src"]]]
         if not ids:
             return "", 0.0
         src = np.array([ids], np.int64)
@@ -67,7 +73,10 @@ def _translate_kv(self, src):
         if nxt == v["eos"]:
             break
         out.append(nxt); lps.append(lp); tok = nxt
-    txt = BPE.decode([self.tv[i] for i in out]) if v.get("bpe") else "".join(self.tv[i] for i in out)
+    if v.get("spm"):
+        txt = " ".join("".join(self.tv[i] for i in out).replace(SPM.SP, " ").split())
+    else:
+        txt = BPE.decode([self.tv[i] for i in out]) if v.get("bpe") else "".join(self.tv[i] for i in out)
     conf = float(np.exp(np.mean(lps))) if lps else 0.0
     return txt, round(conf, 3)
 
@@ -75,12 +84,12 @@ def _translate_kv(self, src):
 Student._translate_kv = _translate_kv
 
 
-def acceptable(out, conf):
-    """Reject empty, degenerate (same 3-gram repeated) or non-English outputs."""
+def acceptable(out, conf, english=True):
+    """Reject empty, degenerate (same words repeated) or, unless english=False, non-English outputs."""
     import encheck
     if not out or conf < 0.5:
         return False
     w = out.split()
     if len(w) >= 6 and len(set(w)) <= len(w) // 2:
         return False
-    return encheck.is_english(out, "relaxed")["english"]
+    return encheck.is_english(out, "relaxed")["english"] if english else True
