@@ -46,6 +46,8 @@ Every number below comes from data not used for training. Exact = output equals 
 
 Some test items also appear, by coincidence, as source text in the training data (60 of the 320 labels, 103 of the 993 real names; common labels such as "phone case" are in catalogues too). On the strictly unseen items v6 scores 60.8% / 76.3 on labels and 66.8 chrF on real names; v5 MAX scores 18.1% / 41.3 and 45.7.
 
+**Base models on the same tests** (run alone, chrF on labels / real names): Hy-MT2-7B 95.1 / 57.5 (real names on a 330-name sample, where v6 scores 66.3), Hy-MT2-1.8B 79.1 / 51.9, OPUS-MT per-language models 76.2 / 47.1, NLLB-600M 70.9 / 48.7, OPUS-MT mul-en before fine-tuning 34.2 / 38.4. v6 alone scores 79.6 / 68.0. Raw outputs are in `reports/analysis/teachers/`.
+
 Every model passes 70/70 tuned cases and 43–44/48 unseen ("blind") cases.
 
 v6 runs in about 15–75 ms per label on one server core and 0.1–0.5 s in a single-thread browser; v5 MAX takes about 10–65 ms. The settings that decide when v6's answer replaces Fast's ship inside its `vocab.json` (`policy`) and were tuned on `test/dev_labels.json` (hand-written, separate from the test labels) and held-out titles.
@@ -134,3 +136,10 @@ See [LICENSES.md](LICENSES.md). In short:
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).
+
+## What else is saved here
+
+- `training_data/`: every training and held-out pair, the teacher translations and answers, and the real-name test set (gzip).
+- `weights/student_V6_fp32/`: v6's full-precision weights in three parts (see its README).
+- `reports/`: the PDF report, per-model analysis and weight-edit files, base-model outputs, training logs.
+- `models/`: all 13 models at 8-bit.

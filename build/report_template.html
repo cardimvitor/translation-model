@@ -63,10 +63,10 @@ main a{color:var(--accent)}
 {{MAIN_TABLE}}
 <p class="legend">Cases = 70 tuned address and label cases; unseen = 48 blind cases written after tuning. Size = int8 encoder + decoder files (Fast's data files are shared by every model). Training = CPU time on 4 cores.</p>
 
-<h2>2. Big teacher models vs our small models</h2>
-<p>The small models learn from bigger translation models ("teachers"). Same 320 labels, teachers run on their own:</p>
+<h2>2. Base models vs what we trained</h2>
+<p>Every base model run on its own on both test sets (no Fast rules, no training by us), next to v6. The small models learned from these ("teachers").</p>
 {{TEACHERS}}
-<p>Hy-MT2-7B is clearly the best translator of product labels, but at 4.6 GB and over a second per label it can't run on a phone. v6 is about 40× smaller and now scores above the OPUS-MT teachers that wrote most of its training data, and level with Hy-MT2-1.8B: it learned from real English titles, real product-name pairs and two teachers at once. The earlier from-scratch models (13–22 MB) stayed near 50.</p>
+<p>On short labels Hy-MT2-7B is the best translator, but at 4.6 GB and seconds per label it can't run on a phone. v6 is about 40× smaller, scores above the OPUS-MT models that wrote most of its training data and level with Hy-MT2-1.8B, and started from a base model that scored 34. The earlier from-scratch models (13–22 MB) stayed near 50.</p>
 
 <h2>3. What we did, in order</h2>
 <ul class="tl">

@@ -174,12 +174,31 @@ def main():
 
     # --- teachers
     best_small = max((F[k][("gold", "Accurate")][1], META[k][0]) for k in order if ("gold", "Accurate") in F[k])
-    teach_rows = [[E(n), pct(T[k].get("exact", 0) * 100), f'{T[k].get("chrF", 0):.1f}', E(s), E(lic)] for k, n, s, lic in [
-        ("hy7", "Hy-MT2-7B (Tencent)", "7B parameters, ~4.6 GB at 4-bit, ~1.4 s per label here", "Apache-2.0"),
-        ("hy18", "Hy-MT2-1.8B (Tencent)", "1.8B, ~1.1 GB at 4-bit, ~0.4-0.8 s per label", "Apache-2.0"),
-        ("opus", "OPUS-MT (Helsinki-NLP)", "75M per language, ~300 MB each", "CC BY 4.0"),
-        ("nllb", "NLLB-200-distilled-600M (Meta)", "600M, one model for all languages", "CC BY-NC 4.0")]]
-    teach_rows.append([f"<b>best small model ({E(best_small[1])})</b>", "", f"{best_small[0]:.1f}", "106 MB at 8-bit; 15-75 ms per label on a server core, 0.1-0.5 s in a single-thread browser", "commercial use OK"])
+    TA = {k: load(os.path.join(W, "teachers", f"abo_{k}.json"), {}) for k in ("hy7", "hy18", "opus", "nllb")}
+    S330 = load(os.path.join(W, "teachers", "abo_sample330.json"), {}); MUL = load(os.path.join(W, "teachers", "marian_mul.json"), {})
+    def abo_cell(k):
+        if not TA[k]:
+            return "-"
+        return f'{TA[k]["chrF"]:.1f}' + (f' (on {TA[k]["n"]} names)' if TA[k].get("per_lang_cap") else "")
+    teach_rows = [[E(n), pct(T[k].get("exact", 0) * 100), f'{T[k].get("chrF", 0):.1f}', abo_cell(k), E(s), E(lic)] for k, n, s, lic in [
+        ("hy7", "Hy-MT2-7B (Tencent)", "7B parameters, ~4.6 GB at 4-bit; 1.4 s per label, 6 s per product name here", "Apache-2.0"),
+        ("hy18", "Hy-MT2-1.8B (Tencent)", "1.8B, ~1.1 GB at 4-bit; 0.4-1.6 s", "Apache-2.0"),
+        ("opus", "OPUS-MT (Helsinki-NLP), one model per language", "75M per language, ~300 MB each; 0.3 s per product name", "CC BY 4.0"),
+        ("nllb", "NLLB-200-distilled-600M (Meta)", "600M, one model for all languages; 0.7 s per product name", "CC BY-NC 4.0")]]
+    if MUL:
+        teach_rows.append(["OPUS-MT mul-en, before our fine-tuning (v6's starting point)", pct(MUL["gold"]["exact"] * 100), f'{MUL["gold"]["chrF"]:.1f}', f'{MUL["abo"]["chrF"]:.1f}', "77M, one model for all languages", "CC BY 4.0"])
+    v6r = F.get("student_V6", {})
+    if v6r:
+        teach_rows.append(["<b>v6, model alone</b>", pct(v6r[("gold", "Student only")][0]), f'{v6r[("gold", "Student only")][1]:.1f}', f'{v6r[("abo", "Student only")][1]:.1f}', "65M after trimming, 106 MB at 8-bit; 15-75 ms", "commercial use OK"])
+        teach_rows.append(["<b>v6, full system (with Fast)</b>", pct(v6r[("gold", "Accurate")][0]), f'{v6r[("gold", "Accurate")][1]:.1f}', f'{v6r[("abo", "Accurate")][1]:.1f}', "", ""])
+    teach_note = ""
+    if S330:
+        teach_note = (f'<p>Hy-MT2-7B takes about 6 seconds per product name on this machine, so it ran on a balanced sample of {S330["n"]} real names (30 per language). '
+                      f'On that same sample: Hy-MT2-7B {S330["hy7"]["chrF"]:.1f}, Hy-MT2-1.8B {S330["hy18"]["chrF"]:.1f}, NLLB {S330["nllb"]["chrF"]:.1f}, OPUS-MT {S330["opus"]["chrF"]:.1f}, '
+                      f'Fast {S330["fast"]["chrF"]:.1f}, <b>v6 {S330["v6"]["chrF"]:.1f}</b> chrF.</p>'
+                      "<p><b>Why v6 beats even the 7B model on real names.</b> The reference answers are Amazon's own English titles, which are not literal translations: they follow a catalogue style "
+                      "(brand first, a fixed order of attributes, US units). v6 was fine-tuned on 35k such pairs and learned that style; the general translators translate faithfully and lose points for wording. "
+                      "On the short hand-written labels, where a plain correct translation is what counts, Hy-MT2-7B is still clearly ahead (95 vs 80).</p>")
 
     # --- weight testing and changes
     edit_rows = []
@@ -318,7 +337,7 @@ def main():
              "<li><b>The rules (Fast) remain necessary.</b> Place names and addresses are where the neural models are weakest (about 25 chrF on held-out place names) and Fast is near-perfect, so every system keeps Fast for those.</li>"
              "<li><b>Weight edits help a little, never a lot.</b> Switching off one or two attention heads gained 0.2–1 chrF on about half the small models. For v6 the weight change that mattered was the 8-bit conversion method (+3 chrF over the default).</li>"
              "<li><b>JEPA worked technically but did not pay off</b> with this much translated data: the same hours spent on ordinary training gave a better model.</li>"
-             "<li><b>Bigger teachers are still far ahead.</b> Hy-MT2-7B scores 95 on the labels. Distilling it into v6 on a GPU is the clearest path to further gains.</li>"
+             "<li><b>Against the base models:</b> v6 beats every base model on real product names, including the 7B one (it learned the catalogue's naming style), and beats all but Hy-MT2-7B on short labels. Hy-MT2-7B scores 95 there; distilling it into v6 on a GPU is the clearest path to further gains.</li>"
              "</ol>")
     important = ("<ul>"
                  "<li><b>Licenses.</b> v6, v5 MAX, B2, H, HY and v4 B were trained only with teachers and data that allow commercial use (OPUS-MT CC BY 4.0, Hy-MT2 Apache-2.0, ABO CC BY 4.0, ESCI Apache-2.0); attribution is required. v3, v4 A, v4 C, C2 and ALL3 used NLLB (CC BY-NC) and are non-commercial. City names need GeoNames attribution. Whether a teacher's license carries over to a model trained on its outputs is not settled law; get legal advice before selling.</li>"
@@ -337,7 +356,7 @@ def main():
             .replace("{{DATA}}", table(["Source", "Used for", "License"], data_rows))
             .replace("{{TIME}}", table(["What", "Time"], time_rows)).replace("{{RECO}}", reco)
             .replace("{{GOLD_CHART}}", gold_chart).replace("{{ABO_CHART}}", abo_chart)
-            .replace("{{TEACHERS}}", table(["Teacher", "Exact", "chrF", "Size and speed", "License"], teach_rows))
+            .replace("{{TEACHERS}}", table(["Model", "Labels: exact", "Labels: chrF", "Real names: chrF", "Size and speed", "License"], teach_rows) + teach_note)
             .replace("{{EDITS}}", table(["Model", "Changes tested", "Kept", "Before: held-out / labels", "After change", "After 15-min retraining", "Decision"], edit_rows, "wide"))
             .replace("{{RULE}}", table(["Model", "Labels, old rule", "Labels, new rule", "Real names, old rule", "Real names, new rule"], rule_rows))
             .replace("{{JEPA_TUNE}}", table(["Trial", "Target update", "Hidden", "Predictor layers", "Right title in 1,000", "Spread"], tune_rows))

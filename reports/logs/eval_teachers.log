@@ -10,3 +10,171 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 432/993 0.25 s/item
 480/993 0.25 s/item
 Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 7010.39it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 4855.69it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6184.38it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 9939.11it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 6838.63it/s]
+Loading weights:   0%|          | 0/258 [00:00<?, ?it/s]Loading weights: 100%|██████████| 258/258 [00:00<00:00, 8455.27it/s]
+opus {'n': 993, 'exact': 0.0111, 'chrF': 47.06, 'by_lang': {'ar': 38.6, 'de': 59.0, 'es': 51.6, 'fr': 54.9, 'hi': 36.1, 'ja': 31.2, 'ko': 41.2, 'pl': 59.6, 'pt': 49.3, 'tr': 52.4, 'zh': 42.0}, 'ms_per_item': 289}
+nllb left 993
+48/993 0.63 s/item
+96/993 0.61 s/item
+432/993 0.67 s/item
+480/993 0.66 s/item
+nllb {'n': 993, 'exact': 0.0201, 'chrF': 48.73, 'by_lang': {'ar': 41.3, 'de': 48.9, 'es': 47.3, 'fr': 47.1, 'hi': 59.1, 'ja': 37.6, 'ko': 54.2, 'pl': 56.1, 'pt': 42.3, 'tr': 58.4, 'zh': 44.1}, 'ms_per_item': 748}
+hy18 left 993
+20/993 1.93 s/item
+40/993 1.83 s/item
+48/993 1.80 s/item
+60/993 1.77 s/item
+80/993 1.72 s/item
+96/993 1.70 s/item
+100/993 1.69 s/item
+120/993 1.64 s/item
+140/993 1.64 s/item
+144/993 1.66 s/item
+160/993 1.63 s/item
+180/993 1.65 s/item
+192/993 1.65 s/item
+200/993 1.65 s/item
+220/993 1.66 s/item
+240/993 1.64 s/item
+260/993 1.63 s/item
+280/993 1.63 s/item
+288/993 1.62 s/item
+300/993 1.62 s/item
+320/993 1.61 s/item
+336/993 1.61 s/item
+340/993 1.61 s/item
+360/993 1.61 s/item
+380/993 1.60 s/item
+384/993 1.60 s/item
+400/993 1.59 s/item
+420/993 1.59 s/item
+432/993 1.59 s/item
+440/993 1.59 s/item
+460/993 1.59 s/item
+480/993 1.59 s/item
+500/993 1.59 s/item
+520/993 1.60 s/item
+528/993 1.61 s/item
+540/993 1.61 s/item
+560/993 1.62 s/item
+576/993 1.62 s/item
+580/993 1.62 s/item
+600/993 1.61 s/item
+620/993 1.60 s/item
+624/993 1.60 s/item
+640/993 1.60 s/item
+660/993 1.60 s/item
+672/993 1.59 s/item
+680/993 1.59 s/item
+700/993 1.58 s/item
+720/993 1.57 s/item
+740/993 1.57 s/item
+760/993 1.56 s/item
+768/993 1.57 s/item
+780/993 1.56 s/item
+800/993 1.56 s/item
+816/993 1.56 s/item
+820/993 1.56 s/item
+840/993 1.56 s/item
+860/993 1.56 s/item
+864/993 1.56 s/item
+880/993 1.56 s/item
+900/993 1.55 s/item
+912/993 1.55 s/item
+920/993 1.55 s/item
+940/993 1.55 s/item
+960/993 1.55 s/item
+980/993 1.55 s/item
+hy18 {'n': 993, 'exact': 0.0171, 'chrF': 51.92, 'by_lang': {'ar': 44.5, 'de': 52.9, 'es': 48.8, 'fr': 50.8, 'hi': 55.7, 'ja': 47.8, 'ko': 56.0, 'pl': 61.8, 'pt': 45.3, 'tr': 58.1, 'zh': 52.4}, 'ms_per_item': 1551}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 4624.65 MB. The target location /home/user/en-normalizer/models/hy-mt2/.cache/huggingface/download only has 4122.06 MB free disk space.
+  warnings.warn(
+/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 4624.65 MB. The target location /home/user/en-normalizer/models/hy-mt2 only has 4122.06 MB free disk space.
+  warnings.warn(
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from huggingface_hub import hf_hub_download; hf_hub_download('tencent/Hy-MT2-7B-GGUF','Hy-MT2-7B-Q4_K_M.gguf',local_dir='models/hy-mt2')
+                                                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+    return fn(*args, **kwargs)
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 1026, in hf_hub_download
+    return _hf_hub_download_to_local_dir(
+        # Destination
+    ...<16 lines>...
+        dry_run=dry_run,
+    )
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 1505, in _hf_hub_download_to_local_dir
+    _download_to_tmp_and_move(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        incomplete_path=paths.incomplete_path(etag),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 2017, in _download_to_tmp_and_move
+    xet_get(
+    ~~~~~~~^
+        incomplete_path=tmp_path,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+    with session.new_file_download_group(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        endpoint=connection_info.endpoint,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        progress_callback=progress.update_progress,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as group:
+    ^
+RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+hy7 left 993
+Traceback (most recent call last):
+  File "/home/user/en-normalizer/build/eval_teachers.py", line 54, in <module>
+    main(sys.argv[1])
+    ~~~~^^^^^^^^^^^^^
+  File "/home/user/en-normalizer/build/eval_teachers.py", line 25, in main
+    H = Hy(os.path.join(ROOT, "models", "hy-mt2", "Hy-MT2-1.8B-Q4_K_M.gguf" if name == "hy18" else "Hy-MT2-7B-Q4_K_M.gguf"))
+  File "/home/user/en-normalizer/build/hy_gen.py", line 13, in __init__
+    self.m = Llama(model_path=path, n_ctx=ctx, n_threads=threads, n_batch=256, logits_all=False, verbose=False)
+             ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/en-normalizer/.venv/lib/python3.13/site-packages/llama_cpp/llama.py", line 384, in __init__
+    raise ValueError(f"Model path does not exist: {model_path}")
+ValueError: Model path does not exist: /home/user/en-normalizer/models/hy-mt2/Hy-MT2-7B-Q4_K_M.gguf
+FAILED hy7
+pipeline 9 done
+hy7 left 993
+20/993 7.88 s/item
+hy7 left 300
+20/300 5.39 s/item
+40/300 5.86 s/item
+48/300 5.76 s/item
+60/300 5.53 s/item
+80/300 5.40 s/item
+96/300 5.47 s/item
+100/300 5.48 s/item
+120/300 5.70 s/item
+140/300 6.00 s/item
+144/300 6.11 s/item
+160/300 6.19 s/item
+180/300 6.19 s/item
+192/300 6.07 s/item
+200/300 6.06 s/item
+220/300 6.00 s/item
+240/300 5.96 s/item
+260/300 5.98 s/item
+280/300 5.99 s/item
+288/300 6.00 s/item
+300/300 6.02 s/item
+hy7 {'n': 330, 'per_lang_cap': 30, 'exact': 0.0394, 'chrF': 57.55, 'by_lang': {'ar': 52.7, 'de': 55.4, 'es': 51.6, 'fr': 56.0, 'hi': 70.1, 'ja': 55.1, 'ko': 56.7, 'pl': 66.3, 'pt': 51.2, 'tr': 64.8, 'zh': 53.2}, 'ms_per_item': 6024}

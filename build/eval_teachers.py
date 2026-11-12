@@ -10,6 +10,9 @@ def main(name):
     from analyze_student import clean, chrf
     torch.set_num_threads(4)
     A = [json.loads(l) for l in open(os.path.join(W, "abo_test.jsonl"), encoding="utf-8")]
+    cap = int(os.environ.get("PER_LANG", 0))        # e.g. 30: a balanced sample (first N names per language), for slow models
+    if cap:
+        seen = {}; A = [p for p in A if seen.setdefault(p["lang"], []).append(1) or len(seen[p["lang"]]) <= cap]
     outp = os.path.join(W, "teachers", f"abo_{name}.jsonl")
     done = {json.loads(l)["src"]: json.loads(l)["out"] for l in open(outp, encoding="utf-8")} if os.path.exists(outp) else {}
     todo = [p for p in A if p["src"] not in done]; print(name, "left", len(todo), flush=True)
@@ -43,7 +46,7 @@ def main(name):
     by = {}
     for e, c, l in sc:
         by.setdefault(l, []).append(c)
-    res = {"n": len(A), "exact": round(sum(e for e, _, _ in sc) / len(A), 4), "chrF": round(sum(c for _, c, _ in sc) / len(A), 2),
+    res = {"n": len(A), "per_lang_cap": cap, "exact": round(sum(e for e, _, _ in sc) / len(A), 4), "chrF": round(sum(c for _, c, _ in sc) / len(A), 2),
            "by_lang": {l: round(sum(v) / len(v), 1) for l, v in by.items()}}
     old = json.load(open(os.path.join(W, "teachers", f"abo_{name}.json"))) if os.path.exists(os.path.join(W, "teachers", f"abo_{name}.json")) else {}
     res["ms_per_item"] = ms or old.get("ms_per_item")
