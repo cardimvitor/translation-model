@@ -22,6 +22,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 | `student_A` (v4) | Meta NLLB-200-distilled-600M | **non-commercial** |
 | `student_C` (v4) | NLLB + OPUS-MT | **non-commercial** |
 
+`models/` also holds the experimental models compared in the report (`student_H`, `student_ALL3`, `student_HY`, `student_JEPA`, `student_BASE`, `student_v3`).
+
 v6 is 65M parameters after trimming the vocabulary (43 + 63 MB int8); it uses SentencePiece, implemented in `runtime/spm.py` and `runtime/spm.js`. v5 models are 22M parameters (14 + 8 MB int8); v4 models are 13 MB. Choose one with `NEURAL_DIR=student_B2` (Python) or the `dir` argument of `Student.create` (JS).
 
 ## Results

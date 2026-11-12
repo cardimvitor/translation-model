@@ -273,12 +273,13 @@ def main():
                  ["Hy-MT2-1.8B and 7B (Tencent)", "teacher for H, ALL3, HY, MAX; 7B used only as a reference score", "Apache-2.0"],
                  ["Sudachi dictionary", "Japanese readings", "Apache-2.0"]]
     hours = sum(META[k][3] for k in META if k in F or k.replace("_edited", "") in F) / 60
-    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 12 (about 8.5 days, much of it waiting on CPU training)"],
+    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 12 12:50 UTC: about 202 hours (8.4 days) from the first message to this report"],
                  ["v6: short-label data + fine-tuning + export, quantization and routing tests", "1 h + 8.5 h + 1.5 h"],
                  ["Training the final neural models (sum)", f"{hours:.0f} h on 4 CPU cores"],
                  ["Teacher data generation", "~25 h (OPUS-MT, NLLB, M2M100, Hy-MT2 back-translation and answers)"],
                  ["JEPA pretraining and tuning", "2 h tuning (4 × 30 min) + 3 h main run"],
-                 ["Weight testing and edits", "~1 h per model"]]
+                 ["Weight testing and edits", "~25–30 h in total (about 2–3 h per model: switch-off tests, edits, 15-min retraining)"],
+                 ["Total compute spent training and changing models", "≈ 130–135 h; the rest was evaluation, packaging, restarts and idle time"]]
     reco = ("<ul><li><b>Ship v6</b> wherever a 106 MB model is acceptable: it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
             "<li><b>Ship v5 MAX</b> (22 MB) when download size or speed matters more: about 10 ms per short label.</li>"
             "<li><b>Fast alone</b> stays the right choice for addresses and place names (~2 ms); every Accurate model keeps using it for those.</li>"
@@ -286,10 +287,53 @@ def main():
             "(2) Korean is still the weakest language (its word pieces were new to the pretrained model); "
             "(3) a smaller v6 by sharing the output layer with the embeddings (about 20 MB less).</li></ul>")
     v6 = v6_section(F)
+
+    # --- downloads, conclusions, important notes
+    GH = "https://github.com/cardimvitor/translation-model"; BR = "ccr-9202c40a-kuyiob"
+    DL = [("student_V6", "student_V6", "v6", "Recommended. Best quality."), ("student_MAX_edited", "student_MAX", "v5 MAX", "Best small model for real product names."),
+          ("student_B2", "student_B2", "v5 B2", "Small, OPUS-MT only."), ("student_C2_edited", "student_C2", "v5 C2", "Small, best v5 on labels."),
+          ("student_A", "student_A", "v4 A", ""), ("student_B", "student_B", "v4 B", ""), ("student_C", "student_C", "v4 C", "Best small model on labels."),
+          ("student_H", "student_H", "v5 H", "Experiment."), ("student_ALL3_edited", "student_ALL3", "v5 ALL3", "Experiment."),
+          ("student_HY_edited", "student_HY", "v5 HY", "Experiment."), ("student_JG", "student_JEPA", "JEPA-Gen", "Experiment, not recommended."),
+          ("student_BASE_edited", "student_BASE", "Baseline", "Comparison model for JEPA."), ("student_edited", "student_v3", "v3", "First neural model.")]
+    dl_rows = []
+    for key, folder, lab, note in DL:
+        r = F.get(key, {}); com = META.get(key, ("", "", False))[2]
+        a = r.get(("gold", "Accurate")); b = r.get(("abo", "Accurate"))
+        dl_rows.append([f"<b>{E(lab)}</b>", f'<a href="{GH}/tree/{BR}/models/{folder}">models/{folder}</a>', f"{r['size']:.0f} MB" if "size" in r else "-",
+                        f"{a[1]:.1f} / {b[1]:.1f}" if a and b else "-", "yes" if com else "no", E(note)])
+    downloads = (table(["Model", "Download (GitHub folder)", "Size", "chrF: labels / real names", "Commercial use", "Note"], dl_rows, "wide")
+                 + f'<p>Each folder holds <code>encoder_int8.onnx</code>, <code>decoder_int8.onnx</code> and <code>vocab.json</code> (v6 also <code>spm_src.json</code>). '
+                 f'To get everything at once (all models, Fast data, Python and JavaScript runtimes, build scripts, tests): '
+                 f'<a href="{GH}/archive/refs/heads/{BR}.zip">download the whole branch as a zip</a>, or open <a href="{GH}/pull/1">pull request #1</a>. '
+                 f'Fast needs no model: its data is in <a href="{GH}/tree/{BR}/data">data/</a> and its code in <a href="{GH}/tree/{BR}/runtime">runtime/</a>. '
+                 "The repository is private, so the links work only when signed in to GitHub with access to it. They point at the work branch; after the pull request is merged, the same folders are on <code>main</code>. "
+                 'Ready-to-use packages (model + runtime + data in one zip) for v6, v5 MAX, B2, C2 and Fast were also sent as files in the chat. '
+                 'Try the models without downloading: <a href="https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL">phone test page</a>.</p>')
+    V6a = F.get("student_V6", {}); g6 = V6a.get(("gold", "Accurate"), (0, 0)); a6 = V6a.get(("abo", "Accurate"), (0, 0))
+    concl = ("<ol>"
+             f"<li><b>The goal was reached with v6.</b> The full system goes from {acc['none'][0]:.1f}% exact / {acc['none'][1]:.1f} chrF (rules only) to {g6[0]:.1f}% / {g6[1]:.1f} on hand-written labels, and from {abo['none'][1]:.1f} to {a6[1]:.1f} chrF on real marketplace names, fully offline.</li>"
+             "<li><b>Starting from a pretrained model mattered more than everything else combined.</b> Seven days of from-scratch models (v3 to v5, twelve of them) moved label chrF from 43 to 51. One 8.5-hour fine-tune of a pretrained translator moved it to 80.</li>"
+             "<li><b>Data that looks like the task beats more data.</b> 35k real product-name pairs lifted real-name scores by 7 points in v5; 58k short labels were a large part of v6's jump on short labels.</li>"
+             "<li><b>The rules (Fast) remain necessary.</b> Place names and addresses are where the neural models are weakest (about 25 chrF on held-out place names) and Fast is near-perfect, so every system keeps Fast for those.</li>"
+             "<li><b>Weight edits help a little, never a lot.</b> Switching off one or two attention heads gained 0.2–1 chrF on about half the small models. For v6 the weight change that mattered was the 8-bit conversion method (+3 chrF over the default).</li>"
+             "<li><b>JEPA worked technically but did not pay off</b> with this much translated data: the same hours spent on ordinary training gave a better model.</li>"
+             "<li><b>Bigger teachers are still far ahead.</b> Hy-MT2-7B scores 95 on the labels. Distilling it into v6 on a GPU is the clearest path to further gains.</li>"
+             "</ol>")
+    important = ("<ul>"
+                 "<li><b>Licenses.</b> v6, v5 MAX, B2, H, HY and v4 B were trained only with teachers and data that allow commercial use (OPUS-MT CC BY 4.0, Hy-MT2 Apache-2.0, ABO CC BY 4.0, ESCI Apache-2.0); attribution is required. v3, v4 A, v4 C, C2 and ALL3 used NLLB (CC BY-NC) and are non-commercial. City names need GeoNames attribution. Whether a teacher's license carries over to a model trained on its outputs is not settled law; get legal advice before selling.</li>"
+                 "<li><b>Speed and size of v6.</b> 106 MB download; 15–75 ms per label on one server core; about 0.1–0.5 s per label in a single-thread browser (measured in Node, not on a real phone). The small models take about 10–65 ms.</li>"
+                 "<li><b>It still makes mistakes.</b> About one label in three is not an exact match, and some are plainly wrong (an Arabic \"non-stick frying pan\" came out as \"unsticked mattress\"). Korean is the weakest language. For anything where a wrong name is costly, show the original next to the translation.</li>"
+                 "<li><b>Test honesty.</b> The test files were never trained on, but 60 of 320 labels and 103 of 993 real names also occur by coincidence in training text. The \"unseen\" columns in the v6 section exclude them and are the strict numbers. The 48 unseen address cases were looked at once while choosing a cautious setting for place names; the score did not change.</li>"
+                 "<li><b>Python and JavaScript.</b> Identical for Fast, the English check and the tokenizer. For v6 they differ on about 1–3% of labels because 8-bit arithmetic rounds differently; measured quality is the same (79.5 vs 79.6 on labels).</li>"
+                 "<li><b>GitHub.</b> The pull request is a draft and nothing is merged. GitHub's automatic tests have never run because no runner gets assigned (an Actions setting or billing limit on the account); all tests pass when run here.</li>"
+                 "<li><b>What is not in the repository.</b> The raw training data (several GB, regenerable with the build scripts), full-precision weights and training checkpoints. They exist only in this session's container, which is temporary. Say so if you want them kept.</li>"
+                 "<li><b>Privacy.</b> All models run on the device; no label text is sent anywhere.</li>"
+                 "</ul>")
     tpl = open(os.path.join(HERE, "report_template.html"), encoding="utf-8").read()
     page = (tpl.replace("{{MAIN_TABLE}}", table(["Model", "Teachers / data", "Commercial use", "Labels: Accurate", "Labels: model alone",
                                                  "Real names: Accurate", "Real names: model alone", "Cases · unseen", "Size", "Training"], main_rows, "wide"))
-            .replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
+            .replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{DOWNLOADS}}", downloads).replace("{{CONCLUSIONS}}", concl).replace("{{IMPORTANT}}", important).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
             .replace("{{DATA}}", table(["Source", "Used for", "License"], data_rows))
             .replace("{{TIME}}", table(["What", "Time"], time_rows)).replace("{{RECO}}", reco)
             .replace("{{GOLD_CHART}}", gold_chart).replace("{{ABO_CHART}}", abo_chart)
