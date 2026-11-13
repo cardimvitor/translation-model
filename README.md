@@ -14,7 +14,9 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
-| `student_V6` (default, v6) | pretrained OPUS-MT mul-en (77M parameters) fine-tuned on the MAX data plus 58k short labels from Amazon ESCI search queries | **commercial use OK** (attribution required) |
+| **`student_V8` (default, final: "v8 Complete")** | v6's encoder + a 2-layer decoder + English-only output layer + one 1.6 MB encoder expert per language; all v6 data plus 13k short labels written by Hy-MT2-1.8B for ko/th/vi/ja/zh | **commercial use OK** (attribution required) |
+| **`student_V8F` (final: "v8 Fast")** | cut from v8 Complete (3 encoder layers, 1 decoder layer, no experts); for quick validation | **commercial use OK** (attribution required) |
+| `student_V6` (v6) | pretrained OPUS-MT mul-en (77M parameters) fine-tuned on the MAX data plus 58k short labels from Amazon ESCI search queries | **commercial use OK** (attribution required) |
 | `student_V7` (v7) | v6 frozen, plus one 3 MB expert per language (mixture of experts); the language detector picks the expert, so only that language's extra parameters are loaded and used | **commercial use OK** (attribution required) |
 | `student_MAX` (v5) | OPUS-MT + Tencent Hy-MT2-1.8B answers + 35k real multilingual product names (Amazon Berkeley Objects) | **commercial use OK** (attribution required) |
 | `student_B2` (v5) | OPUS-MT, with its own English answers as extra targets | **commercial use OK** (attribution required) |
@@ -44,7 +46,11 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 C2 | 29.1% | 51.0 | 38.6 | no |
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
-| **v7** (v6 + language experts) | **65.9%** | **80.8** | **67.2** | yes |
+| v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
+| **v8 Complete** | **68.8%** | **83.1** | **67.7** | yes |
+| **v8 Fast** | 65.0% | 79.7 | 62.2 | yes |
+
+Speed on one CPU thread (median, model alone, short label / product name): v8 Complete 7.5 / 34 ms, v8 Fast 4.7 / 20 ms, v6 16.8 / 80 ms. Sizes at 8-bit: 57 MB, 42 MB, 106 MB. Details in `reports/v8/`.
 
 Some test items also appear, by coincidence, as source text in the training data (60 of the 320 labels, 103 of the 993 real names; common labels such as "phone case" are in catalogues too). On the strictly unseen items v6 scores 60.8% / 76.3 on labels and 66.8 chrF on real names; v5 MAX scores 18.1% / 41.3 and 45.7.
 
@@ -134,7 +140,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

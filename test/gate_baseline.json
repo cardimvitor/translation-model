@@ -19,7 +19,11 @@
   "student_V6_gold_exact": 0.6562,
   "student_V6_gold_chrF": 79.56,
   "student_V7_gold_exact": 0.6594,
-  "student_V7_gold_chrF": 80.83
+  "student_V7_gold_chrF": 80.83,
+  "student_V8_gold_exact": 0.6875,
+  "student_V8_gold_chrF": 83.07,
+  "student_V8F_gold_exact": 0.65,
+  "student_V8F_gold_chrF": 79.66
  },
  "variants": [
   "student_A",
@@ -29,6 +33,8 @@
   "student_C2",
   "student_MAX",
   "student_V6",
-  "student_V7"
+  "student_V7",
+  "student_V8",
+  "student_V8F"
  ]
 }

@@ -7,7 +7,7 @@ import bpe as BPE
 import spm as SPM
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V6"))   # student_V6 (default) / _V7 / _MAX / _B2 / _C2 / _A / _B / _C
+MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V8"))   # student_V8 (default, complete) / student_V8F (fast) / older: _V7 _V6 _MAX ...
 
 
 class Student:
@@ -82,7 +82,7 @@ def _translate_kv(self, src, ex=None):
     takes one token per step plus the past self-attention keys/values (models exported by train_student2.py)."""
     v = self.v
     ck, cv, sb = self.enc.run(None, {"src": src, **({"ed": ex[0], "eu": ex[1]} if ex else {})})
-    dex = {"dd": ex[2], "du": ex[3]} if ex else {}
+    dex = {"dd": ex[2], "du": ex[3]} if ex and ex[2].shape[0] else {}      # v8: experts in the encoder only
     pk = np.zeros((v["layers"], 1, v["heads"], 0, v["head_dim"]), np.float32); pv = pk
     tok = v["bos"]; out = []; lps = []
     for t in range(v["max_tgt"] - 1):

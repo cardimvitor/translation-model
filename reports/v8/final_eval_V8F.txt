@@ -1,0 +1,9 @@
+== student_V8F
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  3.3 ms/item
+gold Student only   exact 205/320 (64.1%)  chrF  78.7  5.4 ms/item
+gold Accurate       exact 208/320 (65.0%)  chrF  79.7  4.9 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.9 ms/item
+abo  Student only   exact 65/993 (6.5%)  chrF  62.9  19.2 ms/item
+abo  Accurate       exact 60/993 (6.0%)  chrF  62.2  21.6 ms/item
+cases PASS 70/70 | blind PASS 44/48
+size 24M 18M 

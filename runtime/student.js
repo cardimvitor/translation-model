@@ -6,7 +6,7 @@
   let BPE = typeof module !== "undefined" && module.exports ? require("./bpe.js") : root.BPE;
   let SPM = typeof module !== "undefined" && module.exports ? require("./spm.js") : root.SPM;
   async function create(ort, loadBinary, loadJson, lower, dir) {
-    dir = dir || "student_V6";
+    dir = dir || "student_V8";
     const v = await loadJson(dir + "/vocab.json");
     BPE = BPE || root.BPE;
     if (v.bpe && !BPE) throw new Error("this model splits words into pieces: load runtime/bpe.js before student.js");
@@ -71,7 +71,7 @@
     }
     async function translateKv(src, ex) {
       const e = await enc.run(ex ? { src, ed: ex[0], eu: ex[1] } : { src });
-      const dex = ex ? { dd: ex[2], du: ex[3] } : {};
+      const dex = ex && ex[2].dims[0] ? { dd: ex[2], du: ex[3] } : {};   // v8: experts in the encoder only
       let pk = new ort.Tensor("float32", new Float32Array(0), [v.layers, 1, v.heads, 0, v.head_dim]); let pv = pk;
       let tok = v.bos; const out = []; const lps = [];
       for (let t = 0; t < v.max_tgt - 1; t++) {

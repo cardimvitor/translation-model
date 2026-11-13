@@ -22,6 +22,8 @@ META = {
     "student_JG": ("JEPA-Gen", "MAX data, encoder pretrained with JEPA", True, 360),
     "student_BASE_edited": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
     "student_V6": ("v6", "pretrained OPUS-MT mul-en (77M) fine-tuned on MAX data + 58k short labels", True, 510),
+    "student_V8": ("v8 Complete", "v6 encoder + 2-layer decoder + English-only output + encoder experts per language; all data + 13k Hy-MT2 short labels", True, 420),
+    "student_V8F": ("v8 Fast", "cut from v8 Complete: 3 encoder layers, 1 decoder layer, no experts", True, 180),
     "student_V7": ("v7", "v6 + one 3 MB expert per language (only the detected language's expert is active)", True, 240),
     "student_BASE": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
 }
@@ -29,7 +31,7 @@ META = {
 
 def parse_final():
     txt = open(os.path.join(W, "final_eval.txt"), encoding="utf-8").read()
-    for extra in ("final_eval_V6.txt", "final_eval_V7.txt"):
+    for extra in ("final_eval_V6.txt", "final_eval_V7.txt", "final_eval_V8.txt", "final_eval_V8F.txt"):
         if os.path.exists(os.path.join(W, extra)):
             txt += open(os.path.join(W, extra), encoding="utf-8").read()
     rows = {}
@@ -102,6 +104,55 @@ def curves():
     leg = " ".join(f'<span><i class="sw {c}"></i>{E(n)}</span>' for n, c, _ in series)
     return (f'<div class="chart"><svg viewBox="0 0 {W_} {H_}" role="img" aria-label="held-out chrF by training step">{g}{lines}'
             f'<text x="{W_ - 20}" y="{H_ - 2}" class="tk" style="text-anchor:end">training step</text></svg><div class="legend">{leg}</div></div>')
+
+
+def final_section(F):
+    """The two final models: quality, speed, size, next to the earlier best ones (all from result files)."""
+    SP = load(os.path.join(W, "speed_ours.json"), {}); SS = load(os.path.join(W, "seen_split.json"), {}); E8 = load(os.path.join(W, "v8_eval_v8.json"), {})
+    names = [("student_V8", "<b>v8 Complete</b>"), ("student_V8F", "<b>v8 Fast</b>"), ("student_V7", "v7"), ("student_V6", "v6"), ("student_MAX_edited", "v5 MAX"), ("none", "Fast rules only")]
+    rows = []
+    for k, lab in names:
+        r = F.get(k)
+        if not r:
+            continue
+        a = r.get(("gold", "Accurate"), r.get(("gold", "Fast"))); b = r.get(("abo", "Accurate"), r.get(("abo", "Fast")))
+        u = SS.get(k, {}); un = f'{pct(u["gold_unseen"]["accurate"]["exact"] * 100)} / {u["gold_unseen"]["accurate"]["chrF"]:.1f}' if u else "-"
+        rows.append([lab, f"{pct(a[0])} / {a[1]:.1f}", un, f"{b[1]:.1f}", f'{r.get("cases", "-")}/70 · {r.get("blind", "-")}/48', f"{r['size']:.0f} MB" if "size" in r else "-"])
+    h = table(["Full system", "Labels: exact / chrF", "Labels, unseen only", "Real names: chrF", "Address cases · unseen", "Model size"], rows)
+    if SP:
+        srow = []
+        for k, lab in names:
+            x = SP.get(k)
+            if not x:
+                continue
+            L, N = x["labels"], x["names"]; al = L.get("alone"); an = N.get("alone")
+            srow.append([lab, f'{L["system"]["median_ms"]:.1f} ms', f'{L["system"]["per_second"]:.0f}', f'{N["system"]["median_ms"]:.1f} ms', f'{N["system"]["per_second"]:.0f}',
+                         f'{al["median_ms"]:.1f} / {an["median_ms"]:.1f} ms' if al else "-", f'{an["tokens_per_second"]:.0f}' if an else "-"])
+        h += ("<h3>Speed on one CPU thread</h3><p>Median time per request and requests per second, measured on this server (4-core cloud CPU, one thread, 8-bit models). "
+              "Short labels = the 320 test labels; product names = 330 long real names. Tokens are each model's own output steps (word pieces for v6–v8, characters for v5).</p>"
+              + table(["Full system", "Short label: median", "Short labels / s", "Product name: median", "Product names / s", "Model alone: median (label / name)", "Output tokens / s"], srow, "wide"))
+    if E8:
+        bl = E8["gold"]["by_lang"]
+        h += ("<p class=\"legend\">v8 Complete alone, test labels by language (chrF): " + ", ".join(f"{l} {v:.0f}" for l, v in sorted(bl.items(), key=lambda x: -x[1])) + ".</p>")
+    return h
+
+
+def steps_section(F):
+    v8 = F.get("student_V8", {}); v8f = F.get("student_V8F", {})
+    g = lambda r, k: (f'{r[k][1]:.1f}' if k in r else "-")
+    s8 = ("<h3>Step 9. v8 Complete and v8 Fast, the two final models (Nov 12–13)</h3><ol>"
+          "<li>Goal: the best accuracy and the best speed together, using everything learned; plus a much faster small model for quick validation.</li>"
+          "<li>Measured where v7 was weakest: Korean (55 chrF) and Thai (58), the two languages with no short-label training data, because OPUS-MT cannot write them.</li>"
+          "<li>New data: Hy-MT2-1.8B wrote 13k short labels (5,000 Korean, 4,000 Thai, 1,500 each Vietnamese, Japanese, Chinese) from Amazon search queries; kept 12,992 after script and length checks.</li>"
+          "<li>Speed by design: the decoder runs once per output token, the encoder once per label. So v8 keeps v6's 6 encoder layers but only 2 of its 6 decoder layers (tested which two to keep), "
+          "and its output layer covers only the 13.6k word pieces that occur in English instead of the shared 39k.</li>"
+          "<li>Mixture of experts without a speed cost: one expert per language in the encoder only (1.6 MB each), chosen by the language detector, trained together with the rest.</li>"
+          "<li>Fine-tuned everything for 7 hours on 470k pairs. Right after the cut the model scored 2; after 30 minutes 71; at the end it passed v7.</li>"
+          "<li>Exported with per-channel 8-bit weights; retuned the decision rule on the tuning labels; ran the full tests.</li>"
+          f"<li>v8 Fast: cut again from v8 Complete (3 encoder layers, 1 decoder layer, no experts), fine-tuned 3 hours, same export and tests.</li>"
+          f"<li>Results: v8 Complete {g(v8, ('gold', 'Accurate'))} on labels and {g(v8, ('abo', 'Accurate'))} on real names; v8 Fast {g(v8f, ('gold', 'Accurate'))} and {g(v8f, ('abo', 'Accurate'))}. "
+          "Lesson: a shallow decoder plus data aimed at the weakest languages gave more accuracy and more speed at once.</li></ol>")
+    return open(os.path.join(HERE, "steps.html"), encoding="utf-8").read().replace("{{STEPS_V8}}", s8)
 
 
 def v6_section(F):
@@ -307,15 +358,16 @@ def main():
                  ["Hy-MT2-1.8B and 7B (Tencent)", "teacher for H, ALL3, HY, MAX; 7B used only as a reference score", "Apache-2.0"],
                  ["Sudachi dictionary", "Japanese readings", "Apache-2.0"]]
     hours = sum(META[k][3] for k in META if k in F or k.replace("_edited", "") in F) / 60
-    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 12 12:50 UTC: about 202 hours (8.4 days) from the first message to this report"],
+    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 13 15:00 UTC: about 228 hours (9.5 days) from the first message to this report, including several hours lost to machine restarts"],
                  ["v6: short-label data + fine-tuning + export, quantization and routing tests", "1 h + 8.5 h + 1.5 h"],
+                 ["v8 Complete and v8 Fast (Hy-MT2 short labels, training, export, tests, speed)", "4 h + 7 h + 3 h + 1 h"],
                  ["v7: language experts (training, export, tests)", "4 h + 1 h"],
                  ["Training the final neural models (sum)", f"{hours:.0f} h on 4 CPU cores"],
                  ["Teacher data generation", "~25 h (OPUS-MT, NLLB, M2M100, Hy-MT2 back-translation and answers)"],
                  ["JEPA pretraining and tuning", "2 h tuning (4 × 30 min) + 3 h main run"],
                  ["Weight testing and edits", "~25–30 h in total (about 2–3 h per model: switch-off tests, edits, 15-min retraining)"],
                  ["Total compute spent training and changing models", "≈ 130–135 h; the rest was evaluation, packaging, restarts and idle time"]]
-    reco = ("<ul><li><b>Ship v6 or v7</b> wherever a 106 MB model is acceptable (v7 = v6 plus a 3 MB expert per language, about +1 chrF on labels; v6 is simpler): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
+    reco = ("<ul><li><b>Use v8 Complete</b> for real work: the most accurate model and about twice as fast as v6/v7 at half the size. <b>Use v8 Fast</b> for quick validation runs. The earlier models are kept for reference only.</li><li>Earlier advice, still true for v6/v7 (106 MB): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
             "<li><b>Ship v5 MAX</b> (22 MB) when download size or speed matters more: about 10 ms per short label.</li>"
             "<li><b>Fast alone</b> stays the right choice for addresses and place names (~2 ms); every Accurate model keeps using it for those.</li>"
             "<li><b>Next gains:</b> (1) Hy-MT2-7B scores 95 on the labels, so distilling its answers into v6 on a GPU should close much of the remaining gap; "
@@ -325,7 +377,8 @@ def main():
 
     # --- downloads, conclusions, important notes
     GH = "https://github.com/cardimvitor/translation-model"; BR = "ccr-9202c40a-kuyiob"
-    DL = [("student_V6", "student_V6", "v6", "Recommended. Best quality."), ("student_MAX_edited", "student_MAX", "v5 MAX", "Best small model for real product names."),
+    DL = [("student_V8", "student_V8", "v8 Complete", "FINAL. Best accuracy and speed."), ("student_V8F", "student_V8F", "v8 Fast", "FINAL. Fast model for validation."),
+          ("student_V6", "student_V6", "v6", "Earlier best."), ("student_MAX_edited", "student_MAX", "v5 MAX", "Best small model for real product names."),
           ("student_B2", "student_B2", "v5 B2", "Small, OPUS-MT only."), ("student_C2_edited", "student_C2", "v5 C2", "Small, best v5 on labels."),
           ("student_A", "student_A", "v4 A", ""), ("student_B", "student_B", "v4 B", ""), ("student_C", "student_C", "v4 C", "Best small model on labels."),
           ("student_H", "student_H", "v5 H", "Experiment."), ("student_ALL3_edited", "student_ALL3", "v5 ALL3", "Experiment."),
@@ -347,7 +400,8 @@ def main():
                  'Try the models without downloading: <a href="https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL">phone test page</a>.</p>')
     V6a = F.get("student_V6", {}); g6 = V6a.get(("gold", "Accurate"), (0, 0)); a6 = V6a.get(("abo", "Accurate"), (0, 0))
     concl = ("<ol>"
-             f"<li><b>The goal was reached with v6.</b> The full system goes from {acc['none'][0]:.1f}% exact / {acc['none'][1]:.1f} chrF (rules only) to {g6[0]:.1f}% / {g6[1]:.1f} on hand-written labels, and from {abo['none'][1]:.1f} to {a6[1]:.1f} chrF on real marketplace names, fully offline.</li>"
+             "<li><b>Two final models.</b> v8 Complete is the most accurate and, among the strong models, the fastest and smallest; v8 Fast trades some accuracy for much more speed and is meant for validation.</li>"
+             f"<li><b>The big jump came with v6.</b> The full system goes from {acc['none'][0]:.1f}% exact / {acc['none'][1]:.1f} chrF (rules only) to {g6[0]:.1f}% / {g6[1]:.1f} on hand-written labels, and from {abo['none'][1]:.1f} to {a6[1]:.1f} chrF on real marketplace names, fully offline.</li>"
              "<li><b>Starting from a pretrained model mattered more than everything else combined.</b> Seven days of from-scratch models (v3 to v5, twelve of them) moved label chrF from 43 to 51. One 8.5-hour fine-tune of a pretrained translator moved it to 80.</li>"
              "<li><b>Data that looks like the task beats more data.</b> 35k real product-name pairs lifted real-name scores by 7 points in v5; 58k short labels were a large part of v6's jump on short labels.</li>"
              "<li><b>The rules (Fast) remain necessary.</b> Place names and addresses are where the neural models are weakest (about 25 chrF on held-out place names) and Fast is near-perfect, so every system keeps Fast for those.</li>"
@@ -369,7 +423,7 @@ def main():
     tpl = open(os.path.join(HERE, "report_template.html"), encoding="utf-8").read()
     page = (tpl.replace("{{MAIN_TABLE}}", table(["Model", "Teachers / data", "Commercial use", "Labels: Accurate", "Labels: model alone",
                                                  "Real names: Accurate", "Real names: model alone", "Cases · unseen", "Size", "Training"], main_rows, "wide"))
-            .replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{DOWNLOADS}}", downloads).replace("{{CONCLUSIONS}}", concl).replace("{{IMPORTANT}}", important).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
+            .replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{FINAL}}", final_section(F)).replace("{{STEPS}}", steps_section(F)).replace("{{DOWNLOADS}}", downloads).replace("{{CONCLUSIONS}}", concl).replace("{{IMPORTANT}}", important).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
             .replace("{{DATA}}", table(["Source", "Used for", "License"], data_rows))
             .replace("{{TIME}}", table(["What", "Time"], time_rows)).replace("{{RECO}}", reco)
             .replace("{{GOLD_CHART}}", gold_chart).replace("{{ABO_CHART}}", abo_chart)
