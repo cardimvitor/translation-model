@@ -1,0 +1,477 @@
+{
+ "about": "Hand-written labels that mix English with another language (4 per language). Test only; never used for training or tuning.",
+ "items": [
+  {
+   "lang": "zh",
+   "src": "wireless 耳机",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "zh",
+   "src": "不锈钢 water bottle",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "zh",
+   "src": "kids 雨衣",
+   "en": [
+    "kids raincoat",
+    "children's raincoat"
+   ]
+  },
+  {
+   "lang": "zh",
+   "src": "黑色 leather 夹克",
+   "en": [
+    "black leather jacket"
+   ]
+  },
+  {
+   "lang": "es",
+   "src": "wireless auriculares",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "es",
+   "src": "botella de agua stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "es",
+   "src": "kids impermeable",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "es",
+   "src": "chaqueta de cuero black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "pt",
+   "src": "fones de ouvido wireless",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "pt",
+   "src": "garrafa de água stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "pt",
+   "src": "capa de chuva kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "pt",
+   "src": "jaqueta de couro black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "ar",
+   "src": "wireless سماعات",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "ar",
+   "src": "زجاجة ماء stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "ar",
+   "src": "kids معطف مطر",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "ar",
+   "src": "جاكيت جلد black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "ru",
+   "src": "wireless наушники",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "ru",
+   "src": "бутылка для воды stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "ru",
+   "src": "kids дождевик",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "ru",
+   "src": "кожаная куртка black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "ja",
+   "src": "wireless イヤホン",
+   "en": [
+    "wireless earphones",
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "ja",
+   "src": "ステンレス water bottle",
+   "en": [
+    "stainless steel water bottle",
+    "stainless water bottle"
+   ]
+  },
+  {
+   "lang": "ja",
+   "src": "kids レインコート",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "ja",
+   "src": "黒 leather ジャケット",
+   "en": [
+    "black leather jacket"
+   ]
+  },
+  {
+   "lang": "ko",
+   "src": "wireless 이어폰",
+   "en": [
+    "wireless earphones",
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "ko",
+   "src": "스테인리스 water bottle",
+   "en": [
+    "stainless steel water bottle",
+    "stainless water bottle"
+   ]
+  },
+  {
+   "lang": "ko",
+   "src": "kids 우비",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "ko",
+   "src": "블랙 leather 자켓",
+   "en": [
+    "black leather jacket"
+   ]
+  },
+  {
+   "lang": "de",
+   "src": "wireless kopfhörer",
+   "en": [
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "de",
+   "src": "wasserflasche stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "de",
+   "src": "kids regenmantel",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "de",
+   "src": "lederjacke black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "fr",
+   "src": "écouteurs wireless",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "fr",
+   "src": "bouteille d'eau stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "fr",
+   "src": "imperméable kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "fr",
+   "src": "veste en cuir black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "hi",
+   "src": "wireless हेडफोन",
+   "en": [
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "hi",
+   "src": "पानी की बोतल stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "hi",
+   "src": "kids रेनकोट",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "hi",
+   "src": "black चमड़े की जैकेट",
+   "en": [
+    "black leather jacket"
+   ]
+  },
+  {
+   "lang": "tr",
+   "src": "wireless kulaklık",
+   "en": [
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "tr",
+   "src": "stainless steel su şişesi",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "tr",
+   "src": "kids yağmurluk",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "tr",
+   "src": "black deri ceket",
+   "en": [
+    "black leather jacket"
+   ]
+  },
+  {
+   "lang": "id",
+   "src": "sepatu lari black",
+   "en": [
+    "black running shoes",
+    "running shoes black"
+   ]
+  },
+  {
+   "lang": "id",
+   "src": "botol air stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "id",
+   "src": "jas hujan kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "id",
+   "src": "jaket kulit black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "vi",
+   "src": "tai nghe wireless",
+   "en": [
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "vi",
+   "src": "bình nước stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "vi",
+   "src": "áo mưa kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "vi",
+   "src": "áo khoác da black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "it",
+   "src": "cuffie wireless",
+   "en": [
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "it",
+   "src": "bottiglia d'acqua stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "it",
+   "src": "impermeabile kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "it",
+   "src": "giacca di pelle black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "pl",
+   "src": "słuchawki wireless",
+   "en": [
+    "wireless headphones"
+   ]
+  },
+  {
+   "lang": "pl",
+   "src": "butelka na wodę stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "pl",
+   "src": "płaszcz przeciwdeszczowy kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "pl",
+   "src": "kurtka skórzana black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  },
+  {
+   "lang": "th",
+   "src": "หูฟัง wireless",
+   "en": [
+    "wireless headphones",
+    "wireless earphones"
+   ]
+  },
+  {
+   "lang": "th",
+   "src": "ขวดน้ำ stainless steel",
+   "en": [
+    "stainless steel water bottle"
+   ]
+  },
+  {
+   "lang": "th",
+   "src": "เสื้อกันฝน kids",
+   "en": [
+    "kids raincoat"
+   ]
+  },
+  {
+   "lang": "th",
+   "src": "แจ็คเก็ตหนัง black",
+   "en": [
+    "black leather jacket",
+    "leather jacket black"
+   ]
+  }
+ ]
+}

@@ -100,12 +100,18 @@ def read_jsonl(p):
 
 def all_train():
     """Old training data that is on disk (replay, so nothing is forgotten) + the EXTRA files."""
-    t = []
-    for name in ("pairs_MAX_train.jsonl", "pairs_Q_train.jsonl", "pairs_HQ_train.jsonl"):
+    t = []; extra_names = {os.path.basename(f) for f in EXTRA}
+    for name in ("pairs_MAX_train.jsonl", "pairs_Q_train.jsonl", "pairs_HQ_train.jsonl", "pairs_NEW_v9.jsonl", "pairs_NEW_v10.jsonl"):
+        if name in extra_names:
+            continue                                         # given as new data in this run
         if os.path.exists(os.path.join(W, name)):
             t += read_jsonl(os.path.join(W, name))
-        else:
+        elif not name.startswith("pairs_NEW"):
             print("replay file missing (unpack training_data/*.gz into build/work to use it):", name, flush=True)
+    dp = os.path.join(W, os.environ.get("DROP_PAIRS", "drop_pairs.jsonl"))
+    if os.path.exists(dp):                                   # pairs a stronger teacher judged wrong (build/hy7_judge.py)
+        drop = {(d["src"], d["tgt"]) for d in read_jsonl(dp)}; n0 = len(t); t = [p for p in t if (p["src"], p["tgt"]) not in drop]
+        print("dropped", n0 - len(t), "old pairs judged wrong", flush=True)
     for f in EXTRA:
         from student_data import student_input
         for p in read_jsonl(f):

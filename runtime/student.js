@@ -6,7 +6,7 @@
   let BPE = typeof module !== "undefined" && module.exports ? require("./bpe.js") : root.BPE;
   let SPM = typeof module !== "undefined" && module.exports ? require("./spm.js") : root.SPM;
   async function create(ort, loadBinary, loadJson, lower, dir) {
-    dir = dir || "student_V10";
+    dir = dir || "student_V11";
     const v = await loadJson(dir + "/vocab.json");
     BPE = BPE || root.BPE;
     if (v.bpe && !BPE) throw new Error("this model splits words into pieces: load runtime/bpe.js before student.js");

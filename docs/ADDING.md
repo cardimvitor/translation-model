@@ -33,11 +33,11 @@ Use this when you have real examples (your own catalogue, corrections of wrong o
 
    A few hundred pairs already help for a narrow topic; a few thousand for a broad one.
 2. Put the old training data in place so the model does not forget: `mkdir -p build/work && for f in training_data/pairs_MAX_*.gz training_data/pairs_Q_train*.gz training_data/pairs_HQ_train*.gz; do gunzip -c $f > build/work/$(basename ${f%.gz}); done`
-3. Rebuild the parent's full-precision weights once: `cat weights/student_V10_fp32/student.pt.part* > models/student_V10/student.pt`
-4. Run: `sh build/post_train.sh student_V10 student_V11 120 my_pairs.jsonl`
+3. Rebuild the parent's full-precision weights once: `cat weights/student_V11_fp32/student.pt.part* > models/student_V11/student.pt`
+4. Run: `sh build/post_train.sh student_V11 student_V12 120 my_pairs.jsonl`
    (parent model, name of the new model, minutes of training, your file or files).
 5. The script does six steps on its own: start from the parent, fine-tune on your pairs mixed with the old data, export 8-bit, choose the beam width and retune the decision rule, run every test on parent and child, print the verdict.
-6. **PASS**: `models/student_V11` is ready; use it with `NEURAL_DIR=student_V11` (Python) or `"student_V11"` (JavaScript). **FAIL**: some score fell by more than 0.5; keep the parent, then train longer or check the new pairs.
+6. **PASS**: `models/student_V12` is ready; use it with `NEURAL_DIR=student_V12` (Python) or `"student_V12"` (JavaScript). **FAIL**: some score fell by more than 0.5; keep the parent, then train longer or check the new pairs.
 7. If the machine restarts, run the same command again: it continues where it stopped.
 
 How long: 60 minutes for a few thousand pairs, 180–300 for tens of thousands (4 CPU cores).

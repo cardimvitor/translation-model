@@ -193,6 +193,13 @@ def is_address_v3(s, langs, fast, pol):
     return not (mw and len(s.split()) > mw and fast.get("coverage", 0) < pol.get("addr_long_cov", 0.6))
 
 
+def _sim(a, b):
+    """Share of character pairs two texts have in common (0..1), lower-cased."""
+    a = " ".join(a.lower().split()); b = " ".join(b.lower().split())
+    A = {a[i:i + 2] for i in range(len(a) - 1)}; B = {b[i:i + 2] for i in range(len(b) - 1)}
+    return len(A & B) / max(1, len(A | B))
+
+
 def process_v3(op, text, ascii_out, variant, pol):
     """Decision rule v3, for a strong neural model (v6). Its settings ship with the model (vocab.json "policy"):
       keep_cov    stay with Fast when Fast knew every word of the label
@@ -204,6 +211,14 @@ def process_v3(op, text, ascii_out, variant, pol):
                       addr_long_cov of its words (long product names often contain a number and a place word)
     Places, addresses and labels already in English always stay with Fast."""
     fast = F.process(op, text, ascii_out)
+    if fast["operation"] == "translate" and fast["method"] == "already-english" and fast["confidence"] < pol.get("en_sure", 0):
+        # English double check: the English check was not sure. The neural answer replaces the label only if it is confident
+        # (en_tau) and clearly different text (en_sim), i.e. a translation and not a small edit of English.
+        s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text)).strip()
+        o, c = mt(variant).translate(s)
+        if o and c >= pol.get("en_tau", 0.85) and _sim(o, s) < pol.get("en_sim", 0.5):
+            return dict(fast, output=F.tr_fallback(F.fold_latin(o)) if ascii_out else o, method="neural", confidence=F.r3(c), model="accurate")
+        return dict(fast, model="accurate")
     if fast["operation"] != "translate" or fast["method"] in ("gazetteer", "already-english") or not fast["output"]:
         return dict(fast, model="accurate")
     s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text)).strip()
@@ -219,11 +234,23 @@ def process_v3(op, text, ascii_out, variant, pol):
     return dict(fast, method=fast["method"] + "(neural rejected)", model="accurate")
 
 
+def reliable(r, pol):
+    """Adds "reliable": True / False when the model ships a calibrated threshold (policy "rel_tau").
+    True: a known place, text already in English, every word known to Fast, or a neural answer whose confidence is at least
+    rel_tau. False means "show it, but a person should check it"."""
+    if "rel_tau" in pol:
+        m = r.get("method", "")
+        r["reliable"] = bool(r.get("operation") != "translate" or m == "gazetteer" or (m == "already-english" and r.get("confidence", 0) >= pol.get("en_sure", 0))
+                             or (m == "neural" and r.get("confidence", 0) >= pol["rel_tau"])
+                             or (m != "neural" and "rejected" not in m and r.get("coverage", 0) >= 1))
+    return r
+
+
 def process(op, text, ascii_out=False, variant=None):
     if MODEL_NAME == "student" and POLICY["name"] != "v1":
         pol = getattr(mt(variant), "v", {}).get("policy")
         if pol:
-            return process_v3(op, text, ascii_out, variant, pol)
+            return reliable(process_v3(op, text, ascii_out, variant, pol), pol)
     if POLICY["name"] == "v2" and MODEL_NAME == "student":
         return process_v2(op, text, ascii_out, variant)
     fast = F.process(op, text, ascii_out)

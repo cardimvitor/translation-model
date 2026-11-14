@@ -23,7 +23,7 @@ def main():
         r["mean"] = round((r["labels"] + r["titles"]) / 2, 2); res.append(r); print(r, flush=True)
     best = res[0]
     for r in sorted(res[1:], key=lambda x: (x["beams"], -x["lp"])):
-        if r["mean"] >= best["mean"] + 0.5:
+        if r["beams"] <= int(os.environ.get("MAX_BEAMS", 2)) and r["mean"] >= best["mean"] + 0.5:      # MAX_BEAMS keeps the speed: beam 3+ costs about 2x
             best = r
     v = json.load(open(os.path.join(md, "vocab.json"), encoding="utf-8")); pol = v.get("policy") or {}; pol["beams"] = best["beams"]; pol["lp"] = best["lp"]; pol["beam_max_src"] = int(os.environ.get("BEAM_MAX_SRC", 16)); v["policy"] = pol   # beam only for inputs up to 16 word pieces (short labels)
     json.dump(v, open(os.path.join(md, "vocab.json"), "w", encoding="utf-8"), ensure_ascii=False)

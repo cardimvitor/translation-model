@@ -55,8 +55,24 @@
     return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });
   }
   // rule v3 (strong neural model, v6): settings ship with the model (vocab.json "policy"); same as accurate.py
+  function sim(a, b) {
+    a = a.toLowerCase().split(/\s+/).filter(Boolean).join(" "); b = b.toLowerCase().split(/\s+/).filter(Boolean).join(" ");
+    const A = new Set(), B = new Set();
+    for (let i = 0; i < a.length - 1; i++) A.add(a.slice(i, i + 2));
+    for (let i = 0; i < b.length - 1; i++) B.add(b.slice(i, i + 2));
+    let n = 0; for (const x of A) if (B.has(x)) n++;
+    return n / Math.max(1, A.size + B.size - n);
+  }
   async function processV3(op, text, asciiOut, pol) {
     const _ = N._; const fast = N.process(op, text, asciiOut);
+    if (fast.operation === "translate" && fast.method === "already-english" && fast.confidence < (pol.en_sure || 0)) {
+      // English double check (same as accurate.py): confident and clearly different neural answer replaces the label
+      const s0 = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+      const [o0, c0] = await S.translate(s0);
+      if (o0 && c0 >= (pol.en_tau === undefined ? 0.85 : pol.en_tau) && sim(o0, s0) < (pol.en_sim === undefined ? 0.5 : pol.en_sim))
+        return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o0)) : o0, method: "neural", confidence: Math.round(c0 * 1000) / 1000, model: "accurate" });
+      return Object.assign({}, fast, { model: "accurate" });
+    }
     if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });
     const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
     const langs = fast.language.map((x) => x[0]);
@@ -68,8 +84,18 @@
       return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o)) : o, method: "neural", confidence: Math.round(c * 1000) / 1000, model: "accurate" });
     return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });
   }
+  // "reliable" flag (same as accurate.py): only when the model ships a calibrated threshold (policy.rel_tau)
+  function reliable(r, pol) {
+    if (pol.rel_tau !== undefined) {
+      const m = r.method || "";
+      r.reliable = !!(r.operation !== "translate" || m === "gazetteer" || (m === "already-english" && (r.confidence || 0) >= (pol.en_sure || 0))
+        || (m === "neural" && (r.confidence || 0) >= pol.rel_tau)
+        || (m !== "neural" && !m.includes("rejected") && (r.coverage || 0) >= 1));
+    }
+    return r;
+  }
   async function process(op, text, asciiOut = false) {
-    if (S && S.policy && POLICY.name !== "v1") return processV3(op, text, asciiOut, S.policy);
+    if (S && S.policy && POLICY.name !== "v1") return reliable(await processV3(op, text, asciiOut, S.policy), S.policy);
     if (POLICY.name === "v2") return processV2(op, text, asciiOut);
     const _ = N._; const fast = N.process(op, text, asciiOut);
     if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });

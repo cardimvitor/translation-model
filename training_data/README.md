@@ -9,3 +9,11 @@ Everything the models were trained on, as produced by the scripts in `build/`. U
 - `titles_*.json.gz`, `abo_titles.json.gz`: English product titles.
 
 Licenses: Amazon ESCI (Apache-2.0), Amazon Berkeley Objects (CC BY 4.0), translations by OPUS-MT (CC BY 4.0), M2M100 (MIT), Hy-MT2 (Apache-2.0) and NLLB (CC BY-NC 4.0: files with `nllb` in the name and the A / C / C2 / ALL3 pairs are non-commercial). See `LICENSES.md`.
+
+
+## v11
+
+- `v11_judged.jsonl.gz`: 8,331 short labels v10 missed, each with the old training answer, v10's answer and Hy-MT2-7B's answer (`build/hy7_judge.py judge`).
+- `v11_real.jsonl.gz`: 1,800 real Spanish and Japanese search queries (Amazon ESCI) with Hy-MT2-7B's translation.
+- `pairs_NEW_v11.jsonl.gz`: the new training pairs made from those two files plus 9,600 mixed-language labels (`build/v11_pairs.py`).
+- `drop_pairs.jsonl.gz`: 5,976 old pairs the 7B judged wrong; put it in `build/work/` and `build/ft_v8.py` leaves them out of the replayed data.
