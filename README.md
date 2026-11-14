@@ -14,7 +14,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
-| **`student_V8` (default, final: "v8 Complete")** | v6's encoder + a 2-layer decoder + English-only output layer + one 1.6 MB encoder expert per language; all v6 data plus 13k short labels written by Hy-MT2-1.8B for ko/th/vi/ja/zh | **commercial use OK** (attribution required) |
+| **`student_V9` (default, final)** | `student_V8` post-trained with 200k more short labels (every ESCI query in 7 OPUS-MT languages, more Korean and Thai from Hy-MT2-1.8B), made with `build/post_train.sh` | **commercial use OK** (attribution required) |
+| `student_V8` ("v8 Complete", parent of v9) | v6's encoder + a 2-layer decoder + English-only output layer + one 1.6 MB encoder expert per language; all v6 data plus 13k short labels written by Hy-MT2-1.8B for ko/th/vi/ja/zh | **commercial use OK** (attribution required) |
 | **`student_V8F` (final: "v8 Fast")** | cut from v8 Complete (3 encoder layers, 1 decoder layer, no experts); for quick validation | **commercial use OK** (attribution required) |
 | `student_V6` (v6) | pretrained OPUS-MT mul-en (77M parameters) fine-tuned on the MAX data plus 58k short labels from Amazon ESCI search queries | **commercial use OK** (attribution required) |
 | `student_V7` (v7) | v6 frozen, plus one 3 MB expert per language (mixture of experts); the language detector picks the expert, so only that language's extra parameters are loaded and used | **commercial use OK** (attribution required) |
@@ -47,7 +48,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
 | v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
-| **v8 Complete** | **68.8%** | **83.1** | **67.7** | yes |
+| **v9** | **72.5%** | **86.0** | 67.2 | yes |
+| v8 Complete | 68.8% | 83.1 | **67.7** | yes |
 | **v8 Fast** | 65.0% | 79.7 | 62.2 | yes |
 
 Speed on one CPU thread (median, model alone, short label / product name): v8 Complete 7.5 / 34 ms, v8 Fast 4.7 / 20 ms, v6 16.8 / 80 ms. Sizes at 8-bit: 57 MB, 42 MB, 106 MB. Details in `reports/v8/`.
@@ -67,6 +69,12 @@ The full comparison (12 models, the Hy-MT2-7B / 1.8B, OPUS-MT and NLLB teachers 
 **Python vs JavaScript:** identical output on 3,018 of 3,018 Fast inputs (eager and lazy loading) and 12,072 of 12,072 English-check inputs. The JS SentencePiece tokenizer matches Python on every test input, and Python matches the real sentencepiece library on 60,000 of 60,000 training sources. For Accurate, 315–318 of 318 are identical. The rare difference is a near-tie in the neural decoder between onnxruntime-web and onnxruntime, on labels where both answers are wrong.
 
 How the weights were tested and changed after training is in [reports/WEIGHTS.md](reports/WEIGHTS.md).
+
+## Adding new things later
+
+Three tested ways, each with an automatic pass/fail check: add words instantly (`build/add_terms.py`), post-train on new pairs (`build/post_train.sh`), or turn an English-only list into pairs (`build/make_pairs.py`). Step by step in [docs/ADDING.md](docs/ADDING.md). `student_V9` was itself made from `student_V8` with the post-training tool.
+
+Against Hy-MT2 (each model alone): v9 scores 86.4 chrF on labels and 68.8 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5.
 
 ## Use it
 
@@ -140,7 +148,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

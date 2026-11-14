@@ -1,0 +1,212 @@
+{
+ "none": {
+  "labels": {
+   "system": {
+    "n": 320,
+    "median_ms": 0.2,
+    "p90_ms": 0.3,
+    "per_second": 3287.9
+   }
+  },
+  "names": {
+   "system": {
+    "n": 330,
+    "median_ms": 0.6,
+    "p90_ms": 1.2,
+    "per_second": 1400.0
+   }
+  }
+ },
+ "student_MAX_edited": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 11.2,
+    "p90_ms": 18.6,
+    "per_second": 80.8,
+    "tokens_per_second": 1281.6
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 9.7,
+    "p90_ms": 17.1,
+    "per_second": 94.5
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 54.7,
+    "p90_ms": 79.9,
+    "per_second": 18.6,
+    "tokens_per_second": 1172.4
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 48.9,
+    "p90_ms": 71.2,
+    "per_second": 21.5
+   }
+  }
+ },
+ "student_V6": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 11.2,
+    "p90_ms": 17.0,
+    "per_second": 81.6,
+    "tokens_per_second": 320.5
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 9.7,
+    "p90_ms": 16.8,
+    "per_second": 94.2
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 56.7,
+    "p90_ms": 77.1,
+    "per_second": 17.9,
+    "tokens_per_second": 362.1
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 55.7,
+    "p90_ms": 80.7,
+    "per_second": 19.1
+   }
+  }
+ },
+ "student_V7": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 12.3,
+    "p90_ms": 20.2,
+    "per_second": 67.8,
+    "tokens_per_second": 261.2
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 10.7,
+    "p90_ms": 15.9,
+    "per_second": 103.1
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 59.8,
+    "p90_ms": 82.3,
+    "per_second": 16.9,
+    "tokens_per_second": 339.5
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 58.8,
+    "p90_ms": 82.9,
+    "per_second": 17.9
+   }
+  }
+ },
+ "student_V8": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 5.5,
+    "p90_ms": 8.3,
+    "per_second": 166.7,
+    "tokens_per_second": 638.2
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 5.1,
+    "p90_ms": 6.9,
+    "per_second": 229.7
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 22.9,
+    "p90_ms": 32.6,
+    "per_second": 43.5,
+    "tokens_per_second": 868.6
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 22.8,
+    "p90_ms": 32.0,
+    "per_second": 46.6
+   }
+  }
+ },
+ "student_V8F": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 3.2,
+    "p90_ms": 4.6,
+    "per_second": 288.1,
+    "tokens_per_second": 1110.1
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 3.4,
+    "p90_ms": 5.8,
+    "per_second": 203.8
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 13.4,
+    "p90_ms": 19.7,
+    "per_second": 73.6,
+    "tokens_per_second": 1443.4
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 13.8,
+    "p90_ms": 19.9,
+    "per_second": 76.5
+   }
+  }
+ },
+ "student_V9": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 5.1,
+    "p90_ms": 7.4,
+    "per_second": 174.8,
+    "tokens_per_second": 658.8
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 4.9,
+    "p90_ms": 7.0,
+    "per_second": 235.3
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 21.1,
+    "p90_ms": 30.1,
+    "per_second": 46.8,
+    "tokens_per_second": 917.3
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 21.5,
+    "p90_ms": 30.2,
+    "per_second": 49.2
+   }
+  }
+ }
+}

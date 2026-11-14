@@ -4,7 +4,7 @@ en -> ko / th / vi / ja / zh. OPUS-MT has no en->ko / en->th model, so v6 had no
 Resumable. Output: build/work/bt_hy_q.jsonl {"en", "lang", "src"}"""
 import json, os, random, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); W = os.path.join(HERE, "work"); sys.path.insert(0, HERE)
-PLAN = [("ko", 5000), ("th", 4000), ("vi", 1500), ("ja", 1500), ("zh", 1500)]
+PLAN = [("ko", 5000), ("th", 4000), ("vi", 1500), ("ja", 1500), ("zh", 1500), ("ko", 4000), ("th", 2000)]   # second half added for v9
 
 
 def main():

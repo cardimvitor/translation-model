@@ -89,9 +89,28 @@ def hy_pairs():
     return out
 
 
+EXTRA = []          # post-training: extra pair files (absolute paths or names inside build/work)
+NEW_W = 6           # sampling weight of pairs that come from EXTRA files (old data: 1-4)
+
+
+def read_jsonl(p):
+    p = p if os.path.isabs(p) or os.path.exists(p) else os.path.join(W, p)
+    return [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
+
+
 def all_train():
-    t = FT.read_pairs("MAX", "train") + [json.loads(l) for l in open(os.path.join(W, "pairs_Q_train.jsonl"), encoding="utf-8")]
-    return t + [json.loads(l) for l in open(os.path.join(W, "pairs_HQ_train.jsonl"), encoding="utf-8")]
+    """Old training data that is on disk (replay, so nothing is forgotten) + the EXTRA files."""
+    t = []
+    for name in ("pairs_MAX_train.jsonl", "pairs_Q_train.jsonl", "pairs_HQ_train.jsonl"):
+        if os.path.exists(os.path.join(W, name)):
+            t += read_jsonl(os.path.join(W, name))
+        else:
+            print("replay file missing (unpack training_data/*.gz into build/work to use it):", name, flush=True)
+    for f in EXTRA:
+        from student_data import student_input
+        for p in read_jsonl(f):
+            t.append({"kind": p.get("kind", "new"), "lang": p.get("lang", ""), "src": student_input(p["src"]), "tgt": p["tgt"].lower(), "new": 1})
+    return t
 
 
 def prep(a):
@@ -164,6 +183,38 @@ def prep_lite(a):
     print("lite params", round(sum(p.numel() for p in m.parameters()) / 1e6, 2), "M | encoder layers", ek, "decoder layers", dk, flush=True)
 
 
+def prep_post(a):
+    """Post-training: start a new model (--tag) from an exported one (--from-model, e.g. student_V8). Same
+    vocabularies and layers; the EXTRA pair files get detector routes; reports how well the vocabulary covers them."""
+    d = out_dir(a.tag); src_d = os.path.join(ROOT, "models", a.from_model)
+    v = json.load(open(os.path.join(src_d, "vocab.json"), encoding="utf-8"))
+    json.dump({"src": v["src"], "tgt": v["tgt"]}, open(os.path.join(d, "vocab8.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    sd = torch.load(os.path.join(src_d, "student.pt"), map_location="cpu")
+    ne = 1 + max(int(k.split(".")[3]) for k in sd["model"] if k.startswith("model.encoder.layers."))
+    base = {"model": sd["model"], "dec_keep": sd.get("dec_keep") or list(range(1 + max(int(k.split(".")[3]) for k in sd["model"] if k.startswith("model.decoder.layers.")))),
+            "enc_layers": ne, "lite": "experts" not in v, "parent": a.from_model}
+    if "experts" in sd and "experts" in v:
+        base["experts"] = sd["experts"]
+    torch.save(base, os.path.join(d, "base.pt"))
+    tok = Tok(d); R = json.load(open(os.path.join(W, "moe_routes.json"), encoding="utf-8")) if os.path.exists(os.path.join(W, "moe_routes.json")) else {}
+    from student_data import student_input
+    n = unk_s = tot_s = unk_t = tot_t = 0
+    for f in EXTRA:
+        P = read_jsonl(f); n += len(P)
+        for i in range(0, len(P), 2000):
+            S = [student_input(p["src"]) for p in P[i:i + 2000]]
+            for ids in tok.enc(S):
+                unk_s += ids.count(UNK); tot_s += len(ids)
+            for ids in tok.enc([p["tgt"].lower() for p in P[i:i + 2000]], "tgt", 48):
+                unk_t += ids.count(UNK); tot_t += len(ids)
+            for x in S:
+                if x not in R:
+                    R[x] = MOE.route(x)
+    json.dump(R, open(os.path.join(W, "moe_routes.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    print(f"post-training from {a.from_model}: {n} new pairs | pieces the model cannot read: source {100 * unk_s / max(1, tot_s):.2f}%, English {100 * unk_t / max(1, tot_t):.2f}%"
+          f" | language experts: {'no' if base['lite'] else 'yes'}", flush=True)
+
+
 def load(a, ckpt=None):
     d = out_dir(a.tag); tok = Tok(d); base = torch.load(os.path.join(d, "base.pt"), map_location="cpu")
     if base.get("lite"):
@@ -200,7 +251,7 @@ def translate(tok, m, ex, texts, routes, bs=48, max_new=48):
 
 
 def batches(train, R, tok, rng, max_tok):
-    w = [KIND_W.get(p["kind"], 1) for p in train]
+    w = [NEW_W if p.get("new") else KIND_W.get(p["kind"], 1) for p in train]
     while True:
         chunk = rng.choices(train, weights=w, k=3072)
         xs = tok.enc([p["src"] for p in chunk]); ys = tok.enc([p["tgt"] for p in chunk], "tgt", 48); rs = [rt(p["src"], R) for p in chunk]
@@ -308,8 +359,9 @@ def evaluate(a):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("mode"); ap.add_argument("--tag", default="v8"); ap.add_argument("--rank", type=int, default=64)
-    ap.add_argument("--dec-keep", default="0,5"); ap.add_argument("--enc-keep", default="0,2,5"); ap.add_argument("--from-tag", default="v8"); ap.add_argument("--minutes", type=float, default=30); ap.add_argument("--total-min", type=float, default=0)
+    ap.add_argument("--dec-keep", default="0,5"); ap.add_argument("--enc-keep", default="0,2,5"); ap.add_argument("--from-tag", default="v8"); ap.add_argument("--from-model", default="student_V8"); ap.add_argument("--extra", nargs="*", default=[]); ap.add_argument("--minutes", type=float, default=30); ap.add_argument("--total-min", type=float, default=0)
     ap.add_argument("--lr", type=float, default=1e-4); ap.add_argument("--ex-lr", type=float, default=1e-3); ap.add_argument("--warmup", type=int, default=300)
     ap.add_argument("--max-tok", type=int, default=1400); ap.add_argument("--ckpt-min", type=float, default=30); ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--resume", action="store_true"); ap.add_argument("--ckpt", default=None)
-    a = ap.parse_args(); {"prep": prep, "prep_lite": prep_lite, "train": train, "eval": evaluate}[a.mode](a)
+    a = ap.parse_args(); EXTRA[:] = a.extra
+    {"prep": prep, "prep_lite": prep_lite, "prep_post": prep_post, "train": train, "eval": evaluate}[a.mode](a)
