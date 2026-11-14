@@ -19,7 +19,9 @@ if [ ! -f $W/$TAG.train.done ]; then
 fi
 if [ ! -f $W/$TAG.export.done ]; then
   echo "[3/6] export 8-bit"; $PY build/export_v8.py --tag $TAG --out $NEW > $W/$TAG.export.log 2>&1; grep -E "step loop|int8" $W/$TAG.export.log
-  echo "[4/6] retune the decision rule"; NEURAL_DIR=$NEW $PY build/tune_routing3.py 2>&1 | grep chosen | cut -c1-200; touch $W/$TAG.export.done
+  echo "[4/6] choose the beam width, retune the decision rule"
+  NEURAL_DIR=$NEW $PY build/tune_beams.py 2>&1 | grep chosen | cut -c1-160
+  NEURAL_DIR=$NEW $PY build/tune_routing3.py 2>&1 | grep chosen | cut -c1-200; touch $W/$TAG.export.done
 fi
 echo "[5/6] tests against $PARENT"
 if $PY build/compare_models.py $PARENT $NEW; then echo "[6/6] done: models/$NEW is ready"; else echo "[6/6] the new model is worse somewhere: keep $PARENT, or train longer / check the new pairs"; exit 1; fi

@@ -40,7 +40,10 @@ def score(outs, refs):
 
 def main():
     name = os.environ.get("NEURAL_DIR", "student_V6"); md = os.path.join(ROOT, "models", name)
-    v = json.load(open(os.path.join(md, "vocab.json"), encoding="utf-8")); v.pop("policy", None)
+    v = json.load(open(os.path.join(md, "vocab.json"), encoding="utf-8")); oldp = v.pop("policy", None) or {}
+    keep = {k: oldp[k] for k in ("beams", "lp", "beam_max_src") if k in oldp}            # decoding settings (build/tune_beams.py) stay
+    if keep:
+        v["policy"] = dict(keep)
     json.dump(v, open(os.path.join(md, "vocab.json"), "w", encoding="utf-8"), ensure_ascii=False)
     dev = [json.loads(l) for l in open(os.path.join(HERE, "work", "pairs_MAX_dev.jsonl"), encoding="utf-8")]
     rng = random.Random(9); real = [p for p in dev if p["kind"] == "real"]; bt = [p for p in dev if p["kind"] == "bt"]
@@ -61,12 +64,24 @@ def main():
                         sc = {k: score([decide(x, kc, nk, tau, ne, mw, kg) for x in X], R) for k, (X, R) in P.items()}
                         grid[(kc, nk, tau, ne, mw, kg)] = (round(sum(s["chrF"] for s in sc.values()) / len(sc), 3), sc)
                         print("keep_cov", kc, "need_known", nk, "tau", tau, "need_english", ne, "addr_max_words", mw, "keep_gaz", kg, grid[(kc, nk, tau, ne, mw, kg)][0], {k: s["chrF"] for k, s in sc.items()}, flush=True)
-    best = max(grid, key=lambda k: (grid[k][0], k[5]))      # on a tie, the cautious setting (places stay with Fast)
-    pol = {"keep_cov": bool(best[0]), "need_known": bool(best[1]), "tau": best[2], "need_english": bool(best[3]), "addr_max_words": best[4], "addr_long_cov": 0.6, "keep_gaz": bool(best[5])}
+    # Best setting by tuning score that also keeps every tuned address/label case right (on a tie, the cautious
+    # setting: places stay with Fast). A setting that scores higher but breaks a tuned case is never chosen.
+    CASES = json.load(open(os.path.join(ROOT, "test", "cases.json"), encoding="utf-8")); S = AC.mt(); best = pol = None; top = 0
+    def cases_ok(p):
+        S.v["policy"] = dict(p, **keep)
+        return sum(AC.process(c["op"], c["in"])["output"].casefold() == c["want"].casefold() for c in CASES)
+    for k in sorted(grid, key=lambda k: (-grid[k][0], -k[5])):
+        p = {"keep_cov": bool(k[0]), "need_known": bool(k[1]), "tau": k[2], "need_english": bool(k[3]), "addr_max_words": k[4], "addr_long_cov": 0.6, "keep_gaz": bool(k[5])}
+        n = cases_ok(p)
+        if n > top:
+            top, best, pol = n, k, p
+        if n == len(CASES):
+            break
+    print("tuned cases with the chosen setting:", top, "of", len(CASES), flush=True)
     print("chosen", pol, grid[best], flush=True)
     fast_only = {k: score([x["fast"] for x in X], R) for k, (X, R) in P.items()}
     neural_only = {k: score([x.get("o") or x["fast"] for x in X], R) for k, (X, R) in P.items()}
-    v["policy"] = pol; json.dump(v, open(os.path.join(md, "vocab.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    pol.update(keep); v["policy"] = pol; json.dump(v, open(os.path.join(md, "vocab.json"), "w", encoding="utf-8"), ensure_ascii=False)
     json.dump({"model": name, "policy": pol, "dev": grid[best][1], "dev_mean": grid[best][0], "dev_fast_only": fast_only, "dev_neural_where_allowed": neural_only,
                "grid": [{"keep_cov": k[0], "need_known": k[1], "tau": k[2], "need_english": k[3], "addr_max_words": k[4], "keep_gaz": k[5], "mean": g[0]} for k, g in sorted(grid.items())]},
               open(os.path.join(HERE, "work", f"routing3_{name}.json"), "w"), indent=1)

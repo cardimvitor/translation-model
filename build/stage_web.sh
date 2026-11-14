@@ -8,7 +8,7 @@ cp data/*.json $D/data/; cp data/translit/*.json $D/data/translit/; cp data/gaze
 for f in encheck normalizer bpe spm student accurate; do python3 build/ascii_js.py runtime/$f.js $D/runtime/$f.js; done
 printf '<meta charset="utf-8">\n' | cat - web/index.html > $D/local_test.html   # the published page gets its charset from the host skeleton
 echo "{" > $D/models_parts.tmp
-for V in V9:student_V9 V8F:student_V8F; do   # the two final models
+for V in V10:student_V10 V8F:student_V8F; do   # the two final models
   N=student_${V%%:*}; S=models/${V#*:}; mkdir -p $D/models/$N
   for m in encoder decoder; do
     F=$S/${m}_int8.onnx

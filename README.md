@@ -14,7 +14,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
-| **`student_V9` (default, final)** | `student_V8` post-trained with 200k more short labels (every ESCI query in 7 OPUS-MT languages, more Korean and Thai from Hy-MT2-1.8B), made with `build/post_train.sh` | **commercial use OK** (attribution required) |
+| **`student_V10` (default, final)** | `student_V9` post-trained with 15k head terms written by Hy-MT2-1.8B in all 16 languages; decodes short labels with a 2-candidate beam search | **commercial use OK** (attribution required) |
+| `student_V9` (parent of v10) | `student_V8` post-trained with 200k more short labels (every ESCI query in 7 OPUS-MT languages, more Korean and Thai from Hy-MT2-1.8B), made with `build/post_train.sh` | **commercial use OK** (attribution required) |
 | `student_V8` ("v8 Complete", parent of v9) | v6's encoder + a 2-layer decoder + English-only output layer + one 1.6 MB encoder expert per language; all v6 data plus 13k short labels written by Hy-MT2-1.8B for ko/th/vi/ja/zh | **commercial use OK** (attribution required) |
 | **`student_V8F` (final: "v8 Fast")** | cut from v8 Complete (3 encoder layers, 1 decoder layer, no experts); for quick validation | **commercial use OK** (attribution required) |
 | `student_V6` (v6) | pretrained OPUS-MT mul-en (77M parameters) fine-tuned on the MAX data plus 58k short labels from Amazon ESCI search queries | **commercial use OK** (attribution required) |
@@ -48,7 +49,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
 | v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
-| **v9** | **72.5%** | **86.0** | 67.2 | yes |
+| **v10** | **72.8%** | **86.8** | 67.3 | yes |
+| v9 | 72.5% | 86.0 | 67.2 | yes |
 | v8 Complete | 68.8% | 83.1 | **67.7** | yes |
 | **v8 Fast** | 65.0% | 79.7 | 62.2 | yes |
 
@@ -72,9 +74,9 @@ How the weights were tested and changed after training is in [reports/WEIGHTS.md
 
 ## Adding new things later
 
-Three tested ways, each with an automatic pass/fail check: add words instantly (`build/add_terms.py`), post-train on new pairs (`build/post_train.sh`), or turn an English-only list into pairs (`build/make_pairs.py`). Step by step in [docs/ADDING.md](docs/ADDING.md). `student_V9` was itself made from `student_V8` with the post-training tool.
+Three tested ways, each with an automatic pass/fail check: add words instantly (`build/add_terms.py`), post-train on new pairs (`build/post_train.sh`), or turn an English-only list into pairs (`build/make_pairs.py`). Step by step in [docs/ADDING.md](docs/ADDING.md). `student_V9` and `student_V10` were both made with the post-training tool.
 
-Against Hy-MT2 (each model alone): v9 scores 86.4 chrF on labels and 68.8 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5.
+Against Hy-MT2 (each model alone, 8-bit as shipped): v10 scores 87.9 chrF on labels and 68.3 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5.
 
 ## Use it
 
@@ -148,7 +150,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

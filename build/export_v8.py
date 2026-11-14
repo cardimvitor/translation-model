@@ -49,10 +49,12 @@ def main():
         ck, cv, sb = enc(src, E[0], E[1])
     torch.onnx.export(pe if lite else enc, (src,) if lite else (src, E[0], E[1]), os.path.join(OUT, "encoder.onnx"), input_names=["src"] if lite else ["src", "ed", "eu"], output_names=["ck", "cv", "src_bias"],
                       dynamic_axes={"src": {1: "S"}, "ck": {3: "S"}, "cv": {3: "S"}, "src_bias": {3: "S"}}, opset_version=17, dynamo=False)
-    t = torch.tensor([[PAD]]); pos = torch.tensor([[2]]); pk = torch.zeros(L, 1, h, 2, hd); pv = torch.zeros(L, 1, h, 2, hd)
+    # traced with 2 hypotheses so the batch axis stays dynamic: beam search runs all its candidates in one call
+    t = torch.tensor([[PAD], [PAD]]); pos = torch.tensor([[2]]); pk = torch.zeros(L, 2, h, 2, hd); pv = torch.zeros(L, 2, h, 2, hd)
     torch.onnx.export(dec, (t, pos, ck, cv, sb, pk, pv), os.path.join(OUT, "decoder.onnx"),
                       input_names=["tok", "pos", "ck", "cv", "src_bias", "pk", "pv"], output_names=["logits", "nk", "nv"],
-                      dynamic_axes={"ck": {3: "S"}, "cv": {3: "S"}, "src_bias": {3: "S"}, "pk": {3: "T"}, "pv": {3: "T"}, "nk": {3: "T1"}, "nv": {3: "T1"}},
+                      dynamic_axes={"tok": {0: "B"}, "ck": {3: "S"}, "cv": {3: "S"}, "src_bias": {3: "S"}, "pk": {1: "B", 3: "T"}, "pv": {1: "B", 3: "T"},
+                                    "logits": {0: "B"}, "nk": {1: "B", 3: "T1"}, "nv": {1: "B", 3: "T1"}},
                       opset_version=17, dynamo=False)
     from onnxruntime.quantization import quantize_dynamic, QuantType
     for n in ("encoder", "decoder"):
@@ -64,7 +66,7 @@ def main():
         if i and not lite:
             np.concatenate([x.numpy().astype(np.float32).ravel() for x in expert(i)]).tofile(os.path.join(OUT, "experts", f"{lang}.bin"))
     json.dump({"spm": True, "src": tok.src, "tgt": tok.tgt, "max_src": 64, "max_tgt": 49, "pad": PAD, "unk": UNK, "bos": PAD, "eos": EOS,
-               "kv": True, "layers": L, "heads": h, "head_dim": hd,
+               "kv": True, "batch": True, "layers": L, "heads": h, "head_dim": hd,
                **({} if lite else {"experts": {"langs": MOE.LANGS[1:], "rank": a.rank, "d": m.config.d_model, "enc_layers": ne, "dec_layers": 0, "min_conf": MOE.MIN_CONF}})},
               open(os.path.join(OUT, "vocab.json"), "w", encoding="utf-8"), ensure_ascii=False)
     shutil.copy(os.path.join(ROOT, "models", "student_V6", "spm_src.json"), OUT)

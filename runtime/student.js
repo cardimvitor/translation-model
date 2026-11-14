@@ -6,7 +6,7 @@
   let BPE = typeof module !== "undefined" && module.exports ? require("./bpe.js") : root.BPE;
   let SPM = typeof module !== "undefined" && module.exports ? require("./spm.js") : root.SPM;
   async function create(ort, loadBinary, loadJson, lower, dir) {
-    dir = dir || "student_V9";
+    dir = dir || "student_V10";
     const v = await loadJson(dir + "/vocab.json");
     BPE = BPE || root.BPE;
     if (v.bpe && !BPE) throw new Error("this model splits words into pieces: load runtime/bpe.js before student.js");
@@ -35,7 +35,8 @@
     const si = new Map(v.src.map((c, i) => [c, i]));
     const prep = (s) => lower(s.normalize("NFKC")).replace(/\s+/g, " ").trim();
     const T = (arr, dims) => new ort.Tensor("int64", BigInt64Array.from(arr.map(BigInt)), dims);
-    async function translate(text) {
+    async function translate(text, opt) {
+      opt = opt || {};
       let ids;
       if (sp) {            // pretrained translator (v6): SentencePiece pieces, then the end mark
         ids = sp.encode(prep(text)).slice(0, v.max_src - 1).map((c) => si.has(c) ? si.get(c) : v.unk);
@@ -46,7 +47,12 @@
       }
       if (!ids.length) return ["", 0.0];
       const src = T(ids, [1, ids.length]);
-      if (v.kv) return translateKv(src, v.experts ? await expert(prep(text)) : null);
+      if (v.kv) {
+        const ex = v.experts ? await expert(prep(text)) : null;
+        const pol = v.policy || {}; let K = v.batch ? (opt.beams || pol.beams || 1) : 1;
+        if (pol.beam_max_src !== undefined && ids.length > pol.beam_max_src) K = 1;   // long inputs: greedy
+        return K > 1 ? translateBeam(src, ex, K, opt.lp || pol.lp || 1.0) : translateKv(src, ex);
+      }
       const mem = (await enc.run({ src })).mem;
       const out = [v.bos]; const lps = [];
       for (let k = 0; k < v.max_tgt - 1; k++) {
@@ -83,6 +89,55 @@
       const txt = sp ? out.map((i) => v.tgt[i]).join("").split(SPM.SP).join(" ").split(/\s+/).filter(Boolean).join(" ")
         : v.bpe ? BPE.decode(out.map((i) => v.tgt[i])) : out.map((i) => v.tgt[i]).join("");
       const conf = lps.length ? Math.exp(lps.reduce((a, b) => a + b, 0) / lps.length) : 0.0;
+      return [txt, Math.round(conf * 1000) / 1000];
+    }
+    // Beam search, same algorithm as student.py: K partial outputs run through the decoder as one batch.
+    async function translateBeam(src, ex, K, lp) {
+      const e = await enc.run(ex ? { src, ed: ex[0], eu: ex[1] } : { src });
+      const dex = ex && ex[2].dims[0] ? { dd: ex[2], du: ex[3] } : {};
+      const L = v.layers, H = v.heads, D = v.head_dim, V = v.tgt.length;
+      let pk = new ort.Tensor("float32", new Float32Array(0), [L, 1, H, 0, D]); let pv = pk;
+      let beams = [[[], 0.0]]; const done = [];
+      const take = (t, idx) => {                 // keep the cache rows of the surviving hypotheses (axis 1)
+        const [l, b, h, T, d] = t.dims; const blk = h * T * d; const out = new Float32Array(l * idx.length * blk);
+        for (let a = 0; a < l; a++) for (let k = 0; k < idx.length; k++) out.set(t.data.subarray((a * b + idx[k]) * blk, (a * b + idx[k] + 1) * blk), (a * idx.length + k) * blk);
+        return new ort.Tensor("float32", out, [l, idx.length, h, T, d]);
+      };
+      for (let t = 0; t < v.max_tgt - 1; t++) {
+        const toks = beams.map((b) => b[0].length ? b[0][b[0].length - 1] : v.bos);
+        const r = await dec.run({ tok: T(toks, [toks.length, 1]), pos: T([t], [1, 1]), ck: e.ck, cv: e.cv, src_bias: e.src_bias, pk, pv, ...dex });
+        const cand = [];
+        for (let i = 0; i < beams.length; i++) {
+          const lg = r.logits.data.subarray(i * V, (i + 1) * V); const off = (j) => j === v.pad || j === v.unk || j === v.bos;
+          let m = -Infinity; for (let j = 0; j < V; j++) if (!off(j) && lg[j] > m) m = lg[j];
+          let z = 0; for (let j = 0; j < V; j++) if (!off(j)) z += Math.exp(lg[j] - m);
+          const norm = m + Math.log(z);
+          const top = [];                        // the K best tokens in one pass (no sort of the vocabulary)
+          for (let j = 0; j < V; j++) {
+            if (off(j)) continue;
+            if (top.length < K || lg[j] > lg[top[top.length - 1]]) {
+              let p = top.length; top.push(j);
+              while (p > 0 && lg[top[p - 1]] < lg[j]) { top[p] = top[p - 1]; p--; }
+              top[p] = j; if (top.length > K) top.pop();
+            }
+          }
+          for (const j of top) cand.push([beams[i][1] + (lg[j] - norm), i, j]);
+        }
+        cand.sort((a, b) => b[0] - a[0] || a[1] - b[1] || a[2] - b[2]);
+        const nxt = [], idx = [];
+        for (const [sc, i, j] of cand) {
+          if (j === v.eos) done.push([sc / Math.pow(beams[i][0].length + 1, lp), beams[i][0], sc]);
+          else { nxt.push([beams[i][0].concat([j]), sc]); idx.push(i); }
+          if (nxt.length + done.length >= K) break;
+        }
+        if (done.length >= K || !nxt.length) break;
+        beams = nxt; pk = take(r.nk, idx); pv = take(r.nv, idx);
+      }
+      if (!done.length) for (const [seq, sc] of beams) done.push([sc / Math.pow(Math.max(1, seq.length), lp), seq, sc]);
+      done.sort((a, b) => b[0] - a[0] || a[1].length - b[1].length);
+      const out = done[0][1], sc = done[0][2];
+      const txt = sp ? out.map((i) => v.tgt[i]).join("").split(SPM.SP).join(" ").split(/\s+/).filter(Boolean).join(" ") : out.map((i) => v.tgt[i]).join("");
+      const conf = out.length ? Math.exp(sc / (out.length + 1)) : 0.0;
       return [txt, Math.round(conf * 1000) / 1000];
     }
     return { translate, kv: !!v.kv, dir, policy: v.policy || null };

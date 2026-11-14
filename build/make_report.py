@@ -22,6 +22,7 @@ META = {
     "student_JG": ("JEPA-Gen", "MAX data, encoder pretrained with JEPA", True, 360),
     "student_BASE_edited": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
     "student_V6": ("v6", "pretrained OPUS-MT mul-en (77M) fine-tuned on MAX data + 58k short labels", True, 510),
+    "student_V10": ("v10", "v9 post-trained with head terms written by Hy-MT2 in all 16 languages; beam search (2 candidates) when decoding", True, 180),
     "student_V9": ("v9", "v8 Complete post-trained with 200k more short labels (every search query in 7 languages, more Korean and Thai), made with the post-training tool", True, 300),
     "student_V8": ("v8 Complete", "v6 encoder + 2-layer decoder + English-only output + encoder experts per language; all data + 13k Hy-MT2 short labels", True, 420),
     "student_V8F": ("v8 Fast", "cut from v8 Complete: 3 encoder layers, 1 decoder layer, no experts", True, 180),
@@ -32,7 +33,7 @@ META = {
 
 def parse_final():
     txt = open(os.path.join(W, "final_eval.txt"), encoding="utf-8").read()
-    for extra in ("final_eval_V6.txt", "final_eval_V7.txt", "final_eval_V8.txt", "final_eval_V8F.txt", "final_eval_V9.txt"):
+    for extra in ("final_eval_V6.txt", "final_eval_V7.txt", "final_eval_V8.txt", "final_eval_V8F.txt", "final_eval_V9.txt", "final_eval_V10.txt"):
         if os.path.exists(os.path.join(W, extra)):
             txt += open(os.path.join(W, extra), encoding="utf-8").read()
     rows = {}
@@ -110,7 +111,7 @@ def curves():
 def final_section(F):
     """The two final models: quality, speed, size, next to the earlier best ones (all from result files)."""
     SP = load(os.path.join(W, "speed_ours.json"), {}); SS = load(os.path.join(W, "seen_split.json"), {}); E8 = load(os.path.join(W, "v8_eval_v8.json"), {})
-    names = [("student_V9", "<b>v9</b>"), ("student_V8", "v8 Complete"), ("student_V8F", "<b>v8 Fast</b>"), ("student_V7", "v7"), ("student_V6", "v6"), ("student_MAX_edited", "v5 MAX"), ("none", "Fast rules only")]
+    names = [("student_V10", "<b>v10</b>"), ("student_V9", "v9"), ("student_V8", "v8 Complete"), ("student_V8F", "<b>v8 Fast</b>"), ("student_V7", "v7"), ("student_V6", "v6"), ("student_MAX_edited", "v5 MAX"), ("none", "Fast rules only")]
     rows = []
     for k, lab in names:
         r = F.get(k)
@@ -136,21 +137,30 @@ def final_section(F):
     # --- v9 against Hy-MT2 (both alone, no rules)
     T7 = load(os.path.join(W, "teachers", "gold_hy7.json"), {}); T18 = load(os.path.join(W, "teachers", "gold_hy18.json"), {})
     A7 = load(os.path.join(W, "teachers", "abo_hy7.json"), {}); A18 = load(os.path.join(W, "teachers", "abo_hy18.json"), {}); S330 = load(os.path.join(W, "teachers", "abo_sample330.json"), {})
-    E9 = load(os.path.join(W, "v8_eval_post_student_V9.json"), {}); v9 = F.get("student_V9", {}); sp9 = SP.get("student_V9", {})
+    E9 = load(os.path.join(W, "v8_eval_post_student_V10.json"), {}) or load(os.path.join(W, "v8_eval_post_student_V9.json"), {})
+    best_k = "student_V10" if "student_V10" in F else "student_V9"; v9 = F.get(best_k, {}); sp9 = SP.get(best_k, {}); best_lab = META[best_k][0]
+    BM = load(os.path.join(W, "beams_student_V10.json"), {})
     if E9 and T7:
         g9 = E9["gold"]["experts"]; a9 = E9["abo"]["experts"]
-        hr = [["<b>v9</b> (alone, full precision)", f'{pct(g9["exact"] * 100)} / {g9["chrF"]:.1f}', f'{a9["chrF"]:.1f}', f'{v9.get("size", 0):.0f} MB',
+        gs = v9.get(("gold", "Student only")); as_ = v9.get(("abo", "Student only"))
+        hr = [[f"<b>{best_lab}</b> (alone, 8-bit, as shipped)", f'{pct(gs[0])} / {gs[1]:.1f}' if gs else f'{pct(g9["exact"] * 100)} / {g9["chrF"]:.1f}', f'{as_[1]:.1f}' if as_ else f'{a9["chrF"]:.1f}', f'{v9.get("size", 0):.0f} MB',
                f'{sp9["labels"]["alone"]["median_ms"]:.0f} ms / {sp9["names"]["alone"]["median_ms"]:.0f} ms (1 thread)' if sp9 else "-"],
               ["Hy-MT2-1.8B", f'{pct(T18["exact"] * 100)} / {T18["chrF"]:.1f}', f'{A18.get("chrF", 0):.1f}', "1,133 MB", "400–800 ms / 1,550 ms (4 threads)"],
               ["Hy-MT2-7B", f'{pct(T7["exact"] * 100)} / {T7["chrF"]:.1f}', f'{A7.get("chrF", 0):.1f} (on 330 names)', "4,625 MB", "1,400 ms / 6,000 ms (4 threads)"]]
-        h += ("<h3>v9 against Hy-MT2</h3><p>Each model on its own, same tests, same machine.</p>"
+        h += (f"<h3>{best_lab} against Hy-MT2</h3><p>Each model on its own, same tests, same machine.</p>"
               + table(["Model", "Labels: exact / chrF", "Real names: chrF", "Size", "Time per label / product name"], hr)
               + f'<p><b>Hy-MT2-1.8B is beaten on both tests</b> by a model 20 times smaller and far faster. <b>Hy-MT2-7B is beaten on real product names</b> '
-              f'(v9 learned the catalogue style from real pairs) <b>but not on short labels</b>, where it scores {T7["chrF"]:.0f} against {g9["chrF"]:.0f}: '
+              f'(it learned the catalogue style from real pairs) <b>but not on short labels</b>, where it scores {T7["chrF"]:.0f} against {(gs[1] if gs else g9["chrF"]):.0f}: '
               "a 7-billion-parameter model simply knows more rare product words in every language. Closing that last gap needs its answers as training data, which takes a GPU; the post-training tool below is built for exactly that kind of addition.</p>")
+    if BM:
+        h += ("<h3>Beam search</h3><p>Until v9 the model committed to its single best word at every step. v10 keeps several candidate outputs alive and picks the best complete one. "
+              "The decoder was re-exported so all candidates run as one batch. Chosen on tuning data only (model alone, 8-bit, one thread):</p>"
+              + table(["Candidates kept", "Tuning labels (chrF)", "Held-out titles (chrF)", "Time per label", "Time per title"],
+                      [[("<b>%d (chosen)</b>" % r["beams"]) if r["beams"] == BM["chosen"]["beams"] and r["lp"] == BM["chosen"]["lp"] else str(r["beams"]) + ("" if r["lp"] == 1.0 else f' (length penalty {r["lp"]})'),
+                        f'{r["labels"]:.1f}', f'{r["titles"]:.1f}', f'{r["labels_ms"]:.0f} ms', f'{r["titles_ms"]:.0f} ms'] for r in BM["all"]]))
     if E9 or E8:
         bl = (E9 or E8)["gold"]["by_lang"]
-        h += ("<p class=\"legend\">v9 alone, test labels by language (chrF): " + ", ".join(f"{l} {v:.0f}" for l, v in sorted(bl.items(), key=lambda x: -x[1])) + ".</p>")
+        h += (f"<p class=\"legend\">{best_lab} alone (greedy, full precision), test labels by language (chrF): " + ", ".join(f"{l} {v:.0f}" for l, v in sorted(bl.items(), key=lambda x: -x[1])) + ".</p>")
     return h
 
 
@@ -161,14 +171,14 @@ def adding_section():
                  "1. Write a file: language, foreign text, English, separated by TABs.<br>2. <code>python build/add_terms.py my_terms.tsv</code>", "seconds, no training",
                  "re-runs the 70 cases and the test labels; undoes itself if a score drops"],
                 ["<b>2. Add translated pairs</b> (post-training)", "your own catalogue, corrections of wrong outputs, a new category",
-                 "1. Write one JSON line per pair: <code>{\"src\", \"tgt\", \"lang\"}</code>.<br>2. <code>sh build/post_train.sh student_V9 student_V10 120 my_pairs.jsonl</code><br>3. Read the verdict.", "1–5 hours on 4 CPU cores",
+                 "1. Write one JSON line per pair: <code>{\"src\", \"tgt\", \"lang\"}</code>.<br>2. <code>sh build/post_train.sh student_V10 student_V11 120 my_pairs.jsonl</code><br>3. Read the verdict.", "1–5 hours on 4 CPU cores",
                  "the parent model is never changed; the new one is kept only if no test drops by more than 0.5"],
                 ["<b>3. Add English-only names</b>", "a new catalogue section with no translations",
                  "1. One English name per line.<br>2. <code>python build/make_pairs.py names.txt --langs ko,th,de --out my_pairs.jsonl</code><br>3. Check a sample by eye.<br>4. Continue with way 2.", "0.7 s per name and language",
                  "wrong-script, copied and odd-length outputs are dropped automatically"]], "wide")
             + "<p>What post-training does on its own, in order: (1) starts from the parent model's weights; (2) fine-tunes on the new pairs mixed with all the old training data, so nothing is forgotten; "
             "(3) exports the 8-bit model; (4) retunes the rule that decides when the neural answer is used; (5) runs the tuning labels, test labels, real names and address cases on parent and child; "
-            "(6) prints PASS or FAIL. If the machine restarts, the same command continues where it stopped. <b>v9 itself was made this way from v8 Complete</b>, so the tool has been used for real.</p>"
+            "(6) prints PASS or FAIL. If the machine restarts, the same command continues where it stopped. <b>v9 and v10 were both made this way</b>, so the tool has been used for real.</p>"
             "<p>Limits: the vocabulary is fixed, so text in a script the model has never seen cannot be taught this way (the first output line reports how much of the new data is unreadable); a whole new language also needs rules and detector support.</p>")
 
 
@@ -193,7 +203,14 @@ def steps_section(F):
           "<li>New data: until now each English search query had been translated into only 3 of 14 languages. Translated all 54k queries into 7 languages each with OPUS-MT (393k translations, 251k kept after the round-trip check), plus 6k more Korean and Thai labels from Hy-MT2-1.8B: 199,525 new pairs.</li>"
           "<li>Ran the post-training tool on v8 Complete for 5 hours: new pairs sampled more often, all old data replayed.</li>"
           "<li>The tool exported, retuned, tested parent against child and gave its verdict; then the usual full tests and speed measurements.</li>"
-          f"<li>Result: v9 {g(F.get('student_V9', {}), ('gold', 'Accurate'))} on labels and {g(F.get('student_V9', {}), ('abo', 'Accurate'))} on real names.</li></ol>")
+          f"<li>Result: v9 {g(F.get('student_V9', {}), ('gold', 'Accurate'))} on labels and {g(F.get('student_V9', {}), ('abo', 'Accurate'))} on real names.</li></ol>"
+          "<h3>Step 11. v10: a diagnosed plan (Nov 14)</h3><ol>"
+          "<li>Diagnosis on the tuning labels: (a) OPUS-MT had written wrong everyday nouns into the training data (vacuum cleaner as \"Vakuum-Reiniger\", not \"Staubsauger\"), so the model never saw the right words; "
+          "(b) picking only the single best word at each step loses about 2 chrF that a wider search finds; (c) some remaining errors are valid paraphrases the references do not list.</li>"
+          "<li>Beam search: re-exported the decoder with a batch axis, wrote the same search in Python and JavaScript, chose the width on tuning data (2 candidates: most of the gain for a few ms).</li>"
+          "<li>Head terms: the 1,200 most frequent short search queries, written in all 16 languages by Hy-MT2-1.8B (19,200 translations).</li>"
+          "<li>Post-trained v9 with the tool for 3 hours on those pairs (plus the v9 pairs and all old data); the tool chose the beam width, retuned the rule and ran the pass/fail comparison.</li>"
+          f"<li>Result: v10 {g(F.get('student_V10', {}), ('gold', 'Accurate'))} on labels and {g(F.get('student_V10', {}), ('abo', 'Accurate'))} on real names.</li></ol>")
     return open(os.path.join(HERE, "steps.html"), encoding="utf-8").read().replace("{{STEPS_V8}}", s8)
 
 
@@ -400,8 +417,9 @@ def main():
                  ["Hy-MT2-1.8B and 7B (Tencent)", "teacher for H, ALL3, HY, MAX; 7B used only as a reference score", "Apache-2.0"],
                  ["Sudachi dictionary", "Japanese readings", "Apache-2.0"]]
     hours = sum(META[k][3] for k in META if k in F or k.replace("_edited", "") in F) / 60
-    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 14 04:30 UTC: about 242 hours (10.1 days) from the first message to this report, including many hours lost to machine restarts"],
+    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 14 14:00 UTC: about 252 hours (10.5 days) from the first message to this report, including many hours lost to machine restarts"],
                  ["v6: short-label data + fine-tuning + export, quantization and routing tests", "1 h + 8.5 h + 1.5 h"],
+                 ["v10: beam search, Hy-MT2 head terms, post-training, tests", "1.5 h + 3 h + 3 h + 1 h"],
                  ["v9 and the post-training tools (data 6 h, post-training 5 h, tests 1 h)", "12 h"],
                  ["v8 Complete and v8 Fast (Hy-MT2 short labels, training, export, tests, speed)", "4 h + 7 h + 3 h + 1 h"],
                  ["v7: language experts (training, export, tests)", "4 h + 1 h"],
@@ -410,7 +428,7 @@ def main():
                  ["JEPA pretraining and tuning", "2 h tuning (4 × 30 min) + 3 h main run"],
                  ["Weight testing and edits", "~25–30 h in total (about 2–3 h per model: switch-off tests, edits, 15-min retraining)"],
                  ["Total compute spent training and changing models", "≈ 130–135 h; the rest was evaluation, packaging, restarts and idle time"]]
-    reco = ("<ul><li><b>Use v9</b> for real work: the most accurate model and about twice as fast as v6/v7 at half the size. To teach it more, use the post-training tool (see the section on adding new things). <b>Use v8 Fast</b> for quick validation runs. The earlier models are kept for reference only.</li><li>Earlier advice, still true for v6/v7 (106 MB): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
+    reco = ("<ul><li><b>Use v10</b> for real work: the most accurate model and about twice as fast as v6/v7 at half the size. To teach it more, use the post-training tool (see the section on adding new things). <b>Use v8 Fast</b> for quick validation runs. The earlier models are kept for reference only.</li><li>Earlier advice, still true for v6/v7 (106 MB): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
             "<li><b>Ship v5 MAX</b> (22 MB) when download size or speed matters more: about 10 ms per short label.</li>"
             "<li><b>Fast alone</b> stays the right choice for addresses and place names (~2 ms); every Accurate model keeps using it for those.</li>"
             "<li><b>Next gains:</b> (1) Hy-MT2-7B scores 95 on the labels, so distilling its answers into v6 on a GPU should close much of the remaining gap; "
@@ -420,7 +438,7 @@ def main():
 
     # --- downloads, conclusions, important notes
     GH = "https://github.com/cardimvitor/translation-model"; BR = "ccr-9202c40a-kuyiob"
-    DL = [("student_V9", "student_V9", "v9", "FINAL. Best model."), ("student_V8", "student_V8", "v8 Complete", "Parent of v9."), ("student_V8F", "student_V8F", "v8 Fast", "FINAL. Fast model for validation."),
+    DL = [("student_V10", "student_V10", "v10", "FINAL. Best model."), ("student_V9", "student_V9", "v9", "Parent of v10."), ("student_V8", "student_V8", "v8 Complete", "Parent of v9."), ("student_V8F", "student_V8F", "v8 Fast", "FINAL. Fast model for validation."),
           ("student_V6", "student_V6", "v6", "Earlier best."), ("student_MAX_edited", "student_MAX", "v5 MAX", "Best small model for real product names."),
           ("student_B2", "student_B2", "v5 B2", "Small, OPUS-MT only."), ("student_C2_edited", "student_C2", "v5 C2", "Small, best v5 on labels."),
           ("student_A", "student_A", "v4 A", ""), ("student_B", "student_B", "v4 B", ""), ("student_C", "student_C", "v4 C", "Best small model on labels."),
@@ -443,7 +461,7 @@ def main():
                  'Try the models without downloading: <a href="https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL">phone test page</a>.</p>')
     V6a = F.get("student_V6", {}); g6 = V6a.get(("gold", "Accurate"), (0, 0)); a6 = V6a.get(("abo", "Accurate"), (0, 0))
     concl = ("<ol>"
-             "<li><b>Two final models.</b> v9 (v8 Complete post-trained) is the most accurate and, among the strong models, the fastest and smallest; v8 Fast trades some accuracy for much more speed and is meant for validation.</li>"
+             "<li><b>Two final models.</b> v10 (v8 Complete post-trained twice, with beam search) is the most accurate and, among the strong models, the fastest and smallest; v8 Fast trades some accuracy for much more speed and is meant for validation.</li>"
              f"<li><b>The big jump came with v6.</b> The full system goes from {acc['none'][0]:.1f}% exact / {acc['none'][1]:.1f} chrF (rules only) to {g6[0]:.1f}% / {g6[1]:.1f} on hand-written labels, and from {abo['none'][1]:.1f} to {a6[1]:.1f} chrF on real marketplace names, fully offline.</li>"
              "<li><b>Starting from a pretrained model mattered more than everything else combined.</b> Seven days of from-scratch models (v3 to v5, twelve of them) moved label chrF from 43 to 51. One 8.5-hour fine-tune of a pretrained translator moved it to 80.</li>"
              "<li><b>Data that looks like the task beats more data.</b> 35k real product-name pairs lifted real-name scores by 7 points in v5; 58k short labels were a large part of v6's jump on short labels.</li>"

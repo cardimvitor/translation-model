@@ -43,7 +43,7 @@ main a{color:var(--accent)}
 </head>
 <body><main>
 <h1>Label normalizer: what we built and how the models compare</h1>
-<p class="sub">Product names, item labels and addresses in 16 languages turned into English, offline, on a phone. From the first version (Nov 4) to the two final models, v9 and v8 Fast (Nov 14).</p>
+<p class="sub">Product names, item labels and addresses in 16 languages turned into English, offline, on a phone. From the first version (Nov 4) to the two final models, v10 and v8 Fast (Nov 14).</p>
 
 <div class="kpis">
 {{KPIS}}
@@ -52,7 +52,7 @@ main a{color:var(--accent)}
 <div class="note"><b>How to read the scores.</b> <i>Exact</i> is the share of outputs that match a reference English name word for word (after lowercasing). <i>chrF</i> (0–100) is a character-overlap score that gives partial credit, e.g. "cotton t-shirt" vs "cotton tee shirt". Two test sets, never used in training: <b>Labels</b> = 320 product labels I wrote by hand in 16 languages; <b>Real names</b> = 993 real marketplace product names from the Amazon Berkeley Objects set, held out before training. <i>Accurate</i> is the full system (Fast rules, then the small neural model when Fast is unsure); <i>model alone</i> is the neural model without Fast.</div>
 
 <h2>The two final models</h2>
-<p><b>v9</b> is the model to use: v8 Complete (pretrained base, real product names, a shallow decoder for speed, one expert per language) taught 200k more short labels with the post-training tool. <b>v8 Fast</b> is the smaller, faster cut for quick validation. Both use only teachers and data that allow commercial use.</p>
+<p><b>v10</b> is the model to use: v8 Complete (pretrained base, real product names, a shallow decoder for speed, one expert per language) taught more twice with the post-training tool, and decoding with a small beam search. <b>v8 Fast</b> is the smaller, faster cut for quick validation. Both use only teachers and data that allow commercial use.</p>
 {{FINAL}}
 <h2>How to add new things later</h2>
 {{ADDING}}

@@ -7,7 +7,7 @@ import bpe as BPE
 import spm as SPM
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V9"))   # student_V9 (default) / student_V8 (its parent) / student_V8F (fast) / older: _V7 _V6 _MAX ...
+MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V10"))   # student_V10 (default) / student_V8F (fast) / older: _V9 _V8 _V7 _V6 ...
 
 
 class Student:
@@ -54,7 +54,14 @@ class Student:
             return "", 0.0
         src = np.array([ids], np.int64)
         if v.get("kv"):
-            return self._translate_kv(src, self.expert(self.prep(text)) if v.get("experts") else None)
+            ex = self.expert(self.prep(text)) if v.get("experts") else None
+            pol = v.get("policy") or {}
+            beams = int(os.environ.get("NEURAL_BEAMS", pol.get("beams", 1))) if v.get("batch") else 1
+            if len(ids) > pol.get("beam_max_src", 10 ** 9):
+                beams = 1                        # long inputs (product names): greedy, where the beam costs 3x for little gain
+            if beams > 1:
+                return self._translate_beam(src, ex, beams, float(os.environ.get("NEURAL_LP", (v.get("policy") or {}).get("lp", 1.0))))
+            return self._translate_kv(src, ex)
         mem = self.enc.run(None, {"src": src})[0]
         out = [v["bos"]]; lps = []
         for _ in range(v["max_tgt"] - 1):
@@ -100,7 +107,47 @@ def _translate_kv(self, src, ex=None):
     return txt, round(conf, 3)
 
 
+def _translate_beam(self, src, ex, K, lp):
+    """Beam search (same algorithm as student.js): keep the K best partial outputs, run them through the decoder as one
+    batch, stop when K outputs have ended; pick the best by log-probability / (length ** lp)."""
+    v = self.v
+    ck, cv, sb = self.enc.run(None, {"src": src, **({"ed": ex[0], "eu": ex[1]} if ex else {})})
+    dex = {"dd": ex[2], "du": ex[3]} if ex and ex[2].shape[0] else {}
+    pk = np.zeros((v["layers"], 1, v["heads"], 0, v["head_dim"]), np.float32); pv = pk
+    beams = [([], 0.0)]; done = []
+    for t in range(v["max_tgt"] - 1):
+        toks = np.array([[b[0][-1] if b[0] else v["bos"]] for b in beams], np.int64)
+        logits, nk, nv = self.dec.run(None, {"tok": toks, "pos": np.array([[t]], np.int64), "ck": ck, "cv": cv, "src_bias": sb, "pk": pk, "pv": pv, **dex})
+        cand = []
+        for i, (seq, sc) in enumerate(beams):
+            lg = logits[i].astype(np.float64); lg[v["pad"]] = -1e9; lg[v["unk"]] = -1e9
+            if v["bos"] != v["pad"]:
+                lg[v["bos"]] = -1e9
+            m = lg.max(); norm = m + np.log(np.exp(lg - m).sum())
+            top = np.argpartition(-lg, K)[:K]                    # the K best tokens without sorting the vocabulary
+            for j in sorted(top.tolist(), key=lambda j: (-lg[j], j)):
+                cand.append((sc + float(lg[j] - norm), i, int(j)))
+        cand.sort(key=lambda c: (-c[0], c[1], c[2])); nxt = []; idx = []
+        for sc, i, j in cand:
+            if j == v["eos"]:
+                done.append((sc / ((len(beams[i][0]) + 1) ** lp), beams[i][0], sc))
+            else:
+                nxt.append((beams[i][0] + [j], sc)); idx.append(i)
+            if len(nxt) + len(done) >= K:
+                break
+        if len(done) >= K or not nxt:
+            break
+        beams = nxt; pk = nk[:, idx]; pv = nv[:, idx]
+    if not done:
+        done = [(sc / (max(1, len(seq)) ** lp), seq, sc) for seq, sc in beams]
+    done.sort(key=lambda d: (-d[0], len(d[1]))); _, out, sc = done[0]
+    txt = " ".join("".join(self.tv[i] for i in out).replace(SPM.SP, " ").split()) if v.get("spm") else "".join(self.tv[i] for i in out)
+    conf = float(np.exp(sc / (len(out) + 1))) if out else 0.0
+    return txt, round(conf, 3)
+
+
 Student._translate_kv = _translate_kv
+Student._translate_beam = _translate_beam
 
 
 def acceptable(out, conf, english=True):
