@@ -1,0 +1,44 @@
+{
+ "kinds": {
+  "A foreign label, one English word": 9600,
+  "B English label, one foreign word": 19200,
+  "C English modifier + foreign label": 11200,
+  "D foreign label + size or pack": 4000
+ },
+ "by_lang": {
+  "zh": 2750,
+  "es": 2750,
+  "pt": 2750,
+  "ar": 2750,
+  "ru": 2750,
+  "ja": 2750,
+  "ko": 2750,
+  "de": 2750,
+  "fr": 2750,
+  "hi": 2750,
+  "tr": 2750,
+  "id": 2750,
+  "vi": 2750,
+  "it": 2750,
+  "pl": 2750,
+  "th": 2750
+ },
+ "word_pairs": {
+  "zh": 1016,
+  "es": 1303,
+  "pt": 1208,
+  "ar": 1091,
+  "ru": 1314,
+  "ja": 941,
+  "ko": 1102,
+  "de": 1154,
+  "fr": 1214,
+  "hi": 774,
+  "tr": 1049,
+  "id": 942,
+  "vi": 277,
+  "it": 1288,
+  "pl": 1143,
+  "th": 648
+ }
+}

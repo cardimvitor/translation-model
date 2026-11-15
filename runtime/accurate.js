@@ -55,6 +55,10 @@
     return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });
   }
   // rule v3 (strong neural model, v6): settings ship with the model (vocab.json "policy"); same as accurate.py
+  const WORD = /^[\p{L}]+(?:['’\-][\p{L}]+)*$/u;
+  function toks(s) {
+    return s.toLowerCase().split(" ").map((w) => w.replace(/^[^\p{L}\p{N}_]+|[^\p{L}\p{N}_]+$/gu, "").replace(/’/g, "'")).filter(Boolean);
+  }
   function sim(a, b) {
     a = a.toLowerCase().split(/\s+/).filter(Boolean).join(" "); b = b.toLowerCase().split(/\s+/).filter(Boolean).join(" ");
     const A = new Set(), B = new Set();
@@ -65,11 +69,22 @@
   }
   async function processV3(op, text, asciiOut, pol) {
     const _ = N._; const fast = N.process(op, text, asciiOut);
+    if (fast.operation === "translate" && fast.method === "already-english" && pol.w_tau !== undefined && S.enWords && S.enWords.size) {
+      // Word check (same as accurate.py): words missing from the model's English word list are suspects
+      const s1 = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim(); const tk = toks(s1);
+      const sus = tk.length <= (pol.w_max_words === undefined ? 8 : pol.w_max_words) ? tk.filter((w) => w.length >= 3 && WORD.test(w) && !S.enWords.has(w)) : [];
+      if (sus.length) {
+        const [o1, c1] = await S.translate(s1); const ot = new Set(toks(o1 || ""));
+        const need = (pol.w_tau_known !== undefined && S.xxWords && sus.some((w) => S.xxWords.has(w))) ? pol.w_tau_known : pol.w_tau;
+        if (o1 && c1 >= need && toks(o1).length <= tk.length + 2 && !sus.some((w) => ot.has(w)) && tk.every((w) => sus.includes(w) || w.length < 2 || ot.has(w)))
+          return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o1)) : o1, method: "neural", confidence: Math.round(c1 * 1000) / 1000, model: "accurate" });
+      }
+    }
     if (fast.operation === "translate" && fast.method === "already-english" && fast.confidence < (pol.en_sure || 0)) {
       // English double check (same as accurate.py): confident and clearly different neural answer replaces the label
       const s0 = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
       const [o0, c0] = await S.translate(s0);
-      if (o0 && c0 >= (pol.en_tau === undefined ? 0.85 : pol.en_tau) && sim(o0, s0) < (pol.en_sim === undefined ? 0.5 : pol.en_sim))
+      if (o0 && c0 >= (pol.en_tau === undefined ? 0.85 : pol.en_tau) && sim(o0, s0) < (pol.en_sim === undefined ? 0.5 : pol.en_sim) && o0.split(" ").length <= 2 * s0.split(" ").length + 2)
         return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o0)) : o0, method: "neural", confidence: Math.round(c0 * 1000) / 1000, model: "accurate" });
       return Object.assign({}, fast, { model: "accurate" });
     }

@@ -101,7 +101,7 @@ def read_jsonl(p):
 def all_train():
     """Old training data that is on disk (replay, so nothing is forgotten) + the EXTRA files."""
     t = []; extra_names = {os.path.basename(f) for f in EXTRA}
-    for name in ("pairs_MAX_train.jsonl", "pairs_Q_train.jsonl", "pairs_HQ_train.jsonl", "pairs_NEW_v9.jsonl", "pairs_NEW_v10.jsonl"):
+    for name in ("pairs_MAX_train.jsonl", "pairs_Q_train.jsonl", "pairs_HQ_train.jsonl", "pairs_NEW_v9.jsonl", "pairs_NEW_v10.jsonl", "pairs_NEW_v11.jsonl"):
         if name in extra_names:
             continue                                         # given as new data in this run
         if os.path.exists(os.path.join(W, name)):

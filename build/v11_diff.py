@@ -6,7 +6,7 @@ for kv in sys.argv[3:]:
 import accurate as AC
 from analyze_student import clean, chrf
 out = {}
-for f in ("gold_products.json", "mixed_labels.json", "dev_labels.json"):
+for f in ("gold_products.json", "mixed_labels.json", "mixed_tr.json", "dev_labels.json"):
     rows = []
     for g in json.load(open(os.path.join(ROOT, "test", f), encoding="utf-8"))["items"]:
         refs = g["en"] if isinstance(g["en"], list) else [g["en"]]

@@ -6,7 +6,7 @@
   let BPE = typeof module !== "undefined" && module.exports ? require("./bpe.js") : root.BPE;
   let SPM = typeof module !== "undefined" && module.exports ? require("./spm.js") : root.SPM;
   async function create(ort, loadBinary, loadJson, lower, dir) {
-    dir = dir || "student_V11";
+    dir = dir || "student_V12";
     const v = await loadJson(dir + "/vocab.json");
     BPE = BPE || root.BPE;
     if (v.bpe && !BPE) throw new Error("this model splits words into pieces: load runtime/bpe.js before student.js");
@@ -140,7 +140,7 @@
       const conf = out.length ? Math.exp(sc / (out.length + 1)) : 0.0;
       return [txt, Math.round(conf * 1000) / 1000];
     }
-    return { translate, kv: !!v.kv, dir, policy: v.policy || null };
+    return { translate, kv: !!v.kv, dir, policy: v.policy || null, enWords: v.en_words ? new Set(v.en_words) : null, xxWords: v.xx_words ? new Set(v.xx_words) : null };
   }
   function acceptable(out, conf, EC, english) {
     if (!out || conf < 0.5) return false;

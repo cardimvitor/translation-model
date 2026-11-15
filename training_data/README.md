@@ -17,3 +17,7 @@ Licenses: Amazon ESCI (Apache-2.0), Amazon Berkeley Objects (CC BY 4.0), transla
 - `v11_real.jsonl.gz`: 1,800 real Spanish and Japanese search queries (Amazon ESCI) with Hy-MT2-7B's translation.
 - `pairs_NEW_v11.jsonl.gz`: the new training pairs made from those two files plus 9,600 mixed-language labels (`build/v11_pairs.py`).
 - `drop_pairs.jsonl.gz`: 5,976 old pairs the 7B judged wrong; put it in `build/work/` and `build/ft_v8.py` leaves them out of the replayed data.
+
+## v12
+
+- `pairs_NEW_v12.jsonl.gz`: 44,000 mixed-language pairs for all 16 languages (`build/v12_pairs.py`). Training on them made ordinary labels worse, so the run was rejected and v12 does not use them; kept as a record and as tuning data for the word check.

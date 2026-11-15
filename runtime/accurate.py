@@ -193,6 +193,15 @@ def is_address_v3(s, langs, fast, pol):
     return not (mw and len(s.split()) > mw and fast.get("coverage", 0) < pol.get("addr_long_cov", 0.6))
 
 
+_WORD = re.compile(r"[^\W\d_]+(?:['’\-][^\W\d_]+)*$")
+_EDGE = re.compile(r"^[^\w]+|[^\w]+$")
+
+
+def _toks(s):
+    """Lower-cased words of a label, punctuation at the edges removed."""
+    return [t for t in (_EDGE.sub("", w).replace("’", "'") for w in s.lower().split()) if t]
+
+
 def _sim(a, b):
     """Share of character pairs two texts have in common (0..1), lower-cased."""
     a = " ".join(a.lower().split()); b = " ".join(b.lower().split())
@@ -211,12 +220,26 @@ def process_v3(op, text, ascii_out, variant, pol):
                       addr_long_cov of its words (long product names often contain a number and a place word)
     Places, addresses and labels already in English always stay with Fast."""
     fast = F.process(op, text, ascii_out)
+    if fast["operation"] == "translate" and fast["method"] == "already-english" and "w_tau" in pol:
+        # Word check: a label the English check accepts may still hold a foreign word ("led ampul"). Words that are not in the
+        # model's English word list are suspects; the neural answer is taken only if it is confident, drops every suspect
+        # and keeps every other word.
+        M = mt(variant); EW = getattr(M, "_en_words", None)
+        if EW is None:
+            EW = M._en_words = set(M.v.get("en_words") or []); M._xx_words = set(M.v.get("xx_words") or [])
+        s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text)).strip(); toks = _toks(s)
+        sus = [w for w in toks if len(w) >= 3 and _WORD.match(w) and w not in EW] if EW and len(toks) <= pol.get("w_max_words", 8) else []
+        if sus:
+            o, c = M.translate(s); ot = set(_toks(o or ""))
+            # a suspect seen in foreign training text needs less confidence (w_tau_known) than an unknown word (w_tau)
+            if o and c >= (pol.get("w_tau_known", pol["w_tau"]) if any(w in M._xx_words for w in sus) else pol["w_tau"]) and len(_toks(o)) <= len(toks) + 2 and not any(w in ot for w in sus) and all(w in ot for w in toks if w not in sus and len(w) >= 2):
+                return dict(fast, output=F.tr_fallback(F.fold_latin(o)) if ascii_out else o, method="neural", confidence=F.r3(c), model="accurate")
     if fast["operation"] == "translate" and fast["method"] == "already-english" and fast["confidence"] < pol.get("en_sure", 0):
         # English double check: the English check was not sure. The neural answer replaces the label only if it is confident
         # (en_tau) and clearly different text (en_sim), i.e. a translation and not a small edit of English.
         s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text)).strip()
         o, c = mt(variant).translate(s)
-        if o and c >= pol.get("en_tau", 0.85) and _sim(o, s) < pol.get("en_sim", 0.5):
+        if o and c >= pol.get("en_tau", 0.85) and _sim(o, s) < pol.get("en_sim", 0.5) and len(o.split()) <= 2 * len(s.split()) + 2:
             return dict(fast, output=F.tr_fallback(F.fold_latin(o)) if ascii_out else o, method="neural", confidence=F.r3(c), model="accurate")
         return dict(fast, model="accurate")
     if fast["operation"] != "translate" or fast["method"] in ("gazetteer", "already-english") or not fast["output"]:

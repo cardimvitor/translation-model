@@ -14,7 +14,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
-| **`student_V11` (default, final)** | `student_V10` post-trained on data checked by Hy-MT2-7B (6k wrong pairs removed, 6k hard labels corrected), 1.6k real Spanish and Japanese queries and 9.6k mixed-language labels; adds the English double check and a `reliable` flag on every answer | **commercial use OK** (attribution required) |
+| **`student_V12` (default, final)** | `student_V11`'s weights, unchanged, plus a word-level English check: a label judged English that contains a word outside the model's English word list is given to the neural model, so "led ampul" or "office sandalye" is translated. A training run on 44k mixed-language pairs was tested and rejected (it lost accuracy) | **commercial use OK** (attribution required) |
+| `student_V11` (parent of v12) | `student_V10` post-trained on data checked by Hy-MT2-7B (6k wrong pairs removed, 6k hard labels corrected), 1.6k real Spanish and Japanese queries and 9.6k mixed-language labels; adds the English double check and a `reliable` flag on every answer | **commercial use OK** (attribution required) |
 | `student_V10` (parent of v11) | `student_V9` post-trained with 15k head terms written by Hy-MT2-1.8B in all 16 languages; decodes short labels with a 2-candidate beam search | **commercial use OK** (attribution required) |
 | `student_V9` (parent of v10) | `student_V8` post-trained with 200k more short labels (every ESCI query in 7 OPUS-MT languages, more Korean and Thai from Hy-MT2-1.8B), made with `build/post_train.sh` | **commercial use OK** (attribution required) |
 | `student_V8` ("v8 Complete", parent of v9) | v6's encoder + a 2-layer decoder + English-only output layer + one 1.6 MB encoder expert per language; all v6 data plus 13k short labels written by Hy-MT2-1.8B for ko/th/vi/ja/zh | **commercial use OK** (attribution required) |
@@ -50,7 +51,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
 | v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
-| **v11** | **75.9%** | **87.6** | 67.6 | yes |
+| **v12** | **76.2%** | **87.8** | 67.5 | yes |
+| v11 | 75.9% | 87.6 | 67.6 | yes |
 | v10 | 72.8% | 86.8 | 67.3 | yes |
 | v9 | 72.5% | 86.0 | 67.2 | yes |
 | v8 Complete | 68.8% | 83.1 | **67.7** | yes |
@@ -80,7 +82,11 @@ Three tested ways, each with an automatic pass/fail check: add words instantly (
 
 Against Hy-MT2 (each model alone, 8-bit as shipped): v11 scores 88.0 chrF on labels and 68.5 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5. v11 is not better than the 7B on short labels overall.
 
-### The `reliable` flag (v11)
+### Labels with one word in another language (v12)
+
+`test/mixed_tr.json` holds 64 hand-written English + Turkish labels (never trained or tuned on). Exact / chrF: v12 75.0% / 89.5, v11 68.8% / 84.6, v10 60.9% / 80.5, Hy-MT2-1.8B 59.4% / 82.8, Hy-MT2-7B 84.4% / 93.9. The word check is tuned by `build/tune_wordcheck.py` on data outside the tests (`policy.w_tau`, `w_tau_known`); the word lists are built by `build/en_words.py` and stored in the model's `vocab.json`. About 5% of labels that really are English now get a neural second opinion; labels in other languages take the same time as before.
+
+### The `reliable` flag (v11, v12)
 
 Every result of the v11 system carries `reliable: true/false`. True means a known place, clearly English text, every word known to the rules, or a neural answer with confidence of at least `policy.rel_tau` (0.82, set on tuning labels only). On the test labels 68% of answers are marked reliable; those score 87.7% exact / 95.5 chrF (Hy-MT2-7B on the same labels: 91.3% / 95.3), the rest 50.5% / 70.6. The flag does not remove errors: about one reliable answer in eight still differs from the reference. Recalibrate with `python build/tune_reliable.py <model> [target]`.
 
@@ -158,7 +164,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).
