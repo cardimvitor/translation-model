@@ -40,6 +40,10 @@
   const DE_STREET = /\p{L}(?:straße|strasse|str\.|gasse|allee|platz|weg|damm|ufer)\s+\d+\s?[a-z]?(?=$|[\s,])/iu;   // Hauptstraße 5, Bahnhofstr. 12
   function isAddressV2(s, langs, fast) {
     if (addressWords(s, langs) || DE_STREET.test(s)) return true;
+    const o = fast.output || "";
+    if ((o.match(/[a-z]-(?:gu|ro|gil|daero|dong|do|si|gun|eup|myeon)\b/g) || []).length >= 2) return true;
+    if (fast.method.includes("dictionary") && /[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af\u0e00-\u0e7f]/.test(s)
+      && N._.lower(o).split(" ").filter((w) => addressEn().has(w.replace(/^[,.]+|[,.]+$/g, ""))).length >= 2) return true;
     if (Array.from(s).some(N._.isDigit))
       return fast.method.includes("gazetteer") || N._.lower(fast.output).split(" ").some((w) => addressEn().has(w.replace(/^[,.]+|[,.]+$/g, "")));
     return false;
@@ -96,7 +100,8 @@
     const longLabel = !commaAddr && pol.addr_max_words && s.split(" ").length > pol.addr_max_words && (fast.coverage || 0) < (pol.addr_long_cov === undefined ? 0.6 : pol.addr_long_cov);
     const shortPlace = pol.keep_gaz && fast.method.includes("gazetteer") && s.split(" ").length <= (pol.addr_max_words === undefined ? 8 : pol.addr_max_words);
     if ((isAddressV2(s, langs, fast) && !longLabel) || (pol.keep_cov && (fast.coverage || 0) >= 1) || shortPlace) return Object.assign({}, fast, { model: "accurate" });
-    const [o, c] = await S.translate(s);
+    let [o, c] = await S.translate(s);
+    if (!s.includes(" ") && fast.method === "transliteration" && c < (pol.one_tau || 0)) o = "";   // one unknown word, hesitant translator: keep the romanization
     if (o && c >= (pol.tau || 0) && ST.acceptable(o, 1.0, _.EC(), pol.need_english !== false) && (!pol.need_known || keepsKnown(o, fast.output)))
       return Object.assign({}, fast, { output: asciiOut ? _.trFallback(_.foldLatin(o)) : o, method: "neural", confidence: Math.round(c * 1000) / 1000, model: "accurate" });
     return Object.assign({}, fast, { method: fast.method + "(neural rejected)", model: "accurate" });

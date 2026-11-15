@@ -11,7 +11,7 @@ else:
     run = F.process
 def fold(s):
     s = unicodedata.normalize("NFKD", s.replace("ı", "i").replace("ł", "l").replace("Ł", "L").replace("đ", "d").replace("Đ", "D").replace("ß", "ss")); return " ".join("".join(c for c in s if not unicodedata.combining(c)).casefold().replace(",", " ").replace(".", " ").replace("-", " ").replace("’", "'").split())
-T = json.load(open(os.path.join(ROOT, "test", "places_world.json"), encoding="utf-8"))["items"]; by = {}; rows = []
+T = json.load(open(os.path.join(ROOT, "test", os.environ.get("SET", "places_world.json")), encoding="utf-8"))["items"]; by = {}; rows = []
 for t in T:
     r = run(t["op"], t["in"]); ok = fold(r["output"]) in [fold(w) for w in t["want"]]; by.setdefault(t["kind"], []).append(ok)
     rows.append({"kind": t["kind"], "in": t["in"], "out": r["output"], "want": t["want"][0], "ok": ok, "method": r["method"]})

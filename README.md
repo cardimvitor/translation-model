@@ -14,7 +14,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
-| **`student_V13` (default, final)** | the same weights as `student_V12`; shipped with the world place list (198,000 towns and cities, 3,865 regions) and the address and transliteration fixes in the Fast rules | **commercial use OK** (attribution required) |
+| **`student_V14` (default, final)** | the same weights as `student_V13`; place list rebuilt from the complete GeoNames file (villages, islands, districts, neighbourhoods; 2.1 million names), Arabic and Hindi word readings mined from place names, more address forms, and a guard that keeps the romanized form of one unknown word | **commercial use OK** (attribution required) |
+| `student_V13` (parent of v14) | the same weights as `student_V12`; shipped with the world place list (198,000 towns and cities, 3,865 regions) and the address and transliteration fixes in the Fast rules | **commercial use OK** (attribution required) |
 | `student_V12` (parent of v13) | `student_V11`'s weights, unchanged, plus a word-level English check: a label judged English that contains a word outside the model's English word list is given to the neural model, so "led ampul" or "office sandalye" is translated. A training run on 44k mixed-language pairs was tested and rejected (it lost accuracy) | **commercial use OK** (attribution required) |
 | `student_V11` (parent of v12) | `student_V10` post-trained on data checked by Hy-MT2-7B (6k wrong pairs removed, 6k hard labels corrected), 1.6k real Spanish and Japanese queries and 9.6k mixed-language labels; adds the English double check and a `reliable` flag on every answer | **commercial use OK** (attribution required) |
 | `student_V10` (parent of v11) | `student_V9` post-trained with 15k head terms written by Hy-MT2-1.8B in all 16 languages; decodes short labels with a 2-candidate beam search | **commercial use OK** (attribution required) |
@@ -52,7 +53,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
 | v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
-| **v13** | **76.2%** | **87.8** | 67.6 | yes |
+| **v14** | **76.2%** | **87.7** | 67.5 | yes |
+| v13 | 76.2% | 87.8 | 67.6 | yes |
 | v12 | 76.2% | 87.8 | 67.5 | yes |
 | v11 | 75.9% | 87.6 | 67.6 | yes |
 | v10 | 72.8% | 86.8 | 67.3 | yes |
@@ -83,6 +85,14 @@ How the weights were tested and changed after training is in [reports/WEIGHTS.md
 Three tested ways, each with an automatic pass/fail check: add words instantly (`build/add_terms.py`), post-train on new pairs (`build/post_train.sh`), or turn an English-only list into pairs (`build/make_pairs.py`). Step by step in [docs/ADDING.md](docs/ADDING.md). `student_V9`, `student_V10` and `student_V11` were all made with the post-training tool.
 
 Against Hy-MT2 (each model alone, 8-bit as shipped): v11 scores 88.0 chrF on labels and 68.5 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5. v11 is not better than the 7B on short labels overall.
+
+### More places, streets and transliteration (v14)
+
+`test/places_world2.json` is a second hand-written test (101 items: islands, districts, villages, addresses with abbreviations, more names), run with `SET=places_world2.json python test/eval_places.py`. v13: 75 of 101; v14: 91 of 101. On the first test v14 scores 153 of 160.
+
+- `build/geonames_all.sh` downloads and filters the complete GeoNames file; `build/build_gazetteer3.py` builds the place list (77 MB, about 875 MB of memory in Python with every script loaded; v13: 32 MB and about 480 MB). To go back to the smaller list, check out `data/gazetteer/` from the v13 commit.
+- `build/mine_translit.py` mines word readings for Arabic and Hindi into `data/rules.json` (`ar_names`, `hi_names`).
+- `policy.one_tau` (0.4): one unknown word with a translator confidence below it keeps its romanized form.
 
 ### Places, addresses and transliteration (v13)
 
@@ -176,7 +186,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V13`, `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V14`, `student_V13`, `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

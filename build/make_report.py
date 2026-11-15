@@ -22,6 +22,7 @@ META = {
     "student_JG": ("JEPA-Gen", "MAX data, encoder pretrained with JEPA", True, 360),
     "student_BASE_edited": ("Baseline", "MAX data, no JEPA (same size, same total time)", True, 360),
     "student_V6": ("v6", "pretrained OPUS-MT mul-en (77M) fine-tuned on MAX data + 58k short labels", True, 510),
+    "student_V14": ("v14", "v12's weights unchanged; place list with villages, islands, districts and neighbourhoods (2.1 million names), mined Arabic and Hindi word readings, more address forms, guard for unknown single words", True, 0),
     "student_V13": ("v13", "v12's weights unchanged; world place list (198,000 towns and cities, 3,865 regions), address fixes, personal-name and Ukrainian / Greek transliteration", True, 0),
     "student_V12": ("v12", "v11's weights unchanged, plus a word-level English check so a label with one foreign word is translated; a new training run on 44k mixed-language pairs was tested and rejected", True, 120),
     "student_V11": ("v11", "v10 post-trained on data checked by Hy-MT2-7B (wrong pairs removed, hard labels corrected), real Spanish and Japanese queries and mixed-language labels; English double check; reliable flag", True, 150),
@@ -36,7 +37,7 @@ META = {
 
 def parse_final():
     txt = open(os.path.join(W, "final_eval.txt"), encoding="utf-8").read()
-    for extra in ("final_eval_V6.txt", "final_eval_V7.txt", "final_eval_V8.txt", "final_eval_V8F.txt", "final_eval_V9.txt", "final_eval_V10.txt", "final_eval_V11.txt", "final_eval_V12.txt", "final_eval_V13.txt"):
+    for extra in ("final_eval_V6.txt", "final_eval_V7.txt", "final_eval_V8.txt", "final_eval_V8F.txt", "final_eval_V9.txt", "final_eval_V10.txt", "final_eval_V11.txt", "final_eval_V12.txt", "final_eval_V13.txt", "final_eval_V14.txt"):
         if os.path.exists(os.path.join(W, extra)):
             txt += open(os.path.join(W, extra), encoding="utf-8").read()
     rows = {}
@@ -109,6 +110,36 @@ def curves():
     leg = " ".join(f'<span><i class="sw {c}"></i>{E(n)}</span>' for n, c, _ in series)
     return (f'<div class="chart"><svg viewBox="0 0 {W_} {H_}" role="img" aria-label="held-out chrF by training step">{g}{lines}'
             f'<text x="{W_ - 20}" y="{H_ - 2}" class="tk" style="text-anchor:end">training step</text></svg><div class="legend">{leg}</div></div>')
+
+
+def v14_block(F):
+    """v14: more places, streets and transliteration."""
+    A1 = load(os.path.join(W, "places_v14.json"), {}); B1 = load(os.path.join(W, "places_v13.json"), {}); A2 = load(os.path.join(W, "places_2_v14.json"), {}); B2 = load(os.path.join(W, "places_2_v13.json"), {})
+    IX = load(os.path.join(ROOT, "data", "gazetteer", "index.json"), {}); R = load(os.path.join(ROOT, "data", "rules.json"), {})
+    if not (A1 and A2 and B2):
+        return ""
+    m = IX.get("meta", {}); mb = sum(IX.get("mb", {}).values()); lab = {"town": "Villages, islands, districts, neighbourhoods", "address": "Street addresses, with abbreviations", "translit": "Transliteration on request"}
+    rows = [[lab[k], f"{B2['by'][k][0]} of {B2['by'][k][1]}", f"<b>{A2['by'][k][0]} of {A2['by'][k][1]}</b>"] for k in lab]
+    rows += [["<b>Second places test, all</b>", f"{B2['total'][0]} of {B2['total'][1]} ({B2['total'][0] / B2['total'][1] * 100:.0f}%)", f"<b>{A2['total'][0]} of {A2['total'][1]} ({A2['total'][0] / A2['total'][1] * 100:.0f}%)</b>"],
+             ["First places test (160 items)", f"{B1['total'][0]} of {B1['total'][1]}", f"<b>{A1['total'][0]} of {A1['total'][1]}</b>"]]
+    h = ("<h3>v14: more places, streets and transliteration</h3><p>A second test of 101 new items was written before the work (islands, districts, villages, addresses with abbreviations, more names). The neural weights are unchanged again.</p>"
+         + table(["Test", "v13 (before)", "v14"], rows)
+         + "<ul>"
+         f"<li><b>Place list, third build</b>, from the complete GeoNames file: {m.get('places', 0):,} towns and villages with 200 or more people, plus {m.get('islands_districts_and_small_places', 0):,} smaller places, islands, districts and neighbourhoods that GeoNames names in a local script. "
+         f"{m.get('entries', 0):,} names, {mb:.0f} MB (v13: 32 MB). English district names are tidied (\"Chaoyang Qu\" becomes \"Chaoyang District\").</li>"
+         f"<li><b>Arabic and Hindi words read from data, not letter by letter.</b> Arabic is written without short vowels, so \"التحرير\" came out as \"Al-thryr\". {len(R.get('ar_names', {})):,} Arabic and {len(R.get('hi_names', {})):,} Hindi word readings were mined from places whose local and Latin names have the same number of words, "
+         "kept only when seen three times or more and when the consonants agree. Now: \"Al-Tahrir\". Hindi words made of English letter names give initials (\"एमजी\" → MG).</li>"
+         "<li><b>Streets</b>: a street word of another language is recognised even when the label was detected as the wrong language (\"Pza. Mayor 1\", \"Carrer de Mallorca 401\"); Portuguese postal codes; Turkish \"No:4 D:3\"; "
+         "Korean and Japanese addresses without a house number are no longer sent to the product translator; \"京都府\" is read as Kyoto + prefecture; \"20000 mah\" is a unit, not a neighbourhood.</li>"
+         "<li><b>Greek</b> \"ευ\" / \"αυ\" → ef / af or ev / av.</li>"
+         "<li><b>Guard for one unknown word.</b> When a label is a single word the rules do not know and the translator's confidence is under 0.4, the romanized form is kept instead of a guessed translation (v13 turned the district \"Хамовники\" into \"hammocks\"). "
+         "Tuned outside the tests: place names wrongly translated fall from 100% to 32%, and no correct single-word tuning label is lost.</li></ul>"
+         "<p>Checked again: tuning labels, real product names, mixed-language tests and the 70 address cases are unchanged; on the 320 test labels three answers that were already wrong are now romanized instead (87.8 → 87.7 chrF). "
+         "JavaScript and Python are identical on 3,018 rule checks. Time per label is the same as v13 measured side by side (the machine itself ran about 25% slower on the day of this measurement). "
+         "<b>Cost:</b> with every script loaded, the place list now takes about 875 MB of memory in Python (v13: about 480 MB); a phone loads only the scripts it meets.</p>"
+         "<p><b>Still wrong</b> (17 of 261 across both tests): some Japanese readings (\"神南\", \"河原町\"), Thai address words run together, places written in a third language (Japanese \"済州島\" for Jeju), Ukrainian text without Ukrainian-only letters, "
+         "a district returned with the word \"District\". <b>There is still no list of streets</b>: more street words are understood, but street names themselves are romanized.</p>")
+    return h
 
 
 def v13_block(F):
@@ -221,7 +252,7 @@ def v11_block(F):
 def final_section(F):
     """The two final models: quality, speed, size, next to the earlier best ones (all from result files)."""
     SP = load(os.path.join(W, "speed_ours.json"), {}); SS = load(os.path.join(W, "seen_split.json"), {}); E8 = load(os.path.join(W, "v8_eval_v8.json"), {})
-    names = [("student_V13", "<b>v13</b>"), ("student_V12", "v12"), ("student_V11", "v11"), ("student_V10", "v10"), ("student_V9", "v9"), ("student_V8", "v8 Complete"), ("student_V8F", "<b>v8 Fast</b>"), ("student_V7", "v7"), ("student_V6", "v6"), ("student_MAX_edited", "v5 MAX"), ("none", "Fast rules only")]
+    names = [("student_V14", "<b>v14</b>"), ("student_V13", "v13"), ("student_V12", "v12"), ("student_V11", "v11"), ("student_V10", "v10"), ("student_V9", "v9"), ("student_V8", "v8 Complete"), ("student_V8F", "<b>v8 Fast</b>"), ("student_V7", "v7"), ("student_V6", "v6"), ("student_MAX_edited", "v5 MAX"), ("none", "Fast rules only")]
     rows = []
     for k, lab in names:
         r = F.get(k)
@@ -248,7 +279,7 @@ def final_section(F):
     T7 = load(os.path.join(W, "teachers", "gold_hy7.json"), {}); T18 = load(os.path.join(W, "teachers", "gold_hy18.json"), {})
     A7 = load(os.path.join(W, "teachers", "abo_hy7.json"), {}); A18 = load(os.path.join(W, "teachers", "abo_hy18.json"), {}); S330 = load(os.path.join(W, "teachers", "abo_sample330.json"), {})
     E9 = load(os.path.join(W, "v8_eval_post_student_V11.json"), {}) or load(os.path.join(W, "v8_eval_post_student_V10.json"), {}) or load(os.path.join(W, "v8_eval_post_student_V9.json"), {})
-    best_k = next(k for k in ("student_V13", "student_V12", "student_V11", "student_V10", "student_V9") if k in F); v9 = F.get(best_k, {}); sp9 = SP.get(best_k, {}); best_lab = META[best_k][0]
+    best_k = next(k for k in ("student_V14", "student_V13", "student_V12", "student_V11", "student_V10", "student_V9") if k in F); v9 = F.get(best_k, {}); sp9 = SP.get(best_k, {}); best_lab = META[best_k][0]
     BM = load(os.path.join(W, "beams_student_V10.json"), {})
     if E9 and T7:
         g9 = E9["gold"]["experts"]; a9 = E9["abo"]["experts"]
@@ -262,7 +293,7 @@ def final_section(F):
               + f'<p><b>Hy-MT2-1.8B is beaten on both tests</b> by a model 20 times smaller and far faster. <b>Hy-MT2-7B is beaten on real product names</b> '
               f'(it learned the catalogue style from real pairs) <b>but not on short labels</b>, where it scores {T7["chrF"]:.0f} against {(gs[1] if gs else g9["chrF"]):.0f}: '
               "a 7-billion-parameter model simply knows more rare product words in every language. v11 used the 7B as a judge and teacher for about 10,000 labels (all a CPU allows in a few hours); closing the rest of the gap needs far more of its answers, which takes a GPU.</p>")
-    h += v13_block(F) + v12_block(F) + v11_block(F)
+    h += v14_block(F) + v13_block(F) + v12_block(F) + v11_block(F)
     if BM:
         h += ("<h3>Beam search</h3><p>Until v9 the model committed to its single best word at every step. v10 keeps several candidate outputs alive and picks the best complete one. "
               "The decoder was re-exported so all candidates run as one batch. Chosen on tuning data only (model alone, 8-bit, one thread):</p>"
@@ -282,7 +313,7 @@ def adding_section():
                  "1. Write a file: language, foreign text, English, separated by TABs.<br>2. <code>python build/add_terms.py my_terms.tsv</code>", "seconds, no training",
                  "re-runs the 70 cases and the test labels; undoes itself if a score drops"],
                 ["<b>2. Add translated pairs</b> (post-training)", "your own catalogue, corrections of wrong outputs, a new category",
-                 "1. Write one JSON line per pair: <code>{\"src\", \"tgt\", \"lang\"}</code>.<br>2. <code>sh build/post_train.sh student_V13 student_V14 120 my_pairs.jsonl</code><br>3. Read the verdict.", "1–5 hours on 4 CPU cores",
+                 "1. Write one JSON line per pair: <code>{\"src\", \"tgt\", \"lang\"}</code>.<br>2. <code>sh build/post_train.sh student_V14 student_V15 120 my_pairs.jsonl</code><br>3. Read the verdict.", "1–5 hours on 4 CPU cores",
                  "the parent model is never changed; the new one is kept only if no test drops by more than 0.5"],
                 ["<b>3. Add English-only names</b>", "a new catalogue section with no translations",
                  "1. One English name per line.<br>2. <code>python build/make_pairs.py names.txt --langs ko,th,de --out my_pairs.jsonl</code><br>3. Check a sample by eye.<br>4. Continue with way 2.", "0.7 s per name and language",
@@ -350,13 +381,21 @@ def steps_section(F):
           "<li>Fixed address rules in Python and JavaScript: postal codes, German street names, long comma addresses, Chinese house numbers, Thai word order, Turkish abbreviations, Korean street names.</li>"
           "<li>Added name tables and rules for transliteration: Korean, Chinese and Japanese personal names, Ukrainian, Greek.</li>"
           "<li>Checked every earlier test (unchanged), both runtimes against each other (identical on rules), speed (unchanged).</li>"
-          "<li>Result: 148 of 160 on the places test. No training; the neural weights are v11's.</li></ol>")
+          "<li>Result: 148 of 160 on the places test. No training; the neural weights are v11's.</li></ol>"
+          "<h3>Step 15. v14: more places, streets and transliteration (Nov 15)</h3><ol>"
+          "<li>Wrote a second places test (101 items) first; v13 scored 75.</li>"
+          "<li>Downloaded the complete GeoNames file (5.6 million places, districts and islands after filtering) and rebuilt the place list: villages from 200 people, every place with a local-script name, islands, districts, neighbourhoods.</li>"
+          "<li>Mined word readings for Arabic and Hindi from place names (7,500 Arabic words) because those scripts cannot be romanized letter by letter.</li>"
+          "<li>More address rules in both runtimes: street words across languages, postal codes, Korean and Japanese addresses, Kyoto-type names, units.</li>"
+          "<li>Tuned a guard that keeps the romanized form of one unknown word when the translator is unsure.</li>"
+          "<li>A first version of the cross-language street rule broke a Polish address (\"al.\" read as Portuguese); caught by the first places test and fixed.</li>"
+          "<li>Result: 153 of 160 and 91 of 101 on the two places tests; product scores unchanged; no training.</li></ol>")
     return open(os.path.join(HERE, "steps.html"), encoding="utf-8").read().replace("{{STEPS_V8}}", s8)
 
 
 def versus_section(F):
     """Every base model and every model we made against the reference (the newest final model): accuracy, size, speed."""
-    ref = next(k for k in ("student_V13", "student_V12", "student_V11", "student_V10", "student_V9") if k in F); R = F[ref]; rl = META[ref][0]
+    ref = next(k for k in ("student_V14", "student_V13", "student_V12", "student_V11", "student_V10", "student_V9") if k in F); R = F[ref]; rl = META[ref][0]
     SP = load(os.path.join(W, "speed_ours.json"), {}); T = {k: load(os.path.join(W, "teachers", f"gold_{k}.json"), {}) for k in ("hy7", "hy18", "opus", "nllb")}
     TA = {k: load(os.path.join(W, "teachers", f"abo_{k}.json"), {}) for k in ("hy7", "hy18", "opus", "nllb")}; MUL = load(os.path.join(W, "teachers", "marian_mul.json"), {})
     g0 = R[("gold", "Accurate")]; a0 = R[("abo", "Accurate")]; s0 = R["size"]
@@ -374,7 +413,7 @@ def versus_section(F):
     if MUL:
         rows.append(["OPUS-MT mul-en (v6's untrained start)", pct(MUL["gold"]["exact"] * 100), f'{MUL["gold"]["chrF"]:.1f}', d(MUL["gold"]["chrF"], g0[1]), f'{MUL["abo"]["chrF"]:.1f}', d(MUL["abo"]["chrF"], a0[1]), "-", "-", "-", "-", "-"])
     rows.append(["<b>Models we created (full system, 1 CPU thread)</b>"] + [""] * 10)
-    order = ["student_V13", "student_V12", "student_V11", "student_V10", "student_V9", "student_V8", "student_V8F", "student_V7", "student_V6", "student_BASE_edited", "student_JG", "student_MAX_edited", "student_HY_edited",
+    order = ["student_V14", "student_V13", "student_V12", "student_V11", "student_V10", "student_V9", "student_V8", "student_V8F", "student_V7", "student_V6", "student_BASE_edited", "student_JG", "student_MAX_edited", "student_HY_edited",
              "student_ALL3_edited", "student_H", "student_C2_edited", "student_B2", "student_C", "student_B", "student_A", "student_edited", "none"]
     for k in order:
         r = F.get(k)
@@ -596,8 +635,9 @@ def main():
                  ["Hy-MT2-1.8B and 7B (Tencent)", "teacher for H, ALL3, HY, MAX; 7B used only as a reference score", "Apache-2.0"],
                  ["Sudachi dictionary", "Japanese readings", "Apache-2.0"]]
     hours = sum(META[k][3] for k in META if k in F or k.replace("_edited", "") in F) / 60
-    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 15 06:00 UTC: about 268 hours (11 days) from the first message to this report, including many hours lost to machine restarts"],
+    time_rows = [["Chat and work", "Nov 4 02:25 UTC → Nov 15 13:00 UTC: about 275 hours (11.5 days) from the first message to this report, including many hours lost to machine restarts"],
                  ["v6: short-label data + fine-tuning + export, quantization and routing tests", "1 h + 8.5 h + 1.5 h"],
+                 ["v14: second places test, full GeoNames place list, mined readings, address rules, guard, checks", "about 3 h, no training"],
                  ["v13: places test, GeoNames place list, address and transliteration rules in two runtimes, checks", "about 2.5 h, no training"],
                  ["v12: mixed-language test, Hy-MT2 comparison, 44k pairs, post-training (rejected), weight blends, word check, tests", "0.5 h + 2.5 h + 0.5 h + 1.5 h"],
                  ["v11: 7B judge and real queries, two post-training runs, English double check, reliable flag, tests", "6 h + 5.5 h + 1 h + 1 h"],
@@ -610,17 +650,50 @@ def main():
                  ["JEPA pretraining and tuning", "2 h tuning (4 × 30 min) + 3 h main run"],
                  ["Weight testing and edits", "~25–30 h in total (about 2–3 h per model: switch-off tests, edits, 15-min retraining)"],
                  ["Total compute spent training and changing models", "≈ 130–135 h; the rest was evaluation, packaging, restarts and idle time"]]
-    reco = ("<ul><li><b>Use v13</b> for real work: the most accurate model, about twice as fast as v6/v7 at half the size, and it marks each answer reliable or needs review. To teach it more, use the post-training tool (see the section on adding new things). <b>Use v8 Fast</b> for quick validation runs. The earlier models are kept for reference only.</li><li>Earlier advice, still true for v6/v7 (106 MB): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
+    reco = ("<ul><li><b>Use v14</b> for real work: the most accurate model, about twice as fast as v6/v7 at half the size, and it marks each answer reliable or needs review. To teach it more, use the post-training tool (see the section on adding new things). <b>Use v8 Fast</b> for quick validation runs. The earlier models are kept for reference only.</li><li>Earlier advice, still true for v6/v7 (106 MB): it more than doubles the exact-match rate on labels and adds over 20 chrF on real names, and its teachers and data allow commercial use (with attribution).</li>"
             "<li><b>Ship v5 MAX</b> (22 MB) when download size or speed matters more: about 10 ms per short label.</li>"
             "<li><b>Fast alone</b> stays the right choice for addresses and place names (~2 ms); every Accurate model keeps using it for those.</li>"
             "<li><b>Next gains:</b> (1) Hy-MT2-7B scores 95 on the labels; v11 used about 10,000 of its answers, and many more (which needs a GPU) should close much of the remaining gap; "
             "(2) Korean is still the weakest language (its word pieces were new to the pretrained model); "
             "(3) a smaller v6 by sharing the output layer with the embeddings (about 20 MB less).</li></ul>")
     v6 = v6_section(F)
+    GH0 = "https://github.com/cardimvitor/translation-model"; BR0 = "ccr-9202c40a-kuyiob"; T0 = f"{GH0}/tree/{BR0}"
+    lk = lambda u, t: f'<a href="{u}">{E(t)}</a>'
+    MODELS = [("v3", "student_v3", "Nov 5–6"), ("v4 A", "student_A", "Nov 6–8"), ("v4 B", "student_B", "Nov 6–8"), ("v4 C", "student_C", "Nov 6–8"), ("v5 B2", "student_B2", "Nov 8–10"), ("v5 C2", "student_C2", "Nov 8–10"),
+              ("v5 H", "student_H", "Nov 8–10"), ("v5 ALL3", "student_ALL3", "Nov 8–10"), ("v5 HY", "student_HY", "Nov 8–10"), ("v5 MAX", "student_MAX", "Nov 10"), ("JEPA-Gen", "student_JEPA", "Nov 10–11"), ("Baseline", "student_BASE", "Nov 10–11"),
+              ("v6", "student_V6", "Nov 11–12"), ("v7 (MoE)", "student_V7", "Nov 12"), ("v8 Complete", "student_V8", "Nov 13"), ("v8 Fast", "student_V8F", "Nov 13"), ("v9", "student_V9", "Nov 13–14"), ("v10", "student_V10", "Nov 14"),
+              ("v11", "student_V11", "Nov 14"), ("v12", "student_V12", "Nov 15"), ("v13", "student_V13", "Nov 15"), ("v14", "student_V14", "Nov 15")]
+    ZIPS = {"v3": "en-normalizer-accurate-v3.zip", "v4 A": "en-normalizer-accurate-A.zip", "v4 B": "en-normalizer-accurate-B.zip", "v4 C": "en-normalizer-accurate-C.zip", "v5 B2": "en-normalizer-accurate-B2.zip", "v5 C2": "en-normalizer-accurate-C2.zip",
+            "v5 H": "en-normalizer-accurate-H.zip", "v5 ALL3": "en-normalizer-accurate-ALL3.zip", "v5 HY": "en-normalizer-accurate-HY.zip", "v5 MAX": "en-normalizer-accurate-MAX.zip", "JEPA-Gen": "en-normalizer-accurate-JEPA.zip", "Baseline": "en-normalizer-accurate-BASE.zip",
+            "v6": "en-normalizer-accurate-V6.zip", "v7 (MoE)": "en-normalizer-accurate-V7.zip", "v8 Complete": "label-normalizer-V8.zip", "v8 Fast": "label-normalizer-V8F.zip", "v9": "label-normalizer-V9.zip", "v10": "label-normalizer-V10.zip",
+            "v11": "label-normalizer-V11.zip", "v12": "label-normalizer-V12.zip", "v13": "label-normalizer-V13.zip", "v14": "label-normalizer-V14.zip"}
+    FP = {"v6": "student_V6_fp32", "v8 Complete": "student_V8_fp32", "v8 Fast": "student_V8F_fp32", "v9": "student_V9_fp32", "v10": "student_V10_fp32", "v11": "student_V11_fp32", "v12": "student_V12_fp32", "v13": "student_V13_fp32", "v14": "student_V14_fp32"}
+    RP = {"v5 B2": "v5", "v5 C2": "v5", "v5 H": "v5", "v5 ALL3": "v5", "v5 HY": "v5", "v5 MAX": "v5", "v6": "v6", "v7 (MoE)": "v7", "v8 Complete": "v8", "v8 Fast": "v8", "v9": "v9", "v10": "v10", "v11": "v11", "v12": "v12", "v13": "v13", "v14": "v14"}
+    links = ("<p>Everything made since the first version, in one place. GitHub links need access to the private repository and point at the work branch of the draft pull request; the pages on claude.ai are private to their owner until shared.</p>"
+             + table(["What", "Link"],
+                     [["This report (web page)", lk("https://claude.ai/artifact/QKvzmgbPuUJYixzyVx7Xzk", "claude.ai/artifact/QKvzmgbPuUJYixzyVx7Xzk")],
+                      ["Document: all models, how they were made, what we learned", lk("https://claude.ai/artifact/LqFBZNhhMArpGUZxN49dU7", "claude.ai/artifact/LqFBZNhhMArpGUZxN49dU7")],
+                      ["Phone test page (v14 and v8 Fast, runs in the browser)", lk("https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL", "claude.ai/artifact/3je2spXyFcH1QicAoMfZWL")],
+                      ["Pull request (draft) with all the code, models and data", lk(GH0 + "/pull/1", "translation-model/pull/1")],
+                      ["Whole branch as one zip", lk(f"{GH0}/archive/refs/heads/{BR0}.zip", "archive/refs/heads/" + BR0 + ".zip")],
+                      ["This report as PDF", lk(f"{GH0}/blob/{BR0}/reports/pdf/label-normalizer-report.pdf", "reports/pdf/label-normalizer-report.pdf")],
+                      ["Fast (rules only): data and code", lk(T0 + "/data", "data/") + " · " + lk(T0 + "/runtime", "runtime/")],
+                      ["Place list and how it is built", lk(T0 + "/data/gazetteer", "data/gazetteer/") + " · " + lk(f"{GH0}/blob/{BR0}/build/build_gazetteer3.py", "build/build_gazetteer3.py")],
+                      ["Training data (compressed)", lk(T0 + "/training_data", "training_data/")],
+                      ["Build and training scripts", lk(T0 + "/build", "build/")],
+                      ["Tests (labels, mixed-language, places, address cases)", lk(T0 + "/test", "test/")],
+                      ["How to add words or train more", lk(f"{GH0}/blob/{BR0}/docs/ADDING.md", "docs/ADDING.md")],
+                      ["Licenses and attributions", lk(f"{GH0}/blob/{BR0}/LICENSES.md", "LICENSES.md")]], "wide")
+             + "<h3>Every model</h3>"
+             + table(["Model", "Made", "Model files (8-bit, as shipped)", "Full-precision weights", "Result files", "Zip sent in the chat"],
+                     [[("<b>" + E(n) + "</b>") if n in ("v14", "v8 Fast") else E(n), d, lk(f"{T0}/models/{f}", "models/" + f), lk(f"{T0}/weights/{FP[n]}", "weights/" + FP[n]) if n in FP else "-",
+                       lk(f"{T0}/reports/{RP[n]}", "reports/" + RP[n]) if n in RP else lk(T0 + "/reports", "reports/"), ZIPS.get(n, "-")] for n, f, d in MODELS], "wide")
+             + "<p>Also sent as a file in the chat: <code>en-normalizer-fast.zip</code> (rules only) and each version of this report as PDF. Files sent in the chat have no web address; the same content is in the repository folders above. "
+             "v12, v13 and v14 share one set of neural weights (v11's); their folders differ in <code>vocab.json</code> (rule settings and word lists), and v13 / v14 need the place list of the same commit.</p>")
 
     # --- downloads, conclusions, important notes
     GH = "https://github.com/cardimvitor/translation-model"; BR = "ccr-9202c40a-kuyiob"
-    DL = [("student_V13", "student_V13", "v13", "FINAL. Best model (v11 weights + word check + world place list)."), ("student_V12", "student_V12", "v12", "Parent of v13, same weights."), ("student_V11", "student_V11", "v11", "Parent of v12, same weights."), ("student_V10", "student_V10", "v10", "Parent of v11."), ("student_V9", "student_V9", "v9", "Parent of v10."), ("student_V8", "student_V8", "v8 Complete", "Parent of v9."), ("student_V8F", "student_V8F", "v8 Fast", "FINAL. Fast model for validation."),
+    DL = [("student_V14", "student_V14", "v14", "FINAL. Best model (v11 weights + word check + world place list, third build)."), ("student_V13", "student_V13", "v13", "Parent of v14, same weights."), ("student_V12", "student_V12", "v12", "Parent of v13, same weights."), ("student_V11", "student_V11", "v11", "Parent of v12, same weights."), ("student_V10", "student_V10", "v10", "Parent of v11."), ("student_V9", "student_V9", "v9", "Parent of v10."), ("student_V8", "student_V8", "v8 Complete", "Parent of v9."), ("student_V8F", "student_V8F", "v8 Fast", "FINAL. Fast model for validation."),
           ("student_V6", "student_V6", "v6", "Earlier best."), ("student_MAX_edited", "student_MAX", "v5 MAX", "Best small model for real product names."),
           ("student_B2", "student_B2", "v5 B2", "Small, OPUS-MT only."), ("student_C2_edited", "student_C2", "v5 C2", "Small, best v5 on labels."),
           ("student_A", "student_A", "v4 A", ""), ("student_B", "student_B", "v4 B", ""), ("student_C", "student_C", "v4 C", "Best small model on labels."),
@@ -643,7 +716,7 @@ def main():
                  'Try the models without downloading: <a href="https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL">phone test page</a>.</p>')
     V6a = F.get("student_V6", {}); g6 = V6a.get(("gold", "Accurate"), (0, 0)); a6 = V6a.get(("abo", "Accurate"), (0, 0))
     concl = ("<ol>"
-             "<li><b>Two final models.</b> v13 (v8 Complete post-trained three times, with beam search, cleaned data, a reliable flag, a word-level English check and a place list of the whole world) is the most accurate and, among the strong models, the fastest and smallest; v8 Fast trades some accuracy for much more speed and is meant for validation.</li>"
+             "<li><b>Two final models.</b> v14 (v8 Complete post-trained three times, with beam search, cleaned data, a reliable flag, a word-level English check and a place list of the whole world) is the most accurate and, among the strong models, the fastest and smallest; v8 Fast trades some accuracy for much more speed and is meant for validation.</li>"
              "<li><b>v12 against Hy-MT2-7B, honestly.</b> Overall on short labels the 7B is still ahead (95 against 88 chrF), and on mixed English + Turkish labels too (94 against 90). On the two thirds of labels v12 marks reliable they are level in chrF; on real product names v12 is ahead; and v12 is about 80 times smaller and 200 times faster. No model here is free of errors: the reliable flag tells which answers to check.</li>"
              f"<li><b>The big jump came with v6.</b> The full system goes from {acc['none'][0]:.1f}% exact / {acc['none'][1]:.1f} chrF (rules only) to {g6[0]:.1f}% / {g6[1]:.1f} on hand-written labels, and from {abo['none'][1]:.1f} to {a6[1]:.1f} chrF on real marketplace names, fully offline.</li>"
              "<li><b>Starting from a pretrained model mattered more than everything else combined.</b> Seven days of from-scratch models (v3 to v5, twelve of them) moved label chrF from 43 to 51. One 8.5-hour fine-tune of a pretrained translator moved it to 80.</li>"
@@ -667,7 +740,7 @@ def main():
     tpl = open(os.path.join(HERE, "report_template.html"), encoding="utf-8").read()
     page = (tpl.replace("{{MAIN_TABLE}}", table(["Model", "Teachers / data", "Commercial use", "Labels: Accurate", "Labels: model alone",
                                                  "Real names: Accurate", "Real names: model alone", "Cases · unseen", "Size", "Training"], main_rows, "wide"))
-            .replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{FINAL}}", final_section(F)).replace("{{VERSUS}}", versus_section(F)).replace("{{STEPS}}", steps_section(F)).replace("{{ADDING}}", adding_section()).replace("{{DOWNLOADS}}", downloads).replace("{{CONCLUSIONS}}", concl).replace("{{IMPORTANT}}", important).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
+            .replace("{{LINKS}}", links).replace("{{KPIS}}", kp).replace("{{V6}}", v6).replace("{{FINAL}}", final_section(F)).replace("{{VERSUS}}", versus_section(F)).replace("{{STEPS}}", steps_section(F)).replace("{{ADDING}}", adding_section()).replace("{{DOWNLOADS}}", downloads).replace("{{CONCLUSIONS}}", concl).replace("{{IMPORTANT}}", important).replace("{{CURVES}}", curves()).replace("{{JEPA_VERDICT}}", verdict)
             .replace("{{DATA}}", table(["Source", "Used for", "License"], data_rows))
             .replace("{{TIME}}", table(["What", "Time"], time_rows)).replace("{{RECO}}", reco)
             .replace("{{GOLD_CHART}}", gold_chart).replace("{{ABO_CHART}}", abo_chart)

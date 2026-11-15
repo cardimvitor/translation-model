@@ -2,20 +2,20 @@
  "scores": {
   "fast_tuned": 70,
   "fast_blind": 44,
-  "fast_gold_exact": 0.2,
-  "fast_gold_chrF": 42.62,
+  "fast_gold_exact": 0.2031,
+  "fast_gold_chrF": 42.75,
   "student_A_gold_exact": 0.2812,
   "student_A_gold_chrF": 49.55,
-  "student_B_gold_exact": 0.2406,
-  "student_B_gold_chrF": 46.54,
+  "student_B_gold_exact": 0.2437,
+  "student_B_gold_chrF": 46.64,
   "student_C_gold_exact": 0.3063,
-  "student_C_gold_chrF": 51.02,
+  "student_C_gold_chrF": 51.03,
   "student_B2_gold_exact": 0.2812,
   "student_B2_gold_chrF": 49.83,
   "student_C2_gold_exact": 0.2906,
   "student_C2_gold_chrF": 51.04,
-  "student_MAX_gold_exact": 0.2844,
-  "student_MAX_gold_chrF": 49.07,
+  "student_MAX_gold_exact": 0.2875,
+  "student_MAX_gold_chrF": 49.18,
   "student_V6_gold_exact": 0.6562,
   "student_V6_gold_chrF": 79.56,
   "student_V7_gold_exact": 0.6594,
@@ -33,7 +33,9 @@
   "student_V12_gold_exact": 0.7625,
   "student_V12_gold_chrF": 87.8,
   "student_V13_gold_exact": 0.7625,
-  "student_V13_gold_chrF": 87.8
+  "student_V13_gold_chrF": 87.8,
+  "student_V14_gold_exact": 0.7625,
+  "student_V14_gold_chrF": 87.75
  },
  "variants": [
   "student_A",
@@ -50,6 +52,7 @@
   "student_V10",
   "student_V11",
   "student_V12",
-  "student_V13"
+  "student_V13",
+  "student_V14"
  ]
 }

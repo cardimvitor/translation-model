@@ -157,6 +157,7 @@ def address_en():
     return _AEN[0]
 
 
+_KO_ADDR = re.compile(r"[a-z]-(?:gu|ro|gil|daero|dong|do|si|gun|eup|myeon)\b")
 _DE_STREET = re.compile(r"(?i)[^\W\d_](?:straße|strasse|str\.|gasse|allee|platz|weg|damm|ufer)\s+\d+\s?[a-z]?(?=$|[\s,])")     # Hauptstraße 5, Bahnhofstr. 12
 
 
@@ -165,6 +166,12 @@ def is_address_v2(s, langs, fast):
     (product sizes like "38.5 EU" have numbers but no place)."""
     if address_words(s, langs) or _DE_STREET.search(s):
         return True
+    o = fast["output"]
+    if len(_KO_ADDR.findall(o)) >= 2:                    # Gangnam-gu Teheran-ro: Korean address parts
+        return True
+    if "dictionary" in fast["method"] and re.search(r"[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af\u0e00-\u0e7f]", s) \
+            and sum(w.strip(",.") in address_en() for w in F.lower(o).split()) >= 2:
+        return True                                      # two address words (Ward, City, District ...) in a CJK or Thai label, with or without a number
     if any(F.is_digit(c) for c in s):
         return "gazetteer" in fast["method"] or any(w.strip(",.") in address_en() for w in F.lower(fast["output"]).split())
     return False
@@ -256,6 +263,8 @@ def process_v3(op, text, ascii_out, variant, pol):
         return dict(fast, model="accurate")               # address, every word known, or a short label with a known place
     o, c = mt(variant).translate(s)
     import student
+    if " " not in s and fast["method"] == "transliteration" and c < pol.get("one_tau", 0.0):
+        o = ""                                           # one unknown word and a hesitant translator: most likely a name, keep the romanization
     if o and c >= pol.get("tau", 0.0) and student.acceptable(o, 1.0, pol.get("need_english", True)) and (not pol.get("need_known") or keeps_known(o, fast["output"])):
         out = F.tr_fallback(F.fold_latin(o)) if ascii_out else o
         return dict(fast, output=out, method="neural", confidence=F.r3(c), model="accurate")

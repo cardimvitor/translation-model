@@ -236,10 +236,30 @@ def tr_arabic(s):
     return " ".join(out)
 
 
+HI_LETTERS = [("डब्ल्यू", "W"), ("एक्स", "X"), ("क्यू", "Q"), ("जेड", "Z"), ("एच", "H"), ("एफ", "F"), ("एल", "L"), ("एम", "M"), ("एन", "N"), ("एस", "S"), ("आई", "I"), ("आर", "R"), ("वाई", "Y"), ("बी", "B"), ("सी", "C"), ("डी", "D"), ("जी", "G"), ("जे", "J"), ("के", "K"), ("पी", "P"), ("टी", "T"), ("यू", "U"), ("वी", "V"), ("ए", "A"), ("ई", "E"), ("ओ", "O")]
+
+
+def _hi_initials(w):
+    """A word made only of English letter names (एमजी = M + G): the initials. Needs two or more letters."""
+    out = ""; i = 0
+    while i < len(w):
+        for f, e in HI_LETTERS:
+            if w.startswith(f, i):
+                out += e; i += len(f); break
+        else:
+            return None
+    return out if 2 <= len(out) <= 4 else None
+
+
 def tr_devanagari(s):
     R = rules(); C, V, M, O = R["deva_cons"], R["deva_vowels"], R["deva_matras"], R["deva_other"]
-    words = []
+    words = []; NM = R.get("hi_names", {})
     for w in s.split(" "):
+        if w in NM:
+            words.append(NM[w]); continue
+        ini = _hi_initials(w)
+        if ini:
+            words.append(ini); continue
         syl = []  # [consonant, vowel, inherent]
         i = 0
         while i < len(w):
@@ -435,6 +455,8 @@ def segment_split(s, lang, depth=0):
             suf = next((f for f, _ in SF if t.endswith(f) and len(t) > len(f)), None)
             if suf:
                 base = t[:-len(suf)]
+                if len(base) >= 2 and norm_key(base) in gaz():          # 京都 + 府: a known place whose own name ends in a suffix letter
+                    out += [("gaz", base), ("addr", suf)]; continue
                 inner = segment_split_limited(base, lang, depth + 1)
                 out += inner + [("addr", suf)]
                 continue
@@ -485,6 +507,15 @@ def _group(ch):
     return sc
 
 
+_GR_AV = re.compile(r"([αεΑΕ])[υύ](?=([θκξπστφχψ])|.|$)")
+
+
+def _greek_digraphs(t):
+    """Greek ου -> ou; αυ / ευ -> af / ef before a voiceless consonant, av / ev otherwise."""
+    t = t.replace("ου", "ou").replace("ού", "ou").replace("Ου", "Ou").replace("Ού", "Ou")
+    return _GR_AV.sub(lambda m: {"α": "a", "ε": "e", "Α": "A", "Ε": "E"}[m.group(1)] + ("f" if m.group(2) else "v"), t)
+
+
 def romanize(s, lang=None):
     """Romanize a string that may mix scripts; Latin, digits and punctuation pass through."""
     runs = []
@@ -510,7 +541,7 @@ def romanize(s, lang=None):
         elif g in (None, "Latin"):
             out.append(t)
         else:
-            out.append(tr_fallback(t.replace("ου", "ou").replace("ού", "ou").replace("Ου", "Ou").replace("Ού", "Ou")))      # Greek ou
+            out.append(tr_fallback(_greek_digraphs(t)))
     return re.sub(r"\s+", " ", "".join(out)).strip()
 
 
@@ -602,7 +633,7 @@ def move_type_words(words, lang):
 
 # ---------------------------------------------------------------- main pipeline
 CJK_LANGS = {"zh", "ja", "th"}
-_POSTAL = re.compile(r"^(?:(\d{2}-\d{3}|\d{4,6})\s+(\D.*)|(\D.*?)\s+(\d{2}-\d{3}|\d{4,6}))$")
+_POSTAL = re.compile(r"^(?:(\d{2}-\d{3}|\d{4}-\d{3}|\d{5}-\d{3}|\d{4,6})\s+(\D.*)|(\D.*?)\s+(\d{2}-\d{3}|\d{4}-\d{3}|\d{5}-\d{3}|\d{4,6}))$")
 
 # ---- personal names, used only when transliteration is asked for
 KO_SURNAMES = {"김": "Kim", "이": "Lee", "박": "Park", "최": "Choi", "정": "Jung", "강": "Kang", "조": "Cho", "윤": "Yoon", "장": "Jang", "임": "Lim", "한": "Han", "오": "Oh", "서": "Seo", "신": "Shin", "권": "Kwon", "황": "Hwang", "안": "Ahn", "송": "Song", "류": "Ryu", "전": "Jeon", "홍": "Hong", "고": "Ko", "문": "Moon", "양": "Yang", "손": "Son", "배": "Bae", "백": "Baek", "허": "Heo", "유": "Yoo", "남": "Nam", "심": "Shim", "노": "Noh", "하": "Ha", "곽": "Kwak", "성": "Sung", "차": "Cha", "주": "Joo", "우": "Woo", "구": "Koo", "민": "Min"}
@@ -665,9 +696,25 @@ def _stem_lookup(k, table):
     return None
 
 
+_COLON = re.compile(r"(?<=[^\W\d_]):(?=\d)")
+ADDR_LATIN = ["es", "pt", "fr", "it", "de", "pl", "tr", "id", "vi"]
+_TF = {}
+
+
+def _type_forms(l):
+    if l not in _TF:
+        _TF[l] = {f for forms, en, kind in rules()["address"].get(l, []) if kind == "type" for f in forms}
+    return _TF[l]
+
+
 def translate_spaced(part, lang, op, cand_langs=None):
     """Languages written with spaces (all except zh / ja / th). Longest span first (5 words)."""
     langs = [lang] + [l for l in (cand_langs or []) if l != lang]
+    if op == "translate" and any(is_digit(c) for c in part):          # "Pza. Mayor 1" detected as another language: use the street word's language
+        tk = _tokens(part)
+        for l in ([] if any(norm_key(t) in _type_forms(x) for x in langs for t in tk) else ADDR_LATIN):
+            if l not in langs and any(norm_key(t) in _type_forms(l) and (len(norm_key(t)) >= 5 or t.endswith(".") or t.endswith("/")) for t in tk):
+                langs = [l] + langs; break
     G = gaz()
     GL = _merged(langs, lambda l: gloss().get(l, {}))
     addr = _merged(langs, lambda l: {f: (en, kind) for forms, en, kind in rules()["address"].get(l, [])
@@ -687,7 +734,7 @@ def translate_spaced(part, lang, op, cand_langs=None):
                 break
             if op == "translate":
                 latin1 = L == 1 and all(script_of(c) in (None, "Latin") for c in span)
-                if k in addr:
+                if k in addr and not (k in ("mah", "m", "d") and i > 0 and is_digit(toks[i - 1][-1:]) and L == 1):      # "20000 mah", "5 m": units, not address words
                     hit = ("addr", addr[k][0], L)
                 elif k in GL and not in_street:
                     hit = ("gloss", GL[k], L)
@@ -760,6 +807,7 @@ def romanize_korean_token(tok, op):
 def process(op, text, ascii_out=False):
     op = "transliterate" if str(op).lower().startswith("translit") else "translate"
     s = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text or "")).strip()
+    s = _COLON.sub(": ", s)                              # "No:4" -> "No: 4"
     script, langs = detect(s)
     lang = langs[0][0]
     res = {"input": text, "operation": op, "language": [list(x) for x in langs], "script": script}

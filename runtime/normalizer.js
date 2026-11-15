@@ -173,9 +173,21 @@
       return pre + (has(NM, w) ? NM[w] : chars(w).map((ch) => has(R, ch) ? R[ch] : ch).join(""));
     }).join(" ");
   }
+  const HI_LETTERS = [["डब्ल्यू", "W"], ["एक्स", "X"], ["क्यू", "Q"], ["जेड", "Z"], ["एच", "H"], ["एफ", "F"], ["एल", "L"], ["एम", "M"], ["एन", "N"], ["एस", "S"], ["आई", "I"], ["आर", "R"], ["वाई", "Y"], ["बी", "B"], ["सी", "C"], ["डी", "D"], ["जी", "G"], ["जे", "J"], ["के", "K"], ["पी", "P"], ["टी", "T"], ["यू", "U"], ["वी", "V"], ["ए", "A"], ["ई", "E"], ["ओ", "O"]];
+  function hiInitials(w) {
+    let out = ""; let i = 0;
+    outer: while (i < w.length) {
+      for (const [f, e] of HI_LETTERS) if (w.startsWith(f, i)) { out += e; i += f.length; continue outer; }
+      return null;
+    }
+    return out.length >= 2 && out.length <= 4 ? out : null;
+  }
   function trDevanagari(s) {
     const R = rules(); const C = R.deva_cons, V = R.deva_vowels, M = R.deva_matras, O = R.deva_other;
+    const NMH = R.hi_names || {};
     return s.split(" ").map((w0) => {
+      if (has(NMH, w0)) return NMH[w0];
+      const ini = hiInitials(w0); if (ini) return ini;
       const w = chars(w0); const syl = []; let i = 0;
       while (i < w.length) {
         const ch = w[i]; const two = w.slice(i, i + 2).join("");
@@ -301,6 +313,7 @@
         const suf = (SF.find(([f]) => t.endsWith(f) && len(t) > len(f)) || [null])[0];
         if (suf) {
           const base = chars(t).slice(0, len(t) - len(suf)).join("");
+          if (len(base) >= 2 && has(gaz(), normKey(base))) { out.push(["gaz", base], ["addr", suf]); continue; }
           out.push(...segmentSplit(base, lang, depth + 1), ["addr", suf]); continue;
         }
       }
@@ -331,6 +344,10 @@
     return romanize(text, lang);
   }
   function group(ch) { const sc = scriptOf(ch); return (sc === "Han" || sc === "Kana") ? "CJK" : sc; }
+  function greekDigraphs(t) {
+    t = t.replace(/ου/g, "ou").replace(/ού/g, "ou").replace(/Ου/g, "Ou").replace(/Ού/g, "Ou");
+    return t.replace(/([αεΑΕ])[υύ](?=([θκξπστφχψ])|.|$)/gu, (m, a, v) => ({ "α": "a", "ε": "e", "Α": "A", "Ε": "E" })[a] + (v ? "f" : "v"));
+  }
   function romanize(s, lang = null) {
     const runs = [];
     for (const ch of s) { const g = group(ch); if (runs.length && runs[runs.length - 1][0] === g) runs[runs.length - 1][1] += ch; else runs.push([g, ch]); }
@@ -344,7 +361,7 @@
         const l = g === "Thai" ? "th" : ((lang === "ja" || chars(t).some((c) => scriptOf(c) === "Kana")) ? "ja" : "zh");
         out += " " + renderCjk(segmentSplit(t, l), l, "transliterate") + " ";
       } else if (g === null || g === "Latin") out += t;
-      else out += trFallback(t.replace(/ου/g, "ou").replace(/ού/g, "ou").replace(/Ου/g, "Ou").replace(/Ού/g, "Ou"));   // Greek ou
+      else out += trFallback(greekDigraphs(t));
     }
     return out.replace(/\s+/g, " ").trim();
   }
@@ -412,7 +429,7 @@
 
   // ------------------------------------------------------------ main pipeline
   const CJK_LANGS = new Set(["zh", "ja", "th"]);
-  const POSTAL = /^(?:(\d{2}-\d{3}|\d{4,6})\s+(\D.*)|(\D.*?)\s+(\d{2}-\d{3}|\d{4,6}))$/;
+  const POSTAL = /^(?:(\d{2}-\d{3}|\d{4}-\d{3}|\d{5}-\d{3}|\d{4,6})\s+(\D.*)|(\D.*?)\s+(\d{2}-\d{3}|\d{4}-\d{3}|\d{5}-\d{3}|\d{4,6}))$/;
   // personal names, used only when transliteration is asked for (same tables as normalizer.py)
   const KO_SURNAMES = {"김": "Kim", "이": "Lee", "박": "Park", "최": "Choi", "정": "Jung", "강": "Kang", "조": "Cho", "윤": "Yoon", "장": "Jang", "임": "Lim", "한": "Han", "오": "Oh", "서": "Seo", "신": "Shin", "권": "Kwon", "황": "Hwang", "안": "Ahn", "송": "Song", "류": "Ryu", "전": "Jeon", "홍": "Hong", "고": "Ko", "문": "Moon", "양": "Yang", "손": "Son", "배": "Bae", "백": "Baek", "허": "Heo", "유": "Yoo", "남": "Nam", "심": "Shim", "노": "Noh", "하": "Ha", "곽": "Kwak", "성": "Sung", "차": "Cha", "주": "Joo", "우": "Woo", "구": "Koo", "민": "Min"};
   const ZH_SURNAMES = "王李张張刘劉陈陳杨楊黄黃赵趙吴吳周徐孙孫马馬朱胡郭何罗羅郑鄭梁谢謝宋唐许許韩韓冯馮邓鄧曹彭曾肖董袁潘蒋蔣蔡余杜叶葉程苏蘇魏吕呂丁任沈姚卢盧姜崔钟鍾谭譚陆陸汪范廖贾賈夏韦韋付邹鄒孟熊秦邱尹薛闫段雷侯龙龍史陶黎贺賀顾顧毛郝龚龔邵孔";
@@ -456,8 +473,20 @@
     for (const [forms, en, kind] of (rules().address[l] || [])) if (!spaced || (kind !== "s" && kind !== "p")) for (const f of forms) m[f] = [en, kind];
     return m;
   }
+  const COLON = /(?<=\p{L}):(?=\d)/gu;
+  const ADDR_LATIN = ["es", "pt", "fr", "it", "de", "pl", "tr", "id", "vi"]; const TF = {};
+  function typeForms(l) {
+    if (!has(TF, l)) { TF[l] = new Set(); for (const [forms, , kind] of (rules().address[l] || [])) if (kind === "type") for (const f of forms) TF[l].add(f); }
+    return TF[l];
+  }
   function translateSpaced(part, lang0, op, candLangs) {
-    const langs = [lang0, ...(candLangs || []).filter((l) => l !== lang0)];
+    let langs = [lang0, ...(candLangs || []).filter((l) => l !== lang0)];
+    if (op === "translate" && chars(part).some(isDigit)) {
+      const tk = tokens(part);
+      for (const l of (langs.some((x) => tk.some((t) => typeForms(x).has(normKey(t)))) ? [] : ADDR_LATIN)) {
+        if (!langs.includes(l) && tk.some((t) => typeForms(l).has(normKey(t)) && (len(normKey(t)) >= 5 || t.endsWith(".") || t.endsWith("/")))) { langs = [l, ...langs]; break; }
+      }
+    }
     const G = gaz();
     const GL = merged(langs, (l) => gloss()[l] || {});
     const addr = merged(langs, (l) => addrMap(l, true));
@@ -479,7 +508,7 @@
         if (!hasAlpha(k)) break;
         if (op === "translate") {
           const latin1 = L === 1 && chars(span).every((c) => { const s = scriptOf(c); return s === null || s === "Latin"; });
-          if (has(addr, k)) hit = ["addr", addr[k][0], L];
+          if (has(addr, k) && !((k === "mah" || k === "m" || k === "d") && i > 0 && isDigit(chars(toks[i - 1]).slice(-1)[0] || "") && L === 1)) hit = ["addr", addr[k][0], L];
           else if (has(GL, k) && !inStreet) hit = ["gloss", GL[k], L];
           else if ((has(G, k) || (has(G, f) && f !== k)) && !inStreet && !latin1) hit = ["gaz", (has(G, k) ? G[k] : G[f])[0], L];
         }
@@ -525,7 +554,7 @@
   const BASE_CONF = { Latin: 0.9, Cyrillic: 0.85, Hangul: 0.85, Kana: 0.85, Devanagari: 0.75, Han: 0.75, Arabic: 0.55, Thai: 0.6 };
   function processItem(op0, text, asciiOut = false) {
     const op = String(op0).toLowerCase().startsWith("translit") ? "transliterate" : "translate";
-    const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+    const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim().replace(COLON, ": ");
     const [script, langs] = detect(s);
     const lang = langs[0][0];
     const res = { input: text, operation: op, language: langs.map((x) => [x[0], x[1]]), script };
