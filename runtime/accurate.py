@@ -157,10 +157,13 @@ def address_en():
     return _AEN[0]
 
 
+_DE_STREET = re.compile(r"(?i)[^\W\d_](?:straße|strasse|str\.|gasse|allee|platz|weg|damm|ufer)\s+\d+\s?[a-z]?(?=$|[\s,])")     # Hauptstraße 5, Bahnhofstr. 12
+
+
 def is_address_v2(s, langs, fast):
     """Address words in the input, or a number together with a place name / address word in Fast's answer
     (product sizes like "38.5 EU" have numbers but no place)."""
-    if address_words(s, langs):
+    if address_words(s, langs) or _DE_STREET.search(s):
         return True
     if any(F.is_digit(c) for c in s):
         return "gazetteer" in fast["method"] or any(w.strip(",.") in address_en() for w in F.lower(fast["output"]).split())
@@ -190,6 +193,8 @@ def is_address_v3(s, langs, fast, pol):
     if not is_address_v2(s, langs, fast):
         return False
     mw = pol.get("addr_max_words", 0)
+    if re.search(r"[,，、،]", s) and "gazetteer" in fast["method"] and (address_words(s, langs) or _DE_STREET.search(s)):
+        return True                               # a street word and a known place in separate comma parts: an address, however long
     return not (mw and len(s.split()) > mw and fast.get("coverage", 0) < pol.get("addr_long_cov", 0.6))
 
 

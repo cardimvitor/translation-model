@@ -10,7 +10,7 @@
   // on demand (ensure / normalizeAsync) or all at once (init option preload: "all", the default).
   const CORE = ["rules.json", "glossary.json", "lid.json", "encheck.json", "translit/fallback.json", "gazetteer/index.json"];
   const SCRIPT_TABLES = { Han: ["translit/zh.json", "translit/ja.json"], Kana: ["translit/ja.json"], Thai: ["translit/th.json"] };
-  const D = {}; const GZ = {}; const loadedGaz = new Set();
+  const D = {}; const GZ = {}; const GZT = {}; const loadedGaz = new Set();   // GZT: small towns, whole label / whole part only
   const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
   const chars = (s) => Array.from(s);
   const len = (s) => chars(s).length;
@@ -41,7 +41,8 @@
     for (const sc of list) {
       if (parts.includes(sc) && !loadedGaz.has(sc)) {
         loadedGaz.add(sc);
-        jobs.push(loadFile("gazetteer/" + sc + ".json").then((d) => { Object.assign(GZ, d.k); }));
+        jobs.push(loadFile("gazetteer/" + sc + ".json").then((d) => { Object.assign(GZ, d.k); if (d.t) Object.assign(GZT, d.t); }));
+        for (const tn of (D["gazetteer/index.json"].towns || [])) if (tn.startsWith(sc + "_towns")) jobs.push(loadFile("gazetteer/" + tn + ".json").then((d) => { Object.assign(GZT, d.t); }));
       }
       for (const f of (SCRIPT_TABLES[sc] || [])) if (!has(D, f)) jobs.push(loadFile(f));
     }
@@ -58,6 +59,7 @@
     await ensureScripts([...need]);
   }
   const gaz = () => GZ;
+  const gazWhole = (k) => { const f = foldLatin(k); return has(GZ, k) ? GZ[k] : has(GZ, f) ? GZ[f] : has(GZT, k) ? GZT[k] : has(GZT, f) ? GZT[f] : null; };
   const rules = () => D["rules.json"];
   const gloss = () => D["glossary.json"];
   const tl = (n) => {
@@ -147,6 +149,7 @@
 
   // ------------------------------------------------------------ transliteration per script
   function trCyrillic(s) {
+    if (UK_ONLY.test(s)) return trUkrainian(s);
     const R = rules().cyrillic, after = rules().cyr_ye_after; let out = ""; let prev = "";
     for (const ch of s) {
       const lo = lower(ch);
@@ -341,7 +344,7 @@
         const l = g === "Thai" ? "th" : ((lang === "ja" || chars(t).some((c) => scriptOf(c) === "Kana")) ? "ja" : "zh");
         out += " " + renderCjk(segmentSplit(t, l), l, "transliterate") + " ";
       } else if (g === null || g === "Latin") out += t;
-      else out += trFallback(t);
+      else out += trFallback(t.replace(/ου/g, "ou").replace(/ού/g, "ou").replace(/Ου/g, "Ou").replace(/Ού/g, "Ou"));   // Greek ou
     }
     return out.replace(/\s+/g, " ").trim();
   }
@@ -362,7 +365,7 @@
     for (let i = 0; i < segs.length; i++) {
       const [kind, t] = segs[i];
       if (allDigits(t) || !t.trim()) { words.push(t); continue; }
-      if (op === "translate" && kind === "gaz") { words.push(G[normKey(t)][0]); continue; }
+      if (op === "translate" && kind === "gaz") { words.push("\x03" + G[normKey(t)][0]); continue; }
       if (op === "translate" && kind === "gloss") { words.push("\x02" + GL[normKey(t)]); continue; }
       if (kind === "addr") {
         if (op === "translate") {
@@ -382,8 +385,9 @@
     }
     words = reorderGloss(words);
     if (op === "translate") words = moveTypeWords(words, lang);
-    const out = words.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
-    return out.replace(/([0-9A-Za-z]) ?([-\/]) ?(?=[0-9])/g, "$1$2");
+    let out = words.filter(Boolean).join(" ").replace(/\s+/g, " ").trim().replace(/\x03/g, "");
+    out = out.replace(/([0-9A-Za-z]) ?([-\/]) ?(?=[0-9])/g, "$1$2");
+    return op === "translate" ? out.replace(/(\d+(?:-\d+)*) No\.(?= |$)/g, "No. $1") : out;
   }
   let ADDR_EN = null;
   function addrEnglish() {
@@ -398,7 +402,8 @@
     const stop = addrEnglish(); const out = []; let held = null;
     for (const w of words) {
       if (TYPE_WORDS.has(w) && held === null) { held = w; continue; }
-      if (held !== null && ((w && isDigit(chars(w)[0])) || stop.has(w) || w.endsWith(","))) { out.push(held); held = null; }
+      const pl = w && w[0] === "\x03" && out.length && out[out.length - 1][0] !== "\x03";
+      if (held !== null && ((w && isDigit(chars(w)[0])) || stop.has(w) || w.endsWith(",") || pl)) { out.push(held + (pl ? "," : "")); held = null; }
       out.push(w);
     }
     if (held !== null) out.push(held);
@@ -407,6 +412,38 @@
 
   // ------------------------------------------------------------ main pipeline
   const CJK_LANGS = new Set(["zh", "ja", "th"]);
+  const POSTAL = /^(?:(\d{2}-\d{3}|\d{4,6})\s+(\D.*)|(\D.*?)\s+(\d{2}-\d{3}|\d{4,6}))$/;
+  // personal names, used only when transliteration is asked for (same tables as normalizer.py)
+  const KO_SURNAMES = {"김": "Kim", "이": "Lee", "박": "Park", "최": "Choi", "정": "Jung", "강": "Kang", "조": "Cho", "윤": "Yoon", "장": "Jang", "임": "Lim", "한": "Han", "오": "Oh", "서": "Seo", "신": "Shin", "권": "Kwon", "황": "Hwang", "안": "Ahn", "송": "Song", "류": "Ryu", "전": "Jeon", "홍": "Hong", "고": "Ko", "문": "Moon", "양": "Yang", "손": "Son", "배": "Bae", "백": "Baek", "허": "Heo", "유": "Yoo", "남": "Nam", "심": "Shim", "노": "Noh", "하": "Ha", "곽": "Kwak", "성": "Sung", "차": "Cha", "주": "Joo", "우": "Woo", "구": "Koo", "민": "Min"};
+  const ZH_SURNAMES = "王李张張刘劉陈陳杨楊黄黃赵趙吴吳周徐孙孫马馬朱胡郭何罗羅郑鄭梁谢謝宋唐许許韩韓冯馮邓鄧曹彭曾肖董袁潘蒋蔣蔡余杜叶葉程苏蘇魏吕呂丁任沈姚卢盧姜崔钟鍾谭譚陆陸汪范廖贾賈夏韦韋付邹鄒孟熊秦邱尹薛闫段雷侯龙龍史陶黎贺賀顾顧毛郝龚龔邵孔";
+  const JA_SURNAMES = {"佐藤": "Sato", "鈴木": "Suzuki", "高橋": "Takahashi", "田中": "Tanaka", "伊藤": "Ito", "渡辺": "Watanabe", "山本": "Yamamoto", "中村": "Nakamura", "小林": "Kobayashi", "加藤": "Kato", "吉田": "Yoshida", "山田": "Yamada", "佐々木": "Sasaki", "山口": "Yamaguchi", "松本": "Matsumoto", "井上": "Inoue", "木村": "Kimura", "斎藤": "Saito", "清水": "Shimizu", "山崎": "Yamazaki", "池田": "Ikeda", "橋本": "Hashimoto", "阿部": "Abe", "石川": "Ishikawa", "山下": "Yamashita", "中島": "Nakajima", "石井": "Ishii", "小川": "Ogawa", "前田": "Maeda", "岡田": "Okada", "長谷川": "Hasegawa", "藤田": "Fujita", "後藤": "Goto", "近藤": "Kondo", "村上": "Murakami", "遠藤": "Endo", "青木": "Aoki", "坂本": "Sakamoto", "福田": "Fukuda", "太田": "Ota", "西村": "Nishimura", "藤井": "Fujii", "岡本": "Okamoto", "松田": "Matsuda", "中川": "Nakagawa", "中野": "Nakano", "原田": "Harada", "小野": "Ono", "田村": "Tamura", "竹内": "Takeuchi", "金子": "Kaneko", "和田": "Wada", "中山": "Nakayama", "石田": "Ishida", "上田": "Ueda", "森田": "Morita", "酒井": "Sakai", "工藤": "Kudo", "横山": "Yokoyama", "宮崎": "Miyazaki", "宮本": "Miyamoto", "内田": "Uchida", "高木": "Takagi", "安藤": "Ando", "島田": "Shimada", "谷口": "Taniguchi", "大野": "Ono", "高田": "Takada", "丸山": "Maruyama", "今井": "Imai", "河野": "Kono", "藤原": "Fujiwara", "村田": "Murata", "武田": "Takeda", "上野": "Ueno", "杉山": "Sugiyama", "増田": "Masuda", "小島": "Kojima", "小山": "Koyama", "千葉": "Chiba", "久保": "Kubo", "松井": "Matsui", "岩崎": "Iwasaki", "野口": "Noguchi", "菊地": "Kikuchi", "木下": "Kinoshita", "野村": "Nomura", "新井": "Arai", "渡部": "Watanabe", "桜井": "Sakurai", "菅原": "Sugawara"};
+  const JA_GIVEN = {"太郎": "Taro", "一郎": "Ichiro", "次郎": "Jiro", "健": "Ken", "誠": "Makoto", "大輔": "Daisuke", "翔": "Sho", "翔太": "Shota", "拓也": "Takuya", "健太": "Kenta", "大翔": "Hiroto", "蓮": "Ren", "悠真": "Yuma", "陽翔": "Haruto", "直樹": "Naoki", "和也": "Kazuya", "達也": "Tatsuya", "哲也": "Tetsuya", "浩": "Hiroshi", "隆": "Takashi", "勇": "Isamu", "茂": "Shigeru", "博": "Hiroshi", "清": "Kiyoshi", "花子": "Hanako", "陽子": "Yoko", "恵子": "Keiko", "美咲": "Misaki", "さくら": "Sakura", "愛": "Ai", "結衣": "Yui", "葵": "Aoi", "陽菜": "Hina", "美穂": "Miho", "由美": "Yumi", "直美": "Naomi", "真由美": "Mayumi", "裕子": "Yuko", "京子": "Kyoko", "洋子": "Yoko", "和子": "Kazuko", "幸子": "Sachiko", "明美": "Akemi", "智子": "Tomoko", "久美子": "Kumiko", "優子": "Yuko"};
+  function personName(s) {
+    const a = chars(s);
+    if (s.includes(" ") || a.length < 2 || a.length > 5 || gazWhole(normKey(s))) return null;
+    const sc = new Set(a.map(scriptOf));
+    if (sc.size === 1 && sc.has("Hangul") && (a.length === 3 || a.length === 4) && has(KO_SURNAMES, a[0])) return KO_SURNAMES[a[0]] + " " + cap(trHangul(a.slice(1).join("")));
+    if (sc.has("Han") && [...sc].every((x) => x === "Han" || x === "Kana")) {
+      for (const n of [3, 2]) {
+        const sn = a.slice(0, n).join("");
+        if (has(JA_SURNAMES, sn) && a.length > n) { const g = a.slice(n).join(""); return JA_SURNAMES[sn] + " " + (has(JA_GIVEN, g) ? JA_GIVEN[g] : cap(romanizeSegment(g, "ja"))); }
+      }
+      if (sc.size === 1 && (a.length === 2 || a.length === 3) && ZH_SURNAMES.includes(a[0])) return cap(trPinyinWord(a[0])) + " " + cap(trPinyinWord(a.slice(1).join("")));
+    }
+    return null;
+  }
+  const UK_ONLY = /[їєіґЇЄІҐ]/;
+  const UK = {"а": "a", "б": "b", "в": "v", "г": "h", "ґ": "g", "д": "d", "е": "e", "є": "ie", "ж": "zh", "з": "z", "и": "y", "і": "i", "ї": "i", "й": "i", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "kh", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "shch", "ь": "", "ю": "iu", "я": "ia", "'": "", "’": "", "ʼ": ""};
+  const UK_START = {"є": "ye", "ї": "yi", "й": "y", "ю": "yu", "я": "ya"};
+  function trUkrainian(s) {
+    let out = ""; let start = true;
+    for (const ch of s) {
+      const lo = lower(ch);
+      if (has(UK, lo)) { const r = start && has(UK_START, lo) ? UK_START[lo] : UK[lo]; out += (ch !== lo && r) ? cap(r) : r; start = false; }
+      else { out += ch; start = !isAlpha(ch); }
+    }
+    return out;
+  }
   const tokens = (part) => part.split(/\s+/).filter(Boolean);
   function merged(langs, getter) { const out = {}; for (const l of [...langs].reverse()) Object.assign(out, getter(l)); return out; }
   function stemLookup(k, table) {
@@ -471,12 +508,13 @@
     if (op === "translate") res = moveTypeWords(res, lang);
     return [res.join(" "), stats];
   }
+  const KO_STREET = new Set(["로", "길", "대로", "번길", "가"]);
   function romanizeKoreanToken(tok, op) {
     const G = gaz();
     for (const [f, en] of suffixForms("ko")) {
       if (tok.endsWith(f) && len(tok) > len(f)) {
         const base = chars(tok).slice(0, len(tok) - len(f)).join("");
-        const b = (op === "translate" && has(G, normKey(base))) ? G[normKey(base)][0] : cap(trHangul(base));
+        const b = (op === "translate" && has(G, normKey(base)) && !KO_STREET.has(f)) ? G[normKey(base)][0] : cap(trHangul(base));
         if (op === "translate") return (en.startsWith("-") || en === "F") ? b + en : (b + (en ? " " + en : ""));
         return b + "-" + trHangul(f);
       }
@@ -495,8 +533,10 @@
     const G = gaz(); const k = normKey(s);
     let out, method, conf, cov = 1;
     let ec;
-    if (op === "translate" && (has(G, k) || has(G, foldLatin(k)))) {
-      out = (has(G, k) ? G[k] : G[foldLatin(k)])[0]; method = "gazetteer"; conf = 0.95;
+    if (op === "translate" && gazWhole(k)) {
+      out = gazWhole(k)[0]; method = "gazetteer"; conf = 0.95;
+    } else if (op === "transliterate" && personName(s)) {
+      out = personName(s); method = "transliteration"; conf = 0.75;
     } else if (op === "translate" && (ec = EC().isEnglish(s, "strict")).english) {
       out = s; method = "already-english"; conf = ec.score;
     } else {
@@ -505,7 +545,12 @@
       for (const p of parts) {
         if (!p) continue;
         const kp = normKey(p);
-        if (op === "translate" && (has(G, kp) || has(G, foldLatin(kp)))) { outs.push((has(G, kp) ? G[kp] : G[foldLatin(kp)])[0]); known++; total++; methods.add("gazetteer"); continue; }
+        if (op === "translate" && gazWhole(kp)) { outs.push(gazWhole(kp)[0]); known++; total++; methods.add("gazetteer"); continue; }
+        const pc = op === "translate" ? POSTAL.exec(p) : null;
+        if (pc && gazWhole(normKey(pc[2] || pc[3]))) {
+          const e = gazWhole(normKey(pc[2] || pc[3]))[0];
+          outs.push(pc[1] ? pc[1] + " " + e : e + " " + pc[4]); known += 2; total += 2; methods.add("gazetteer"); continue;
+        }
         if (CJK_LANGS.has(lang) || script === "Han" || script === "Kana" || script === "Thai") {
           let l = CJK_LANGS.has(lang) ? lang : (script === "Thai" ? "th" : script === "Kana" ? "ja" : "zh");
           let segs = segmentSplit(p, l);

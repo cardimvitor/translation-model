@@ -39,7 +39,7 @@
  {"lang":"vi","type":"product","op":"translate","in":"giày thể thao nam","want":"men's sneakers"},
  {"lang":"zh","type":"city","op":"translate","in":"北京","want":"Beijing"},
  {"lang":"zh","type":"country","op":"translate","in":"德国","want":"Germany"},
- {"lang":"zh","type":"address","op":"translate","in":"北京市朝阳区建国路88号","want":"Beijing Chaoyang District Jianguo Road 88 No."},
+ {"lang":"zh","type":"address","op":"translate","in":"北京市朝阳区建国路88号","want":"Beijing Chaoyang District Jianguo Road No. 88"},
  {"lang":"zh","type":"address","op":"transliterate","in":"上海市浦东新区世纪大道100号","want":"Shanghai Shi Pudong Xin Qu Shiji Dadao 100 Hao"},
  {"lang":"zh","type":"product","op":"translate","in":"真皮女士包包","want":"women's leather bag"},
  {"lang":"zh","type":"product","op":"translate","in":"黑色男士运动鞋","want":"men's black sneakers"},

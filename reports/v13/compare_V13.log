@@ -1,0 +1,7 @@
+test                student_V12    student_V13
+tuning_labels     78.1% /  90.3  78.1% /  90.3  ok
+test_labels       76.2% /  87.8  76.2% /  87.8  ok
+real_names        11.7% /  67.5  11.7% /  67.5  ok
+cases                        70             70  ok
+blind                        45             45  ok
+VERDICT: PASS (new model kept)

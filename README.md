@@ -14,7 +14,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
-| **`student_V12` (default, final)** | `student_V11`'s weights, unchanged, plus a word-level English check: a label judged English that contains a word outside the model's English word list is given to the neural model, so "led ampul" or "office sandalye" is translated. A training run on 44k mixed-language pairs was tested and rejected (it lost accuracy) | **commercial use OK** (attribution required) |
+| **`student_V13` (default, final)** | the same weights as `student_V12`; shipped with the world place list (198,000 towns and cities, 3,865 regions) and the address and transliteration fixes in the Fast rules | **commercial use OK** (attribution required) |
+| `student_V12` (parent of v13) | `student_V11`'s weights, unchanged, plus a word-level English check: a label judged English that contains a word outside the model's English word list is given to the neural model, so "led ampul" or "office sandalye" is translated. A training run on 44k mixed-language pairs was tested and rejected (it lost accuracy) | **commercial use OK** (attribution required) |
 | `student_V11` (parent of v12) | `student_V10` post-trained on data checked by Hy-MT2-7B (6k wrong pairs removed, 6k hard labels corrected), 1.6k real Spanish and Japanese queries and 9.6k mixed-language labels; adds the English double check and a `reliable` flag on every answer | **commercial use OK** (attribution required) |
 | `student_V10` (parent of v11) | `student_V9` post-trained with 15k head terms written by Hy-MT2-1.8B in all 16 languages; decodes short labels with a 2-candidate beam search | **commercial use OK** (attribution required) |
 | `student_V9` (parent of v10) | `student_V8` post-trained with 200k more short labels (every ESCI query in 7 OPUS-MT languages, more Korean and Thai from Hy-MT2-1.8B), made with `build/post_train.sh` | **commercial use OK** (attribution required) |
@@ -51,7 +52,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | v5 MAX | 28.4% | 49.1 | 45.7 | yes |
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
 | v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
-| **v12** | **76.2%** | **87.8** | 67.5 | yes |
+| **v13** | **76.2%** | **87.8** | 67.6 | yes |
+| v12 | 76.2% | 87.8 | 67.5 | yes |
 | v11 | 75.9% | 87.6 | 67.6 | yes |
 | v10 | 72.8% | 86.8 | 67.3 | yes |
 | v9 | 72.5% | 86.0 | 67.2 | yes |
@@ -81,6 +83,16 @@ How the weights were tested and changed after training is in [reports/WEIGHTS.md
 Three tested ways, each with an automatic pass/fail check: add words instantly (`build/add_terms.py`), post-train on new pairs (`build/post_train.sh`), or turn an English-only list into pairs (`build/make_pairs.py`). Step by step in [docs/ADDING.md](docs/ADDING.md). `student_V9`, `student_V10` and `student_V11` were all made with the post-training tool.
 
 Against Hy-MT2 (each model alone, 8-bit as shipped): v11 scores 88.0 chrF on labels and 68.5 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5. v11 is not better than the 7B on short labels overall.
+
+### Places, addresses and transliteration (v13)
+
+`test/places_world.json` holds 160 hand-written items (countries, cities, small towns, regions, street addresses, transliteration on request), written before the fixes. Run `python test/eval_places.py`. v12: 109 of 160; v13: 148 of 160.
+
+- The place list (`data/gazetteer/`, 32 MB, built by `build/build_gazetteer2.py` from GeoNames `cities500`, `admin1CodesASCII`, `countryInfo` and `alternateNamesV2`, CC BY 4.0) covers every place with 500 or more people, all states and regions and all countries, with the English name GeoNames marks as preferred. Small towns are in `<Script>_towns*.json` and match only a whole label or a whole comma-separated part.
+- Place names that are also words seen in product text are left out, so product labels are not read as towns.
+- There is no list of streets: street names are transliterated and the street-type word is translated.
+- Transliteration on request also handles Korean, Chinese and Japanese personal names (tables of common surnames), Ukrainian and Greek.
+- Known misses: Arabic words without written vowels, some Japanese readings, Thai street names, islands and places GeoNames has no local-script name for.
 
 ### Labels with one word in another language (v12)
 
@@ -164,7 +176,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V13`, `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

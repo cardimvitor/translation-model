@@ -6,7 +6,7 @@ const EC = require(path.join(ROOT, "runtime", "encheck.js")); const A = require(
 (async () => {
   const load = async (n) => JSON.parse(fs.readFileSync(path.join(ROOT, "data", n), "utf8"));
   await N.init(load, EC);
-  const S = await ST.create(ort, async (n) => fs.readFileSync(path.join(ROOT, "models", n)).buffer.slice(0), async (n) => JSON.parse(fs.readFileSync(path.join(ROOT, "models", n), "utf8")), N._.lower, process.env.NEURAL_DIR || "student_V12");
+  const S = await ST.create(ort, async (n) => fs.readFileSync(path.join(ROOT, "models", n)).buffer.slice(0), async (n) => JSON.parse(fs.readFileSync(path.join(ROOT, "models", n), "utf8")), N._.lower, process.env.NEURAL_DIR || "student_V13");
   A.init(N, S, ST);
   const P = JSON.parse(fs.readFileSync(path.join(ROOT, "test", "parity_accurate_python.json"), "utf8"));
   let same = 0; const ex = []; const t0 = Date.now();

@@ -37,8 +37,9 @@
     if (!AEN) { AEN = new Set(); for (const A of Object.values(N._.rules().address)) for (const [, en] of A) for (const w of N._.lower(en).replace(/^-+/, "").split(" ")) if (w.length > 2) AEN.add(w); }
     return AEN;
   }
+  const DE_STREET = /\p{L}(?:straße|strasse|str\.|gasse|allee|platz|weg|damm|ufer)\s+\d+\s?[a-z]?(?=$|[\s,])/iu;   // Hauptstraße 5, Bahnhofstr. 12
   function isAddressV2(s, langs, fast) {
-    if (addressWords(s, langs)) return true;
+    if (addressWords(s, langs) || DE_STREET.test(s)) return true;
     if (Array.from(s).some(N._.isDigit))
       return fast.method.includes("gazetteer") || N._.lower(fast.output).split(" ").some((w) => addressEn().has(w.replace(/^[,.]+|[,.]+$/g, "")));
     return false;
@@ -91,7 +92,8 @@
     if (fast.operation !== "translate" || fast.method === "gazetteer" || fast.method === "already-english" || !fast.output) return Object.assign({}, fast, { model: "accurate" });
     const s = (text || "").normalize("NFKC").replace(/\s+/g, " ").trim();
     const langs = fast.language.map((x) => x[0]);
-    const longLabel = pol.addr_max_words && s.split(" ").length > pol.addr_max_words && (fast.coverage || 0) < (pol.addr_long_cov === undefined ? 0.6 : pol.addr_long_cov);
+    const commaAddr = /[,，、،]/.test(s) && fast.method.includes("gazetteer") && (addressWords(s, langs) || DE_STREET.test(s));
+    const longLabel = !commaAddr && pol.addr_max_words && s.split(" ").length > pol.addr_max_words && (fast.coverage || 0) < (pol.addr_long_cov === undefined ? 0.6 : pol.addr_long_cov);
     const shortPlace = pol.keep_gaz && fast.method.includes("gazetteer") && s.split(" ").length <= (pol.addr_max_words === undefined ? 8 : pol.addr_max_words);
     if ((isAddressV2(s, langs, fast) && !longLabel) || (pol.keep_cov && (fast.coverage || 0) >= 1) || shortPlace) return Object.assign({}, fast, { model: "accurate" });
     const [o, c] = await S.translate(s);

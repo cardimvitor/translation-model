@@ -3,7 +3,7 @@
 | Part | Source | License |
 |---|---|---|
 | Country names | Unicode CLDR (via Babel) | Unicode License v3 |
-| City names (`data/gazetteer/`) | GeoNames (via geonamescache) | CC BY 4.0, **attribution required** |
+| City names (`data/gazetteer/`) | GeoNames (cities500, admin1CodesASCII, countryInfo, alternateNamesV2 from download.geonames.org) | CC BY 4.0, **attribution required** |
 | Chinese readings | pypinyin | MIT |
 | Japanese readings (`data/translit/ja.json`) | SudachiDict-core | Apache-2.0 |
 | Thai word list | PyThaiNLP | Apache-2.0 |
@@ -21,6 +21,7 @@
 | `models/student_V6` | fine-tuned from Helsinki-NLP/opus-mt-mul-en (CC BY 4.0) on the `student_MAX` data plus Amazon ESCI search queries (Apache-2.0) translated by OPUS-MT | commercial use OK, with attribution to OPUS-MT / Helsinki-NLP and Amazon Berkeley Objects; Hy-MT2 Apache-2.0 notice |
 | `models/student_V7` | `student_V6` plus per-language experts trained on the same data | same as `student_V6` |
 | `models/student_V10`, `models/student_V9`, `models/student_V8`, `models/student_V8F` | `student_V6` weights, fine-tuned on the same data plus short labels written by Tencent Hy-MT2-1.8B (Apache-2.0) | same as `student_V6` |
+| `models/student_V13` | the same weights as `student_V12` | same as `student_V6` |
 | `models/student_V12` | the same weights as `student_V11`; its English and foreign word lists are counted from the training data listed above | same as `student_V6` |
 | `models/student_V11` | `student_V10` weights, fine-tuned on the same data with corrections and real-query translations written by Tencent Hy-MT2-7B (Apache-2.0) | same as `student_V6` |
 | Product word list, rules, test sets | written for this project | MIT (see LICENSE) |

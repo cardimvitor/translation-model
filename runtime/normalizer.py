@@ -116,14 +116,22 @@ def _load(name):
 
 
 _GAZ = {}
+_GAZT = {}          # small towns (under 15,000 people): matched only as a whole label or a whole comma-separated part
 
 
 def gaz():
     """Place-name gazetteer: all per-script parts merged (data/gazetteer/<Script>.json)."""
     if not _GAZ:
-        for part in _load(os.path.join("gazetteer", "index.json"))["parts"]:
-            _GAZ.update(_load(os.path.join("gazetteer", part + ".json"))["k"])
+        ix = _load(os.path.join("gazetteer", "index.json"))
+        for part in ix["parts"] + ix.get("towns", []):
+            d = _load(os.path.join("gazetteer", part + ".json")); _GAZ.update(d["k"]); _GAZT.update(d.get("t") or {})
     return _GAZ
+
+
+def gaz_whole(k):
+    """Entry for a whole label or part: cities, regions, countries, then small towns."""
+    G = gaz(); f = fold_latin(k)
+    return G.get(k) or G.get(f) or _GAZT.get(k) or _GAZT.get(f)
 
 
 def rules():
@@ -195,6 +203,8 @@ def _cap(w):
 
 
 def tr_cyrillic(s):
+    if any(c in UK_ONLY for c in s):
+        return tr_ukrainian(s)
     R = rules()["cyrillic"]; after = rules()["cyr_ye_after"]
     out = []; prev = ""
     for ch in s:
@@ -500,7 +510,7 @@ def romanize(s, lang=None):
         elif g in (None, "Latin"):
             out.append(t)
         else:
-            out.append(tr_fallback(t))
+            out.append(tr_fallback(t.replace("ου", "ou").replace("ού", "ou").replace("Ου", "Ou").replace("Ού", "Ou")))      # Greek ou
     return re.sub(r"\s+", " ", "".join(out)).strip()
 
 
@@ -528,7 +538,7 @@ def render_cjk(segs, lang, op):
         if all(is_digit(c) for c in t) or not t.strip():
             words.append(t); continue
         if op == "translate" and kind == "gaz":
-            words.append(G[norm_key(t)][0]); continue
+            words.append("\x03" + G[norm_key(t)][0]); continue
         if op == "translate" and kind == "gloss":
             words.append("\x02" + GL[norm_key(t)]); continue
         if kind == "addr":
@@ -553,8 +563,9 @@ def render_cjk(segs, lang, op):
     words = reorder_gloss(words)
     if op == "translate":
         words = move_type_words(words, lang)
-    out = re.sub(r"\s+", " ", " ".join(w for w in words if w)).strip()
-    return re.sub(r"([0-9A-Za-z]) ?([-/]) ?(?=[0-9])", r"\1\2", out)
+    out = re.sub(r"\s+", " ", " ".join(w for w in words if w)).strip().replace("\x03", "")
+    out = re.sub(r"([0-9A-Za-z]) ?([-/]) ?(?=[0-9])", r"\1\2", out)
+    return re.sub(r"(\d+(?:-\d+)*) No\.(?= |$)", r"No. \1", out) if op == "translate" else out
 
 
 _ADDR_EN = []
@@ -581,8 +592,8 @@ def move_type_words(words, lang):
     for w in words:
         if w in TYPE_WORDS and held is None:
             held = w; continue
-        if held is not None and ((w[:1] and is_digit(w[0])) or w in stop or w.endswith(",")):
-            out.append(held); held = None
+        if held is not None and ((w[:1] and is_digit(w[0])) or w in stop or w.endswith(",") or (w[:1] == "\x03" and out and out[-1][:1] != "\x03")):
+            out.append(held + ("," if w[:1] == "\x03" else "")); held = None
         out.append(w)
     if held is not None:
         out.append(held)
@@ -591,6 +602,47 @@ def move_type_words(words, lang):
 
 # ---------------------------------------------------------------- main pipeline
 CJK_LANGS = {"zh", "ja", "th"}
+_POSTAL = re.compile(r"^(?:(\d{2}-\d{3}|\d{4,6})\s+(\D.*)|(\D.*?)\s+(\d{2}-\d{3}|\d{4,6}))$")
+
+# ---- personal names, used only when transliteration is asked for
+KO_SURNAMES = {"김": "Kim", "이": "Lee", "박": "Park", "최": "Choi", "정": "Jung", "강": "Kang", "조": "Cho", "윤": "Yoon", "장": "Jang", "임": "Lim", "한": "Han", "오": "Oh", "서": "Seo", "신": "Shin", "권": "Kwon", "황": "Hwang", "안": "Ahn", "송": "Song", "류": "Ryu", "전": "Jeon", "홍": "Hong", "고": "Ko", "문": "Moon", "양": "Yang", "손": "Son", "배": "Bae", "백": "Baek", "허": "Heo", "유": "Yoo", "남": "Nam", "심": "Shim", "노": "Noh", "하": "Ha", "곽": "Kwak", "성": "Sung", "차": "Cha", "주": "Joo", "우": "Woo", "구": "Koo", "민": "Min"}
+ZH_SURNAMES = "王李张張刘劉陈陳杨楊黄黃赵趙吴吳周徐孙孫马馬朱胡郭何罗羅郑鄭梁谢謝宋唐许許韩韓冯馮邓鄧曹彭曾肖董袁潘蒋蔣蔡余杜叶葉程苏蘇魏吕呂丁任沈姚卢盧姜崔钟鍾谭譚陆陸汪范廖贾賈夏韦韋付邹鄒孟熊秦邱尹薛闫段雷侯龙龍史陶黎贺賀顾顧毛郝龚龔邵孔"
+JA_SURNAMES = {"佐藤": "Sato", "鈴木": "Suzuki", "高橋": "Takahashi", "田中": "Tanaka", "伊藤": "Ito", "渡辺": "Watanabe", "山本": "Yamamoto", "中村": "Nakamura", "小林": "Kobayashi", "加藤": "Kato", "吉田": "Yoshida", "山田": "Yamada", "佐々木": "Sasaki", "山口": "Yamaguchi", "松本": "Matsumoto", "井上": "Inoue", "木村": "Kimura", "斎藤": "Saito", "清水": "Shimizu", "山崎": "Yamazaki", "池田": "Ikeda", "橋本": "Hashimoto", "阿部": "Abe", "石川": "Ishikawa", "山下": "Yamashita", "中島": "Nakajima", "石井": "Ishii", "小川": "Ogawa", "前田": "Maeda", "岡田": "Okada", "長谷川": "Hasegawa", "藤田": "Fujita", "後藤": "Goto", "近藤": "Kondo", "村上": "Murakami", "遠藤": "Endo", "青木": "Aoki", "坂本": "Sakamoto", "福田": "Fukuda", "太田": "Ota", "西村": "Nishimura", "藤井": "Fujii", "岡本": "Okamoto", "松田": "Matsuda", "中川": "Nakagawa", "中野": "Nakano", "原田": "Harada", "小野": "Ono", "田村": "Tamura", "竹内": "Takeuchi", "金子": "Kaneko", "和田": "Wada", "中山": "Nakayama", "石田": "Ishida", "上田": "Ueda", "森田": "Morita", "酒井": "Sakai", "工藤": "Kudo", "横山": "Yokoyama", "宮崎": "Miyazaki", "宮本": "Miyamoto", "内田": "Uchida", "高木": "Takagi", "安藤": "Ando", "島田": "Shimada", "谷口": "Taniguchi", "大野": "Ono", "高田": "Takada", "丸山": "Maruyama", "今井": "Imai", "河野": "Kono", "藤原": "Fujiwara", "村田": "Murata", "武田": "Takeda", "上野": "Ueno", "杉山": "Sugiyama", "増田": "Masuda", "小島": "Kojima", "小山": "Koyama", "千葉": "Chiba", "久保": "Kubo", "松井": "Matsui", "岩崎": "Iwasaki", "野口": "Noguchi", "菊地": "Kikuchi", "木下": "Kinoshita", "野村": "Nomura", "新井": "Arai", "渡部": "Watanabe", "桜井": "Sakurai", "菅原": "Sugawara"}
+JA_GIVEN = {"太郎": "Taro", "一郎": "Ichiro", "次郎": "Jiro", "健": "Ken", "誠": "Makoto", "大輔": "Daisuke", "翔": "Sho", "翔太": "Shota", "拓也": "Takuya", "健太": "Kenta", "大翔": "Hiroto", "蓮": "Ren", "悠真": "Yuma", "陽翔": "Haruto", "直樹": "Naoki", "和也": "Kazuya", "達也": "Tatsuya", "哲也": "Tetsuya", "浩": "Hiroshi", "隆": "Takashi", "勇": "Isamu", "茂": "Shigeru", "博": "Hiroshi", "清": "Kiyoshi", "花子": "Hanako", "陽子": "Yoko", "恵子": "Keiko", "美咲": "Misaki", "さくら": "Sakura", "愛": "Ai", "結衣": "Yui", "葵": "Aoi", "陽菜": "Hina", "美穂": "Miho", "由美": "Yumi", "直美": "Naomi", "真由美": "Mayumi", "裕子": "Yuko", "京子": "Kyoko", "洋子": "Yoko", "和子": "Kazuko", "幸子": "Sachiko", "明美": "Akemi", "智子": "Tomoko", "久美子": "Kumiko", "優子": "Yuko"}
+
+
+def person_name(s):
+    """Korean, Chinese or Japanese personal name written without a space -> "Surname Given". None if it does not look like one."""
+    if " " in s or not (2 <= len(s) <= 5) or gaz_whole(norm_key(s)):
+        return None
+    sc = set(script_of(c) for c in s)
+    if sc == {"Hangul"} and len(s) in (3, 4) and s[0] in KO_SURNAMES:
+        return KO_SURNAMES[s[0]] + " " + _cap(tr_hangul(s[1:]))
+    if sc <= {"Han", "Kana"} and "Han" in sc:
+        for n in (3, 2):
+            if s[:n] in JA_SURNAMES and len(s) > n:
+                g = s[n:]; return JA_SURNAMES[s[:n]] + " " + (JA_GIVEN.get(g) or _cap(romanize_segment(g, "ja")))
+        if sc == {"Han"} and len(s) in (2, 3) and s[0] in ZH_SURNAMES:
+            return _cap(tr_pinyin_word(s[0])) + " " + _cap(tr_pinyin_word(s[1:]))
+    return None
+
+
+UK_ONLY = set("їєіґЇЄІҐ")
+_UK = {"а": "a", "б": "b", "в": "v", "г": "h", "ґ": "g", "д": "d", "е": "e", "є": "ie", "ж": "zh", "з": "z", "и": "y", "і": "i", "ї": "i", "й": "i", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "kh", "ц": "ts", "ч": "ch", "ш": "sh", "щ": "shch", "ь": "", "ю": "iu", "я": "ia", "'": "", "’": "", "ʼ": ""}
+_UK_START = {"є": "ye", "ї": "yi", "й": "y", "ю": "yu", "я": "ya"}
+
+
+def tr_ukrainian(s):
+    """Ukrainian (official 2010 romanization): Київ -> Kyiv."""
+    out = []; start = True
+    for ch in s:
+        lo = lower(ch)
+        if lo in _UK:
+            r = _UK_START[lo] if start and lo in _UK_START else _UK[lo]
+            out.append(_cap(r) if ch != lo and r else r); start = False
+        else:
+            out.append(ch); start = not is_alpha(ch)
+    return "".join(out)
 
 
 def _tokens(part):
@@ -684,13 +736,16 @@ def _cap_words(s):
     return " ".join(_cap(w) for w in s.split(" "))
 
 
+KO_STREET = {"로", "길", "대로", "번길", "가"}
+
+
 def romanize_korean_token(tok, op):
     """Korean token: split address suffix (서울특별시 -> 서울 + 특별시) and hyphen-attach it (Sejong-daero)."""
     G = gaz()
     for f, en in suffix_forms("ko"):
         if tok.endswith(f) and len(tok) > len(f):
             base = tok[:-len(f)]
-            if op == "translate" and norm_key(base) in G:
+            if op == "translate" and norm_key(base) in G and f not in KO_STREET:      # a street named after a place keeps its Korean name (테헤란로 -> Teheran-ro)
                 b = G[norm_key(base)][0]
             else:
                 b = _cap(tr_hangul(base))
@@ -711,9 +766,11 @@ def process(op, text, ascii_out=False):
     if not s:
         res.update(output="", confidence=0.0, method="empty"); return res
     G = gaz(); k = norm_key(s); cov = 1.0
-    if op == "translate" and (k in G or fold_latin(k) in G):
-        e = G.get(k) or G.get(fold_latin(k))
+    if op == "translate" and gaz_whole(k):
+        e = gaz_whole(k)
         out, method, conf = e[0], "gazetteer", 0.95
+    elif op == "transliterate" and person_name(s):
+        out, method, conf = person_name(s), "transliteration", 0.75
     elif op == "translate" and _encheck()(s, "strict")["english"]:
         out, method, conf = s, "already-english", _encheck()(s, "strict")["score"]
     else:
@@ -723,8 +780,12 @@ def process(op, text, ascii_out=False):
             if not p:
                 continue
             kp = norm_key(p)
-            if op == "translate" and (kp in G or fold_latin(kp) in G):
-                outs.append((G.get(kp) or G.get(fold_latin(kp)))[0]); known += 1; total += 1; methods.add("gazetteer"); continue
+            if op == "translate" and gaz_whole(kp):
+                outs.append(gaz_whole(kp)[0]); known += 1; total += 1; methods.add("gazetteer"); continue
+            pc = _POSTAL.match(p) if op == "translate" else None          # "10115 Berlin", "00-024 Warszawa", "Berlin 10115"
+            if pc and gaz_whole(norm_key(pc.group(2) or pc.group(3))):
+                e = gaz_whole(norm_key(pc.group(2) or pc.group(3)))[0]
+                outs.append(pc.group(1) + " " + e if pc.group(1) else e + " " + pc.group(4)); known += 2; total += 2; methods.add("gazetteer"); continue
             if lang in CJK_LANGS or script in ("Han", "Kana", "Thai"):
                 l = lang if lang in CJK_LANGS else ("th" if script == "Thai" else "ja" if script == "Kana" else "zh")
                 segs = segment_split(p, l)
