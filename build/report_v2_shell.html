@@ -5,15 +5,15 @@
 /* Layout: one reading column (about 70 characters); tables and figures may run wider inside their own scroll boxes. */
 :root {
   --bg: #f7f8fa; --panel: #ffffff; --ink: #14181f; --ink-2: #4a5361; --ink-3: #6f7886; --line: #dfe3ea; --accent: #1f5fbf; --accent-soft: #e8f0fc;
-  --s1: #2a78d6; --s2: #eb6834; --ref: #6f7886;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --ref: #6f7886;
   --display: "Space Grotesk", "Inter", system-ui, sans-serif; --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #12151a; --panel: #1a1e25; --ink: #eceff4; --ink-2: #b9c1cd; --ink-3: #8b94a3; --line: #2c323c; --accent: #7fb0f5; --accent-soft: #1c2a40;
-  --s1: #3987e5; --s2: #d95926; --ref: #8b94a3; color-scheme: dark } }
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --ref: #8b94a3; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #12151a; --panel: #1a1e25; --ink: #eceff4; --ink-2: #b9c1cd; --ink-3: #8b94a3; --line: #2c323c; --accent: #7fb0f5; --accent-soft: #1c2a40;
-  --s1: #3987e5; --s2: #d95926; --ref: #8b94a3; color-scheme: dark }
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --ref: #8b94a3; color-scheme: dark }
 body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
 main { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 44px; }
 header, section { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
@@ -55,12 +55,14 @@ tr.hl td { background: var(--accent-soft); }
 figcaption { display: flex; flex-direction: column; gap: 2px; } figcaption span { font-size: 13.5px; color: var(--ink-2); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
 .sw { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
-.s1b { background: var(--s1); } .s2b { background: var(--s2); } .refb { background: repeating-linear-gradient(90deg, var(--ref) 0 4px, transparent 4px 7px); }
+.s1b { background: var(--s1); } .s2b { background: var(--s2); } .s3b { background: var(--s3); }
+.sq { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; } .refb { background: repeating-linear-gradient(90deg, var(--ref) 0 4px, transparent 4px 7px); }
 svg { display: block; width: 100%; min-width: 620px; height: auto; }
 .grid { stroke: var(--line); stroke-width: 1; } .ref { stroke: var(--ref); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .ax { fill: var(--ink-3); font: 11.5px var(--body); } .lab { fill: var(--ink-2); font: 12px var(--body); }
 .ln { fill: none; stroke-width: 2; stroke-linejoin: round; } .ln.s1 { stroke: var(--s1); } .ln.s2 { stroke: var(--s2); }
-.pt { stroke: var(--panel); stroke-width: 2; } .s1f { fill: var(--s1); } .s2f { fill: var(--s2); }
+.pt { stroke: var(--panel); stroke-width: 2; } .s1f { fill: var(--s1); } .s2f { fill: var(--s2); } .s3f { fill: var(--s3); }
+.bar { stroke: var(--panel); stroke-width: 1; } .val { fill: var(--ink); font: 600 11.5px var(--body); font-variant-numeric: tabular-nums; }
 .hit { fill: transparent; cursor: default; } .hit:hover { fill: var(--accent-soft); fill-opacity: .5; }
 .tip { position: absolute; background: var(--ink); color: var(--bg); font-size: 12.5px; padding: 8px 10px; border-radius: 6px; pointer-events: none; line-height: 1.45; z-index: 2; }
 details summary { cursor: pointer; font-size: 13.5px; color: var(--accent); } details .tw { margin-top: 10px; }
@@ -78,6 +80,14 @@ footer { font-size: 13px; color: var(--ink-3); border-top: 1px solid var(--line)
 </main>
 <script>
 (function () {
+  document.querySelectorAll("svg.hov").forEach(function (svg) {
+    var fig = svg.closest("figure"), t = document.createElement("div"); t.className = "tip"; t.hidden = true; fig.appendChild(t);
+    svg.querySelectorAll(".hit").forEach(function (r) {
+      r.addEventListener("mousemove", function (e) { t.innerHTML = r.dataset.tip; t.hidden = false; var b = fig.getBoundingClientRect();
+        t.style.left = Math.min(e.clientX - b.left + 12, b.width - 190) + "px"; t.style.top = (e.clientY - b.top + 12) + "px"; });
+      r.addEventListener("mouseleave", function () { t.hidden = true; });
+    });
+  });
   var tip = document.getElementById("tip"), fig = tip && tip.parentElement;
   if (!tip) return;
   document.querySelectorAll("#chart .hit").forEach(function (r) {

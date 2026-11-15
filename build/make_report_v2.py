@@ -82,6 +82,49 @@ def chart():
             f'<details><summary>Show the numbers</summary>{table(["Version", "Labels chrF", "Real names chrF"], [[E(n), a, b] for n, a, b in pts])}</details></figure>')
 
 
+def vs_hy(X):
+    """v14 against Hy-MT2-1.8B and 7B: grouped bars for accuracy (one chrF scale) and log-scale bars for size and time."""
+    S3 = [("v14", "s1"), ("Hy-MT2-1.8B", "s2"), ("Hy-MT2-7B", "s3")]
+    groups = [("Short labels", "320 hand-written", X["labels"]), ("Mixed English + Turkish", "64 labels", X["mixed"]),
+              ("Real product names", "same 330 names for all three", X["names"]), ("Labels v14 marks reliable", "217 of the 320", X["reliable"])]
+    Wd, Ht, L, Tp, Bt = 780, 330, 40, 26, 56; lo, hi = 0, 100; gw = (Wd - L - 10) / len(groups); bw = 30; gap = 4
+    y = lambda v: Tp + (hi - v) * (Ht - Tp - Bt) / (hi - lo); g = ""
+    for v in (0, 25, 50, 75, 100):
+        g += f'<line x1="{L}" x2="{Wd - 10}" y1="{y(v):.1f}" y2="{y(v):.1f}" class="grid"/><text x="{L - 8}" y="{y(v) + 4:.1f}" class="ax" text-anchor="end">{v}</text>'
+    for gi, (name, sub, vals) in enumerate(groups):
+        cx = L + gw * gi + gw / 2; x0 = cx - (3 * bw + 2 * gap) / 2
+        for si, ((mn, cls), v) in enumerate(zip(S3, vals)):
+            x = x0 + si * (bw + gap); top = y(v); h = y(0) - top
+            g += (f'<path class="bar {cls}f" d="M{x:.1f},{y(0):.1f} V{top + 4:.1f} Q{x:.1f},{top:.1f} {x + 4:.1f},{top:.1f} H{x + bw - 4:.1f} Q{x + bw:.1f},{top:.1f} {x + bw:.1f},{top + 4:.1f} V{y(0):.1f} Z"/>'
+                  f'<text x="{x + bw / 2:.1f}" y="{top - 6:.1f}" class="val" text-anchor="middle">{v:.1f}</text>'
+                  f'<rect class="hit" x="{x - 2:.1f}" y="{Tp}" width="{bw + 4}" height="{Ht - Tp - Bt}" data-tip="&lt;b&gt;{E(mn)}&lt;/b&gt;&lt;br&gt;{E(name)}: {v:.1f} chrF"/>')
+        g += f'<text x="{cx:.1f}" y="{Ht - Bt + 20}" class="lab" text-anchor="middle">{E(name)}</text><text x="{cx:.1f}" y="{Ht - Bt + 36}" class="ax" text-anchor="middle">{E(sub)}</text>'
+    leg = "".join(f'<span><i class="sq {c}b"></i>{E(n)}</span>' for n, c in S3)
+    acc = (f'<figure class="viz"><figcaption><b>Accuracy: v14 against Hy-MT2</b><span>chrF, 0–100, higher is better. Each model alone on the same items; v14 as the full system.</span></figcaption>'
+           f'<div class="legend">{leg}</div><div class="tw"><svg viewBox="0 0 {Wd} {Ht}" role="img" aria-label="Grouped bar chart: v14, Hy-MT2-1.8B and Hy-MT2-7B on four tests" class="hov">{g}</svg></div>'
+           f'<details><summary>Show the numbers</summary>{table(["Test", "v14", "Hy-MT2-1.8B", "Hy-MT2-7B"], [[E(n + " (" + sb + ")"), *[f"{v:.1f}" for v in vals]] for n, sb, vals in groups])}</details></figure>')
+    # cost: log scale, 1 to 10,000
+    import math
+    rows = [("Size of the model files", "MB", [57, 1133, 4625], ["57 MB", "1,133 MB", "4,625 MB"]),
+            ("Time per short label", "ms", [6, 600, 1400], ["about 6 ms, 1 thread", "400–800 ms, 4 threads", "about 1,400 ms, 4 threads"])]
+    Wd2, L2, R2 = 780, 120, 300; lx = lambda v: L2 + math.log10(v) / 4 * (Wd2 - L2 - R2); rh = 22; Ht2 = 40 + len(rows) * (3 * (rh + 6) + 34); g = ""; yy = 18
+    for t in (1, 10, 100, 1000, 10000):
+        g += f'<line x1="{lx(t):.1f}" x2="{lx(t):.1f}" y1="34" y2="{Ht2 - 26}" class="grid"/><text x="{lx(t):.1f}" y="{Ht2 - 8}" class="ax" text-anchor="middle">{t:,}</text>'
+    for title, unit, vals, labs in rows:
+        g += f'<text x="0" y="{yy + 12}" class="lab"><tspan font-weight="600">{E(title)}</tspan></text>'; yy += 22
+        for (mn, cls), v, lb in zip(S3, vals, labs):
+            mult = "" if mn == "v14" else f" · {'about ' if unit == 'ms' else ''}{v / vals[0]:,.0f}× v14"
+            g += (f'<text x="{L2 - 10}" y="{yy + 15}" class="ax" text-anchor="end">{E(mn)}</text>'
+                  f'<path class="bar {cls}f" d="M{L2},{yy} H{lx(v) - 4:.1f} Q{lx(v):.1f},{yy} {lx(v):.1f},{yy + 4} V{yy + rh - 4} Q{lx(v):.1f},{yy + rh} {lx(v) - 4:.1f},{yy + rh} H{L2} Z"/>'
+                  f'<text x="{lx(v) + 8:.1f}" y="{yy + 15}" class="val">{E(lb + mult)}</text>'
+                  f'<rect class="hit" x="{L2}" y="{yy - 2}" width="{Wd2 - L2 - R2}" height="{rh + 4}" data-tip="&lt;b&gt;{E(mn)}&lt;/b&gt;&lt;br&gt;{E(title)}: {E(lb)}"/>')
+            yy += rh + 6
+        yy += 12
+    cost = (f'<figure class="viz"><figcaption><b>Cost: size and speed</b><span>Log scale: each grid line is ten times the one before. Lower is better. Hy-MT2 was given 4 CPU threads, v14 one, so the real speed gap is larger than shown.</span></figcaption>'
+            f'<div class="legend">{leg}</div><div class="tw"><svg viewBox="0 0 {Wd2} {Ht2}" role="img" aria-label="Log-scale bars of model size and time per label" class="hov">{g}</svg></div></figure>')
+    return acc, cost
+
+
 def bars(title, note, items, unit=""):
     mx = max(v for _, v, _ in items)
     r = "".join(f'<div class="brow"><span class="bn">{n}</span><span class="bt"><i class="{"bf on" if hl else "bf"}" style="width:{v / mx * 100:.1f}%"></i></span><span class="bv">{v}{unit}</span></div>' for n, v, hl in items)
@@ -108,7 +151,7 @@ def main():
 <div><b>57 MB</b><span>neural model, about 6 ms per label on one CPU thread.</span></div>
 <div><b>23</b><span>models and versions built in about 275 hours, on CPU only.</span></div>
 </div></header>
-<nav aria-label="Contents"><a href="#result">Result</a><a href="#how">How it works</a><a href="#scores">Scores</a><a href="#base">Against base models</a><a href="#versions">Every version</a><a href="#story">How it was made</a><a href="#techniques">Techniques</a><a href="#failed">What failed</a><a href="#lessons">Lessons</a><a href="#limits">Limits</a><a href="#use">Using it</a><a href="#data">Data and licenses</a><a href="#time">Time</a><a href="#links">All links</a></nav>''')
+<nav aria-label="Contents"><a href="#result">Result</a><a href="#how">How it works</a><a href="#scores">Scores</a><a href="#vshy">v14 vs Hy-MT2</a><a href="#base">Against base models</a><a href="#versions">Every version</a><a href="#story">How it was made</a><a href="#techniques">Techniques</a><a href="#failed">What failed</a><a href="#lessons">Lessons</a><a href="#limits">Limits</a><a href="#use">Using it</a><a href="#data">Data and licenses</a><a href="#time">Time</a><a href="#links">All links</a></nav>''')
 
     # ---------- result
     S.append(f'''<section id="result"><h2>The result</h2>
@@ -172,6 +215,36 @@ def main():
         ["OPUS-MT mul-en, before our training", "10.3% / 34.2", "38.4", "about 300 MB", "not timed"]], "wide")}
 {bars("Short labels, chrF", "The base model v6–v14 start from is the last bar.", [("Hy-MT2-7B · 4,625 MB", 95.1, False), ("v14 · 57 MB", 87.7, True), ("Hy-MT2-1.8B · 1,133 MB", 79.1, False), ("OPUS-MT per language · 300 MB each", 76.2, False), ("NLLB-200 600M · 870 MB", 70.9, False), ("OPUS-MT mul-en, untrained · 300 MB", 34.2, False)])}
 <p><b>v14 beats every base model except Hy-MT2-7B on short labels, and beats all of them on real product names.</b> Hy-MT2-7B stays ahead on short labels by 7.4 chrF and on mixed English + Turkish labels by about 4: a model 80 times larger knows more rare product words. v14 answers about 200 times faster.</p>
+</section>''')
+
+    # ---------- v14 against Hy-MT2
+    XX = load(os.path.join(W, "v14_vs_hy_extra.json"), {}); H18 = load(os.path.join(W, "teachers", "mixed_hy18.json"), {}); H7 = load(os.path.join(W, "teachers", "mixed_hy7.json"), {})
+    A330 = load(os.path.join(W, "teachers", "abo_sample330.json"), {}); G18 = load(os.path.join(W, "teachers", "gold_hy18.json"), {}); G7 = load(os.path.join(W, "teachers", "gold_hy7.json"), {})
+    avg = lambda rows: sum(r["chrf"] for r in rows) / len(rows)
+    X = {"labels": [87.7, G18["chrF"], G7["chrF"]], "mixed": [avg(D14["mixed_tr.json"]), avg(H18["mixed_tr.json"]), avg(H7["mixed_tr.json"])],
+         "names": [XX["v14_abo330"]["chrF"], A330["hy18"]["chrF"], A330["hy7"]["chrF"]], "reliable": [RL["reliable_chrF"], XX["hy18_reliable"][1], RV["reliable"]["hy7"][1]]}
+    acc, cost = vs_hy(X)
+    win = lambda a, b: "<b>v14</b>" if a > b + 1 else ("Hy-MT2-7B" if b > a + 1 else "level")
+    S.append(f'''<section id="vshy"><h2>Is v14 better than Hy-MT2?</h2>
+<p><b>Better than Hy-MT2-1.8B on every test. Better than Hy-MT2-7B on real product names, size and speed, but not on short labels.</b> Hy-MT2 is Tencent's translation model; the 7-billion-parameter version is the most accurate model available to this project, and it was also one of the teachers.</p>
+{acc}
+{cost}
+{table(["Question", "v14", "Hy-MT2-1.8B", "Hy-MT2-7B", "Better"],
+       [["Short labels: exact / chrF", f"76.2% / {X['labels'][0]:.1f}", f"{G18['exact'] * 100:.1f}% / {X['labels'][1]:.1f}", f"{G7['exact'] * 100:.1f}% / {X['labels'][2]:.1f}", win(X['labels'][0], X['labels'][2])],
+        ["Mixed English + Turkish: chrF", f"{X['mixed'][0]:.1f}", f"{X['mixed'][1]:.1f}", f"{X['mixed'][2]:.1f}", win(X['mixed'][0], X['mixed'][2])],
+        ["Real product names, same 330: chrF", f"{X['names'][0]:.1f}", f"{X['names'][1]:.1f}", f"{X['names'][2]:.1f}", win(X['names'][0], X['names'][2])],
+        ["Labels v14 marks reliable: chrF", f"{X['reliable'][0]:.1f}", f"{X['reliable'][1]:.1f}", f"{X['reliable'][2]:.1f}", win(X['reliable'][0], X['reliable'][2])],
+        ["Size", "57 MB", "1,133 MB", "4,625 MB", "<b>v14</b>, 81× smaller"],
+        ["Time per short label", "about 6 ms", "400–800 ms", "about 1,400 ms", "<b>v14</b>, about 230× faster"],
+        ["Runs on a phone, offline", "yes", "no", "no", "<b>v14</b>"],
+        ["Places, addresses, transliteration", "153 of 160 · 91 of 101", "not run", "not run", "not compared"]], "wide")}
+<ul>
+<li><b>Where Hy-MT2-7B wins:</b> short labels by {X['labels'][2] - X['labels'][0]:.1f} chrF and mixed-language labels by {X['mixed'][2] - X['mixed'][0]:.1f}. A model 80 times larger knows more rare product words in every language.</li>
+<li><b>Where v14 wins:</b> real marketplace product names by {X['names'][0] - X['names'][2]:.1f} chrF on the same 330 names, because v14 learned the catalogue's naming style from 35,000 real pairs; and size, speed and running offline on a phone.</li>
+<li><b>On the two thirds of labels v14 marks reliable</b> the two are level in chrF ({X['reliable'][0]:.1f} against {X['reliable'][2]:.1f}); the 7B still has more exact matches there ({RL['reliable_exact'] * 100:.1f}% against {RV['reliable']['hy7'][0]}%).</li>
+<li><b>Choose v14</b> for phones, offline use and high volume; send the labels it marks <i>needs review</i> to a person or to the 7B when the best possible answer matters more than time.</li>
+</ul>
+<p>Real-name scores here use the 330-name sample on which Hy-MT2-7B was run (it needs about 6 seconds per name), so all three are scored on exactly the same names; on all 993 names v14 scores 67.5. The places tests were not run on Hy-MT2.</p>
 </section>''')
 
     # ---------- every version
