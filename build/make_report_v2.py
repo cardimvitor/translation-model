@@ -338,11 +338,18 @@ def main():
     s330 = A330
     def d(v):
         return f"{v - FE['V14']['gold_products.json'][1]:+.1f}"
-    rows = [
-        ["<b>v14</b>", "ours", f'{fr("V14", "gold_products.json")}', "0", f'{FE["V14"]["mixed_tr.json"][1]:.1f}', f'{XX["v14_abo330"]["chrF"]:.1f}', f"{PL['V14'][0]} · {PL['V14'][1]}", "0.050B", "57 MB", f'{sp("V14", "labels"):.1f} ms', "yes"],
-        ["<b>v14 Fast v2</b>", "ours", fr("V14F2", "gold_products.json"), d(FE["V14F2"]["gold_products.json"][1]), f'{FE["V14F2"]["mixed_tr.json"][1]:.1f}', f'{A3.get("V14F2", {}).get("chrF", 0):.1f}', f"{PL['V14F2'][0]} · {PL['V14F2'][1]}", "0.035B", "42 MB", f'{sp("V14F2", "labels"):.1f} ms', "yes"],
-        ["v14 Fast v1", "ours", fr("V14F1", "gold_products.json"), d(FE["V14F1"]["gold_products.json"][1]), f'{FE["V14F1"]["mixed_tr.json"][1]:.1f}', f'{A3.get("V14F1", {}).get("chrF", 0):.1f}', f"{PL['V14F1'][0]} · {PL['V14F1'][1]}", "0.035B", "42 MB", f'{sp("V14F1", "labels"):.1f} ms', "yes"],
-        ["v8 Fast", "ours, Nov 13", fr("V8F", "gold_products.json"), d(FE["V8F"]["gold_products.json"][1]), f'{FE["V8F"]["mixed_tr.json"][1]:.1f}', f'{A3.get("V8F", {}).get("chrF", 0):.1f}', "not measured", "0.035B", "42 MB", f'{sp("V8F", "labels"):.1f} ms', "yes"],
+    AT = load(os.path.join(W, "all_models_today.json"), {})
+    PARAMS = {"fast": "0 (rules)", "v3": "0.007B", "A": "0.013B", "B": "0.013B", "C": "0.013B", "B2": "0.022B", "C2": "0.022B", "H": "0.022B", "ALL3": "0.022B", "HY": "0.022B", "MAX": "0.022B", "JEPA": "0.022B", "BASE": "0.022B",
+              "V6": "0.065B", "V7": "0.066B", "V8": "0.050B", "V8F": "0.035B", "V9": "0.050B", "V10": "0.050B", "V11": "0.050B", "V12": "0.050B", "V13": "0.050B", "V14": "0.050B", "V14F1": "0.035B", "V14F2": "0.035B"}
+    DIR = {"fast": "none", "v3": "student_edited", "A": "student_A", "B": "student_B", "C": "student_C", "B2": "student_B2", "C2": "student_C2_edited", "H": "student_H", "ALL3": "student_ALL3_edited", "HY": "student_HY_edited",
+           "MAX": "student_MAX_edited", "JEPA": "student_JG", "BASE": "student_BASE_edited"}
+    rows = []
+    for n, k, dt, ex, ch, ab, mb, l, nm, com, idea in M:
+        t = AT.get(DIR.get(k, "student_" + k), {}); big = k in ("V14", "V14F2")
+        b = (lambda x: f"<b>{x}</b>") if big else (lambda x: x)
+        rows.append([b(E(n)), "ours, " + dt, b(f"{ex:.1f}% / {ch:.1f}"), f"{ch - 87.7:+.1f}" if k != "V14" else "0", f'{t["mixed_tr"][1]:.1f}' if t else "-", f'{t["abo330"][1]:.1f}' if t else "-",
+                     f'{t["places1"][0]} · {t["places2"][0]}' if t else "-", PARAMS.get(k, "-"), (mb.split(" ")[0] + " MB") if mb[0].isdigit() else mb, (l + " ms") if l[0] in "0123456789~" else l, "yes" if com else "no"])
+    rows += [
         ["Hy-MT2-7B (Tencent)", "judge and teacher", f'{G7["exact"] * 100:.1f}% / {G7["chrF"]:.1f}', d(G7["chrF"]), mtr("hy7"), f'{s330["hy7"]["chrF"]:.1f}', "not run", "7B", "4,625 MB", "~1,400 ms*", "yes"],
         ["Hy-MT2-1.8B (Tencent)", "teacher", f'{G18["exact"] * 100:.1f}% / {G18["chrF"]:.1f}', d(G18["chrF"]), mtr("hy18"), f'{s330["hy18"]["chrF"]:.1f}', "not run", "1.8B", "1,133 MB", "400–800 ms*", "yes"],
         ["OPUS-MT, one model per language (Helsinki-NLP)", "teacher", f'{GO.get("exact", 0.528) * 100:.1f}% / {GO.get("chrF", 76.2):.1f}', d(GO.get("chrF", 76.2)), mtr("opus") + " (tr-en)", f'{s330["opus"]["chrF"]:.1f}', "not run", "about 0.077B each", "about 300 MB each", "~289 ms per name*", "yes"],
@@ -351,10 +358,11 @@ def main():
     pts = [("v14", 49.6, FE["V14"]["gold_products.json"][1], True, "r"), ("v14 Fast v2", 35.5, FE["V14F2"]["gold_products.json"][1], True, "lu"), ("v14 Fast v1", 35.5, FE["V14F1"]["gold_products.json"][1], True, "ld"),
            ("Hy-MT2-7B", 7000, G7["chrF"], False, "l"), ("Hy-MT2-1.8B", 1800, G18["chrF"], False, "r"), ("OPUS-MT per language", 77, GO.get("chrF", 76.2), False, "r"), ("NLLB-200 600M", 600, GN.get("chrF", 70.9), False, "r"), ("OPUS-MT mul-en, untrained", 77, 34.2, False, "r")]
     S.append(f'''<section id="compare"><h2>Everything against everything</h2>
-<p>One table with the final models, the earlier fast model, both Hy-MT2 models, the teachers whose translations were used for training, and the untrained model v6–v14 started from. Base models and teachers run alone; our models run as the full system. "vs v14" is the difference in chrF on short labels.</p>
+<p>Every version since the first one, both Hy-MT2 models, the teachers whose translations were used for training, and the untrained model v6–v14 started from. Base models and teachers run alone; our models run as the full system. "vs v14" is the difference in chrF on short labels.</p>
+<p>Short labels, time and size are each version's own numbers from when it was made. The English + Turkish test, the 330 real product names and the two places tests were written later, so on Nov 16 every version was run on them again, all on the same day with today's rules and place list. That is why the places scores are close for every version: places are handled mostly by the rules, which all versions now share. At release, before the larger place lists, v12 scored 109 on the first places test and v13 148 (see "Scores").</p>
 {scatter(pts)}
-{table(["Model", "Role", "Short labels: exact / chrF", "vs v14", "English + Turkish: chrF", "Real names, same 330: chrF", "Places tests", "Parameters", "Size", "Time per label", "Commercial use"], rows, "wide xwide")}
-<p>* Hy-MT2, OPUS-MT and NLLB ran on 4 CPU threads, ours on one; OPUS-MT and NLLB were timed per long product name only. Our four models were timed together on Nov 16. The places tests were run only on our models. OPUS-MT on the English + Turkish test is the Turkish-to-English model (opus-mt-tr-en), the one a teacher would use for that language.</p>
+{table(["Model", "Made / role", "Short labels: exact / chrF", "vs v14", "English + Turkish: chrF", "Real names, same 330: chrF", "Places tests", "Parameters", "Size", "Time per label", "Commercial use"], rows, "wide xwide")}
+<p>* Hy-MT2, OPUS-MT and NLLB ran on 4 CPU threads, ours on one; OPUS-MT and NLLB were timed per long product name only. Values with "~" are averages from that version's own test run; the others are medians. v14 Fast v1 and v2 were timed on Nov 16, when the machine was slower: timed together that day, v14 took 7.8 ms per label and v14 Fast v2 5.3 ms. The places tests were run only on our models. OPUS-MT on the English + Turkish test is the Turkish-to-English model (opus-mt-tr-en), the one a teacher would use for that language.</p>
 <ul>
 <li><b>Short labels:</b> only Hy-MT2-7B is ahead of v14. v14 Fast v2 is ahead of every teacher except the 7B, at 0.035B parameters.</li>
 <li><b>Mixed English + Turkish:</b> v14 Fast v2 ({FE["V14F2"]["mixed_tr.json"][1]:.1f}) is ahead of v14 ({FE["V14"]["mixed_tr.json"][1]:.1f}) and of Hy-MT2-1.8B, behind Hy-MT2-7B.</li>
