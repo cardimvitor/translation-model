@@ -105,7 +105,8 @@ def vs_hy(X):
            f'<details><summary>Show the numbers</summary>{table(["Test", "v14", "Hy-MT2-1.8B", "Hy-MT2-7B"], [[E(n + " (" + sb + ")"), *[f"{v:.1f}" for v in vals]] for n, sb, vals in groups])}</details></figure>')
     # cost: log scale, 1 to 10,000
     import math
-    rows = [("Size of the model files", "MB", [57, 1133, 4625], ["57 MB", "1,133 MB", "4,625 MB"]),
+    rows = [("Parameters (millions)", "M", [56.5, 1800, 7000], ["0.056B (56.5 million)", "1.8B", "7B"]),
+            ("Size of the model files", "MB", [57, 1133, 4625], ["57 MB", "1,133 MB", "4,625 MB"]),
             ("Time per short label", "ms", [6, 600, 1400], ["about 6 ms, 1 thread", "400–800 ms, 4 threads", "about 1,400 ms, 4 threads"])]
     Wd2, L2, R2 = 780, 120, 300; lx = lambda v: L2 + math.log10(v) / 4 * (Wd2 - L2 - R2); rh = 22; Ht2 = 40 + len(rows) * (3 * (rh + 6) + 34); g = ""; yy = 18
     for t in (1, 10, 100, 1000, 10000):
@@ -120,7 +121,7 @@ def vs_hy(X):
                   f'<rect class="hit" x="{L2}" y="{yy - 2}" width="{Wd2 - L2 - R2}" height="{rh + 4}" data-tip="&lt;b&gt;{E(mn)}&lt;/b&gt;&lt;br&gt;{E(title)}: {E(lb)}"/>')
             yy += rh + 6
         yy += 12
-    cost = (f'<figure class="viz"><figcaption><b>Cost: size and speed</b><span>Log scale: each grid line is ten times the one before. Lower is better. Hy-MT2 was given 4 CPU threads, v14 one, so the real speed gap is larger than shown.</span></figcaption>'
+    cost = (f'<figure class="viz"><figcaption><b>Cost: parameters, size and speed</b><span>Log scale: each grid line is ten times the one before. Lower is better. Hy-MT2 was given 4 CPU threads, v14 one, so the real speed gap is larger than shown.</span></figcaption>'
             f'<div class="legend">{leg}</div><div class="tw"><svg viewBox="0 0 {Wd2} {Ht2}" role="img" aria-label="Log-scale bars of model size and time per label" class="hov">{g}</svg></div></figure>')
     return acc, cost
 
@@ -148,14 +149,14 @@ def main():
 <div class="kpis">
 <div><b>76.2%</b><span>of 320 hand-written labels exactly right (87.7 chrF). Rules alone: 20.0%.</span></div>
 <div><b>{P1c["total"][0]} / {P1c["total"][1]}</b><span>places, addresses and transliterations right on the first places test.</span></div>
-<div><b>57 MB</b><span>neural model, about 6 ms per label on one CPU thread.</span></div>
+<div><b>0.056B</b><span>parameters (56.5 million, 57 MB), about 6 ms per label on one CPU thread. Hy-MT2: 1.8B and 7B.</span></div>
 <div><b>23</b><span>models and versions built in about 275 hours, on CPU only.</span></div>
 </div></header>
 <nav aria-label="Contents"><a href="#result">Result</a><a href="#how">How it works</a><a href="#scores">Scores</a><a href="#vshy">v14 vs Hy-MT2</a><a href="#base">Against base models</a><a href="#versions">Every version</a><a href="#story">How it was made</a><a href="#techniques">Techniques</a><a href="#failed">What failed</a><a href="#lessons">Lessons</a><a href="#limits">Limits</a><a href="#use">Using it</a><a href="#data">Data and licenses</a><a href="#time">Time</a><a href="#links">All links</a></nav>''')
 
     # ---------- result
     S.append(f'''<section id="result"><h2>The result</h2>
-<p>Two models are final. <b>v14</b> is the one to use: the most accurate, 57 MB, about 6 ms per short label. <b>v8 Fast</b> is a smaller, faster cut (42 MB, about 3 ms) meant for quick validation runs. Both were trained only with teachers and data that allow commercial use, with attribution.</p>
+<p>Two models are final. <b>v14</b> is the one to use: the most accurate, 0.056B parameters (57 MB), about 6 ms per short label. <b>v8 Fast</b> is a smaller, faster cut (0.042B parameters, 42 MB, about 3 ms) meant for quick validation runs. Both were trained only with teachers and data that allow commercial use, with attribution.</p>
 <p>The task is narrow on purpose. Inputs are short: a product label ("кроссовки для бега"), a marketplace product name, an address, a city. The output is the English a catalogue would use ("running shoes"), or the romanized form when transliteration is asked for.</p>
 {chart()}
 <div class="note"><b>How to read the scores.</b> <i>Exact</i> is the share of outputs equal to an accepted English answer after lowercasing. <i>chrF</i> (0–100) gives partial credit by character overlap, so "cotton tee shirt" for "cotton t-shirt" scores high but not 100. The two main test sets were never used for training: 320 product labels written by hand in 16 languages, and 993 real marketplace product names held out before training. Later tests (mixed-language labels, places) were each written before the work they measure.</div>
@@ -205,15 +206,16 @@ def main():
 
     # ---------- base
     S.append(f'''<section id="base"><h2>Against the base models</h2>
-<p>Base models are existing translators, run alone on the same tests and the same machine. Ours are run as the full system.</p>
-{table(["Model", "Labels: exact / chrF", "Real names: chrF", "Size", "Time per label / per product name"],
-       [["<b>v14</b>", "<b>76.2% / 87.7</b>", "<b>67.5</b>", "<b>57 MB</b>", "<b>6 ms / 24 ms</b> (1 thread)"],
-        ["Hy-MT2-7B (Tencent)", "90.3% / 95.1", "57.5 (330-name sample)", "4,625 MB", "about 1,400 ms / 6,000 ms (4 threads)"],
-        ["Hy-MT2-1.8B (Tencent)", "60.6% / 79.1", "51.9", "1,133 MB", "400–800 ms / 1,550 ms (4 threads)"],
-        ["OPUS-MT, one model per language", "52.8% / 76.2", "47.1", "about 300 MB each", "not timed / 289 ms"],
-        ["NLLB-200 600M (Meta, non-commercial)", "51.9% / 70.9", "48.7", "870 MB", "not timed / 748 ms"],
-        ["OPUS-MT mul-en, before our training", "10.3% / 34.2", "38.4", "about 300 MB", "not timed"]], "wide")}
-{bars("Short labels, chrF", "The base model v6–v14 start from is the last bar.", [("Hy-MT2-7B · 4,625 MB", 95.1, False), ("v14 · 57 MB", 87.7, True), ("Hy-MT2-1.8B · 1,133 MB", 79.1, False), ("OPUS-MT per language · 300 MB each", 76.2, False), ("NLLB-200 600M · 870 MB", 70.9, False), ("OPUS-MT mul-en, untrained · 300 MB", 34.2, False)])}
+<p>Base models are existing translators, run alone on the same tests and the same machine. Ours are run as the full system. Parameters are given in billions (B), the way translation models are usually named: v14 has 56.5 million, which is 0.056B; v8 Fast has 0.042B.</p>
+{table(["Model", "Labels: exact / chrF", "Real names: chrF", "Parameters", "Size", "Time per label / per product name"],
+       [["<b>v14</b>", "<b>76.2% / 87.7</b>", "<b>67.5</b>", "<b>0.056B</b>", "<b>57 MB</b>", "<b>6 ms / 24 ms</b> (1 thread)"],
+        ["v8 Fast", "65.0% / 79.7", "62.2", "0.042B", "42 MB", "3 ms / 17 ms (1 thread)"],
+        ["Hy-MT2-7B (Tencent)", "90.3% / 95.1", "57.5 (330-name sample)", "7B", "4,625 MB", "about 1,400 ms / 6,000 ms (4 threads)"],
+        ["Hy-MT2-1.8B (Tencent)", "60.6% / 79.1", "51.9", "1.8B", "1,133 MB", "400–800 ms / 1,550 ms (4 threads)"],
+        ["OPUS-MT, one model per language", "52.8% / 76.2", "47.1", "about 0.077B each", "about 300 MB each", "not timed / 289 ms"],
+        ["NLLB-200 600M (Meta, non-commercial)", "51.9% / 70.9", "48.7", "0.6B", "870 MB", "not timed / 748 ms"],
+        ["OPUS-MT mul-en, before our training", "10.3% / 34.2", "38.4", "0.077B", "about 300 MB", "not timed"]], "wide")}
+{bars("Short labels, chrF", "The base model v6–v14 start from is the last bar.", [("Hy-MT2-7B · 7B", 95.1, False), ("v14 · 0.056B", 87.7, True), ("Hy-MT2-1.8B · 1.8B", 79.1, False), ("OPUS-MT per language · 300 MB each", 76.2, False), ("NLLB-200 600M · 870 MB", 70.9, False), ("OPUS-MT mul-en, untrained · 300 MB", 34.2, False)])}
 <p><b>v14 beats every base model except Hy-MT2-7B on short labels, and beats all of them on real product names.</b> Hy-MT2-7B stays ahead on short labels by 7.4 chrF and on mixed English + Turkish labels by about 4: a model 80 times larger knows more rare product words. v14 answers about 200 times faster.</p>
 </section>''')
 
@@ -234,6 +236,7 @@ def main():
         ["Mixed English + Turkish: chrF", f"{X['mixed'][0]:.1f}", f"{X['mixed'][1]:.1f}", f"{X['mixed'][2]:.1f}", win(X['mixed'][0], X['mixed'][2])],
         ["Real product names, same 330: chrF", f"{X['names'][0]:.1f}", f"{X['names'][1]:.1f}", f"{X['names'][2]:.1f}", win(X['names'][0], X['names'][2])],
         ["Labels v14 marks reliable: chrF", f"{X['reliable'][0]:.1f}", f"{X['reliable'][1]:.1f}", f"{X['reliable'][2]:.1f}", win(X['reliable'][0], X['reliable'][2])],
+        ["Parameters", "0.056B", "1.8B", "7B", "<b>v14</b>, 124× fewer than the 7B"],
         ["Size", "57 MB", "1,133 MB", "4,625 MB", "<b>v14</b>, 81× smaller"],
         ["Time per short label", "about 6 ms", "400–800 ms", "about 1,400 ms", "<b>v14</b>, about 230× faster"],
         ["Runs on a phone, offline", "yes", "no", "no", "<b>v14</b>"],
