@@ -337,7 +337,7 @@ def main():
     mtr = lambda t: f'{avg(MM[t]["mixed_tr.json"]):.1f}' if MM.get(t, {}).get("mixed_tr.json") else "not measured"
     s330 = A330
     def d(v):
-        return f"{v - FE['V14']['gold_products.json'][1]:+.1f}"
+        return f"{v - 87.7:+.1f}"
     AT = load(os.path.join(W, "all_models_today.json"), {})
     PARAMS = {"fast": "0 (rules)", "v3": "0.007B", "A": "0.013B", "B": "0.013B", "C": "0.013B", "B2": "0.022B", "C2": "0.022B", "H": "0.022B", "ALL3": "0.022B", "HY": "0.022B", "MAX": "0.022B", "JEPA": "0.022B", "BASE": "0.022B",
               "V6": "0.065B", "V7": "0.066B", "V8": "0.050B", "V8F": "0.035B", "V9": "0.050B", "V10": "0.050B", "V11": "0.050B", "V12": "0.050B", "V13": "0.050B", "V14": "0.050B", "V14F1": "0.035B", "V14F2": "0.035B"}
