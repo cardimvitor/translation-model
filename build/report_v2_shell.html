@@ -40,7 +40,7 @@ th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--lin
 th { font-weight: 600; font-size: 12.5px; color: var(--ink-2); white-space: nowrap; }
 tbody tr:last-child td { border-bottom: 0; }
 tr.hl td { background: var(--accent-soft); }
-.wide table { min-width: 760px; }
+.wide table { min-width: 760px; } .xwide table { min-width: 1180px; } .xwide td:first-child { min-width: 150px; }
 .flow { list-style: none; padding: 0; counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .flow li { counter-increment: s; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; font-size: 14.5px; color: var(--ink-2); max-width: none; min-width: 0; }
 .flow li::before { content: "Step " counter(s); display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
@@ -55,14 +55,14 @@ tr.hl td { background: var(--accent-soft); }
 figcaption { display: flex; flex-direction: column; gap: 2px; } figcaption span { font-size: 13.5px; color: var(--ink-2); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
 .sw { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
-.s1b { background: var(--s1); } .s2b { background: var(--s2); } .s3b { background: var(--s3); }
+.s1b { background: var(--s1); } .s2b { background: var(--s2); } .s3b { background: var(--s3); } .s4b { background: var(--ref); } .s4f { fill: var(--ref); }
 .sq { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; } .refb { background: repeating-linear-gradient(90deg, var(--ref) 0 4px, transparent 4px 7px); }
 svg { display: block; width: 100%; min-width: 620px; height: auto; }
 .grid { stroke: var(--line); stroke-width: 1; } .ref { stroke: var(--ref); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .ax { fill: var(--ink-3); font: 11.5px var(--body); } .lab { fill: var(--ink-2); font: 12px var(--body); }
 .ln { fill: none; stroke-width: 2; stroke-linejoin: round; } .ln.s1 { stroke: var(--s1); } .ln.s2 { stroke: var(--s2); }
 .pt { stroke: var(--panel); stroke-width: 2; } .s1f { fill: var(--s1); } .s2f { fill: var(--s2); } .s3f { fill: var(--s3); }
-.bar { stroke: var(--panel); stroke-width: 1; } .val { fill: var(--ink); font: 600 11.5px var(--body); font-variant-numeric: tabular-nums; }
+.bar { stroke: var(--panel); stroke-width: 1; } .val { fill: var(--ink); font: 600 11.5px var(--body); font-variant-numeric: tabular-nums; } .val.sm { font-size: 10.5px; }
 .hit { fill: transparent; cursor: default; } .hit:hover { fill: var(--accent-soft); fill-opacity: .5; }
 .tip { position: absolute; background: var(--ink); color: var(--bg); font-size: 12.5px; padding: 8px 10px; border-radius: 6px; pointer-events: none; line-height: 1.45; z-index: 2; }
 details summary { cursor: pointer; font-size: 13.5px; color: var(--accent); } details .tw { margin-top: 10px; }
@@ -72,11 +72,11 @@ details summary { cursor: pointer; font-size: 13.5px; color: var(--accent); } de
 .bt { height: 14px; display: block; } .bf { display: block; height: 100%; background: var(--ref); border-radius: 0 4px 4px 0; opacity: .55; } .bf.on { background: var(--s1); opacity: 1; }
 @media (max-width: 520px) { .brow { grid-template-columns: 1fr 44px; } .bt { grid-column: 1 / -1; grid-row: 2; } }
 footer { font-size: 13px; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 16px; }
-@media print { body { background: #fff; } main { max-width: none; gap: 28px; padding-block: 0; } h2 { break-after: avoid; } tr, .story div, .viz, .flow li { break-inside: avoid; } .tw { overflow: visible; } .wide table, svg { min-width: 0; } table { font-size: 10.5px; } nav, details { display: none; } }
+@media print { body { background: #fff; } main { max-width: none; gap: 28px; padding-block: 0; } h2 { break-after: avoid; } tr, .story div, .viz, .flow li { break-inside: avoid; } .tw { overflow: visible; } .wide table, .xwide table, svg { min-width: 0; } table { font-size: 10.5px; } nav, details { display: none; } }
 </style>
 <main>
 {{BODY}}
-<footer>Rebuilt from scratch on Nov 15, 2026. Numbers come from the result files of each version; the earlier, longer report is kept in the repository as a PDF.</footer>
+<footer>Rebuilt from scratch on Nov 15, 2026; v14 Fast added on Nov 16. Numbers come from the result files of each version; the earlier, longer report is kept in the repository as a PDF.</footer>
 </main>
 <script>
 (function () {

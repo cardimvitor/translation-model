@@ -1,0 +1,34 @@
+{
+ "chosen": {
+  "one_tau": 0.4,
+  "town_names_still_translated": 0.182,
+  "correct_tuning_words_lost": 0
+ },
+ "all": [
+  {
+   "one_tau": 0.2,
+   "town_names_still_translated": 0.7,
+   "correct_tuning_words_lost": 0
+  },
+  {
+   "one_tau": 0.3,
+   "town_names_still_translated": 0.396,
+   "correct_tuning_words_lost": 0
+  },
+  {
+   "one_tau": 0.4,
+   "town_names_still_translated": 0.182,
+   "correct_tuning_words_lost": 0
+  },
+  {
+   "one_tau": 0.5,
+   "town_names_still_translated": 0.087,
+   "correct_tuning_words_lost": 4
+  },
+  {
+   "one_tau": 0.6,
+   "town_names_still_translated": 0.033,
+   "correct_tuning_words_lost": 7
+  }
+ ]
+}

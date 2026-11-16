@@ -1,0 +1,509 @@
+{
+ "model": "student_V14F2",
+ "chosen": {
+  "w_tau_known": 0.4,
+  "w_tau": 0.8,
+  "english_changed": 2,
+  "english_n": 2993,
+  "foreign_flagged_english": 518,
+  "caught": 199,
+  "caught_right": 157,
+  "ex": [
+   [
+    "mens ribbon watchbands",
+    "mens ribbon watch bands"
+   ],
+   [
+    "gaxaly note 9 case",
+    "galaxy note 9 case"
+   ]
+  ]
+ },
+ "all": [
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.7,
+   "english_changed": 12,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 208,
+   "caught_right": 160,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ],
+    [
+     "seiko sportura watches for men",
+     "seiko sports watches for men"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "handtowels",
+     "towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "kitchen hutches and buffets",
+     "kitchen hats and buffets"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jelly cabinet with mirror"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.8,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 199,
+   "caught_right": 157,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 187,
+   "caught_right": 148,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.7,
+   "english_changed": 12,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 200,
+   "caught_right": 158,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ],
+    [
+     "seiko sportura watches for men",
+     "seiko sports watches for men"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "handtowels",
+     "towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "kitchen hutches and buffets",
+     "kitchen hats and buffets"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jelly cabinet with mirror"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.8,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 191,
+   "caught_right": 155,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 179,
+   "caught_right": 146,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.7,
+   "english_changed": 12,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 187,
+   "caught_right": 152,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ],
+    [
+     "seiko sportura watches for men",
+     "seiko sports watches for men"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "handtowels",
+     "towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "kitchen hutches and buffets",
+     "kitchen hats and buffets"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jelly cabinet with mirror"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.8,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 178,
+   "caught_right": 149,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 166,
+   "caught_right": 140,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.7,
+   "english_changed": 12,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 165,
+   "caught_right": 139,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ],
+    [
+     "seiko sportura watches for men",
+     "seiko sports watches for men"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "handtowels",
+     "towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "kitchen hutches and buffets",
+     "kitchen hats and buffets"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jelly cabinet with mirror"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.8,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 156,
+   "caught_right": 136,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 144,
+   "caught_right": 127,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.7,
+   "english_changed": 12,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 136,
+   "caught_right": 121,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ],
+    [
+     "seiko sportura watches for men",
+     "seiko sports watches for men"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "handtowels",
+     "towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "kitchen hutches and buffets",
+     "kitchen hats and buffets"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jelly cabinet with mirror"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ],
+    [
+     "AmazonBasics Mic On-Camera with",
+     "amazonbasics mic with camera"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.8,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 127,
+   "caught_right": 118,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 115,
+   "caught_right": 109,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "gaxaly note 9 case",
+     "galaxy note 9 case"
+    ]
+   ]
+  }
+ ]
+}

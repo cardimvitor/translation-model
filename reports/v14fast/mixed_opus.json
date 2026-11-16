@@ -1,0 +1,452 @@
+{
+ "mixed_tr.json": [
+  {
+   "lang": "tr",
+   "src": "wireless kulaklık",
+   "out": "Wireless headphones",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "stainless steel çaydanlık",
+   "out": "Stainless steel teapot",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "gaming mouse pad büyük boy",
+   "out": "playing mouse pad large",
+   "exact": false,
+   "chrf": 81.50277208204267
+  },
+  {
+   "lang": "tr",
+   "src": "black deri ceket",
+   "out": "Black leather jacket",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "usb şarj kablosu fast charging",
+   "out": "Usb charge cable fast charging",
+   "exact": false,
+   "chrf": 85.85400688503175
+  },
+  {
+   "lang": "tr",
+   "src": "kadın çanta leather",
+   "out": "Woman bag leather",
+   "exact": false,
+   "chrf": 59.78433168096203
+  },
+  {
+   "lang": "tr",
+   "src": "iphone kılıf",
+   "out": "iPhone cover",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "erkek spor ayakkabı size 42",
+   "out": "Male sneakers for you 42",
+   "exact": false,
+   "chrf": 36.60795406686172
+  },
+  {
+   "lang": "tr",
+   "src": "bluetooth hoparlör",
+   "out": "Bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "laptop çantası",
+   "out": "Laptop bag",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "kids yağmurluk",
+   "out": "children's raincoat",
+   "exact": false,
+   "chrf": 62.292245994097485
+  },
+  {
+   "lang": "tr",
+   "src": "cotton gömlek",
+   "out": "Cotton shirt",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "led ampul",
+   "out": "led amp",
+   "exact": false,
+   "chrf": 16.573915525114153
+  },
+  {
+   "lang": "tr",
+   "src": "smart saat",
+   "out": "Smart hour",
+   "exact": false,
+   "chrf": 31.968286110914008
+  },
+  {
+   "lang": "tr",
+   "src": "wooden masa",
+   "out": "Wooden table",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "baby battaniye",
+   "out": "Baby blanket",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "kitchen bıçak set",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "winter eldiven",
+   "out": "Winter glove",
+   "exact": false,
+   "chrf": 91.09666585944807
+  },
+  {
+   "lang": "tr",
+   "src": "yoga matı non-slip",
+   "out": "yoga mat non-slip",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "running ayakkabı",
+   "out": "Running shoes",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "office sandalye",
+   "out": "Office chair",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "travel yastık",
+   "out": "Travel pillow",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "waterproof çadır",
+   "out": "Waterproof tent",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "red elbise",
+   "out": "Red dress",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "power bank 20000 mah hızlı şarj",
+   "out": "Power bench 20,000 mah fast charge",
+   "exact": false,
+   "chrf": 62.11263268447177
+  },
+  {
+   "lang": "tr",
+   "src": "dog mama kabı",
+   "out": "dog formula bowl",
+   "exact": false,
+   "chrf": 40.63292471894734
+  },
+  {
+   "lang": "tr",
+   "src": "glass şişe",
+   "out": "Glass bottle",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "men's kemer",
+   "out": "men's belt",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "hair kurutma makinesi",
+   "out": "Hair dryer",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "coffee fincan",
+   "out": "Coffee cup",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "robot süpürge",
+   "out": "Robot broom",
+   "exact": false,
+   "chrf": 28.46968233711693
+  },
+  {
+   "lang": "tr",
+   "src": "phone tutucu",
+   "out": "phone receiver",
+   "exact": false,
+   "chrf": 29.789829562360826
+  },
+  {
+   "lang": "tr",
+   "src": "car koltuk kılıfı",
+   "out": "car seatcase",
+   "exact": false,
+   "chrf": 59.09235313234967
+  },
+  {
+   "lang": "tr",
+   "src": "polarized güneş gözlüğü",
+   "out": "Polarized sunglasses",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "silver kolye",
+   "out": "silver necklace",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "gold yüzük",
+   "out": "gold ring",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "school çantası",
+   "out": "School bag",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "camping sandalyesi foldable",
+   "out": "Cement chair tindable",
+   "exact": false,
+   "chrf": 31.459250566081753
+  },
+  {
+   "lang": "tr",
+   "src": "mechanical klavye",
+   "out": "Mechanical keyboard",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "wireless şarj cihazı",
+   "out": "Wireless charger",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "deri wallet",
+   "out": "Skin wallet",
+   "exact": false,
+   "chrf": 33.33999057869115
+  },
+  {
+   "lang": "tr",
+   "src": "kablosuz mouse",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "paslanmaz çelik bottle",
+   "out": "With a stainless steel boot",
+   "exact": false,
+   "chrf": 76.82714228911787
+  },
+  {
+   "lang": "tr",
+   "src": "çocuk bisikleti helmet",
+   "out": "child's bicycle helmet",
+   "exact": false,
+   "chrf": 77.74694686601933
+  },
+  {
+   "lang": "tr",
+   "src": "kış montu waterproof",
+   "out": "winter coat waterproof",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "bebek arabası lightweight",
+   "out": "♪ Baby carriage lightweight ♪",
+   "exact": false,
+   "chrf": 50.01341315713841
+  },
+  {
+   "lang": "tr",
+   "src": "mutfak tartısı digital",
+   "out": "kitchen scale digital",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "oyuncu koltuğu ergonomic",
+   "out": "Player seat ergonomic",
+   "exact": false,
+   "chrf": 39.478875914247716
+  },
+  {
+   "lang": "tr",
+   "src": "kadın sneaker beyaz",
+   "out": "female sneaker white",
+   "exact": false,
+   "chrf": 46.0796868020241
+  },
+  {
+   "lang": "tr",
+   "src": "erkek t-shirt siyah",
+   "out": "Male shirt black",
+   "exact": false,
+   "chrf": 55.283131717055035
+  },
+  {
+   "lang": "tr",
+   "src": "duvar saati modern",
+   "out": "Wall clock is modern",
+   "exact": false,
+   "chrf": 75.30958809748428
+  },
+  {
+   "lang": "tr",
+   "src": "banyo havlusu soft",
+   "out": "bath towel soft",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "çelik termos 1 litre",
+   "out": "Steel thermos 1 litre",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "telefon kılıfı transparent",
+   "out": "Phone case transparent",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "masa lambası led",
+   "out": "table lamp led",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "köpek tasması adjustable",
+   "out": "dog collar adjustable",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "güneş kremi spf 50",
+   "out": "Sunscreen spf 50",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "diş fırçası electric",
+   "out": "Toothbrush Electric",
+   "exact": false,
+   "chrf": 82.43078000430941
+  },
+  {
+   "lang": "tr",
+   "src": "su şişesi bpa free",
+   "out": "Water bottle bpa free",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "yatak örtüsü king size",
+   "out": "Bedspread king to you",
+   "exact": false,
+   "chrf": 71.03438018044696
+  },
+  {
+   "lang": "tr",
+   "src": "spor çantası large",
+   "out": "The duffel bag is large",
+   "exact": false,
+   "chrf": 32.67036595522185
+  },
+  {
+   "lang": "tr",
+   "src": "kol saati vintage",
+   "out": "wristwatch vintage",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "çay bardağı set",
+   "out": "tea cup set",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "halı anti-slip",
+   "out": "The carpet is anti-slip",
+   "exact": false,
+   "chrf": 75.30958809748428
+  }
+ ]
+}

@@ -1,0 +1,1314 @@
+{
+ "by": {
+  "country": [
+   24,
+   24
+  ],
+  "city": [
+   30,
+   30
+  ],
+  "town": [
+   30,
+   30
+  ],
+  "region": [
+   11,
+   12
+  ],
+  "address": [
+   30,
+   34
+  ],
+  "translit": [
+   28,
+   30
+  ]
+ },
+ "total": [
+  153,
+  160
+ ],
+ "rows": [
+  {
+   "kind": "country",
+   "in": "Германия",
+   "out": "Germany",
+   "want": "Germany",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "日本",
+   "out": "Japan",
+   "want": "Japan",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "مصر",
+   "out": "Egypt",
+   "want": "Egypt",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Türkiye",
+   "out": "Türkiye",
+   "want": "Türkiye",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "대한민국",
+   "out": "South Korea",
+   "want": "South Korea",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Ελλάδα",
+   "out": "Greece",
+   "want": "Greece",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "ประเทศไทย",
+   "out": "Thailand",
+   "want": "Thailand",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "ไทย",
+   "out": "Thailand",
+   "want": "Thailand",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Brasil",
+   "out": "Brazil",
+   "want": "Brazil",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Deutschland",
+   "out": "Germany",
+   "want": "Germany",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Espagne",
+   "out": "Spain",
+   "want": "Spain",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Stati Uniti",
+   "out": "United States",
+   "want": "United States",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Wielka Brytania",
+   "out": "United Kingdom",
+   "want": "United Kingdom",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Việt Nam",
+   "out": "Vietnam",
+   "want": "Vietnam",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "भारत",
+   "out": "India",
+   "want": "India",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "中国",
+   "out": "China",
+   "want": "China",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Estados Unidos",
+   "out": "United States",
+   "want": "United States",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Южная Корея",
+   "out": "South Korea",
+   "want": "South Korea",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "المملكة العربية السعودية",
+   "out": "Saudi Arabia",
+   "want": "Saudi Arabia",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Jepang",
+   "out": "Japan",
+   "want": "Japan",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Niemcy",
+   "out": "Germany",
+   "want": "Germany",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Países Bajos",
+   "out": "Netherlands",
+   "want": "Netherlands",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "Suíça",
+   "out": "Switzerland",
+   "want": "Switzerland",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "country",
+   "in": "イタリア",
+   "out": "Italy",
+   "want": "Italy",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Москва",
+   "out": "Moscow",
+   "want": "Moscow",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "北京",
+   "out": "Beijing",
+   "want": "Beijing",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "القاهرة",
+   "out": "Cairo",
+   "want": "Cairo",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "İstanbul",
+   "out": "Istanbul",
+   "want": "Istanbul",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "서울",
+   "out": "Seoul",
+   "want": "Seoul",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "München",
+   "out": "Munich",
+   "want": "Munich",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "กรุงเทพมหานคร",
+   "out": "Bangkok",
+   "want": "Bangkok",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Firenze",
+   "out": "Florence",
+   "want": "Florence",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Варшава",
+   "out": "Warsaw",
+   "want": "Warsaw",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "मुंबई",
+   "out": "Mumbai",
+   "want": "Mumbai",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Αθήνα",
+   "out": "Athens",
+   "want": "Athens",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Θεσσαλονίκη",
+   "out": "Thessaloniki",
+   "want": "Thessaloniki",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Wien",
+   "out": "Vienna",
+   "want": "Vienna",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Praha",
+   "out": "Prague",
+   "want": "Prague",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Venezia",
+   "out": "Venice",
+   "want": "Venice",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "København",
+   "out": "Copenhagen",
+   "want": "Copenhagen",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Genève",
+   "out": "Geneva",
+   "want": "Geneva",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Mailand",
+   "out": "Milan",
+   "want": "Milan",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Londres",
+   "out": "london",
+   "want": "London",
+   "ok": true,
+   "method": "neural"
+  },
+  {
+   "kind": "city",
+   "in": "Nueva York",
+   "out": "New York",
+   "want": "New York",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Pékin",
+   "out": "Beijing",
+   "want": "Beijing",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Den Haag",
+   "out": "The Hague",
+   "want": "The Hague",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "東京",
+   "out": "Tokyo",
+   "want": "Tokyo",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "上海市",
+   "out": "Shanghai",
+   "want": "Shanghai",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "부산",
+   "out": "Busan",
+   "want": "Busan",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "दिल्ली",
+   "out": "Delhi",
+   "want": "Delhi",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Санкт-Петербург",
+   "out": "Saint Petersburg",
+   "want": "Saint Petersburg",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "الرياض",
+   "out": "Riyadh",
+   "want": "Riyadh",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "เชียงใหม่",
+   "out": "Chiang Mai",
+   "want": "Chiang Mai",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "city",
+   "in": "Thành phố Hồ Chí Minh",
+   "out": "Ho Chi Minh City",
+   "want": "Ho Chi Minh City",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Суздаль",
+   "out": "Suzdal",
+   "want": "Suzdal",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Плёс",
+   "out": "Plyos",
+   "want": "Plyos",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Мышкин",
+   "out": "Myshkin",
+   "want": "Myshkin",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Геленджик",
+   "out": "Gelendzhik",
+   "want": "Gelendzhik",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "箱根町",
+   "out": "Hakone",
+   "want": "Hakone",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "軽井沢町",
+   "out": "Karuizawa",
+   "want": "Karuizawa",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "白川村",
+   "out": "Shirakawa",
+   "want": "Shirakawa",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "阳朔",
+   "out": "Yangshuo",
+   "want": "Yangshuo",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "乌镇",
+   "out": "Wuzhen",
+   "want": "Wuzhen",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "속초",
+   "out": "Sokcho",
+   "want": "Sokcho",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "세종시",
+   "out": "Sejong",
+   "want": "Sejong",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "하동군",
+   "out": "Hadong",
+   "want": "Hadong",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "شفشاون",
+   "out": "Chefchaouen",
+   "want": "Chefchaouen",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "دهب",
+   "out": "Dahab",
+   "want": "Dahab",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "العلا",
+   "out": "Al-`Ula",
+   "want": "Al-Ula",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "ऋषिकेश",
+   "out": "Rishikesh",
+   "want": "Rishikesh",
+   "ok": true,
+   "method": "transliteration(neural rejected)"
+  },
+  {
+   "kind": "town",
+   "in": "मनाली",
+   "out": "Manali",
+   "want": "Manali",
+   "ok": true,
+   "method": "transliteration(neural rejected)"
+  },
+  {
+   "kind": "town",
+   "in": "पुष्कर",
+   "out": "Pushkar",
+   "want": "Pushkar",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "ปาย",
+   "out": "Pai",
+   "want": "Pai",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "เกาะสมุย",
+   "out": "Ko Samui",
+   "want": "Ko Samui",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "หัวหิน",
+   "out": "Hua Hin",
+   "want": "Hua Hin",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Ηράκλειο",
+   "out": "Irákleion",
+   "want": "Heraklion",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Σαντορίνη",
+   "out": "Santorini",
+   "want": "Santorini",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Göreme",
+   "out": "Göreme",
+   "want": "Göreme",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Alaçatı",
+   "out": "Alacati",
+   "want": "Alaçatı",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Rothenburg ob der Tauber",
+   "out": "Rothenburg ob der Tauber",
+   "want": "Rothenburg ob der Tauber",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Zakopane",
+   "out": "Zakopane",
+   "want": "Zakopane",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Óbidos",
+   "out": "Óbidos",
+   "want": "Óbidos",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Sapa",
+   "out": "Sapa",
+   "want": "Sa Pa",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Ubud",
+   "out": "Ubud",
+   "want": "Ubud",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Bayern",
+   "out": "Bavaria",
+   "want": "Bavaria",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Калифорния",
+   "out": "California",
+   "want": "California",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Toscana",
+   "out": "toska",
+   "want": "Tuscany",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "region",
+   "in": "北海道",
+   "out": "Hokkaido",
+   "want": "Hokkaido",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Cataluña",
+   "out": "Catalonia",
+   "want": "Catalonia",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "경기도",
+   "out": "Gyeonggi-do",
+   "want": "Gyeonggi-do",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Sicilia",
+   "out": "Sicily",
+   "want": "Sicily",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Bretagne",
+   "out": "Brittany",
+   "want": "Brittany",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "广东省",
+   "out": "Guangdong",
+   "want": "Guangdong",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Нью-Йорк",
+   "out": "New York City",
+   "want": "New York",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "تكساس",
+   "out": "Texas",
+   "want": "Texas",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "region",
+   "in": "Andalucía",
+   "out": "Andalusia",
+   "want": "Andalusia",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "улица Ленина, 15, Москва",
+   "out": "Lenina Street, 15, Moscow",
+   "want": "Lenina Street, 15, Moscow",
+   "ok": true,
+   "method": "dictionary+gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "проспект Мира, д. 10, Казань",
+   "out": "Mira Avenue, 10, Kazan",
+   "want": "Mira Avenue, 10, Kazan",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Atatürk Caddesi No:12, Kadıköy, İstanbul",
+   "out": "Atatürk Avenue No. 12, Kadıköy, Istanbul",
+   "want": "Atatürk Avenue No. 12, Kadıköy, Istanbul",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Cumhuriyet Mah. Atatürk Bulv. No:5 Çankaya/Ankara",
+   "out": "Cumhuriyet Neighborhood Atatürk Boulevard No. 5 Çankaya/Ankara",
+   "want": "Cumhuriyet Neighborhood Atatürk Boulevard No. 5 Çankaya/Ankara",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "İstiklal Cad. No: 45 Beyoğlu İstanbul",
+   "out": "İstiklal Avenue No. 45 Beyoğlu İstanbul",
+   "want": "İstiklal Avenue No. 45 Beyoğlu Istanbul",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "Rua das Flores 25, Lisboa",
+   "out": "das Flores Street 25, Lisbon",
+   "want": "das Flores Street 25, Lisbon",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Avenida Paulista 1578, São Paulo",
+   "out": "Paulista Avenue 1578, São Paulo",
+   "want": "Paulista Avenue 1578, São Paulo",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "北京市朝阳区建国路88号",
+   "out": "Beijing Chaoyang District Jianguo Road No. 88",
+   "want": "Beijing Chaoyang District Jianguo Road No. 88",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "上海市浦东新区世纪大道100号",
+   "out": "Shanghai Pudong Xin District century Avenue No. 100",
+   "want": "Shanghai Pudong New Area Shiji Avenue No. 100",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "東京都渋谷区神南1-2-3",
+   "out": "Tokyo Shibuya Ward Kami Minami 1-2-3",
+   "want": "Tokyo Shibuya Ward Jinnan 1-2-3",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "大阪府大阪市北区梅田3-1-1",
+   "out": "Osaka Osaka City Kita Ward Umeda 3-1-1",
+   "want": "Osaka Osaka Kita Ward Umeda 3-1-1",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "شارع الملك فهد، الرياض",
+   "out": "King Fahd Street, Riyadh",
+   "want": "King Fahd Street, Riyadh",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "شارع التحرير 15، القاهرة",
+   "out": "Al-Tahrir Street 15, Cairo",
+   "want": "Tahrir Street 15, Cairo",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Calle Mayor 5, Madrid",
+   "out": "Mayor Street 5, Madrid",
+   "want": "Mayor Street 5, Madrid",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Avenida de la Constitución 20, Sevilla",
+   "out": "de la Constitución Avenue 20, Seville",
+   "want": "de la Constitución Avenue 20, Seville",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "ul. Marszałkowska 10, Warszawa",
+   "out": "Marszałkowska Street 10, Warsaw",
+   "want": "Marszałkowska Street 10, Warsaw",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "al. Jerozolimskie 54, 00-024 Warszawa",
+   "out": "Jerozolimskie Avenue 54, 00-024 Warsaw",
+   "want": "Jerozolimskie Avenue 54, 00-024 Warsaw",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "서울특별시 강남구 테헤란로 152",
+   "out": "Seoul Gangnam-gu Teheran-ro 152",
+   "want": "Seoul Gangnam-gu Teheran-ro 152",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "부산광역시 해운대구 해운대해변로 264",
+   "out": "Busan Haeundae-gu Haeundaehaebyeon-ro 264",
+   "want": "Busan Haeundae-gu Haeundaehaebyeon-ro 264",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "123 ถนนสุขุมวิท กรุงเทพ",
+   "out": "123 Sukhumwit Road, Bangkok",
+   "want": "123 Sukhumvit Road, Bangkok",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "ถนนนิมมานเหมินท์ ซอย 9 เชียงใหม่",
+   "out": "Nimman Me I Not ์ Road Soi 9 Chiang Mai",
+   "want": "Nimmanhaemin Road Soi 9 Chiang Mai",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "Via Roma 12, Milano",
+   "out": "Roma Street 12, Milan",
+   "want": "Roma Street 12, Milan",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Piazza San Marco 1, Venezia",
+   "out": "San Marco Square 1, Venice",
+   "want": "San Marco Square 1, Venice",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "12 rue de la Paix, Paris",
+   "out": "12 Paix Street, Paris",
+   "want": "12 de la Paix Street, Paris",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "5 avenue des Champs-Élysées, 75008 Paris",
+   "out": "5 des Champs-Élysées Avenue, 75008 Paris",
+   "want": "5 des Champs-Élysées Avenue, 75008 Paris",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Hauptstraße 5, 10115 Berlin",
+   "out": "Hauptstraße 5, 10115 Berlin",
+   "want": "Hauptstraße 5, 10115 Berlin",
+   "ok": true,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Bahnhofstr. 12, 80335 München",
+   "out": "Bahnhofstr. 12, 80335 Munich",
+   "want": "Bahnhofstr. 12, 80335 Munich",
+   "ok": true,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Am Marktplatz 3, Köln",
+   "out": "Am Marktplatz 3, Cologne",
+   "want": "Am Marktplatz 3, Cologne",
+   "ok": true,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Jl. Sudirman No. 10, Jakarta",
+   "out": "Sudirman Street No. 10, Jakarta",
+   "want": "Sudirman Street No. 10, Jakarta",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Jalan Malioboro 52, Yogyakarta",
+   "out": "Malioboro Street 52, Yogyakarta",
+   "want": "Malioboro Street 52, Yogyakarta",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "123 Đường Lê Lợi, Quận 1, Hồ Chí Minh",
+   "out": "123 Lê Lợi Street, District 1, Ho Chi Minh City",
+   "want": "123 Lê Lợi Street, District 1, Ho Chi Minh City",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Số 8 Phố Hàng Bài, Hoàn Kiếm, Hà Nội",
+   "out": "No. 8 Hàng Bài Street, Hoàn Kiếm, Hanoi",
+   "want": "No. 8 Hàng Bài Street, Hoàn Kiếm, Hanoi",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "एमजी रोड, बेंगलुरु",
+   "out": "MG Road, Bengluru",
+   "want": "MG Road, Bengaluru",
+   "ok": false,
+   "method": "dictionary+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "महात्मा गांधी मार्ग, नई दिल्ली",
+   "out": "Mahatma Gandhi Road, New Delhi",
+   "want": "Mahatma Gandhi Marg, New Delhi",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "translit",
+   "in": "Москва",
+   "out": "Moskva",
+   "want": "Moskva",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Александр Пушкин",
+   "out": "Aleksandr Pushkin",
+   "want": "Aleksandr Pushkin",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Нижний Новгород",
+   "out": "Nizhniy Novgorod",
+   "want": "Nizhniy Novgorod",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Екатерина Щербакова",
+   "out": "Yekaterina Shcherbakova",
+   "want": "Ekaterina Shcherbakova",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "北京",
+   "out": "Beijing",
+   "want": "Beijing",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "王小明",
+   "out": "Wang Xiaoming",
+   "want": "Wang Xiaoming",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "東京",
+   "out": "Tokyo",
+   "want": "Tokyo",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "山田太郎",
+   "out": "Yamada Taro",
+   "want": "Yamada Taro",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "佐藤花子",
+   "out": "Sato Hanako",
+   "want": "Sato Hanako",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "ありがとう",
+   "out": "Arigato",
+   "want": "Arigato",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "서울",
+   "out": "Seoul",
+   "want": "Seoul",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "김민준",
+   "out": "Kim Minjun",
+   "want": "Kim Minjun",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "박지성",
+   "out": "Park Jiseong",
+   "want": "Park Jisung",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "이서연",
+   "out": "Lee Seoyeon",
+   "want": "Lee Seoyeon",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "القاهرة",
+   "out": "Al-Qahirah",
+   "want": "Al-Qahirah",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "محمد علي",
+   "out": "Mohammed Ali",
+   "want": "Muhammad Ali",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "عبد الله",
+   "out": "Abdul Allah",
+   "want": "Abdullah",
+   "ok": false,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "فاطمة",
+   "out": "Fatima",
+   "want": "Fatimah",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Αθήνα",
+   "out": "Athina",
+   "want": "Athina",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Γιώργος Παπαδόπουλος",
+   "out": "Giorgos Papadopoulos",
+   "want": "Giorgos Papadopoulos",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "मुंबई",
+   "out": "Mumbai",
+   "want": "Mumbai",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "राजेश कुमार",
+   "out": "Rajesh Kumar",
+   "want": "Rajesh Kumar",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "प्रिया शर्मा",
+   "out": "Priya Sharma",
+   "want": "Priya Sharma",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "กรุงเทพ",
+   "out": "Krungthep",
+   "want": "Krung Thep",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "สมชาย",
+   "out": "Som Chai",
+   "want": "Somchai",
+   "ok": false,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "İstanbul",
+   "out": "İstanbul",
+   "want": "İstanbul",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Łódź",
+   "out": "Łódź",
+   "want": "Łódź",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "улица Ленина, 15",
+   "out": "Ulitsa Lenina, 15",
+   "want": "Ulitsa Lenina, 15",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Київ",
+   "out": "Kyiv",
+   "want": "Kyiv",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Иван Иванов",
+   "out": "Ivan Ivanov",
+   "want": "Ivan Ivanov",
+   "ok": true,
+   "method": "transliteration"
+  }
+ ]
+}

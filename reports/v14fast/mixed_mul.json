@@ -1,0 +1,902 @@
+{
+ "mixed_tr.json": [
+  {
+   "lang": "tr",
+   "src": "wireless kulaklık",
+   "out": "wireless listening",
+   "exact": false,
+   "chrf": 44.848136517361745
+  },
+  {
+   "lang": "tr",
+   "src": "stainless steel çaydanlık",
+   "out": "invalid steel circuit",
+   "exact": false,
+   "chrf": 18.69814515523818
+  },
+  {
+   "lang": "tr",
+   "src": "gaming mouse pad büyük boy",
+   "out": "Playing mouse pad size",
+   "exact": false,
+   "chrf": 54.54338460530411
+  },
+  {
+   "lang": "tr",
+   "src": "black deri ceket",
+   "out": "black to black",
+   "exact": false,
+   "chrf": 24.477330119317976
+  },
+  {
+   "lang": "tr",
+   "src": "usb şarj kablosu fast charging",
+   "out": "USB Charging Cable fast charging",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "kadın çanta leather",
+   "out": "woman's bag leather",
+   "exact": false,
+   "chrf": 78.15727573080515
+  },
+  {
+   "lang": "tr",
+   "src": "iphone kılıf",
+   "out": "iPhone Key",
+   "exact": false,
+   "chrf": 46.50183680960937
+  },
+  {
+   "lang": "tr",
+   "src": "erkek spor ayakkabı size 42",
+   "out": "The man's sport shoes for you 42",
+   "exact": false,
+   "chrf": 58.341717543636996
+  },
+  {
+   "lang": "tr",
+   "src": "bluetooth hoparlör",
+   "out": "bluetooth hopper",
+   "exact": false,
+   "chrf": 53.4219263936958
+  },
+  {
+   "lang": "tr",
+   "src": "laptop çantası",
+   "out": "laptop box",
+   "exact": false,
+   "chrf": 66.81216931216932
+  },
+  {
+   "lang": "tr",
+   "src": "kids yağmurluk",
+   "out": "Kids Rain",
+   "exact": false,
+   "chrf": 61.838423967164225
+  },
+  {
+   "lang": "tr",
+   "src": "cotton gömlek",
+   "out": "Cotton doll",
+   "exact": false,
+   "chrf": 39.527976317915346
+  },
+  {
+   "lang": "tr",
+   "src": "led ampul",
+   "out": "track ampoule",
+   "exact": false,
+   "chrf": 11.014492753623188
+  },
+  {
+   "lang": "tr",
+   "src": "smart saat",
+   "out": "Smart Clock",
+   "exact": false,
+   "chrf": 33.0489417989418
+  },
+  {
+   "lang": "tr",
+   "src": "wooden masa",
+   "out": "Wooden mass",
+   "exact": false,
+   "chrf": 41.07134106291868
+  },
+  {
+   "lang": "tr",
+   "src": "baby battaniye",
+   "out": "mixed baby",
+   "exact": false,
+   "chrf": 19.141122015909243
+  },
+  {
+   "lang": "tr",
+   "src": "kitchen bıçak set",
+   "out": "Kitchen Key Set",
+   "exact": false,
+   "chrf": 52.67381090554676
+  },
+  {
+   "lang": "tr",
+   "src": "winter eldiven",
+   "out": "Winter eldive",
+   "exact": false,
+   "chrf": 40.36075036075036
+  },
+  {
+   "lang": "tr",
+   "src": "yoga matı non-slip",
+   "out": "yoga text non-slip",
+   "exact": false,
+   "chrf": 63.242811535906306
+  },
+  {
+   "lang": "tr",
+   "src": "running ayakkabı",
+   "out": "the jack of diamonds",
+   "exact": false,
+   "chrf": 5.376344086021505
+  },
+  {
+   "lang": "tr",
+   "src": "office sandalye",
+   "out": "office calendar",
+   "exact": false,
+   "chrf": 50.45309177286851
+  },
+  {
+   "lang": "tr",
+   "src": "travel yastık",
+   "out": "travel",
+   "exact": false,
+   "chrf": 39.890284082892784
+  },
+  {
+   "lang": "tr",
+   "src": "waterproof çadır",
+   "out": "the waterproof board",
+   "exact": false,
+   "chrf": 63.309827862274894
+  },
+  {
+   "lang": "tr",
+   "src": "red elbise",
+   "out": "red joker",
+   "exact": false,
+   "chrf": 17.956349206349206
+  },
+  {
+   "lang": "tr",
+   "src": "power bank 20000 mah hızlı şarj",
+   "out": "power bank 20000 hr fast",
+   "exact": false,
+   "chrf": 53.90459011178896
+  },
+  {
+   "lang": "tr",
+   "src": "dog mama kabı",
+   "out": "dog ma'am",
+   "exact": false,
+   "chrf": 10.33932314509387
+  },
+  {
+   "lang": "tr",
+   "src": "glass şişe",
+   "out": "Lightness",
+   "exact": false,
+   "chrf": 11.170177530471646
+  },
+  {
+   "lang": "tr",
+   "src": "men's kemer",
+   "out": "I'm sorry, but's sorry.",
+   "exact": false,
+   "chrf": 9.24368293527172
+  },
+  {
+   "lang": "tr",
+   "src": "hair kurutma makinesi",
+   "out": "hairdryer",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "coffee fincan",
+   "out": "coffee fincan",
+   "exact": false,
+   "chrf": 47.82626981575092
+  },
+  {
+   "lang": "tr",
+   "src": "robot süpürge",
+   "out": "Robots with safe teleport with super-safe moves",
+   "exact": false,
+   "chrf": 20.043396633875606
+  },
+  {
+   "lang": "tr",
+   "src": "phone tutucu",
+   "out": "_Videophone",
+   "exact": false,
+   "chrf": 32.557720057720054
+  },
+  {
+   "lang": "tr",
+   "src": "car koltuk kılıfı",
+   "out": "car colloquy key",
+   "exact": false,
+   "chrf": 14.053267254674312
+  },
+  {
+   "lang": "tr",
+   "src": "polarized güneş gözlüğü",
+   "out": "polarized sun vision",
+   "exact": false,
+   "chrf": 58.70228604435771
+  },
+  {
+   "lang": "tr",
+   "src": "silver kolye",
+   "out": "silver ball",
+   "exact": false,
+   "chrf": 33.463237460634545
+  },
+  {
+   "lang": "tr",
+   "src": "gold yüzük",
+   "out": "goldline",
+   "exact": false,
+   "chrf": 30.912698412698408
+  },
+  {
+   "lang": "tr",
+   "src": "school çantası",
+   "out": "school pack",
+   "exact": false,
+   "chrf": 50.556654566295855
+  },
+  {
+   "lang": "tr",
+   "src": "camping sandalyesi foldable",
+   "out": "campsites for walking sandals",
+   "exact": false,
+   "chrf": 22.660769606173005
+  },
+  {
+   "lang": "tr",
+   "src": "mechanical klavye",
+   "out": "mechanical keyboard",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "wireless şarj cihazı",
+   "out": "wireless hardware",
+   "exact": false,
+   "chrf": 51.34192858069467
+  },
+  {
+   "lang": "tr",
+   "src": "deri wallet",
+   "out": "until",
+   "exact": false,
+   "chrf": 3.508771929824562
+  },
+  {
+   "lang": "tr",
+   "src": "kablosuz mouse",
+   "out": "wireless Mouse",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "paslanmaz çelik bottle",
+   "out": "unrolled cell bottle",
+   "exact": false,
+   "chrf": 30.761972570278672
+  },
+  {
+   "lang": "tr",
+   "src": "çocuk bisikleti helmet",
+   "out": "child bike helmet",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "kış montu waterproof",
+   "out": "sunmount waterproof",
+   "exact": false,
+   "chrf": 51.79510124819107
+  },
+  {
+   "lang": "tr",
+   "src": "bebek arabası lightweight",
+   "out": "baby lightweight car",
+   "exact": false,
+   "chrf": 52.49861287778202
+  },
+  {
+   "lang": "tr",
+   "src": "mutfak tartısı digital",
+   "out": "digital mutfack interface",
+   "exact": false,
+   "chrf": 33.7425458467337
+  },
+  {
+   "lang": "tr",
+   "src": "oyuncu koltuğu ergonomic",
+   "out": "ergonomics-based puzzle game",
+   "exact": false,
+   "chrf": 39.874490274197484
+  },
+  {
+   "lang": "tr",
+   "src": "kadın sneaker beyaz",
+   "out": "woman sneaker white",
+   "exact": false,
+   "chrf": 45.9793126227666
+  },
+  {
+   "lang": "tr",
+   "src": "erkek t-shirt siyah",
+   "out": "t-shirt type",
+   "exact": false,
+   "chrf": 33.79104041505543
+  },
+  {
+   "lang": "tr",
+   "src": "duvar saati modern",
+   "out": "two hours modern",
+   "exact": false,
+   "chrf": 29.280883744971202
+  },
+  {
+   "lang": "tr",
+   "src": "banyo havlusu soft",
+   "out": "swimming pool",
+   "exact": false,
+   "chrf": 6.510416666666667
+  },
+  {
+   "lang": "tr",
+   "src": "çelik termos 1 litre",
+   "out": "square root of 1 litre",
+   "exact": false,
+   "chrf": 27.23054178936532
+  },
+  {
+   "lang": "tr",
+   "src": "telefon kılıfı transparent",
+   "out": "phone keyboard transparency",
+   "exact": false,
+   "chrf": 55.176980367062214
+  },
+  {
+   "lang": "tr",
+   "src": "masa lambası led",
+   "out": "table caption",
+   "exact": false,
+   "chrf": 26.569865319865322
+  },
+  {
+   "lang": "tr",
+   "src": "köpek tasması adjustable",
+   "out": "dog fittable",
+   "exact": false,
+   "chrf": 21.656549329302816
+  },
+  {
+   "lang": "tr",
+   "src": "güneş kremi spf 50",
+   "out": "sunscreen spf 50",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "tr",
+   "src": "diş fırçası electric",
+   "out": "electric",
+   "exact": false,
+   "chrf": 39.895401356760004
+  },
+  {
+   "lang": "tr",
+   "src": "su şişesi bpa free",
+   "out": "su su su su su su bpa free",
+   "exact": false,
+   "chrf": 27.80077050346867
+  },
+  {
+   "lang": "tr",
+   "src": "yatak örtüsü king size",
+   "out": "bedroom area kingpaper size",
+   "exact": false,
+   "chrf": 31.429660237389495
+  },
+  {
+   "lang": "tr",
+   "src": "spor çantası large",
+   "out": "Width of the track group",
+   "exact": false,
+   "chrf": 8.771929824561402
+  },
+  {
+   "lang": "tr",
+   "src": "kol saati vintage",
+   "out": "I'll be back in the morning.",
+   "exact": false,
+   "chrf": 13.479181045915414
+  },
+  {
+   "lang": "tr",
+   "src": "çay bardağı set",
+   "out": "tea sheet set",
+   "exact": false,
+   "chrf": 23.080830695187444
+  },
+  {
+   "lang": "tr",
+   "src": "halı anti-slip",
+   "out": "statusbar anti-slip",
+   "exact": false,
+   "chrf": 62.292245994097485
+  }
+ ],
+ "mixed_labels.json": [
+  {
+   "lang": "zh",
+   "src": "wireless 耳机",
+   "out": "wireless",
+   "exact": false,
+   "chrf": 42.3851179025738
+  },
+  {
+   "lang": "zh",
+   "src": "不锈钢 water bottle",
+   "out": "No water bottle",
+   "exact": false,
+   "chrf": 42.63500470458439
+  },
+  {
+   "lang": "zh",
+   "src": "kids 雨衣",
+   "out": "Kids, rain.",
+   "exact": false,
+   "chrf": 32.37814609206788
+  },
+  {
+   "lang": "zh",
+   "src": "黑色 leather 夹克",
+   "out": "Black Leader, Jack.",
+   "exact": false,
+   "chrf": 48.56994507804031
+  },
+  {
+   "lang": "es",
+   "src": "wireless auriculares",
+   "out": "wireless audio",
+   "exact": false,
+   "chrf": 41.25843591895745
+  },
+  {
+   "lang": "es",
+   "src": "botella de agua stainless steel",
+   "out": "stainless steel water bottle",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "es",
+   "src": "kids impermeable",
+   "out": "kids impermeable",
+   "exact": false,
+   "chrf": 18.451862176998844
+  },
+  {
+   "lang": "es",
+   "src": "chaqueta de cuero black",
+   "out": "black leather jacket",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "pt",
+   "src": "fones de ouvido wireless",
+   "out": "wireless hearing backgrounds",
+   "exact": false,
+   "chrf": 52.613746343678294
+  },
+  {
+   "lang": "pt",
+   "src": "garrafa de água stainless steel",
+   "out": "stainless steel water tank",
+   "exact": false,
+   "chrf": 75.18587730561245
+  },
+  {
+   "lang": "pt",
+   "src": "capa de chuva kids",
+   "out": "rain layer kids",
+   "exact": false,
+   "chrf": 31.383164874907322
+  },
+  {
+   "lang": "pt",
+   "src": "jaqueta de couro black",
+   "out": "black joker",
+   "exact": false,
+   "chrf": 22.956651069911807
+  },
+  {
+   "lang": "ar",
+   "src": "wireless سماعات",
+   "out": "wireless hearing",
+   "exact": false,
+   "chrf": 57.43320272204442
+  },
+  {
+   "lang": "ar",
+   "src": "زجاجة ماء stainless steel",
+   "out": "Stealless steel",
+   "exact": false,
+   "chrf": 36.735865232855225
+  },
+  {
+   "lang": "ar",
+   "src": "kids معطف مطر",
+   "out": "Kids are a great fan.",
+   "exact": false,
+   "chrf": 22.158098564004188
+  },
+  {
+   "lang": "ar",
+   "src": "جاكيت جلد black",
+   "out": "Jackett, quick black.",
+   "exact": false,
+   "chrf": 37.6353425985779
+  },
+  {
+   "lang": "ru",
+   "src": "wireless наушники",
+   "out": "wireless plug-ins",
+   "exact": false,
+   "chrf": 40.53815622066662
+  },
+  {
+   "lang": "ru",
+   "src": "бутылка для воды stainless steel",
+   "out": "waterless steel",
+   "exact": false,
+   "chrf": 43.23996413709005
+  },
+  {
+   "lang": "ru",
+   "src": "kids дождевик",
+   "out": "Kids rain",
+   "exact": false,
+   "chrf": 61.838423967164225
+  },
+  {
+   "lang": "ru",
+   "src": "кожаная куртка black",
+   "out": "red joker",
+   "exact": false,
+   "chrf": 7.431358381502891
+  },
+  {
+   "lang": "ja",
+   "src": "wireless イヤホン",
+   "out": "wireless John",
+   "exact": false,
+   "chrf": 42.91047820641584
+  },
+  {
+   "lang": "ja",
+   "src": "ステンレス water bottle",
+   "out": "St. St.",
+   "exact": false,
+   "chrf": 5.957446808510639
+  },
+  {
+   "lang": "ja",
+   "src": "kids レインコート",
+   "out": "Kids Link",
+   "exact": false,
+   "chrf": 21.128392055896047
+  },
+  {
+   "lang": "ja",
+   "src": "黒 leather ジャケット",
+   "out": "Black leather jacket",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "ko",
+   "src": "wireless 이어폰",
+   "out": "wireless",
+   "exact": false,
+   "chrf": 42.3851179025738
+  },
+  {
+   "lang": "ko",
+   "src": "스테인리스 water bottle",
+   "out": "Water bottle",
+   "exact": false,
+   "chrf": 53.64455953924971
+  },
+  {
+   "lang": "ko",
+   "src": "kids 우비",
+   "out": "Kids.",
+   "exact": false,
+   "chrf": 27.107714353952712
+  },
+  {
+   "lang": "ko",
+   "src": "블랙 leather 자켓",
+   "out": "- I'm sorry.",
+   "exact": false,
+   "chrf": 1.0416666666666665
+  },
+  {
+   "lang": "de",
+   "src": "wireless kopfhörer",
+   "out": "wireless headphone",
+   "exact": false,
+   "chrf": 94.70553847668111
+  },
+  {
+   "lang": "de",
+   "src": "wasserflasche stainless steel",
+   "out": "water bottle stainless steel",
+   "exact": false,
+   "chrf": 88.24228307923961
+  },
+  {
+   "lang": "de",
+   "src": "kids regenmantel",
+   "out": "Kids regexp",
+   "exact": false,
+   "chrf": 24.7541293226235
+  },
+  {
+   "lang": "de",
+   "src": "lederjacke black",
+   "out": "Leaderjack black",
+   "exact": false,
+   "chrf": 44.11201711521757
+  },
+  {
+   "lang": "fr",
+   "src": "écouteurs wireless",
+   "out": "wireless listeners",
+   "exact": false,
+   "chrf": 42.99235078646843
+  },
+  {
+   "lang": "fr",
+   "src": "bouteille d'eau stainless steel",
+   "out": "Steelless water bottle",
+   "exact": false,
+   "chrf": 57.47705532919737
+  },
+  {
+   "lang": "fr",
+   "src": "imperméable kids",
+   "out": "impermeable kids",
+   "exact": false,
+   "chrf": 18.451862176998844
+  },
+  {
+   "lang": "fr",
+   "src": "veste en cuir black",
+   "out": "leather black dress",
+   "exact": false,
+   "chrf": 44.723889306558185
+  },
+  {
+   "lang": "hi",
+   "src": "wireless हेडफोन",
+   "out": "wireless Headphone",
+   "exact": false,
+   "chrf": 94.70553847668111
+  },
+  {
+   "lang": "hi",
+   "src": "पानी की बोतल stainless steel",
+   "out": "Water bottleless steel",
+   "exact": false,
+   "chrf": 68.9409522915008
+  },
+  {
+   "lang": "hi",
+   "src": "kids रेनकोट",
+   "out": "Kids Rencot",
+   "exact": false,
+   "chrf": 35.382845226341736
+  },
+  {
+   "lang": "hi",
+   "src": "black चमड़े की जैकेट",
+   "out": "Black Light's Jacket",
+   "exact": false,
+   "chrf": 45.09289185759773
+  },
+  {
+   "lang": "tr",
+   "src": "wireless kulaklık",
+   "out": "wireless listening",
+   "exact": false,
+   "chrf": 37.94131117752502
+  },
+  {
+   "lang": "tr",
+   "src": "stainless steel su şişesi",
+   "out": "stainless steel with steel",
+   "exact": false,
+   "chrf": 60.393236273235686
+  },
+  {
+   "lang": "tr",
+   "src": "kids yağmurluk",
+   "out": "Kids Rain",
+   "exact": false,
+   "chrf": 61.838423967164225
+  },
+  {
+   "lang": "tr",
+   "src": "black deri ceket",
+   "out": "black to black",
+   "exact": false,
+   "chrf": 24.477330119317976
+  },
+  {
+   "lang": "id",
+   "src": "sepatu lari black",
+   "out": "black joker",
+   "exact": false,
+   "chrf": 20.883953973974407
+  },
+  {
+   "lang": "id",
+   "src": "botol air stainless steel",
+   "out": "Steelless button",
+   "exact": false,
+   "chrf": 23.554634077013628
+  },
+  {
+   "lang": "id",
+   "src": "jas hujan kids",
+   "out": "I mean, if you're too young",
+   "exact": false,
+   "chrf": 8.333333333333332
+  },
+  {
+   "lang": "id",
+   "src": "jaket kulit black",
+   "out": "black joker",
+   "exact": false,
+   "chrf": 22.956651069911807
+  },
+  {
+   "lang": "vi",
+   "src": "tai nghe wireless",
+   "out": "That's false.",
+   "exact": false,
+   "chrf": 6.024096385542169
+  },
+  {
+   "lang": "vi",
+   "src": "bình nước stainless steel",
+   "out": "The steel is still in the form of stainless steel.",
+   "exact": false,
+   "chrf": 51.43449691021789
+  },
+  {
+   "lang": "vi",
+   "src": "áo mưa kids",
+   "out": "- The kids' clothes.",
+   "exact": false,
+   "chrf": 18.451862176998844
+  },
+  {
+   "lang": "vi",
+   "src": "áo khoác da black",
+   "out": "the black joker",
+   "exact": false,
+   "chrf": 22.956651069911807
+  },
+  {
+   "lang": "it",
+   "src": "cuffie wireless",
+   "out": "Empty",
+   "exact": false,
+   "chrf": 2.5974025974025974
+  },
+  {
+   "lang": "it",
+   "src": "bottiglia d'acqua stainless steel",
+   "out": "steel stainless steel water bottle",
+   "exact": false,
+   "chrf": 95.72533365003879
+  },
+  {
+   "lang": "it",
+   "src": "impermeabile kids",
+   "out": "unlimited kids",
+   "exact": false,
+   "chrf": 19.106913695170174
+  },
+  {
+   "lang": "it",
+   "src": "giacca di pelle black",
+   "out": "black leather jacket",
+   "exact": true,
+   "chrf": 100.0
+  },
+  {
+   "lang": "pl",
+   "src": "słuchawki wireless",
+   "out": "wireless listeners",
+   "exact": false,
+   "chrf": 39.86971659978934
+  },
+  {
+   "lang": "pl",
+   "src": "butelka na wodę stainless steel",
+   "out": "bottle on water",
+   "exact": false,
+   "chrf": 29.35821398556803
+  },
+  {
+   "lang": "pl",
+   "src": "płaszcz przeciwdeszczowy kids",
+   "out": "Anti-circuit area",
+   "exact": false,
+   "chrf": 10.416666666666666
+  },
+  {
+   "lang": "pl",
+   "src": "kurtka skórzana black",
+   "out": "short black score",
+   "exact": false,
+   "chrf": 26.294736705477277
+  },
+  {
+   "lang": "th",
+   "src": "หูฟัง wireless",
+   "out": "Listen to it, wireless.",
+   "exact": false,
+   "chrf": 39.897372050645835
+  },
+  {
+   "lang": "th",
+   "src": "ขวดน้ำ stainless steel",
+   "out": "Stealing of water",
+   "exact": false,
+   "chrf": 20.444914397966702
+  },
+  {
+   "lang": "th",
+   "src": "เสื้อกันฝน kids",
+   "out": "Wearing the kids.",
+   "exact": false,
+   "chrf": 22.92372587938348
+  },
+  {
+   "lang": "th",
+   "src": "แจ็คเก็ตหนัง black",
+   "out": "Jack's black.",
+   "exact": false,
+   "chrf": 27.23126498229273
+  }
+ ]
+}

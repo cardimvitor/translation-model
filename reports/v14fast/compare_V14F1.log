@@ -1,0 +1,7 @@
+test                student_V8F  student_V14F1
+tuning_labels     51.6% /  72.6  55.2% /  74.6  ok
+test_labels       65.0% /  79.7  66.6% /  80.2  ok
+real_names         6.0% /  62.1   6.3% /  62.3  ok
+cases                        70             70  ok
+blind                        44             45  ok
+VERDICT: PASS (new model kept)

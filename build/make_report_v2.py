@@ -38,16 +38,18 @@ M = [
     ("v12", "V12", "Nov 15", 76.2, 87.8, 67.5, "57", "6.5", "24.5", True, "v11's weights; a word check so one foreign word inside an English label is translated."),
     ("v13", "V13", "Nov 15", 76.2, 87.8, 67.6, "57", "6.1", "23.7", True, "v11's weights; place list of the whole world; address and transliteration fixes."),
     ("v14", "V14", "Nov 15", 76.2, 87.7, 67.5, "57", "6.1", "23.7", True, "v11's weights; villages, islands, districts; mined Arabic and Hindi readings; more street forms."),
+    ("v14 Fast v1", "V14F1", "Nov 16", 66.6, 80.2, 62.3, "42", "4.4", "17.8", True, "v8 Fast's weights with every v14 rule, thresholds tuned for it."),
+    ("v14 Fast v2", "V14F2", "Nov 16", 68.4, 83.6, 61.3, "42", "5.3", "16.6", True, "Cut from v14's weights (3 encoder layers, 1 decoder layer), retrained 3 hours on all current data, v14 rules."),
 ]
 FOLDER = {"v3": "student_v3", "A": "student_A", "B": "student_B", "C": "student_C", "B2": "student_B2", "C2": "student_C2", "H": "student_H", "ALL3": "student_ALL3", "HY": "student_HY", "MAX": "student_MAX",
           "JEPA": "student_JEPA", "BASE": "student_BASE", "V6": "student_V6", "V7": "student_V7", "V8": "student_V8", "V8F": "student_V8F", "V9": "student_V9", "V10": "student_V10", "V11": "student_V11",
-          "V12": "student_V12", "V13": "student_V13", "V14": "student_V14"}
+          "V12": "student_V12", "V13": "student_V13", "V14": "student_V14", "V14F1": "student_V14F1", "V14F2": "student_V14F2"}
 ZIP = {"v3": "en-normalizer-accurate-v3.zip", "A": "en-normalizer-accurate-A.zip", "B": "en-normalizer-accurate-B.zip", "C": "en-normalizer-accurate-C.zip", "B2": "en-normalizer-accurate-B2.zip", "C2": "en-normalizer-accurate-C2.zip",
        "H": "en-normalizer-accurate-H.zip", "ALL3": "en-normalizer-accurate-ALL3.zip", "HY": "en-normalizer-accurate-HY.zip", "MAX": "en-normalizer-accurate-MAX.zip", "JEPA": "en-normalizer-accurate-JEPA.zip", "BASE": "en-normalizer-accurate-BASE.zip",
        "V6": "en-normalizer-accurate-V6.zip", "V7": "en-normalizer-accurate-V7.zip", "V8": "label-normalizer-V8.zip", "V8F": "label-normalizer-V8F.zip", "V9": "label-normalizer-V9.zip", "V10": "label-normalizer-V10.zip", "V11": "label-normalizer-V11.zip",
-       "V12": "label-normalizer-V12.zip", "V13": "label-normalizer-V13.zip", "V14": "label-normalizer-V14.zip", "fast": "en-normalizer-fast.zip"}
-FP32 = {"V6", "V8", "V8F", "V9", "V10", "V11", "V12", "V13", "V14"}
-REPORTS = {"B2": "v5", "C2": "v5", "H": "v5", "ALL3": "v5", "HY": "v5", "MAX": "v5", "V6": "v6", "V7": "v7", "V8": "v8", "V8F": "v8", "V9": "v9", "V10": "v10", "V11": "v11", "V12": "v12", "V13": "v13", "V14": "v14"}
+       "V12": "label-normalizer-V12.zip", "V13": "label-normalizer-V13.zip", "V14": "label-normalizer-V14.zip", "V14F1": "label-normalizer-V14F1.zip", "V14F2": "label-normalizer-V14F2.zip", "fast": "en-normalizer-fast.zip"}
+FP32 = {"V6", "V8", "V8F", "V9", "V10", "V11", "V12", "V13", "V14", "V14F1", "V14F2"}
+REPORTS = {"B2": "v5", "C2": "v5", "H": "v5", "ALL3": "v5", "HY": "v5", "MAX": "v5", "V6": "v6", "V7": "v7", "V8": "v8", "V8F": "v8", "V9": "v9", "V10": "v10", "V11": "v11", "V12": "v12", "V13": "v13", "V14": "v14", "V14F1": "v14fast", "V14F2": "v14fast"}
 GH = "https://github.com/cardimvitor/translation-model"; BR = "ccr-9202c40a-kuyiob"; T = f"{GH}/tree/{BR}"; B = f"{GH}/blob/{BR}"
 A = lambda u, t: f'<a href="{u}">{E(t)}</a>'
 
@@ -105,7 +107,7 @@ def vs_hy(X):
            f'<details><summary>Show the numbers</summary>{table(["Test", "v14", "Hy-MT2-1.8B", "Hy-MT2-7B"], [[E(n + " (" + sb + ")"), *[f"{v:.1f}" for v in vals]] for n, sb, vals in groups])}</details></figure>')
     # cost: log scale, 1 to 10,000
     import math
-    rows = [("Parameters (millions)", "M", [56.5, 1800, 7000], ["0.056B (56.5 million)", "1.8B", "7B"]),
+    rows = [("Parameters (millions)", "M", [49.6, 1800, 7000], ["0.050B (49.6 million)", "1.8B", "7B"]),
             ("Size of the model files", "MB", [57, 1133, 4625], ["57 MB", "1,133 MB", "4,625 MB"]),
             ("Time per short label", "ms", [6, 600, 1400], ["about 6 ms, 1 thread", "400–800 ms, 4 threads", "about 1,400 ms, 4 threads"])]
     Wd2, L2, R2 = 780, 120, 300; lx = lambda v: L2 + math.log10(v) / 4 * (Wd2 - L2 - R2); rh = 22; Ht2 = 40 + len(rows) * (3 * (rh + 6) + 34); g = ""; yy = 18
@@ -126,6 +128,48 @@ def vs_hy(X):
     return acc, cost
 
 
+def grouped(title, note, groups, series, aria):
+    """Grouped bars on one chrF scale. groups: [(name, sub, [values per series])]; series: [(name, css class)]."""
+    n = len(series); Wd, Ht, L, Tp, Bt = 780, 330, 40, 26, 56; gw = (Wd - L - 10) / len(groups); bw = min(30, (gw - 30) / n - 4); gap = 4
+    y = lambda v: Tp + (100 - v) * (Ht - Tp - Bt) / 100; g = ""
+    for v in (0, 25, 50, 75, 100):
+        g += f'<line x1="{L}" x2="{Wd - 10}" y1="{y(v):.1f}" y2="{y(v):.1f}" class="grid"/><text x="{L - 8}" y="{y(v) + 4:.1f}" class="ax" text-anchor="end">{v}</text>'
+    for gi, (name, sub, vals) in enumerate(groups):
+        cx = L + gw * gi + gw / 2; x0 = cx - (n * bw + (n - 1) * gap) / 2
+        for si, ((mn, cls), v) in enumerate(zip(series, vals)):
+            if v is None:
+                continue
+            x = x0 + si * (bw + gap); top = y(v)
+            g += (f'<path class="bar {cls}f" d="M{x:.1f},{y(0):.1f} V{top + 4:.1f} Q{x:.1f},{top:.1f} {x + 4:.1f},{top:.1f} H{x + bw - 4:.1f} Q{x + bw:.1f},{top:.1f} {x + bw:.1f},{top + 4:.1f} V{y(0):.1f} Z"/>'
+                  f'<text x="{x + bw / 2:.1f}" y="{top - 6:.1f}" class="val sm" text-anchor="middle">{v:.1f}</text>'
+                  f'<rect class="hit" x="{x - 2:.1f}" y="{Tp}" width="{bw + 4:.1f}" height="{Ht - Tp - Bt}" data-tip="&lt;b&gt;{E(mn)}&lt;/b&gt;&lt;br&gt;{E(name)}: {v:.1f} chrF"/>')
+        g += f'<text x="{cx:.1f}" y="{Ht - Bt + 20}" class="lab" text-anchor="middle">{E(name)}</text><text x="{cx:.1f}" y="{Ht - Bt + 36}" class="ax" text-anchor="middle">{E(sub)}</text>'
+    leg = "".join(f'<span><i class="sq {c}b"></i>{E(nm)}</span>' for nm, c in series)
+    return (f'<figure class="viz"><figcaption><b>{title}</b><span>{note}</span></figcaption><div class="legend">{leg}</div>'
+            f'<div class="tw"><svg viewBox="0 0 {Wd} {Ht}" role="img" aria-label="{E(aria)}" class="hov">{g}</svg></div>'
+            f'<details><summary>Show the numbers</summary>{table(["Test"] + [E(nm) for nm, _ in series], [[E(nm + " (" + sb + ")")] + [("-" if v is None else f"{v:.1f}") for v in vals] for nm, sb, vals in groups])}</details></figure>')
+
+
+def scatter(points):
+    """Accuracy on short labels against model size, log x. points: [(name, params in millions, chrF, ours, label side)]."""
+    import math
+    Wd, Ht, L, R, Tp, Bt = 780, 360, 48, 30, 20, 50; lo, hi = 10, 10000
+    x = lambda v: L + (math.log10(v) - 1) / 3 * (Wd - L - R); y = lambda v: Tp + (100 - v) * (Ht - Tp - Bt) / 70; g = ""
+    for v in (30, 50, 70, 90):
+        g += f'<line x1="{L}" x2="{Wd - R}" y1="{y(v):.1f}" y2="{y(v):.1f}" class="grid"/><text x="{L - 8}" y="{y(v) + 4:.1f}" class="ax" text-anchor="end">{v}</text>'
+    for t, lb in ((10, "0.01B"), (100, "0.1B"), (1000, "1B"), (10000, "10B")):
+        g += f'<line x1="{x(t):.1f}" x2="{x(t):.1f}" y1="{Tp}" y2="{Ht - Bt}" class="grid"/><text x="{x(t):.1f}" y="{Ht - Bt + 18}" class="ax" text-anchor="middle">{lb}</text>'
+    g += f'<text x="{(L + Wd - R) / 2:.0f}" y="{Ht - 8}" class="ax" text-anchor="middle">parameters, log scale: each grid line is ten times the one before</text>'
+    for n, pm, c, ours, side in points:
+        px, py = x(pm), y(c); anc = {"r": "start", "l": "end"}[side[0]]; dx = 9 if side[0] == "r" else -9; dy = {"": 4, "u": -8, "d": 15}[side[1:]]
+        g += (f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{6 if ours else 5}" class="pt {"s1f" if ours else "s3f"}"/>'
+              f'<text x="{px + dx:.1f}" y="{py + dy:.1f}" class="lab" text-anchor="{anc}">{E(n)}</text>'
+              f'<rect class="hit" x="{px - 10:.1f}" y="{py - 10:.1f}" width="20" height="20" data-tip="&lt;b&gt;{E(n)}&lt;/b&gt;&lt;br&gt;{pm / 1000:.3f}B parameters · {c:.1f} chrF"/>')
+    return (f'<figure class="viz"><figcaption><b>Accuracy against size</b><span>Short labels, chrF (higher is better) against number of parameters. Up and to the left is better.</span></figcaption>'
+            f'<div class="legend"><span><i class="sq s1b"></i>Models made in this project</span><span><i class="sq s3b"></i>Existing models (teachers, base)</span></div>'
+            f'<div class="tw"><svg viewBox="0 0 {Wd} {Ht}" role="img" aria-label="Scatter of label accuracy against parameters" class="hov">{g}</svg></div></figure>')
+
+
 def bars(title, note, items, unit=""):
     mx = max(v for _, v, _ in items)
     r = "".join(f'<div class="brow"><span class="bn">{n}</span><span class="bt"><i class="{"bf on" if hl else "bf"}" style="width:{v / mx * 100:.1f}%"></i></span><span class="bv">{v}{unit}</span></div>' for n, v, hl in items)
@@ -144,19 +188,19 @@ def main():
     S = []
 
     # ---------- summary
-    S.append(f'''<header><p class="eyebrow">Project report · Nov 4 – Nov 15, 2026</p><h1>Label Normalizer</h1>
-<p class="lede">An offline system that turns product names, item labels and addresses written in 16 languages into English, on a phone or a server. This page covers everything from the first version to v14: what was built, how each model was made, what was measured, what failed, and where every file is.</p>
+    S.append(f'''<header><p class="eyebrow">Project report · Nov 4 – Nov 16, 2026</p><h1>Label Normalizer</h1>
+<p class="lede">An offline system that turns product names, item labels and addresses written in 16 languages into English, on a phone or a server. This page covers everything from the first version to v14 and v14 Fast: what was built, how each model was made, what was measured, what failed, and where every file is.</p>
 <div class="kpis">
 <div><b>76.2%</b><span>of 320 hand-written labels exactly right (87.7 chrF). Rules alone: 20.0%.</span></div>
 <div><b>{P1c["total"][0]} / {P1c["total"][1]}</b><span>places, addresses and transliterations right on the first places test.</span></div>
-<div><b>0.056B</b><span>parameters (56.5 million, 57 MB), about 6 ms per label on one CPU thread. Hy-MT2: 1.8B and 7B.</span></div>
-<div><b>23</b><span>models and versions built in about 275 hours, on CPU only.</span></div>
+<div><b>0.050B</b><span>parameters (49.6 million, 57 MB), about 6 ms per label on one CPU thread. Hy-MT2: 1.8B and 7B.</span></div>
+<div><b>25</b><span>models and versions built in about 280 hours, on CPU only.</span></div>
 </div></header>
-<nav aria-label="Contents"><a href="#result">Result</a><a href="#how">How it works</a><a href="#scores">Scores</a><a href="#vshy">v14 vs Hy-MT2</a><a href="#base">Against base models</a><a href="#versions">Every version</a><a href="#story">How it was made</a><a href="#techniques">Techniques</a><a href="#failed">What failed</a><a href="#lessons">Lessons</a><a href="#limits">Limits</a><a href="#use">Using it</a><a href="#data">Data and licenses</a><a href="#time">Time</a><a href="#links">All links</a></nav>''')
+<nav aria-label="Contents"><a href="#result">Result</a><a href="#how">How it works</a><a href="#scores">Scores</a><a href="#vshy">v14 vs Hy-MT2</a><a href="#fast">v14 Fast</a><a href="#compare">Everything compared</a><a href="#base">Against base models</a><a href="#versions">Every version</a><a href="#story">How it was made</a><a href="#techniques">Techniques</a><a href="#failed">What failed</a><a href="#lessons">Lessons</a><a href="#limits">Limits</a><a href="#use">Using it</a><a href="#data">Data and licenses</a><a href="#time">Time</a><a href="#links">All links</a></nav>''')
 
     # ---------- result
     S.append(f'''<section id="result"><h2>The result</h2>
-<p>Two models are final. <b>v14</b> is the one to use: the most accurate, 0.056B parameters (57 MB), about 6 ms per short label. <b>v8 Fast</b> is a smaller, faster cut (0.042B parameters, 42 MB, about 3 ms) meant for quick validation runs. Both were trained only with teachers and data that allow commercial use, with attribution.</p>
+<p>Two models are final. <b>v14</b> is the one to use: the most accurate, 0.050B parameters (57 MB), about 6 ms per short label. <b>v14 Fast v2</b> is the smaller, faster one (0.035B parameters, 42 MB, about 4–5 ms) for quick validation runs and weaker phones; it replaces v8 Fast. Both were trained only with teachers and data that allow commercial use, with attribution.</p>
 <p>The task is narrow on purpose. Inputs are short: a product label ("кроссовки для бега"), a marketplace product name, an address, a city. The output is the English a catalogue would use ("running shoes"), or the romanized form when transliteration is asked for.</p>
 {chart()}
 <div class="note"><b>How to read the scores.</b> <i>Exact</i> is the share of outputs equal to an accepted English answer after lowercasing. <i>chrF</i> (0–100) gives partial credit by character overlap, so "cotton tee shirt" for "cotton t-shirt" scores high but not 100. The two main test sets were never used for training: 320 product labels written by hand in 16 languages, and 993 real marketplace product names held out before training. Later tests (mixed-language labels, places) were each written before the work they measure.</div>
@@ -186,12 +230,13 @@ def main():
                 [["Marked reliable", f'{RL["reliable_share"] * 100:.0f}%', f'<b>{RL["reliable_exact"] * 100:.1f}% / {RL["reliable_chrF"]:.1f}</b>', f'{RV["reliable"]["hy7"][0]}% / {RV["reliable"]["hy7"][1]}'],
                  ["Marked needs review", f'{100 - RL["reliable_share"] * 100:.0f}%', f'{RV["needs review"]["v11"][0]}% / {RL["rest_chrF"]:.1f}', f'{RV["needs review"]["hy7"][0]}% / {RV["needs review"]["hy7"][1]}']])
     S.append(f'''<section id="scores"><h2>Scores of the final system</h2>
-{table(["Test", "What it holds", "v14", "v8 Fast"],
-       [["Short labels", "320 hand-written product labels, 16 languages", "<b>76.2% exact / 87.7 chrF</b>", "65.0% / 79.7"],
-        ["Short labels never seen in training", "the 260 of those whose text is not in the training data", "<b>73.1% / 86.1</b>", "59.6% / 76.7"],
-        ["Real product names", "993 marketplace names written by people", "<b>67.5 chrF</b>", "62.2 chrF"],
-        ["Address cases", "70 tuned and 48 unseen addresses and places", "<b>70 of 70 · 45 of 48</b>", "70 of 70 · 44 of 48"],
-        ["Time per request", "one CPU thread, 8-bit model", "<b>about 6 ms per label, 24 ms per long name</b>", "about 3 ms, 17 ms"]])}
+{table(["Test", "What it holds", "v14", "v14 Fast v2"],
+       [["Short labels", "320 hand-written product labels, 16 languages", "<b>76.2% exact / 87.7 chrF</b>", "68.4% / 83.6"],
+        ["Short labels never seen in training", "the 260 of those whose text is not in the training data", "<b>73.1% / 86.1</b>", "63.8% / 81.2"],
+        ["Real product names", "993 marketplace names written by people", "<b>67.5 chrF</b>", "61.3 chrF"],
+        ["Address cases", "70 tuned and 48 unseen addresses and places", "<b>70 of 70 · 45 of 48</b>", "70 of 70 · 45 of 48"],
+        ["Places tests", "160 and 101 hand-written items", "<b>153 · 91</b>", "153 · 91"],
+        ["Time per request", "one CPU thread, 8-bit model", "<b>about 6 ms per label, 24 ms per long name</b>", "about 4–5 ms, 17 ms"]])}
 <h3>Labels that mix two languages</h3>
 <p>A label that is English except for one word, or the other way round, must still be translated ("black deri ceket", "led ampul"). The test was written by hand in English + Turkish and never trained on.</p>
 {mixed}
@@ -206,16 +251,16 @@ def main():
 
     # ---------- base
     S.append(f'''<section id="base"><h2>Against the base models</h2>
-<p>Base models are existing translators, run alone on the same tests and the same machine. Ours are run as the full system. Parameters are given in billions (B), the way translation models are usually named: v14 has 56.5 million, which is 0.056B; v8 Fast has 0.042B.</p>
+<p>Base models are existing translators, run alone on the same tests and the same machine. Ours are run as the full system. Parameters are given in billions (B), the way translation models are usually named: v14 has 49.6 million, which is 0.050B (49.1 million shared plus the 0.4-million expert of the label's language; the decoder's input and output word tables are one shared matrix and are counted once); v8 Fast has 0.035B.</p>
 {table(["Model", "Labels: exact / chrF", "Real names: chrF", "Parameters", "Size", "Time per label / per product name"],
-       [["<b>v14</b>", "<b>76.2% / 87.7</b>", "<b>67.5</b>", "<b>0.056B</b>", "<b>57 MB</b>", "<b>6 ms / 24 ms</b> (1 thread)"],
-        ["v8 Fast", "65.0% / 79.7", "62.2", "0.042B", "42 MB", "3 ms / 17 ms (1 thread)"],
+       [["<b>v14</b>", "<b>76.2% / 87.7</b>", "<b>67.5</b>", "<b>0.050B</b>", "<b>57 MB</b>", "<b>6 ms / 24 ms</b> (1 thread)"],
+        ["v14 Fast v2", "68.4% / 83.6", "61.3", "0.035B", "42 MB", "about 5 ms / 17 ms (1 thread)"],
         ["Hy-MT2-7B (Tencent)", "90.3% / 95.1", "57.5 (330-name sample)", "7B", "4,625 MB", "about 1,400 ms / 6,000 ms (4 threads)"],
         ["Hy-MT2-1.8B (Tencent)", "60.6% / 79.1", "51.9", "1.8B", "1,133 MB", "400–800 ms / 1,550 ms (4 threads)"],
         ["OPUS-MT, one model per language", "52.8% / 76.2", "47.1", "about 0.077B each", "about 300 MB each", "not timed / 289 ms"],
         ["NLLB-200 600M (Meta, non-commercial)", "51.9% / 70.9", "48.7", "0.6B", "870 MB", "not timed / 748 ms"],
         ["OPUS-MT mul-en, before our training", "10.3% / 34.2", "38.4", "0.077B", "about 300 MB", "not timed"]], "wide")}
-{bars("Short labels, chrF", "The base model v6–v14 start from is the last bar.", [("Hy-MT2-7B · 7B", 95.1, False), ("v14 · 0.056B", 87.7, True), ("Hy-MT2-1.8B · 1.8B", 79.1, False), ("OPUS-MT per language · 300 MB each", 76.2, False), ("NLLB-200 600M · 870 MB", 70.9, False), ("OPUS-MT mul-en, untrained · 300 MB", 34.2, False)])}
+{bars("Short labels, chrF", "The base model v6–v14 start from is the last bar.", [("Hy-MT2-7B · 7B", 95.1, False), ("v14 · 0.050B", 87.7, True), ("Hy-MT2-1.8B · 1.8B", 79.1, False), ("OPUS-MT per language · 300 MB each", 76.2, False), ("NLLB-200 600M · 870 MB", 70.9, False), ("OPUS-MT mul-en, untrained · 300 MB", 34.2, False)])}
 <p><b>v14 beats every base model except Hy-MT2-7B on short labels, and beats all of them on real product names.</b> Hy-MT2-7B stays ahead on short labels by 7.4 chrF and on mixed English + Turkish labels by about 4: a model 80 times larger knows more rare product words. v14 answers about 200 times faster.</p>
 </section>''')
 
@@ -236,7 +281,7 @@ def main():
         ["Mixed English + Turkish: chrF", f"{X['mixed'][0]:.1f}", f"{X['mixed'][1]:.1f}", f"{X['mixed'][2]:.1f}", win(X['mixed'][0], X['mixed'][2])],
         ["Real product names, same 330: chrF", f"{X['names'][0]:.1f}", f"{X['names'][1]:.1f}", f"{X['names'][2]:.1f}", win(X['names'][0], X['names'][2])],
         ["Labels v14 marks reliable: chrF", f"{X['reliable'][0]:.1f}", f"{X['reliable'][1]:.1f}", f"{X['reliable'][2]:.1f}", win(X['reliable'][0], X['reliable'][2])],
-        ["Parameters", "0.056B", "1.8B", "7B", "<b>v14</b>, 124× fewer than the 7B"],
+        ["Parameters", "0.050B", "1.8B", "7B", "<b>v14</b>, 141× fewer than the 7B"],
         ["Size", "57 MB", "1,133 MB", "4,625 MB", "<b>v14</b>, 81× smaller"],
         ["Time per short label", "about 6 ms", "400–800 ms", "about 1,400 ms", "<b>v14</b>, about 230× faster"],
         ["Runs on a phone, offline", "yes", "no", "no", "<b>v14</b>"],
@@ -250,10 +295,77 @@ def main():
 <p>Real-name scores here use the 330-name sample on which Hy-MT2-7B was run (it needs about 6 seconds per name), so all three are scored on exactly the same names; on all 993 names v14 scores 67.5. The places tests were not run on Hy-MT2.</p>
 </section>''')
 
+    # ---------- v14 Fast
+    FE = {}
+    for k in ("V8F", "V14F1", "V14F2", "V14"):
+        d = load(os.path.join(W, f"diff_student_{k}.json"), {}); FE[k] = {f: (sum(r["exact"] for r in d[f]) / len(d[f]) * 100, avg(d[f])) for f in d} if d else {}
+    SS = load(os.path.join(W, "seen_split.json"), {}); SP = load(os.path.join(W, "speed_ours.json"), {})
+    A3 = {json.loads(l)["model"].replace("student_", ""): json.loads(l) for l in open(os.path.join(W, "abo330_fast.jsonl"))} if os.path.exists(os.path.join(W, "abo330_fast.jsonl")) else {}
+    PL = {k: (load(os.path.join(W, f"places_{k}.json"), {"total": [0, 0]})["total"][0], load(os.path.join(W, f"places_2_{k}.json"), {"total": [0, 0]})["total"][0]) for k in ("V14F1", "V14F2")}
+    PL["V14"] = (P1c["total"][0], P2c["total"][0])
+    CMP2 = open(os.path.join(W, "compare_V14F2.log")).read() if os.path.exists(os.path.join(W, "compare_V14F2.log")) else ""
+    REL = {k: load(os.path.join(W, f"reliable_student_{k}.json"), {}).get("test", {}) for k in ("V14F1", "V14F2", "V14")}
+    sp = lambda k, w: SP.get("student_" + k, {}).get(w, {}).get("system", {}).get("median_ms", 0)
+    abo_all = {"V8F": 62.2, "V14F1": 62.3, "V14F2": 61.3, "V14": 67.5}; unseen = lambda k: SS.get("student_" + k, {}).get("gold_unseen", {}).get("accurate", {"exact": 0, "chrF": 0})
+    fr = lambda k, f: f"{FE[k][f][0]:.1f}% / {FE[k][f][1]:.1f}" if k in FE and f in FE[k] else "-"
+    S.append(f'''<section id="fast"><h2>v14 Fast: two versions</h2>
+<p>The fast model was v8 Fast, made on Nov 13, before most of the later work. Two new fast models were made from it on Nov 16, both with 0.035B parameters (35.5 million) and the same shape as v8 Fast (3 encoder layers, 1 decoder layer, no language experts):</p>
+<ul>
+<li><b>v14 Fast v1:</b> v8 Fast's weights unchanged, re-exported so it can use beam search, and given every v14 rule (word check, English double check, one-word guard, reliable mark), each threshold tuned again for this model on data outside the tests. About 30 minutes, no training.</li>
+<li><b>v14 Fast v2:</b> cut from v14's weights (encoder layers 1, 3 and 5 and decoder layer 1 of v14) and retrained for 3 hours on all current data, including the pairs the 7B judge corrected; the pairs it rejected were left out. Then the same rules, tuned for it.</li>
+</ul>
+{grouped("Fast models against v14", "chrF, 0–100, higher is better. Full system on each test.", [("Short labels", "320", [FE["V8F"]["gold_products.json"][1], FE["V14F1"]["gold_products.json"][1], FE["V14F2"]["gold_products.json"][1], FE["V14"]["gold_products.json"][1]]), ("Tuning labels", "192", [FE["V8F"]["dev_labels.json"][1], FE["V14F1"]["dev_labels.json"][1], FE["V14F2"]["dev_labels.json"][1], FE["V14"]["dev_labels.json"][1]]), ("English + Turkish", "64", [FE["V8F"]["mixed_tr.json"][1], FE["V14F1"]["mixed_tr.json"][1], FE["V14F2"]["mixed_tr.json"][1], FE["V14"]["mixed_tr.json"][1]]), ("Real product names", "993", [abo_all["V8F"], abo_all["V14F1"], abo_all["V14F2"], abo_all["V14"]])], [("v8 Fast", "s4"), ("v14 Fast v1", "s2"), ("v14 Fast v2", "s3"), ("v14", "s1")], "Grouped bar chart of the fast models and v14 on four tests")}
+{table(["Test", "v8 Fast (before)", "v14 Fast v1", "<b>v14 Fast v2</b>", "v14 (full)"],
+       [["Short labels: exact / chrF", fr("V8F", "gold_products.json"), fr("V14F1", "gold_products.json"), "<b>" + fr("V14F2", "gold_products.json") + "</b>", fr("V14", "gold_products.json")],
+        ["Short labels never seen in training", "59.6% / 76.7", f'{unseen("V14F1")["exact"] * 100:.1f}% / {unseen("V14F1")["chrF"]:.1f}', f'<b>{unseen("V14F2")["exact"] * 100:.1f}% / {unseen("V14F2")["chrF"]:.1f}</b>', "73.1% / 86.1"],
+        ["Tuning labels (192)", fr("V8F", "dev_labels.json"), fr("V14F1", "dev_labels.json"), "<b>" + fr("V14F2", "dev_labels.json") + "</b>", fr("V14", "dev_labels.json")],
+        ["English + Turkish labels (64)", fr("V8F", "mixed_tr.json"), fr("V14F1", "mixed_tr.json"), "<b>" + fr("V14F2", "mixed_tr.json") + "</b>", fr("V14", "mixed_tr.json")],
+        ["Real product names, 993: chrF", "62.2", "<b>62.3</b>", "61.3", "67.5"],
+        ["Places test 1 (160) · test 2 (101)", "not measured", f"{PL['V14F1'][0]} · {PL['V14F1'][1]}", f"<b>{PL['V14F2'][0]} · {PL['V14F2'][1]}</b>", f"{PL['V14'][0]} · {PL['V14'][1]}"],
+        ["Address cases: tuned · unseen", "70 · 44", "70 · 45", "70 · 45", "70 · 45"],
+        ["Marked reliable: share, chrF", "no mark", f'{REL["V14F1"].get("reliable_share", 0) * 100:.0f}%, {REL["V14F1"].get("reliable_chrF", 0):.1f}', f'<b>{REL["V14F2"].get("reliable_share", 0) * 100:.0f}%, {REL["V14F2"].get("reliable_chrF", 0):.1f}</b>', f'{REL["V14"].get("reliable_share", 0) * 100:.0f}%, {REL["V14"].get("reliable_chrF", 0):.1f}'],
+        ["Parameters · model files", "0.035B · 42 MB", "0.035B · 42 MB", "0.035B · 42 MB", "0.050B · 57 MB"],
+        ["Time per label / per long name", f'{sp("V8F", "labels"):.1f} / {sp("V8F", "names"):.1f} ms', f'{sp("V14F1", "labels"):.1f} / {sp("V14F1", "names"):.1f} ms', f'{sp("V14F2", "labels"):.1f} / {sp("V14F2", "names"):.1f} ms', f'{sp("V14", "labels"):.1f} / {sp("V14", "names"):.1f} ms']], "wide")}
+<p><b>v14 Fast v2 is the new fast model.</b> Against v8 Fast it gains {FE["V14F2"]["gold_products.json"][1] - FE["V8F"]["gold_products.json"][1]:.1f} chrF on short labels, {FE["V14F2"]["dev_labels.json"][1] - FE["V8F"]["dev_labels.json"][1]:.1f} on the tuning labels and {FE["V14F2"]["mixed_tr.json"][1] - FE["V8F"]["mixed_tr.json"][1]:.1f} on mixed-language labels, and it now has the place list, the reliable mark and the word check. It is still {FE["V14"]["gold_products.json"][1] - FE["V14F2"]["gold_products.json"][1]:.1f} chrF behind v14 on short labels.</p>
+<p><b>One loss:</b> on the 993 real product names v2 scores 61.3 against 62.2 for v8 Fast. That is more than the 0.5 the automatic gate allows, so the gate said FAIL for v2; v1 passed. Blending v2's weights with v8 Fast's was tried at six ratios and did not recover it on held-out titles. If long marketplace names are the main input, use v14 Fast v1 or v14 itself.</p>
+<p>All four were timed together on Nov 16, one CPU thread. The build machine was slower that day than on Nov 15 (v14 took 6.1 ms per label then), so compare the four with each other rather than with older timings. Differences under about 1 ms are within run-to-run noise; v14 Fast v2 uses a 2-candidate beam search, which costs about 0.3 ms per label.</p>
+</section>''')
+
+    # ---------- full comparison
+    G18 = load(os.path.join(W, "teachers", "gold_hy18.json"), {}); G7 = load(os.path.join(W, "teachers", "gold_hy7.json"), {}); GO = load(os.path.join(W, "teachers", "gold_opus.json"), {}); GN = load(os.path.join(W, "teachers", "gold_nllb.json"), {})
+    MM = {t: load(os.path.join(W, "teachers", f"mixed_{t}.json"), {}) for t in ("hy7", "hy18", "opus", "nllb", "mul")}
+    mtr = lambda t: f'{avg(MM[t]["mixed_tr.json"]):.1f}' if MM.get(t, {}).get("mixed_tr.json") else "not measured"
+    s330 = A330
+    def d(v):
+        return f"{v - FE['V14']['gold_products.json'][1]:+.1f}"
+    rows = [
+        ["<b>v14</b>", "ours", f'{fr("V14", "gold_products.json")}', "0", f'{FE["V14"]["mixed_tr.json"][1]:.1f}', f'{XX["v14_abo330"]["chrF"]:.1f}', f"{PL['V14'][0]} · {PL['V14'][1]}", "0.050B", "57 MB", f'{sp("V14", "labels"):.1f} ms', "yes"],
+        ["<b>v14 Fast v2</b>", "ours", fr("V14F2", "gold_products.json"), d(FE["V14F2"]["gold_products.json"][1]), f'{FE["V14F2"]["mixed_tr.json"][1]:.1f}', f'{A3.get("V14F2", {}).get("chrF", 0):.1f}', f"{PL['V14F2'][0]} · {PL['V14F2'][1]}", "0.035B", "42 MB", f'{sp("V14F2", "labels"):.1f} ms', "yes"],
+        ["v14 Fast v1", "ours", fr("V14F1", "gold_products.json"), d(FE["V14F1"]["gold_products.json"][1]), f'{FE["V14F1"]["mixed_tr.json"][1]:.1f}', f'{A3.get("V14F1", {}).get("chrF", 0):.1f}', f"{PL['V14F1'][0]} · {PL['V14F1'][1]}", "0.035B", "42 MB", f'{sp("V14F1", "labels"):.1f} ms', "yes"],
+        ["v8 Fast", "ours, Nov 13", fr("V8F", "gold_products.json"), d(FE["V8F"]["gold_products.json"][1]), f'{FE["V8F"]["mixed_tr.json"][1]:.1f}', f'{A3.get("V8F", {}).get("chrF", 0):.1f}', "not measured", "0.035B", "42 MB", f'{sp("V8F", "labels"):.1f} ms', "yes"],
+        ["Hy-MT2-7B (Tencent)", "judge and teacher", f'{G7["exact"] * 100:.1f}% / {G7["chrF"]:.1f}', d(G7["chrF"]), mtr("hy7"), f'{s330["hy7"]["chrF"]:.1f}', "not run", "7B", "4,625 MB", "~1,400 ms*", "yes"],
+        ["Hy-MT2-1.8B (Tencent)", "teacher", f'{G18["exact"] * 100:.1f}% / {G18["chrF"]:.1f}', d(G18["chrF"]), mtr("hy18"), f'{s330["hy18"]["chrF"]:.1f}', "not run", "1.8B", "1,133 MB", "400–800 ms*", "yes"],
+        ["OPUS-MT, one model per language (Helsinki-NLP)", "teacher", f'{GO.get("exact", 0.528) * 100:.1f}% / {GO.get("chrF", 76.2):.1f}', d(GO.get("chrF", 76.2)), mtr("opus") + " (tr-en)", f'{s330["opus"]["chrF"]:.1f}', "not run", "about 0.077B each", "about 300 MB each", "~289 ms per name*", "yes"],
+        ["NLLB-200 600M (Meta)", "teacher, v3–v5 only", f'{GN.get("exact", 0.519) * 100:.1f}% / {GN.get("chrF", 70.9):.1f}', d(GN.get("chrF", 70.9)), mtr("nllb"), f'{s330["nllb"]["chrF"]:.1f}', "not run", "0.6B", "870 MB", "~748 ms per name*", "no"],
+        ["OPUS-MT mul-en, untrained", "starting weights of v6–v14", "10.3% / 34.2", d(34.2), mtr("mul"), "38.4 (all 993)", "not run", "0.077B", "about 300 MB", "not timed", "yes"]]
+    pts = [("v14", 49.6, FE["V14"]["gold_products.json"][1], True, "r"), ("v14 Fast v2", 35.5, FE["V14F2"]["gold_products.json"][1], True, "lu"), ("v14 Fast v1", 35.5, FE["V14F1"]["gold_products.json"][1], True, "ld"),
+           ("Hy-MT2-7B", 7000, G7["chrF"], False, "l"), ("Hy-MT2-1.8B", 1800, G18["chrF"], False, "r"), ("OPUS-MT per language", 77, GO.get("chrF", 76.2), False, "r"), ("NLLB-200 600M", 600, GN.get("chrF", 70.9), False, "r"), ("OPUS-MT mul-en, untrained", 77, 34.2, False, "r")]
+    S.append(f'''<section id="compare"><h2>Everything against everything</h2>
+<p>One table with the final models, the earlier fast model, both Hy-MT2 models, the teachers whose translations were used for training, and the untrained model v6–v14 started from. Base models and teachers run alone; our models run as the full system. "vs v14" is the difference in chrF on short labels.</p>
+{scatter(pts)}
+{table(["Model", "Role", "Short labels: exact / chrF", "vs v14", "English + Turkish: chrF", "Real names, same 330: chrF", "Places tests", "Parameters", "Size", "Time per label", "Commercial use"], rows, "wide xwide")}
+<p>* Hy-MT2, OPUS-MT and NLLB ran on 4 CPU threads, ours on one; OPUS-MT and NLLB were timed per long product name only. Our four models were timed together on Nov 16. The places tests were run only on our models. OPUS-MT on the English + Turkish test is the Turkish-to-English model (opus-mt-tr-en), the one a teacher would use for that language.</p>
+<ul>
+<li><b>Short labels:</b> only Hy-MT2-7B is ahead of v14. v14 Fast v2 is ahead of every teacher except the 7B, at 0.035B parameters.</li>
+<li><b>Mixed English + Turkish:</b> v14 Fast v2 ({FE["V14F2"]["mixed_tr.json"][1]:.1f}) is ahead of v14 ({FE["V14"]["mixed_tr.json"][1]:.1f}) and of Hy-MT2-1.8B, behind Hy-MT2-7B.</li>
+<li><b>Real product names:</b> every one of our models is ahead of every existing model, including Hy-MT2-7B.</li>
+</ul>
+</section>''')
+
     # ---------- every version
     rows = []
     for n, k, d, ex, ch, ab, mb, l, nm, com, idea in M:
-        nb = f"<b>{E(n)}</b>" if k in ("V14", "V8F") else E(n)
+        nb = f"<b>{E(n)}</b>" if k in ("V14", "V14F2") else E(n)
         rows.append([nb, d, f"{ex:.1f}%", f"{ch:.1f}", f"{ab:.1f}", mb, l, nm, "yes" if com else "no"])
     S.append(f'''<section id="versions"><h2>Every version, one table</h2>
 <p>Full system on the same two tests. Sizes are the 8-bit model files. Times are medians on one CPU thread; values with "~" are averages from that model's own test run, and v14 was timed side by side with v13 and found equal. "Commercial" says whether the teachers and data behind the model allow commercial use.</p>
@@ -273,6 +385,7 @@ def main():
         ("Cleaning the data with a judge: v11 (Nov 14)", "v10 was run over 28,493 training labels and missed 10,685. Hy-MT2-7B re-translated 8,331 of them. In about seven of ten cases the training answer itself was wrong or poor, not the model. 5,976 bad pairs were removed and 5,921 corrected ones taught. v11 also added the English double check (9 of 320 test labels had been returned untranslated) and the reliable mark."),
         ("One foreign word: v12 (Nov 15)", "A new English + Turkish test showed labels like \"led ampul\" coming back untranslated. Training on 44,000 mixed-language pairs made ordinary labels worse and was rejected, as were blends of old and new weights. The neural model alone already scored 90.6 on the test; the loss was in the rules. A word-level English check fixed it without touching the weights."),
         ("Places of the whole world: v13 and v14 (Nov 15)", f"The place list was rebuilt twice from GeoNames: first every town of 500 people or more with regions and preferred English names, then villages from 200 people, islands, districts, neighbourhoods and every place with a local-script name ({gm.get('entries', 0):,} names, {gmb:.0f} MB). Address rules were extended (postal codes, German street names, abbreviations across languages, Korean and Japanese forms), personal-name tables and Ukrainian and Greek rules were added, and about 7,500 Arabic word readings were mined from place names because Arabic is written without short vowels. The two places tests went from 109 to 153 of 160 and from 75 to 91 of 101."),
+        ("A new fast model: v14 Fast (Nov 16)", "v8 Fast had missed everything after Nov 13. Version 1 kept its weights and added every v14 rule, each threshold tuned again for it: short labels 79.7 to 80.2, mixed English + Turkish 77.4 to 87.9. Version 2 was cut from v14's own weights (3 of its 6 encoder layers, 1 of its 2 decoder layers) and retrained for 3 hours on all current data: short labels 83.6, tuning labels 83.1 (v8 Fast 72.6). Its one loss, 0.9 chrF on long real product names, made the automatic gate say FAIL; it is kept as the fast model because it is better on every other test, and the loss is stated wherever it is offered."),
     ]
     S.append('<section id="story"><h2>How it was made, in order</h2><div class="story">' + "".join(f"<div><h3>{E(t)}</h3><p>{E(b)}</p></div>" for t, b in story) + "</div></section>")
 
@@ -312,6 +425,7 @@ def main():
         ["v11, first run: mixed labels made by joining two labels", "Taught the model to keep foreign word order.", "Discarded; rebuilt by swapping one known word."],
         ["v12 training on 44,000 mixed-language pairs", "Tuning labels fell from 90.3 to 88.3 chrF; the gate said FAIL.", "Rejected; the weights stayed v11's."],
         ["Blending v11 and v12 weights", "No blend beat v11's weights on tuning data.", "Rejected."],
+        ["Blending v14 Fast v2 with v8 Fast", "Meant to recover 0.9 chrF on real product names; no ratio helped on held-out titles.", "Rejected; v2 kept as trained."],
         ["First rebuilt place list (v13)", "Read the Russian word for hair as the Greek city Volos.", "Fixed with a product-word block list before release."],
         ["Cross-language street rule, first version (v14)", "Read Polish “al.” as Portuguese.", "Caught by the places test and fixed before release."]], "wide")}
 </section>''')
@@ -338,6 +452,7 @@ def main():
 <li><b>Places still missed:</b> 17 of the 261 items in the two places tests, mainly some Japanese readings, Thai address words written without spaces, places named in a third language, and Ukrainian text with no Ukrainian-only letters.</li>
 <li><b>The place list is large:</b> {gmb:.0f} MB, and about 875 MB of memory in Python with every writing system loaded (the v13 list: 32 MB and about 480 MB). A phone loads only the writing systems it meets.</li>
 <li><b>Korean and Thai</b> remain the weakest languages for product labels.</li>
+<li><b>v14 Fast v2 failed one gate check:</b> 61.3 against 62.2 chrF for v8 Fast on the 993 real product names (the gate allows 0.5). It is better on every other test.</li>
 <li><b>Test sets are small</b> (320 labels from 20 products, 64 mixed labels, 261 place items). Differences under about 1 chrF between neighbouring versions are within noise.</li>
 <li><b>Automated checks on GitHub have never run</b> for this pull request: every run ends in a few seconds with no runner assigned, which is an account setting. All checks were run on the build machine.</li>
 </ul></section>''')
@@ -371,8 +486,8 @@ def main():
     # ---------- time
     S.append(f'''<section id="time"><h2>Time spent</h2>
 {table(["What", "Time"],
-       [["From the first message to this report", "Nov 4 to Nov 15: about 275 hours (11.5 days), including many hours lost to machine restarts"],
-        ["Training the neural models", "about 105 hours on 4 CPU cores"],
+       [["From the first message to this report", "Nov 4 to Nov 16: about 280 hours (11.7 days), including many hours lost to machine restarts"],
+        ["Training the neural models", "about 108 hours on 4 CPU cores"],
         ["Teacher translations and the 7B judge", "about 31 hours"],
         ["Weight tests and edits, JEPA tuning", "about 30 hours"],
         ["Rules, place lists, tests, tools, reports", "the rest"]])}
@@ -383,7 +498,7 @@ def main():
     top = table(["What", "Link"],
                 [["This report", A("https://claude.ai/artifact/QKvzmgbPuUJYixzyVx7Xzk", "claude.ai/artifact/QKvzmgbPuUJYixzyVx7Xzk")],
                  ["Document: all models, how they were made, lessons", A("https://claude.ai/artifact/LqFBZNhhMArpGUZxN49dU7", "claude.ai/artifact/LqFBZNhhMArpGUZxN49dU7")],
-                 ["Phone test page (v14 and v8 Fast run in the browser)", A("https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL", "claude.ai/artifact/3je2spXyFcH1QicAoMfZWL")],
+                 ["Phone test page (v14 and v14 Fast v2 run in the browser)", A("https://claude.ai/artifact/3je2spXyFcH1QicAoMfZWL", "claude.ai/artifact/3je2spXyFcH1QicAoMfZWL")],
                  ["Pull request (draft): all code, models and data", A(GH + "/pull/1", "translation-model/pull/1")],
                  ["Whole branch as one zip", A(f"{GH}/archive/refs/heads/{BR}.zip", f"archive/refs/heads/{BR}.zip")],
                  ["This report as PDF", A(B + "/reports/pdf/label-normalizer-report.pdf", "reports/pdf/label-normalizer-report.pdf")],
@@ -397,7 +512,7 @@ def main():
     mrows = [["Fast (rules only)", A(T + "/data", "data/") + " · " + A(T + "/runtime", "runtime/"), "-", A(T + "/reports", "reports/"), ZIP["fast"]]]
     for n, k, d, *_ in M[1:]:
         f = FOLDER[k]
-        mrows.append([f"<b>{E(n)}</b>" if k in ("V14", "V8F") else E(n), A(f"{T}/models/{f}", "models/" + f), A(f"{T}/weights/{f}_fp32", f"weights/{f}_fp32") if k in FP32 else "-",
+        mrows.append([f"<b>{E(n)}</b>" if k in ("V14", "V14F2") else E(n), A(f"{T}/models/{f}", "models/" + f), A(f"{T}/weights/{f}_fp32", f"weights/{f}_fp32") if k in FP32 else "-",
                       A(f"{T}/reports/{REPORTS[k]}", "reports/" + REPORTS[k]) if k in REPORTS else A(T + "/reports", "reports/"), ZIP.get(k, "-")])
     S.append(f'''<section id="links"><h2>All links, since the first version</h2>
 <p>GitHub links need access to the private repository and point at the work branch of the draft pull request. The pages on claude.ai are private to their owner until shared.</p>

@@ -14,6 +14,8 @@ Accurate comes in several variants. They differ in which teachers wrote the trai
 
 | Variant | Teachers and data | License of the model weights |
 |---|---|---|
+| **`student_V14F2` (final: "v14 Fast v2")** | cut from `student_V14`'s weights (encoder layers 1, 3, 5; decoder layer 1; no experts), retrained 3 hours on all current data with the 7B-judged corrections, plus every v14 rule tuned for it. 0.035B parameters, 42 MB. Replaces `student_V8F` as the fast model | **commercial use OK** (attribution required) |
+| `student_V14F1` ("v14 Fast v1") | `student_V8F`'s weights unchanged, re-exported for beam search, plus every v14 rule tuned for it | **commercial use OK** (attribution required) |
 | **`student_V14` (default, final)** | the same weights as `student_V13`; place list rebuilt from the complete GeoNames file (villages, islands, districts, neighbourhoods; 2.1 million names), Arabic and Hindi word readings mined from place names, more address forms, and a guard that keeps the romanized form of one unknown word | **commercial use OK** (attribution required) |
 | `student_V13` (parent of v14) | the same weights as `student_V12`; shipped with the world place list (198,000 towns and cities, 3,865 regions) and the address and transliteration fixes in the Fast rules | **commercial use OK** (attribution required) |
 | `student_V12` (parent of v13) | `student_V11`'s weights, unchanged, plus a word-level English check: a label judged English that contains a word outside the model's English word list is given to the neural model, so "led ampul" or "office sandalye" is translated. A training run on 44k mixed-language pairs was tested and rejected (it lost accuracy) | **commercial use OK** (attribution required) |
@@ -54,6 +56,8 @@ Every number below comes from data not used for training. Exact = output equals 
 | **v6** | 65.6% | 79.6 | 66.9 | yes |
 | v7 (v6 + language experts) | 65.9% | 80.8 | 67.2 | yes |
 | **v14** | **76.2%** | **87.7** | 67.5 | yes |
+| **v14 Fast v2** | 68.4% | 83.6 | 61.3 | yes |
+| v14 Fast v1 | 66.6% | 80.2 | 62.3 | yes |
 | v13 | 76.2% | 87.8 | 67.6 | yes |
 | v12 | 76.2% | 87.8 | 67.5 | yes |
 | v11 | 75.9% | 87.6 | 67.6 | yes |
@@ -85,6 +89,20 @@ How the weights were tested and changed after training is in [reports/WEIGHTS.md
 Three tested ways, each with an automatic pass/fail check: add words instantly (`build/add_terms.py`), post-train on new pairs (`build/post_train.sh`), or turn an English-only list into pairs (`build/make_pairs.py`). Step by step in [docs/ADDING.md](docs/ADDING.md). `student_V9`, `student_V10` and `student_V11` were all made with the post-training tool.
 
 Against Hy-MT2 (each model alone, 8-bit as shipped): v11 scores 88.0 chrF on labels and 68.5 on real names at 57 MB; Hy-MT2-1.8B (1.1 GB) scores 79.1 and 51.9; Hy-MT2-7B (4.6 GB) scores 95.1 and 57.5. v11 is not better than the 7B on short labels overall.
+
+### v14 Fast v1 and v2
+
+Both have 0.035B parameters (v14: 0.050B) and the same shape as v8 Fast. Use them with `NEURAL_DIR=student_V14F2` (or `student_V14F1`).
+
+| Test | v8 Fast | v14 Fast v1 | v14 Fast v2 | v14 |
+|---|---|---|---|---|
+| Short labels: exact / chrF | 65.0% / 79.7 | 66.6% / 80.2 | **68.4% / 83.6** | 76.2% / 87.7 |
+| Tuning labels: chrF | 72.6 | 74.6 | **83.1** | 90.3 |
+| English + Turkish: chrF | 77.4 | 87.9 | **90.2** | 89.7 |
+| Real product names: chrF | 62.2 | **62.3** | 61.3 | 67.5 |
+| Places tests (160 · 101) | not measured | 153 · 90 | 153 · 91 | 153 · 91 |
+
+The post-training gate said FAIL for v2 because of the 0.9 chrF loss on real product names (it allows 0.5); v2 is kept as the fast model because it is better on every other test. Rebuild: `sh build/pipeline22.sh`.
 
 ### More places, streets and transliteration (v14)
 
@@ -186,7 +204,7 @@ The training set also includes:
 ## Licenses
 
 See [LICENSES.md](LICENSES.md). In short:
-- `student_V14`, `student_V13`, `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
+- `student_V14F2`, `student_V14F1`, `student_V14`, `student_V13`, `student_V12`, `student_V11`, `student_V10`, `student_V9`, `student_V8`, `student_V8F`, `student_V6`, `student_V7`, `student_MAX`, `student_B2` and `student_B` can be used commercially, with attribution.
 - `student_A`, `student_C` and `student_C2` are non-commercial (NLLB-derived).
 - City names need GeoNames attribution.
 - The code (plus the hand-written rules, word list and test sets) is MIT; see [LICENSE](LICENSE).

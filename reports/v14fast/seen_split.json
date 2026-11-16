@@ -1,0 +1,186 @@
+{
+ "student_V14F1": {
+  "gold_all": {
+   "n": 320,
+   "fast": {
+    "exact": 0.2031,
+    "chrF": 42.75
+   },
+   "accurate": {
+    "exact": 0.6656,
+    "chrF": 80.18
+   },
+   "alone": {
+    "exact": 0.6531,
+    "chrF": 79.34
+   }
+  },
+  "gold_unseen": {
+   "n": 260,
+   "fast": {
+    "exact": 0.1077,
+    "chrF": 34.84
+   },
+   "accurate": {
+    "exact": 0.6154,
+    "chrF": 77.15
+   },
+   "alone": {
+    "exact": 0.6231,
+    "chrF": 77.71
+   }
+  },
+  "gold_seen": {
+   "n": 60,
+   "fast": {
+    "exact": 0.6167,
+    "chrF": 76.99
+   },
+   "accurate": {
+    "exact": 0.8833,
+    "chrF": 93.27
+   },
+   "alone": {
+    "exact": 0.7833,
+    "chrF": 86.4
+   }
+  },
+  "abo_all": {
+   "n": 993,
+   "fast": {
+    "exact": 0.006,
+    "chrF": 39.21
+   },
+   "accurate": {
+    "exact": 0.0634,
+    "chrF": 62.32
+   },
+   "alone": {
+    "exact": 0.0685,
+    "chrF": 63.17
+   }
+  },
+  "abo_unseen": {
+   "n": 890,
+   "fast": {
+    "exact": 0.0067,
+    "chrF": 39.58
+   },
+   "accurate": {
+    "exact": 0.0697,
+    "chrF": 62.18
+   },
+   "alone": {
+    "exact": 0.0753,
+    "chrF": 62.93
+   }
+  },
+  "abo_seen": {
+   "n": 103,
+   "fast": {
+    "exact": 0.0,
+    "chrF": 35.99
+   },
+   "accurate": {
+    "exact": 0.0097,
+    "chrF": 63.53
+   },
+   "alone": {
+    "exact": 0.0097,
+    "chrF": 65.23
+   }
+  }
+ },
+ "student_V14F2": {
+  "gold_all": {
+   "n": 320,
+   "fast": {
+    "exact": 0.2031,
+    "chrF": 42.75
+   },
+   "accurate": {
+    "exact": 0.6844,
+    "chrF": 83.61
+   },
+   "alone": {
+    "exact": 0.6562,
+    "chrF": 82.2
+   }
+  },
+  "gold_unseen": {
+   "n": 260,
+   "fast": {
+    "exact": 0.1077,
+    "chrF": 34.84
+   },
+   "accurate": {
+    "exact": 0.6385,
+    "chrF": 81.21
+   },
+   "alone": {
+    "exact": 0.6231,
+    "chrF": 80.8
+   }
+  },
+  "gold_seen": {
+   "n": 60,
+   "fast": {
+    "exact": 0.6167,
+    "chrF": 76.99
+   },
+   "accurate": {
+    "exact": 0.8833,
+    "chrF": 94.03
+   },
+   "alone": {
+    "exact": 0.8,
+    "chrF": 88.27
+   }
+  },
+  "abo_all": {
+   "n": 993,
+   "fast": {
+    "exact": 0.006,
+    "chrF": 39.21
+   },
+   "accurate": {
+    "exact": 0.0534,
+    "chrF": 61.3
+   },
+   "alone": {
+    "exact": 0.0544,
+    "chrF": 62.06
+   }
+  },
+  "abo_unseen": {
+   "n": 890,
+   "fast": {
+    "exact": 0.0067,
+    "chrF": 39.58
+   },
+   "accurate": {
+    "exact": 0.0573,
+    "chrF": 61.19
+   },
+   "alone": {
+    "exact": 0.0584,
+    "chrF": 61.81
+   }
+  },
+  "abo_seen": {
+   "n": 103,
+   "fast": {
+    "exact": 0.0,
+    "chrF": 35.99
+   },
+   "accurate": {
+    "exact": 0.0194,
+    "chrF": 62.23
+   },
+   "alone": {
+    "exact": 0.0194,
+    "chrF": 64.2
+   }
+  }
+ }
+}
