@@ -7,7 +7,7 @@ import bpe as BPE
 import spm as SPM
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V14"))   # student_V14 (default) / student_V8F (fast) / older: _V9 _V8 _V7 _V6 ...
+MD = os.path.join(ROOT, "models", os.environ.get("NEURAL_DIR", "student_V14"))   # student_V14 (default) / student_V14F2 (fast) / older: _V14F1 _V8F _V13 ... _V6
 
 
 class Student:
