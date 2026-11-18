@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "en-normalizer"
+version = "0.4.0"
+description = "Translate / transliterate e-commerce and shipping labels (places, addresses, products) into English, offline. 16 languages."
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = []
+
+[project.optional-dependencies]
+accurate = ["onnxruntime>=1.17", "numpy"]
+
+[project.scripts]
+en-normalize = "en_normalizer.cli:main"
+
+[tool.setuptools]
+package-dir = {"en_normalizer" = "runtime"}
+packages = ["en_normalizer"]

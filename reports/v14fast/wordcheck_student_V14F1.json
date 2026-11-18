@@ -1,0 +1,617 @@
+{
+ "model": "student_V14F1",
+ "chosen": {
+  "w_tau_known": 0.4,
+  "w_tau": 0.8,
+  "english_changed": 5,
+  "english_n": 2993,
+  "foreign_flagged_english": 518,
+  "caught": 162,
+  "caught_right": 113,
+  "ex": [
+   [
+    "30set of cupcake boc for 6",
+    "30set of cupcake for 6"
+   ],
+   [
+    "handtowels",
+    "hand towels"
+   ],
+   [
+    "solid black headlhones",
+    "solid black headphones"
+   ],
+   [
+    "cat flee",
+    "fleece cat"
+   ],
+   [
+    "airpods case nerd",
+    "airpods case black"
+   ]
+  ]
+ },
+ "all": [
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 173,
+   "caught_right": 122,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "sccy cpx-2 holster with red dot",
+     "scscy cpx-2 holster with red dot"
+    ],
+    [
+     "44 ddd bras for plus size women",
+     "44 dd bras for plus size women"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "babt seat",
+     "baby seat"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "adornit fabric",
+     "fabric fabric"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ],
+    [
+     "bedsack",
+     "bed backpack"
+    ],
+    [
+     "pagisofe grey fluffy shag area rugs",
+     "patio grey fluffy shag area rugs"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 162,
+   "caught_right": 113,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 154,
+   "caught_right": 106,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 164,
+   "caught_right": 122,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "sccy cpx-2 holster with red dot",
+     "scscy cpx-2 holster with red dot"
+    ],
+    [
+     "44 ddd bras for plus size women",
+     "44 dd bras for plus size women"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "babt seat",
+     "baby seat"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "adornit fabric",
+     "fabric fabric"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ],
+    [
+     "bedsack",
+     "bed backpack"
+    ],
+    [
+     "pagisofe grey fluffy shag area rugs",
+     "patio grey fluffy shag area rugs"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 153,
+   "caught_right": 113,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 145,
+   "caught_right": 106,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 146,
+   "caught_right": 115,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "sccy cpx-2 holster with red dot",
+     "scscy cpx-2 holster with red dot"
+    ],
+    [
+     "44 ddd bras for plus size women",
+     "44 dd bras for plus size women"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "babt seat",
+     "baby seat"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "adornit fabric",
+     "fabric fabric"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ],
+    [
+     "bedsack",
+     "bed backpack"
+    ],
+    [
+     "pagisofe grey fluffy shag area rugs",
+     "patio grey fluffy shag area rugs"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 135,
+   "caught_right": 106,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.85,
+   "english_changed": 2,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 127,
+   "caught_right": 99,
+   "ex": [
+    [
+     "30set of cupcake boc for 6",
+     "30set of cupcake for 6"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.7,
+   "english_changed": 14,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 126,
+   "caught_right": 103,
+   "ex": [
+    [
+     "sccy cpx-2 holster with red dot",
+     "scscy cpx-2 holster with red dot"
+    ],
+    [
+     "44 ddd bras for plus size women",
+     "44 dd bras for plus size women"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "babt seat",
+     "baby seat"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "adornit fabric",
+     "fabric fabric"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ],
+    [
+     "bedsack",
+     "bed backpack"
+    ],
+    [
+     "pagisofe grey fluffy shag area rugs",
+     "patio grey fluffy shag area rugs"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.8,
+   "english_changed": 4,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 115,
+   "caught_right": 94,
+   "ex": [
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.85,
+   "english_changed": 1,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 107,
+   "caught_right": 87,
+   "ex": [
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.7,
+   "english_changed": 14,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 94,
+   "caught_right": 83,
+   "ex": [
+    [
+     "sccy cpx-2 holster with red dot",
+     "scscy cpx-2 holster with red dot"
+    ],
+    [
+     "44 ddd bras for plus size women",
+     "44 dd bras for plus size women"
+    ],
+    [
+     "yetti coffee travel mug",
+     "yeti coffee travel mug"
+    ],
+    [
+     "babt seat",
+     "baby seat"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "adornit fabric",
+     "fabric fabric"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ],
+    [
+     "bedsack",
+     "bed backpack"
+    ],
+    [
+     "pagisofe grey fluffy shag area rugs",
+     "patio grey fluffy shag area rugs"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.8,
+   "english_changed": 4,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 83,
+   "caught_right": 74,
+   "ex": [
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "solid black headlhones",
+     "solid black headphones"
+    ],
+    [
+     "cat flee",
+     "fleece cat"
+    ],
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.85,
+   "english_changed": 1,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 75,
+   "caught_right": 67,
+   "ex": [
+    [
+     "airpods case nerd",
+     "airpods case black"
+    ]
+   ]
+  }
+ ]
+}

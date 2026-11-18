@@ -1,0 +1,7 @@
+test                student_V8F  student_V14F2
+tuning_labels     51.6% /  72.6  66.1% /  83.1  ok
+test_labels       65.0% /  79.7  68.4% /  83.6  ok
+real_names         6.0% /  62.1   5.3% /  61.3  WORSE
+cases                        70             70  ok
+blind                        44             45  ok
+VERDICT: FAIL (keep using the parent model; the new one is left in models/ for inspection)

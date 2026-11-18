@@ -1,0 +1,162 @@
+{
+ "model": "student_A",
+ "base": {
+  "bt_chrF": 38.7,
+  "bt_exact": 0.0689,
+  "gaz_chrF": 37.84,
+  "gaz_exact": 0.0967,
+  "gold_exact": 0.2062,
+  "gold_chrF": 40.07
+ },
+ "tried": [
+  {
+   "edit": "enc0.self.head1",
+   "with": [],
+   "bt_chrF": 38.34,
+   "bt_exact": 0.0611,
+   "gaz_chrF": 36.54,
+   "gaz_exact": 0.0833,
+   "kept": false
+  },
+  {
+   "edit": "enc0.self.head3",
+   "with": [],
+   "bt_chrF": 38.54,
+   "bt_exact": 0.0667,
+   "gaz_chrF": 37.79,
+   "gaz_exact": 0.1,
+   "kept": false
+  },
+  {
+   "edit": "enc3.self.head2",
+   "with": [],
+   "bt_chrF": 38.99,
+   "bt_exact": 0.0678,
+   "gaz_chrF": 37.83,
+   "gaz_exact": 0.0967,
+   "kept": true
+  },
+  {
+   "edit": "dec1.self.head2",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 37.86,
+   "bt_exact": 0.0567,
+   "gaz_chrF": 37.91,
+   "gaz_exact": 0.1,
+   "kept": false
+  },
+  {
+   "edit": "enc1.self.head0",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 38.31,
+   "bt_exact": 0.0622,
+   "gaz_chrF": 38.36,
+   "gaz_exact": 0.1067,
+   "kept": false
+  },
+  {
+   "edit": "enc4.self.head2",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 38.06,
+   "bt_exact": 0.0667,
+   "gaz_chrF": 37.82,
+   "gaz_exact": 0.1,
+   "kept": false
+  },
+  {
+   "edit": "enc5.self.head1",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 38.43,
+   "bt_exact": 0.0644,
+   "gaz_chrF": 37.49,
+   "gaz_exact": 0.0933,
+   "kept": false
+  },
+  {
+   "edit": "enc4.self.head0",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 39.05,
+   "bt_exact": 0.07,
+   "gaz_chrF": 37.8,
+   "gaz_exact": 0.1033,
+   "kept": false
+  },
+  {
+   "edit": "enc5.self.head0",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 38.6,
+   "bt_exact": 0.0622,
+   "gaz_chrF": 37.53,
+   "gaz_exact": 0.0967,
+   "kept": false
+  },
+  {
+   "edit": "enc0.self.head0",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 38.11,
+   "bt_exact": 0.0633,
+   "gaz_chrF": 37.86,
+   "gaz_exact": 0.1033,
+   "kept": false
+  },
+  {
+   "edit": "dec1.self.head1",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 37.55,
+   "bt_exact": 0.0589,
+   "gaz_chrF": 37.95,
+   "gaz_exact": 0.09,
+   "kept": false
+  },
+  {
+   "edit": "enc5.self.head2",
+   "with": [
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 38.7,
+   "bt_exact": 0.0678,
+   "gaz_chrF": 38.02,
+   "gaz_exact": 0.0967,
+   "kept": false
+  }
+ ],
+ "kept": [
+  "enc3.self.head2"
+ ],
+ "edited": {
+  "bt_chrF": 38.99,
+  "bt_exact": 0.0678,
+  "gaz_chrF": 37.83,
+  "gaz_exact": 0.0967,
+  "gold_exact": 0.1906,
+  "gold_chrF": 38.63
+ },
+ "finetuned": {
+  "bt_chrF": 38.29,
+  "bt_exact": 0.0667,
+  "gaz_chrF": 38.0,
+  "gaz_exact": 0.1,
+  "gold_exact": 0.1688,
+  "gold_chrF": 37.98,
+  "steps": 745,
+  "minutes": 15.0,
+  "used": false
+ },
+ "decision": "keep original weights"
+}

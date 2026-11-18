@@ -1,0 +1,278 @@
+{
+ "student_V6": {
+  "gold_all": {
+   "n": 320,
+   "fast": {
+    "exact": 0.2,
+    "chrF": 42.62
+   },
+   "accurate": {
+    "exact": 0.6562,
+    "chrF": 79.56
+   },
+   "alone": {
+    "exact": 0.6719,
+    "chrF": 79.64
+   }
+  },
+  "gold_unseen": {
+   "n": 260,
+   "fast": {
+    "exact": 0.1038,
+    "chrF": 34.69
+   },
+   "accurate": {
+    "exact": 0.6077,
+    "chrF": 76.32
+   },
+   "alone": {
+    "exact": 0.6308,
+    "chrF": 77.05
+   }
+  },
+  "gold_seen": {
+   "n": 60,
+   "fast": {
+    "exact": 0.6167,
+    "chrF": 77.01
+   },
+   "accurate": {
+    "exact": 0.8667,
+    "chrF": 93.61
+   },
+   "alone": {
+    "exact": 0.85,
+    "chrF": 90.84
+   }
+  },
+  "abo_all": {
+   "n": 993,
+   "fast": {
+    "exact": 0.006,
+    "chrF": 39.13
+   },
+   "accurate": {
+    "exact": 0.1198,
+    "chrF": 66.9
+   },
+   "alone": {
+    "exact": 0.1239,
+    "chrF": 68.04
+   }
+  },
+  "abo_unseen": {
+   "n": 890,
+   "fast": {
+    "exact": 0.0067,
+    "chrF": 39.49
+   },
+   "accurate": {
+    "exact": 0.127,
+    "chrF": 66.77
+   },
+   "alone": {
+    "exact": 0.1315,
+    "chrF": 67.71
+   }
+  },
+  "abo_seen": {
+   "n": 103,
+   "fast": {
+    "exact": 0.0,
+    "chrF": 36.01
+   },
+   "accurate": {
+    "exact": 0.0583,
+    "chrF": 68.02
+   },
+   "alone": {
+    "exact": 0.0583,
+    "chrF": 70.91
+   }
+  }
+ },
+ "student_MAX_edited": {
+  "gold_all": {
+   "n": 320,
+   "fast": {
+    "exact": 0.2,
+    "chrF": 42.62
+   },
+   "accurate": {
+    "exact": 0.2844,
+    "chrF": 49.07
+   },
+   "alone": {
+    "exact": 0.1344,
+    "chrF": 32.27
+   }
+  },
+  "gold_unseen": {
+   "n": 260,
+   "fast": {
+    "exact": 0.1038,
+    "chrF": 34.69
+   },
+   "accurate": {
+    "exact": 0.1808,
+    "chrF": 41.27
+   },
+   "alone": {
+    "exact": 0.1154,
+    "chrF": 31.01
+   }
+  },
+  "gold_seen": {
+   "n": 60,
+   "fast": {
+    "exact": 0.6167,
+    "chrF": 77.01
+   },
+   "accurate": {
+    "exact": 0.7333,
+    "chrF": 82.89
+   },
+   "alone": {
+    "exact": 0.2167,
+    "chrF": 37.76
+   }
+  },
+  "abo_all": {
+   "n": 993,
+   "fast": {
+    "exact": 0.006,
+    "chrF": 39.13
+   },
+   "accurate": {
+    "exact": 0.0272,
+    "chrF": 45.74
+   },
+   "alone": {
+    "exact": 0.0373,
+    "chrF": 52.47
+   }
+  },
+  "abo_unseen": {
+   "n": 890,
+   "fast": {
+    "exact": 0.0067,
+    "chrF": 39.49
+   },
+   "accurate": {
+    "exact": 0.0303,
+    "chrF": 45.72
+   },
+   "alone": {
+    "exact": 0.0404,
+    "chrF": 52.08
+   }
+  },
+  "abo_seen": {
+   "n": 103,
+   "fast": {
+    "exact": 0.0,
+    "chrF": 36.01
+   },
+   "accurate": {
+    "exact": 0.0,
+    "chrF": 45.99
+   },
+   "alone": {
+    "exact": 0.0097,
+    "chrF": 55.78
+   }
+  }
+ },
+ "student_C": {
+  "gold_all": {
+   "n": 320,
+   "fast": {
+    "exact": 0.2,
+    "chrF": 42.62
+   },
+   "accurate": {
+    "exact": 0.3063,
+    "chrF": 51.02
+   },
+   "alone": {
+    "exact": 0.2062,
+    "chrF": 40.67
+   }
+  },
+  "gold_unseen": {
+   "n": 260,
+   "fast": {
+    "exact": 0.1038,
+    "chrF": 34.69
+   },
+   "accurate": {
+    "exact": 0.2038,
+    "chrF": 43.33
+   },
+   "alone": {
+    "exact": 0.1731,
+    "chrF": 37.67
+   }
+  },
+  "gold_seen": {
+   "n": 60,
+   "fast": {
+    "exact": 0.6167,
+    "chrF": 77.01
+   },
+   "accurate": {
+    "exact": 0.75,
+    "chrF": 84.37
+   },
+   "alone": {
+    "exact": 0.35,
+    "chrF": 53.63
+   }
+  },
+  "abo_all": {
+   "n": 993,
+   "fast": {
+    "exact": 0.006,
+    "chrF": 39.13
+   },
+   "accurate": {
+    "exact": 0.005,
+    "chrF": 38.42
+   },
+   "alone": {
+    "exact": 0.004,
+    "chrF": 33.43
+   }
+  },
+  "abo_unseen": {
+   "n": 890,
+   "fast": {
+    "exact": 0.0067,
+    "chrF": 39.49
+   },
+   "accurate": {
+    "exact": 0.0056,
+    "chrF": 38.73
+   },
+   "alone": {
+    "exact": 0.0045,
+    "chrF": 33.63
+   }
+  },
+  "abo_seen": {
+   "n": 103,
+   "fast": {
+    "exact": 0.0,
+    "chrF": 36.01
+   },
+   "accurate": {
+    "exact": 0.0,
+    "chrF": 35.76
+   },
+   "alone": {
+    "exact": 0.0,
+    "chrF": 31.71
+   }
+  }
+ }
+}

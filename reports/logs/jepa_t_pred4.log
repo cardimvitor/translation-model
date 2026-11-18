@@ -1,0 +1,9 @@
+JEPA t_pred4: encoder 12.3M, predictor 7.1M, vocab 4261, pairs 399382
+/home/user/en-normalizer/build/jepa.py:212: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  L.append((l_cross.item(), l_mask.item(), float(l_var)))
+step 100 cross 1.792 mask 5.839 var 1.488 lr 8.84e-05 ema 0.9965 23 min left
+step 200 cross 1.269 mask 3.451 var 1.527 lr 1.09e-04 ema 0.9979 15 min left
+dev {'retrieval@1': 0.035, 'spread': 0.95, 'step': 205}
+step 300 cross 1.128 mask 2.956 var 1.467 lr 5.46e-05 ema 0.9994 7 min left
+dev (end) {'retrieval@1': 0.074, 'spread': 0.951, 'step': 397}

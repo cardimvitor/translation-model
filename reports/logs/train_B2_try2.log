@@ -1,0 +1,5 @@
+variant B2 | params 52.2M | cfg {'d': 512, 'enc': 6, 'dec': 4, 'heads': 8, 'ff': 2048} | src vocab 16000 tgt 8000
+training pairs (weighted) 450861
+step 200 loss 7.810 lr 2.33e-04 295 min left
+step 400 loss 7.382 lr 4.65e-04 289 min left
+step 600 loss 7.398 lr 6.96e-04 284 min left

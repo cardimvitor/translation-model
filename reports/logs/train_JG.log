@@ -1,0 +1,44 @@
+encoder from JEPA: models/jepa_main/jepa.pt | not loaded: 110 decoder/output tensors
+variant JG | params 22.0M | cfg {'d': 384, 'enc': 6, 'dec': 4, 'heads': 6, 'ff': 1536, 'max_s': 96, 'max_t': 96} | src vocab 4261 tgt 222
+training pairs (weighted) 661805
+step 200 loss 3.521 lr 2.66e-04 173 min left
+step 400 loss 2.801 lr 5.25e-04 165 min left
+step 600 loss 2.543 lr 7.72e-04 158 min left
+step 800 loss 2.329 lr 7.52e-04 151 min left
+dev {'bt_chrF': 17.33, 'bt_exact': 0.0, 'gaz_chrF': 12.95, 'gaz_exact': 0.0, 'step': 821}
+step 1000 loss 2.190 lr 7.18e-04 142 min left
+step 1200 loss 2.081 lr 6.86e-04 134 min left
+step 1400 loss 2.031 lr 6.51e-04 127 min left
+step 1600 loss 1.989 lr 6.11e-04 120 min left
+dev {'bt_chrF': 19.75, 'bt_exact': 0.0, 'gaz_chrF': 16.98, 'gaz_exact': 0.0067, 'step': 1605}
+step 1800 loss 1.930 lr 5.53e-04 110 min left
+step 2000 loss 1.875 lr 5.02e-04 103 min left
+step 2200 loss 1.863 lr 4.54e-04 95 min left
+dev {'bt_chrF': 22.67, 'bt_exact': 0.0, 'gaz_chrF': 19.88, 'gaz_exact': 0.0133, 'step': 2344}
+step 2400 loss 1.803 lr 3.92e-04 86 min left
+step 2600 loss 1.747 lr 3.43e-04 78 min left
+step 2800 loss 1.704 lr 2.95e-04 71 min left
+step 3000 loss 1.681 lr 2.51e-04 64 min left
+dev {'bt_chrF': 26.79, 'bt_exact': 0.0089, 'gaz_chrF': 22.4, 'gaz_exact': 0.0267, 'step': 3102}
+step 3200 loss 1.645 lr 2.03e-04 55 min left
+step 3400 loss 1.643 lr 1.66e-04 48 min left
+step 3600 loss 1.602 lr 1.32e-04 41 min left
+step 3800 loss 1.609 lr 1.04e-04 34 min left
+dev {'bt_chrF': 28.66, 'bt_exact': 0.0111, 'gaz_chrF': 24.64, 'gaz_exact': 0.0267, 'step': 3903}
+step 4000 loss 1.580 lr 7.42e-05 24 min left
+step 4200 loss 1.565 lr 5.62e-05 17 min left
+step 4400 loss 1.571 lr 4.50e-05 9 min left
+step 4600 loss 1.556 lr 4.02e-05 2 min left
+dev {'bt_chrF': 29.43, 'bt_exact': 0.0133, 'gaz_chrF': 22.48, 'gaz_exact': 0.0133, 'step': 4651}
+dev (end) {'bt_chrF': 29.43, 'bt_exact': 0.0133, 'gaz_chrF': 22.48, 'gaz_exact': 0.0133, 'step': 4651}
+last {'bt_chrF': 29.43, 'bt_exact': 0.0133, 'gaz_chrF': 22.48, 'gaz_exact': 0.0133} | average of 3 {'bt_chrF': 28.65, 'bt_exact': 0.0133, 'gaz_chrF': 22.54, 'gaz_exact': 0.0267}
+/home/user/en-normalizer/build/train_student2.py:249: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(enc, (src,), os.path.join(OUT, "encoder.onnx"), input_names=["src"], output_names=["ck", "cv", "src_bias"],
+/home/user/en-normalizer/build/train_student2.py:252: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(dec, (tok, pos, ck, cv, sb, pk, pv), os.path.join(OUT, "decoder.onnx"),
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+decoder_int8.onnx 8.64 MB
+encoder_int8.onnx 13.73 MB
+train_log.json 0.0 MB
+vocab.json 0.03 MB

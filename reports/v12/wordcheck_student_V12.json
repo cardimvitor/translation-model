@@ -1,0 +1,661 @@
+{
+ "model": "student_V12",
+ "chosen": {
+  "w_tau_known": 0.4,
+  "w_tau": 0.8,
+  "english_changed": 5,
+  "english_n": 2993,
+  "foreign_flagged_english": 518,
+  "caught": 267,
+  "caught_right": 215,
+  "ex": [
+   [
+    "mens ribbon watchbands",
+    "mens ribbon watch bands"
+   ],
+   [
+    "heated foot massagerr",
+    "heated foot massager"
+   ],
+   [
+    "toddlee girls toys",
+    "toddler girls toys"
+   ],
+   [
+    "handtowels",
+    "hand towels"
+   ],
+   [
+    "bedsack",
+    "bedbag"
+   ]
+  ]
+ },
+ "all": [
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 281,
+   "caught_right": 225,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "face plants footsies",
+     "face plants footie"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "nontoxic nail polish",
+     "non-tox nail polish"
+    ],
+    [
+     "foodsaver",
+     "food saver"
+    ],
+    [
+     "30 mm internal circlips thin",
+     "30 mm internal circle clips thin"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "christmas garland poinsettia",
+     "christmas garland poinset"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jewery cabinet with mirror"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ],
+    [
+     "amazon Brand find. Mid-Wedge",
+     "amazon brand: find. mid wedge"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 267,
+   "caught_right": 215,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.4,
+   "w_tau": 0.85,
+   "english_changed": 3,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 256,
+   "caught_right": 207,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 278,
+   "caught_right": 225,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "face plants footsies",
+     "face plants footie"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "nontoxic nail polish",
+     "non-tox nail polish"
+    ],
+    [
+     "foodsaver",
+     "food saver"
+    ],
+    [
+     "30 mm internal circlips thin",
+     "30 mm internal circle clips thin"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "christmas garland poinsettia",
+     "christmas garland poinset"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jewery cabinet with mirror"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ],
+    [
+     "amazon Brand find. Mid-Wedge",
+     "amazon brand: find. mid wedge"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 264,
+   "caught_right": 215,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.5,
+   "w_tau": 0.85,
+   "english_changed": 3,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 253,
+   "caught_right": 207,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 266,
+   "caught_right": 218,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "face plants footsies",
+     "face plants footie"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "nontoxic nail polish",
+     "non-tox nail polish"
+    ],
+    [
+     "foodsaver",
+     "food saver"
+    ],
+    [
+     "30 mm internal circlips thin",
+     "30 mm internal circle clips thin"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "christmas garland poinsettia",
+     "christmas garland poinset"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jewery cabinet with mirror"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ],
+    [
+     "amazon Brand find. Mid-Wedge",
+     "amazon brand: find. mid wedge"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 252,
+   "caught_right": 208,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.6,
+   "w_tau": 0.85,
+   "english_changed": 3,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 241,
+   "caught_right": 200,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 245,
+   "caught_right": 208,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "face plants footsies",
+     "face plants footie"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "nontoxic nail polish",
+     "non-tox nail polish"
+    ],
+    [
+     "foodsaver",
+     "food saver"
+    ],
+    [
+     "30 mm internal circlips thin",
+     "30 mm internal circle clips thin"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "christmas garland poinsettia",
+     "christmas garland poinset"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jewery cabinet with mirror"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ],
+    [
+     "amazon Brand find. Mid-Wedge",
+     "amazon brand: find. mid wedge"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 231,
+   "caught_right": 198,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.7,
+   "w_tau": 0.85,
+   "english_changed": 3,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 220,
+   "caught_right": 190,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.7,
+   "english_changed": 15,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 215,
+   "caught_right": 188,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "face plants footsies",
+     "face plants footie"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "nontoxic nail polish",
+     "non-tox nail polish"
+    ],
+    [
+     "foodsaver",
+     "food saver"
+    ],
+    [
+     "30 mm internal circlips thin",
+     "30 mm internal circle clips thin"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "coach shampo",
+     "coach shampoo"
+    ],
+    [
+     "christmas garland poinsettia",
+     "christmas garland poinset"
+    ],
+    [
+     "tothbrushs kids princess",
+     "tothbrush kids princess"
+    ],
+    [
+     "jelwery cabinet with mirror",
+     "jewery cabinet with mirror"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ],
+    [
+     "amazon Brand find. Mid-Wedge",
+     "amazon brand: find. mid wedge"
+    ],
+    [
+     "Fusefit Men's Gleam Lt",
+     "fusefit men's glam lt"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.8,
+   "english_changed": 5,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 201,
+   "caught_right": 178,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "heated foot massagerr",
+     "heated foot massager"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ],
+    [
+     "bedsack",
+     "bedbag"
+    ]
+   ]
+  },
+  {
+   "w_tau_known": 0.8,
+   "w_tau": 0.85,
+   "english_changed": 3,
+   "english_n": 2993,
+   "foreign_flagged_english": 518,
+   "caught": 190,
+   "caught_right": 170,
+   "ex": [
+    [
+     "mens ribbon watchbands",
+     "mens ribbon watch bands"
+    ],
+    [
+     "toddlee girls toys",
+     "toddler girls toys"
+    ],
+    [
+     "handtowels",
+     "hand towels"
+    ]
+   ]
+  }
+ ]
+}

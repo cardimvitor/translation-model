@@ -1,0 +1,70 @@
+{
+"parts": [
+"Arabic",
+"Cyrillic",
+"Devanagari",
+"Greek",
+"Han",
+"Hangul",
+"Kana",
+"Latin",
+"Other",
+"Thai"
+],
+"towns": [
+"Arabic_towns0",
+"Cyrillic_towns0",
+"Cyrillic_towns1",
+"Devanagari_towns0",
+"Greek_towns0",
+"Han_towns0",
+"Han_towns1",
+"Hangul_towns0",
+"Kana_towns0",
+"Latin_towns0",
+"Latin_towns1",
+"Other_towns0",
+"Thai_towns0"
+],
+"meta": {
+"countries_keys": 42759,
+"entries": 2147613,
+"places": 259962,
+"islands_districts_and_small_places": 1620797,
+"regions": 3865,
+"city_alt_names_seen": 810881,
+"min_population": 200,
+"small_town_names_left_out": 19608,
+"names_left_out_as_product_words": 31860,
+"town_keys": 1722169,
+"sources": [
+"CLDR (Unicode License) via Babel",
+"GeoNames (CC BY 4.0): allCountries, admin1CodesASCII, countryInfo, alternateNamesV2"
+]
+},
+"mb": {
+"Arabic": 1.6,
+"Arabic_towns0": 5.89,
+"Cyrillic": 1.91,
+"Cyrillic_towns0": 6.1,
+"Cyrillic_towns1": 6.11,
+"Devanagari": 0.54,
+"Devanagari_towns0": 0.24,
+"Greek": 0.24,
+"Greek_towns0": 0.69,
+"Han": 1.93,
+"Han_towns0": 7.71,
+"Han_towns1": 7.71,
+"Hangul": 0.5,
+"Hangul_towns0": 1.13,
+"Kana": 0.74,
+"Kana_towns0": 1.56,
+"Latin": 10.31,
+"Latin_towns0": 9.16,
+"Latin_towns1": 9.16,
+"Other": 0.5,
+"Other_towns0": 0.0,
+"Thai": 0.29,
+"Thai_towns0": 2.67
+}
+}

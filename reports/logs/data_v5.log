@@ -1,0 +1,16 @@
+B2 {'read_opus': 252612, 'bt_opus': 153467, 'kd_opus': 96857}
+B2 counts {('train', 'gaz'): 27399, ('train', 'kd'): 96857, ('train', 'noise'): 13199, ('train', 'bt'): 145727, ('dev', 'bt'): 7740, ('train', 'gloss'): 10976, ('dev', 'gaz'): 1314}
+src vocab 16000 merges 11146 avg tokens 9.9 unk 0.0000
+tgt vocab 8000 merges 7760 avg tokens 6.2 unk 0.0000
+src vocab 16000 merges 11099 avg tokens 10.3 unk 0.0000
+tgt vocab 16000 merges 11099 avg tokens 6.4 unk 0.0000
+C2 {'read_opus': 252612, 'bt_opus': 153465, 'kd_opus': 118169, 'kd_nllb': 18571, 'read_nllb': 109603, 'bt_nllb': 85694}
+C2 counts {('train', 'gloss'): 10976, ('train', 'kd'): 136740, ('train', 'bt'): 227228, ('train', 'noise'): 19376, ('train', 'gaz'): 27399, ('dev', 'bt'): 11931, ('dev', 'gaz'): 1314}
+H {'read_opus': 252612, 'bt_opus': 153467, 'kd_opus': 96857, 'kd_hy': 11357}
+H counts {('train', 'bt'): 145727, ('train', 'kd'): 108214, ('train', 'gaz'): 27399, ('train', 'gloss'): 10976, ('train', 'noise'): 13199, ('dev', 'bt'): 7740, ('dev', 'gaz'): 1314}
+ALL3 {'read_opus': 252612, 'bt_opus': 153465, 'kd_opus': 118167, 'kd_hy': 11298, 'kd_nllb': 18571, 'read_nllb': 109603, 'bt_nllb': 85694}
+ALL3 counts {('train', 'bt'): 227228, ('train', 'kd'): 148036, ('train', 'gloss'): 10976, ('train', 'gaz'): 27399, ('dev', 'bt'): 11931, ('train', 'noise'): 19376, ('dev', 'gaz'): 1314}
+HY {'read_hy': 12000, 'bt_hy': 8301, 'kd_hy': 5333}
+HY counts {('train', 'gaz'): 27399, ('train', 'gloss'): 19317, ('train', 'kd'): 5333, ('train', 'noise'): 1480, ('train', 'bt'): 7857, ('dev', 'gaz'): 1314, ('dev', 'bt'): 444}
+MAX {'read_opus': 312612, 'bt_opus': 172266, 'kd_opus': 112011, 'kd_hy': 16676, 'read_hy': 12000, 'bt_hy': 8200, 'real_abo': 35411}
+MAX counts {('train', 'kd'): 128687, ('dev', 'bt'): 8182, ('train', 'real'): 35411, ('train', 'bt'): 172284, ('train', 'gaz'): 27399, ('train', 'gloss'): 19317, ('train', 'noise'): 16284, ('dev', 'gaz'): 1314}

@@ -1,0 +1,35 @@
+{
+ "student_V10": {
+  "tuning_labels": {
+   "exact": 0.7188,
+   "chrF": 88.49
+  },
+  "test_labels": {
+   "exact": 0.7281,
+   "chrF": 86.81
+  },
+  "real_names": {
+   "exact": 0.1088,
+   "chrF": 67.3
+  },
+  "cases": 70,
+  "blind": 45
+ },
+ "student_V11": {
+  "tuning_labels": {
+   "exact": 0.7552,
+   "chrF": 89.99
+  },
+  "test_labels": {
+   "exact": 0.7156,
+   "chrF": 86.47
+  },
+  "real_names": {
+   "exact": 0.1088,
+   "chrF": 67.36
+  },
+  "cases": 70,
+  "blind": 45
+ },
+ "verdict": "PASS"
+}

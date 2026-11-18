@@ -1,0 +1,97 @@
+{
+ "evals": [
+  {
+   "titles": 1.83,
+   "labels": 1.98,
+   "step": 0
+  },
+  {
+   "titles": 55.15,
+   "labels": 70.82,
+   "step": 2523
+  },
+  {
+   "titles": 57.65,
+   "labels": 74.04,
+   "step": 5002
+  },
+  {
+   "titles": 59.14,
+   "labels": 76.55,
+   "step": 7406
+  },
+  {
+   "titles": 60.31,
+   "labels": 79.86,
+   "step": 9843
+  },
+  {
+   "titles": 60.9,
+   "labels": 79.04,
+   "step": 12208
+  },
+  {
+   "titles": 61.07,
+   "labels": 79.41,
+   "step": 14398
+  },
+  {
+   "titles": 61.62,
+   "labels": 77.81,
+   "step": 16442
+  },
+  {
+   "titles": 62.87,
+   "labels": 81.55,
+   "step": 18522
+  },
+  {
+   "titles": 62.85,
+   "labels": 80.41,
+   "step": 20544
+  },
+  {
+   "titles": 63.49,
+   "labels": 82.36,
+   "step": 22576
+  },
+  {
+   "titles": 63.84,
+   "labels": 81.68,
+   "step": 24577
+  },
+  {
+   "titles": 64.64,
+   "labels": 79.56,
+   "step": 26529
+  },
+  {
+   "titles": 64.18,
+   "labels": 83.13,
+   "step": 28536
+  },
+  {
+   "titles": 64.99,
+   "labels": 81.32,
+   "step": 30596
+  }
+ ],
+ "args": {
+  "mode": "train",
+  "tag": "v8",
+  "rank": 64,
+  "dec_keep": "0,5",
+  "enc_keep": "0,2,5",
+  "from_tag": "v8",
+  "minutes": 420.0,
+  "total_min": 420.0,
+  "lr": 0.0001,
+  "ex_lr": 0.001,
+  "warmup": 300,
+  "max_tok": 1400,
+  "ckpt_min": 30,
+  "threads": 4,
+  "resume": true,
+  "ckpt": null
+ }
+}

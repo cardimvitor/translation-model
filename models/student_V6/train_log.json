@@ -1,0 +1,160 @@
+{
+ "runs": [
+  {
+   "minutes": 30.4,
+   "from_step": 0,
+   "to_step": 894
+  },
+  {
+   "minutes": 5.0,
+   "from_step": 894,
+   "to_step": 1055
+  },
+  {
+   "minutes": 55.4,
+   "from_step": 1055,
+   "to_step": 2974
+  },
+  {
+   "minutes": 419.4,
+   "from_step": 2974,
+   "to_step": 23766
+  }
+ ],
+ "evals": [
+  {
+   "bt_chrF": 47.67,
+   "bt_exact": 0.0433,
+   "gaz_chrF": 26.01,
+   "gaz_exact": 0.0533,
+   "step": 638
+  },
+  {
+   "bt_chrF": 48.88,
+   "bt_exact": 0.04,
+   "gaz_chrF": 24.9,
+   "gaz_exact": 0.0467,
+   "step": 894
+  },
+  {
+   "bt_chrF": 54.61,
+   "bt_exact": 0.0967,
+   "gaz_chrF": 25.44,
+   "gaz_exact": 0.04,
+   "step": 2510
+  },
+  {
+   "bt_chrF": 56.66,
+   "bt_exact": 0.1267,
+   "gaz_chrF": 23.27,
+   "gaz_exact": 0.0467,
+   "step": 4510
+  },
+  {
+   "bt_chrF": 56.55,
+   "bt_exact": 0.12,
+   "gaz_chrF": 23.02,
+   "gaz_exact": 0.0267,
+   "step": 5984
+  },
+  {
+   "bt_chrF": 58.16,
+   "bt_exact": 0.1367,
+   "gaz_chrF": 23.7,
+   "gaz_exact": 0.0467,
+   "step": 7513
+  },
+  {
+   "bt_chrF": 59.69,
+   "bt_exact": 0.1467,
+   "gaz_chrF": 27.69,
+   "gaz_exact": 0.06,
+   "step": 9019
+  },
+  {
+   "bt_chrF": 59.78,
+   "bt_exact": 0.1367,
+   "gaz_chrF": 24.62,
+   "gaz_exact": 0.0467,
+   "step": 10536
+  },
+  {
+   "bt_chrF": 60.52,
+   "bt_exact": 0.16,
+   "gaz_chrF": 26.32,
+   "gaz_exact": 0.06,
+   "step": 12002
+  },
+  {
+   "bt_chrF": 60.86,
+   "bt_exact": 0.15,
+   "gaz_chrF": 27.3,
+   "gaz_exact": 0.0733,
+   "step": 13494
+  },
+  {
+   "bt_chrF": 61.57,
+   "bt_exact": 0.17,
+   "gaz_chrF": 25.27,
+   "gaz_exact": 0.0467,
+   "step": 15051
+  },
+  {
+   "bt_chrF": 62.5,
+   "bt_exact": 0.1667,
+   "gaz_chrF": 26.29,
+   "gaz_exact": 0.06,
+   "step": 16572
+  },
+  {
+   "bt_chrF": 63.02,
+   "bt_exact": 0.17,
+   "gaz_chrF": 25.73,
+   "gaz_exact": 0.06,
+   "step": 18046
+  },
+  {
+   "bt_chrF": 63.19,
+   "bt_exact": 0.1667,
+   "gaz_chrF": 27.63,
+   "gaz_exact": 0.0667,
+   "step": 19564
+  },
+  {
+   "bt_chrF": 64.23,
+   "bt_exact": 0.19,
+   "gaz_chrF": 27.92,
+   "gaz_exact": 0.0867,
+   "step": 21059
+  },
+  {
+   "bt_chrF": 63.83,
+   "bt_exact": 0.1933,
+   "gaz_chrF": 27.49,
+   "gaz_exact": 0.0733,
+   "step": 22519
+  },
+  {
+   "bt_chrF": 63.77,
+   "bt_exact": 0.1867,
+   "gaz_chrF": 25.62,
+   "gaz_exact": 0.0533,
+   "step": 23766
+  }
+ ],
+ "args": {
+  "mode": "train",
+  "data": "MAX",
+  "tag": "marian_ft",
+  "extra": [],
+  "minutes": 30.0,
+  "total_min": 480.0,
+  "lr": 0.0001,
+  "warmup": 300,
+  "max_tok": 1400,
+  "ckpt_min": 15.0,
+  "threads": 4,
+  "resume": false,
+  "ckpt": null
+ }
+}

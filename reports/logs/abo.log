@@ -1,0 +1,113 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+ar kept 2116 of 4375
+de kept 7588 of 8809
+es kept 6083 of 7622
+fr kept 1864 of 2045
+hi kept 2613 of 5939
+it kept 18 of 21
+ja kept 327 of 829
+ko kept 3236 of 6348
+pl kept 927 of 1202
+pt kept 5061 of 6281
+tr kept 840 of 1216
+zh kept 4844 of 8324
+abo bt jobs left 60000
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/60000 done, 460 ms/item, lang zh
+672/60000 done, 35 ms/item, lang zh
+1312/60000 done, 25 ms/item, lang zh
+1952/60000 done, 22 ms/item, lang zh
+2592/60000 done, 29 ms/item, lang zh
+3232/60000 done, 43 ms/item, lang zh
+3872/60000 done, 55 ms/item, lang zh
+4318/60000 done, 63 ms/item, lang es
+4958/60000 done, 56 ms/item, lang es
+5598/60000 done, 50 ms/item, lang es
+6238/60000 done, 46 ms/item, lang es
+6878/60000 done, 45 ms/item, lang es
+7518/60000 done, 48 ms/item, lang es
+8158/60000 done, 53 ms/item, lang es
+8604/60000 done, 56 ms/item, lang ar
+9244/60000 done, 53 ms/item, lang ar
+9884/60000 done, 51 ms/item, lang ar
+10524/60000 done, 49 ms/item, lang ar
+11164/60000 done, 48 ms/item, lang ar
+11804/60000 done, 51 ms/item, lang ar
+12444/60000 done, 54 ms/item, lang ar
+12890/60000 done, 58 ms/item, lang ru
+13530/60000 done, 56 ms/item, lang ru
+14170/60000 done, 54 ms/item, lang ru
+14810/60000 done, 52 ms/item, lang ru
+15450/60000 done, 53 ms/item, lang ru
+16090/60000 done, 55 ms/item, lang ru
+16730/60000 done, 57 ms/item, lang ru
+17176/60000 done, 60 ms/item, lang de
+17816/60000 done, 58 ms/item, lang de
+18456/60000 done, 56 ms/item, lang de
+19096/60000 done, 54 ms/item, lang de
+19736/60000 done, 54 ms/item, lang de
+20376/60000 done, 54 ms/item, lang de
+21016/60000 done, 55 ms/item, lang de
+21462/60000 done, 56 ms/item, lang fr
+22102/60000 done, 55 ms/item, lang fr
+22742/60000 done, 54 ms/item, lang fr
+23382/60000 done, 52 ms/item, lang fr
+24022/60000 done, 52 ms/item, lang fr
+24662/60000 done, 53 ms/item, lang fr
+25302/60000 done, 54 ms/item, lang fr
+25748/60000 done, 55 ms/item, lang hi
+26388/60000 done, 54 ms/item, lang hi
+27028/60000 done, 53 ms/item, lang hi
+27668/60000 done, 52 ms/item, lang hi
+28308/60000 done, 52 ms/item, lang hi
+28948/60000 done, 53 ms/item, lang hi
+29588/60000 done, 55 ms/item, lang hi
+30034/60000 done, 56 ms/item, lang id
+30674/60000 done, 55 ms/item, lang id
+31314/60000 done, 54 ms/item, lang id
+31954/60000 done, 53 ms/item, lang id
+32594/60000 done, 53 ms/item, lang id
+33234/60000 done, 54 ms/item, lang id
+33874/60000 done, 55 ms/item, lang id
+34320/60000 done, 56 ms/item, lang vi
+34960/60000 done, 55 ms/item, lang vi
+35600/60000 done, 54 ms/item, lang vi
+36240/60000 done, 53 ms/item, lang vi
+36880/60000 done, 53 ms/item, lang vi
+37520/60000 done, 53 ms/item, lang vi
+38160/60000 done, 54 ms/item, lang vi
+38606/60000 done, 55 ms/item, lang it
+39246/60000 done, 54 ms/item, lang it
+39886/60000 done, 54 ms/item, lang it
+40526/60000 done, 53 ms/item, lang it
+41166/60000 done, 53 ms/item, lang it
+41806/60000 done, 53 ms/item, lang it
+42446/60000 done, 54 ms/item, lang it
+42892/60000 done, 56 ms/item, lang pt
+43532/60000 done, 55 ms/item, lang pt
+44172/60000 done, 54 ms/item, lang pt
+44812/60000 done, 54 ms/item, lang pt
+45452/60000 done, 53 ms/item, lang pt
+46092/60000 done, 54 ms/item, lang pt
+46732/60000 done, 55 ms/item, lang pt
+47177/60000 done, 56 ms/item, lang tr
+47817/60000 done, 55 ms/item, lang tr
+48457/60000 done, 55 ms/item, lang tr
+49097/60000 done, 54 ms/item, lang tr
+49737/60000 done, 54 ms/item, lang tr
+50377/60000 done, 55 ms/item, lang tr
+51017/60000 done, 57 ms/item, lang tr
+51462/60000 done, 58 ms/item, lang ja
+52102/60000 done, 57 ms/item, lang ja
+52742/60000 done, 56 ms/item, lang ja
+53382/60000 done, 56 ms/item, lang ja
+54022/60000 done, 56 ms/item, lang ja
+54662/60000 done, 57 ms/item, lang ja
+55302/60000 done, 58 ms/item, lang ja
+55747/60000 done, 59 ms/item, lang pl
+56387/60000 done, 58 ms/item, lang pl
+57027/60000 done, 58 ms/item, lang pl
+57667/60000 done, 57 ms/item, lang pl
+58307/60000 done, 57 ms/item, lang pl
+58947/60000 done, 57 ms/item, lang pl
+59587/60000 done, 59 ms/item, lang pl

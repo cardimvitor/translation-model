@@ -1,0 +1,22 @@
+new candidate terms 1513 ['everyday', 'led', 'renewed', 'collective', 'vintage', 'picture', 'dual', 'ultimate', 'cast', 'genuine', 'craft', 'spa', 'sixth', 'cutting', 'vary', 'thirty', 'pre', 'boost', 'make', 'ever'] ['white black white', 'black lives matter', 'link chain necklace', 'cross cut paper', 'boots brown brown', 'everyday value reduced', 'white powder coat', 'classic worker boots', 'everyday value half', 'modern wool area']
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+zh confirmed 473 / 1513
+es confirmed 730 / 1513
+pt confirmed 727 / 1513
+ar confirmed 524 / 1513
+ru confirmed 530 / 1513
+ja confirmed 409 / 1513
+ko confirmed 580 / 1513
+de confirmed 801 / 1513
+fr confirmed 698 / 1513
+hi confirmed 410 / 1513
+tr confirmed 687 / 1513
+id confirmed 582 / 1513
+vi confirmed 308 / 1513
+it confirmed 715 / 1513
+pl confirmed 648 / 1513
+th confirmed 389 / 1513
+added terms 952 total auto terms 1841
+auto glossary terms 1841 entries added 17000
+kana 135 | address langs 16 | glossary terms 92 | entries per lang {'zh': 1074, 'es': 1492, 'pt': 1443, 'ar': 1198, 'ru': 1260, 'ja': 956, 'ko': 1096, 'de': 1392, 'fr': 1408, 'hi': 926, 'tr': 1348, 'id': 1188, 'vi': 800, 'it': 1449, 'pl': 1362, 'th': 703, '_rank': 1933, '_drop': 11}
+Fast           exact 64/320 (20.0%)  chrF  42.6  2.5 ms/item

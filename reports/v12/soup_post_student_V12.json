@@ -1,0 +1,58 @@
+[
+ {
+  "blend": 0.0,
+  "tuning_labels": 88.28,
+  "tuning_labels_exact": 0.7448,
+  "mixed_tuning": 87.89,
+  "mixed_tuning_exact": 0.7188,
+  "mean": 88.09
+ },
+ {
+  "blend": 0.25,
+  "tuning_labels": 87.58,
+  "tuning_labels_exact": 0.7344,
+  "mixed_tuning": 88.07,
+  "mixed_tuning_exact": 0.7344,
+  "mean": 87.82
+ },
+ {
+  "blend": 0.4,
+  "tuning_labels": 87.49,
+  "tuning_labels_exact": 0.7292,
+  "mixed_tuning": 87.4,
+  "mixed_tuning_exact": 0.7188,
+  "mean": 87.44
+ },
+ {
+  "blend": 0.5,
+  "tuning_labels": 87.26,
+  "tuning_labels_exact": 0.7188,
+  "mixed_tuning": 87.4,
+  "mixed_tuning_exact": 0.7188,
+  "mean": 87.33
+ },
+ {
+  "blend": 0.6,
+  "tuning_labels": 87.41,
+  "tuning_labels_exact": 0.7188,
+  "mixed_tuning": 87.97,
+  "mixed_tuning_exact": 0.7344,
+  "mean": 87.69
+ },
+ {
+  "blend": 0.75,
+  "tuning_labels": 87.22,
+  "tuning_labels_exact": 0.7188,
+  "mixed_tuning": 85.81,
+  "mixed_tuning_exact": 0.7188,
+  "mean": 86.52
+ },
+ {
+  "blend": 1.0,
+  "tuning_labels": 86.83,
+  "tuning_labels_exact": 0.7188,
+  "mixed_tuning": 85.06,
+  "mixed_tuning_exact": 0.7031,
+  "mean": 85.94
+ }
+]

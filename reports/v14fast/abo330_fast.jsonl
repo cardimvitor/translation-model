@@ -1,0 +1,3 @@
+{"model": "student_V8F", "exact": 0.051515151515151514, "chrF": 61.97}
+{"model": "student_V14F1", "exact": 0.05757575757575758, "chrF": 62.22}
+{"model": "student_V14F2", "exact": 0.06666666666666667, "chrF": 61.32}

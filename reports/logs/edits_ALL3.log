@@ -1,0 +1,10 @@
+base {'bt_chrF': 38.74, 'bt_exact': 0.0467, 'gaz_chrF': 33.66, 'gaz_exact': 0.1167, 'gold_exact': 0.1, 'gold_chrF': 32.55}
+dec1.self.head5 {'bt_chrF': 38.55, 'bt_exact': 0.0389, 'gaz_chrF': 34.37, 'gaz_exact': 0.1133} drop
+edited [] {'bt_chrF': 38.74, 'bt_exact': 0.0467, 'gaz_chrF': 33.66, 'gaz_exact': 0.1167, 'gold_exact': 0.1, 'gold_chrF': 32.55}
+fine-tuned {'bt_chrF': 39.28, 'bt_exact': 0.0478, 'gaz_chrF': 34.86, 'gaz_exact': 0.11, 'gold_exact': 0.1125, 'gold_chrF': 32.98}
+DECISION: use edited model
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+WARNING:root:Please consider to run pre-processing before quantization. Refer to example: https://github.com/microsoft/onnxruntime-inference-examples/blob/main/quantization/image_classification/cpu/ReadMe.md 
+decoder_int8.onnx 8.64 MB
+encoder_int8.onnx 13.67 MB
+vocab.json 0.03 MB

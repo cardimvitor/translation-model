@@ -1,0 +1,586 @@
+{
+ "about": "Hand-written labels mixing English and Turkish (the first 8 are the examples tried in the chat). Test only: never used for training or tuning; training pairs with these sources or these answers are left out.",
+ "items": [
+  {
+   "lang": "tr",
+   "src": "wireless kulaklık",
+   "en": [
+    "wireless headphones",
+    "wireless earphones",
+    "wireless headset"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "stainless steel çaydanlık",
+   "en": [
+    "stainless steel teapot",
+    "stainless steel kettle"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "gaming mouse pad büyük boy",
+   "en": [
+    "large gaming mouse pad",
+    "gaming mouse pad large",
+    "gaming mouse pad large size",
+    "large size gaming mouse pad"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "black deri ceket",
+   "en": [
+    "black leather jacket"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "usb şarj kablosu fast charging",
+   "en": [
+    "usb charging cable fast charging",
+    "fast charging usb cable",
+    "usb fast charging cable",
+    "usb charger cable fast charging"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "kadın çanta leather",
+   "en": [
+    "women's leather bag",
+    "women's bag leather",
+    "leather women's bag",
+    "leather bag for women"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "iphone kılıf",
+   "en": [
+    "iphone case",
+    "iphone cover"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "erkek spor ayakkabı size 42",
+   "en": [
+    "men's sneakers size 42",
+    "men's sports shoes size 42",
+    "men's athletic shoes size 42",
+    "men's sport shoes size 42"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "bluetooth hoparlör",
+   "en": [
+    "bluetooth speaker"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "laptop çantası",
+   "en": [
+    "laptop bag"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "kids yağmurluk",
+   "en": [
+    "kids raincoat"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "cotton gömlek",
+   "en": [
+    "cotton shirt"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "led ampul",
+   "en": [
+    "led bulb",
+    "led light bulb"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "smart saat",
+   "en": [
+    "smart watch",
+    "smartwatch"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "wooden masa",
+   "en": [
+    "wooden table"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "baby battaniye",
+   "en": [
+    "baby blanket"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "kitchen bıçak set",
+   "en": [
+    "kitchen knife set"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "winter eldiven",
+   "en": [
+    "winter gloves"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "yoga matı non-slip",
+   "en": [
+    "non-slip yoga mat",
+    "yoga mat non-slip"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "running ayakkabı",
+   "en": [
+    "running shoes"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "office sandalye",
+   "en": [
+    "office chair"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "travel yastık",
+   "en": [
+    "travel pillow"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "waterproof çadır",
+   "en": [
+    "waterproof tent"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "red elbise",
+   "en": [
+    "red dress"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "power bank 20000 mah hızlı şarj",
+   "en": [
+    "power bank 20000 mah fast charging",
+    "20000 mah fast charging power bank",
+    "fast charging power bank 20000 mah"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "dog mama kabı",
+   "en": [
+    "dog food bowl"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "glass şişe",
+   "en": [
+    "glass bottle"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "men's kemer",
+   "en": [
+    "men's belt"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "hair kurutma makinesi",
+   "en": [
+    "hair dryer",
+    "hairdryer"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "coffee fincan",
+   "en": [
+    "coffee cup",
+    "coffee mug"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "robot süpürge",
+   "en": [
+    "robot vacuum",
+    "robot vacuum cleaner"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "phone tutucu",
+   "en": [
+    "phone holder"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "car koltuk kılıfı",
+   "en": [
+    "car seat cover"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "polarized güneş gözlüğü",
+   "en": [
+    "polarized sunglasses"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "silver kolye",
+   "en": [
+    "silver necklace"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "gold yüzük",
+   "en": [
+    "gold ring"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "school çantası",
+   "en": [
+    "school bag",
+    "school backpack"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "camping sandalyesi foldable",
+   "en": [
+    "foldable camping chair",
+    "folding camping chair",
+    "camping chair foldable"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "mechanical klavye",
+   "en": [
+    "mechanical keyboard"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "wireless şarj cihazı",
+   "en": [
+    "wireless charger"
+   ],
+   "kind": "english label with Turkish words"
+  },
+  {
+   "lang": "tr",
+   "src": "deri wallet",
+   "en": [
+    "leather wallet"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "kablosuz mouse",
+   "en": [
+    "wireless mouse"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "paslanmaz çelik bottle",
+   "en": [
+    "stainless steel bottle"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "çocuk bisikleti helmet",
+   "en": [
+    "kids bike helmet",
+    "children's bike helmet",
+    "kids bicycle helmet",
+    "children's bicycle helmet",
+    "child bike helmet"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "kış montu waterproof",
+   "en": [
+    "waterproof winter coat",
+    "waterproof winter jacket",
+    "winter coat waterproof",
+    "winter jacket waterproof"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "bebek arabası lightweight",
+   "en": [
+    "lightweight baby stroller",
+    "lightweight stroller",
+    "baby stroller lightweight"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "mutfak tartısı digital",
+   "en": [
+    "digital kitchen scale",
+    "kitchen scale digital"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "oyuncu koltuğu ergonomic",
+   "en": [
+    "ergonomic gaming chair",
+    "gaming chair ergonomic"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "kadın sneaker beyaz",
+   "en": [
+    "women's white sneakers",
+    "white women's sneakers",
+    "women's sneakers white"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "erkek t-shirt siyah",
+   "en": [
+    "men's black t-shirt",
+    "black men's t-shirt",
+    "men's t-shirt black"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "duvar saati modern",
+   "en": [
+    "modern wall clock",
+    "wall clock modern"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "banyo havlusu soft",
+   "en": [
+    "soft bath towel",
+    "bath towel soft"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "çelik termos 1 litre",
+   "en": [
+    "steel thermos 1 liter",
+    "1 liter steel thermos",
+    "steel thermos 1 litre",
+    "1 litre steel thermos"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "telefon kılıfı transparent",
+   "en": [
+    "transparent phone case",
+    "clear phone case",
+    "phone case transparent"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "masa lambası led",
+   "en": [
+    "led desk lamp",
+    "led table lamp",
+    "desk lamp led",
+    "table lamp led"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "köpek tasması adjustable",
+   "en": [
+    "adjustable dog collar",
+    "dog collar adjustable"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "güneş kremi spf 50",
+   "en": [
+    "sunscreen spf 50",
+    "sun cream spf 50"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "diş fırçası electric",
+   "en": [
+    "electric toothbrush"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "su şişesi bpa free",
+   "en": [
+    "bpa free water bottle",
+    "water bottle bpa free"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "yatak örtüsü king size",
+   "en": [
+    "king size bedspread",
+    "king size bed cover",
+    "bedspread king size",
+    "bed cover king size"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "spor çantası large",
+   "en": [
+    "large sports bag",
+    "large gym bag",
+    "sports bag large",
+    "gym bag large"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "kol saati vintage",
+   "en": [
+    "vintage wristwatch",
+    "vintage watch",
+    "vintage wrist watch",
+    "wristwatch vintage"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "çay bardağı set",
+   "en": [
+    "tea glass set",
+    "tea cup set",
+    "set of tea glasses"
+   ],
+   "kind": "Turkish label with English words"
+  },
+  {
+   "lang": "tr",
+   "src": "halı anti-slip",
+   "en": [
+    "anti-slip rug",
+    "anti-slip carpet",
+    "non-slip rug",
+    "non-slip carpet"
+   ],
+   "kind": "Turkish label with English words"
+  }
+ ]
+}

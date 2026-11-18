@@ -1,0 +1,62 @@
+{
+ "evals": [
+  {
+   "titles": 65.8,
+   "labels": 84.54,
+   "step": 0
+  },
+  {
+   "titles": 63.37,
+   "labels": 85.0,
+   "step": 2649
+  },
+  {
+   "titles": 64.84,
+   "labels": 85.31,
+   "step": 5194
+  },
+  {
+   "titles": 64.61,
+   "labels": 85.3,
+   "step": 7675
+  },
+  {
+   "titles": 65.09,
+   "labels": 84.87,
+   "step": 10060
+  },
+  {
+   "titles": 65.09,
+   "labels": 85.45,
+   "step": 12239
+  },
+  {
+   "titles": 66.39,
+   "labels": 86.99,
+   "step": 14406
+  }
+ ],
+ "args": {
+  "mode": "train",
+  "tag": "post_student_V10",
+  "rank": 64,
+  "dec_keep": "0,5",
+  "enc_keep": "0,2,5",
+  "from_tag": "v8",
+  "from_model": "student_V8",
+  "extra": [
+   "pairs_NEW_v9.jsonl",
+   "pairs_NEW_v10.jsonl"
+  ],
+  "minutes": 180.0,
+  "total_min": 180.0,
+  "lr": 5e-05,
+  "ex_lr": 0.0005,
+  "warmup": 100,
+  "max_tok": 1400,
+  "ckpt_min": 30,
+  "threads": 4,
+  "resume": true,
+  "ckpt": null
+ }
+}

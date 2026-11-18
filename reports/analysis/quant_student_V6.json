@@ -1,0 +1,45 @@
+{
+ "default": {
+  "labels": 75.01,
+  "titles": 59.35,
+  "ms": 21.2,
+  "MB": 105.8
+ },
+ "per_channel": {
+  "labels": 78.25,
+  "titles": 61.34,
+  "ms": 25.7,
+  "MB": 106.3
+ },
+ "no_embed_lmhead": {
+  "labels": 78.82,
+  "titles": 60.29,
+  "ms": 44.9,
+  "MB": 286.9
+ },
+ "matmul_only": {
+  "labels": 74.94,
+  "titles": 60.25,
+  "ms": 21.2,
+  "MB": 228.1
+ },
+ "matmul_only_per_channel": {
+  "labels": 80.36,
+  "titles": 60.97,
+  "ms": 23.5,
+  "MB": 228.6
+ },
+ "unsigned": {
+  "labels": 76.3,
+  "titles": 60.98,
+  "ms": 26.3,
+  "MB": 105.8
+ },
+ "fp32": {
+  "labels": 79.86,
+  "titles": 62.38,
+  "ms": 88.8,
+  "MB": 420.4
+ },
+ "chosen": "per_channel"
+}

@@ -1,0 +1,21 @@
+[1/6] start from student_V10
+post-training from student_V10: 17079 new pairs | pieces the model cannot read: source 0.96%, English 0.22% | language experts: yes
+[2/6] fine-tune 150 minutes (log: build/work/post_student_V11.log)
+[3/6] export 8-bit
+step loop:  ['wireless headphones', "women's leather bag", 'electric kettle', 'wireless mouse', "men's cotton shirt", 'yoga mat']
+decoder_int8.onnx 21.81 MB
+encoder_int8.onnx 34.99 MB
+[4/6] choose the beam width, retune the decision rule
+chosen {'beams': 2, 'lp': 1.0, 'labels': 90.65, 'labels_ms': 8.1, 'titles': 67.07, 'titles_ms': 18.2, 'mean': 78.86}
+tuned cases with the chosen setting: 70 of 70
+chosen {'keep_cov': True, 'need_known': False, 'tau': 0.1, 'need_english': False, 'addr_max_words': 8, 'addr_long_cov': 0.6, 'keep_gaz': True} (86.117, {'labels': {'exact': 0.7812, 'chrF': 90.34}, 'pl
+[5/6] tests against student_V10
+test                student_V10    student_V11
+tuning_labels     71.9% /  88.5  78.1% /  90.3  ok
+test_labels       72.8% /  86.8  75.0% /  86.7  ok
+real_names        10.9% /  67.3  11.7% /  67.4  ok
+cases                        70             70  ok
+blind                        45             44  WORSE
+VERDICT: FAIL (keep using the parent model; the new one is left in models/ for inspection)
+[6/6] the new model is worse somewhere: keep student_V10, or train longer / check the new pairs
+post_train exit 1

@@ -1,0 +1,17 @@
+variant MAX | params 52.9M | cfg {'d': 512, 'enc': 8, 'dec': 6, 'heads': 8, 'ff': 2048, 'max_s': 96, 'max_t': 96} | src vocab 4216 tgt 222
+training pairs (weighted) 661805
+step 200 loss 3.416 lr 2.00e-04 581 min left
+dev {'bt_chrF': 13.09, 'bt_exact': 0.0, 'gaz_chrF': 10.97, 'gaz_exact': 0.0, 'step': 316}
+step 400 loss 2.767 lr 3.95e-04 557 min left
+dev {'bt_chrF': 12.88, 'bt_exact': 0.0, 'gaz_chrF': 10.45, 'gaz_exact': 0.0, 'step': 589}
+step 600 loss 2.489 lr 5.83e-04 533 min left
+step 800 loss 2.273 lr 5.72e-04 515 min left
+dev {'bt_chrF': 11.64, 'bt_exact': 0.0, 'gaz_chrF': 9.4, 'gaz_exact': 0.0, 'step': 859}
+step 1000 loss 2.149 lr 5.55e-04 491 min left
+dev {'bt_chrF': 14.97, 'bt_exact': 0.0, 'gaz_chrF': 14.33, 'gaz_exact': 0.0, 'step': 1117}
+step 1200 loss 2.045 lr 5.34e-04 467 min left
+dev {'bt_chrF': 17.15, 'bt_exact': 0.0, 'gaz_chrF': 16.69, 'gaz_exact': 0.0267, 'step': 1397}
+step 1400 loss 1.999 lr 5.09e-04 443 min left
+step 1600 loss 1.958 lr 4.87e-04 424 min left
+dev {'bt_chrF': 16.2, 'bt_exact': 0.0, 'gaz_chrF': 19.03, 'gaz_exact': 0.02, 'step': 1647}
+step 1800 loss 1.895 lr 4.57e-04 399 min left

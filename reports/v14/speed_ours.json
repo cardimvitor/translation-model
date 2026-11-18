@@ -1,0 +1,372 @@
+{
+ "none": {
+  "labels": {
+   "system": {
+    "n": 320,
+    "median_ms": 0.3,
+    "p90_ms": 0.4,
+    "per_second": 2778.4
+   }
+  },
+  "names": {
+   "system": {
+    "n": 330,
+    "median_ms": 0.9,
+    "p90_ms": 2.2,
+    "per_second": 849.6
+   }
+  }
+ },
+ "student_MAX_edited": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 12.7,
+    "p90_ms": 21.7,
+    "per_second": 72.5,
+    "tokens_per_second": 1148.9
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 11.9,
+    "p90_ms": 22.9,
+    "per_second": 75.3
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 64.3,
+    "p90_ms": 97.3,
+    "per_second": 15.4,
+    "tokens_per_second": 966.7
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 59.6,
+    "p90_ms": 90.2,
+    "per_second": 17.2
+   }
+  }
+ },
+ "student_V6": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 14.0,
+    "p90_ms": 22.8,
+    "per_second": 66.4,
+    "tokens_per_second": 260.7
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 11.0,
+    "p90_ms": 20.5,
+    "per_second": 80.5
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 62.1,
+    "p90_ms": 102.5,
+    "per_second": 15.3,
+    "tokens_per_second": 309.5
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 63.7,
+    "p90_ms": 109.3,
+    "per_second": 15.4
+   }
+  }
+ },
+ "student_V7": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 15.6,
+    "p90_ms": 27.4,
+    "per_second": 54.3,
+    "tokens_per_second": 209.2
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 14.5,
+    "p90_ms": 24.2,
+    "per_second": 73.0
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 67.9,
+    "p90_ms": 101.7,
+    "per_second": 14.3,
+    "tokens_per_second": 288.2
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 69.6,
+    "p90_ms": 105.8,
+    "per_second": 14.8
+   }
+  }
+ },
+ "student_V8": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 5.8,
+    "p90_ms": 9.2,
+    "per_second": 84.7,
+    "tokens_per_second": 324.4
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 7.7,
+    "p90_ms": 11.2,
+    "per_second": 150.5
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 27.7,
+    "p90_ms": 38.5,
+    "per_second": 36.5,
+    "tokens_per_second": 728.7
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 28.2,
+    "p90_ms": 46.4,
+    "per_second": 34.9
+   }
+  }
+ },
+ "student_V8F": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 4.4,
+    "p90_ms": 7.0,
+    "per_second": 208.8,
+    "tokens_per_second": 804.4
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 4.5,
+    "p90_ms": 6.5,
+    "per_second": 78.3
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 18.2,
+    "p90_ms": 26.7,
+    "per_second": 54.6,
+    "tokens_per_second": 1070.0
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 18.3,
+    "p90_ms": 26.1,
+    "per_second": 58.2
+   }
+  }
+ },
+ "student_V9": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 5.6,
+    "p90_ms": 7.9,
+    "per_second": 164.9,
+    "tokens_per_second": 621.6
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 5.8,
+    "p90_ms": 9.8,
+    "per_second": 180.6
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 25.3,
+    "p90_ms": 36.8,
+    "per_second": 38.7,
+    "tokens_per_second": 759.0
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 25.4,
+    "p90_ms": 36.9,
+    "per_second": 40.7
+   }
+  }
+ },
+ "student_V10": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 7.3,
+    "p90_ms": 10.7,
+    "per_second": 127.0,
+    "tokens_per_second": 536.8
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 6.8,
+    "p90_ms": 9.6,
+    "per_second": 171.5
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 28.7,
+    "p90_ms": 41.6,
+    "per_second": 34.3,
+    "tokens_per_second": 673.2
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 27.1,
+    "p90_ms": 41.4,
+    "per_second": 37.1
+   }
+  }
+ },
+ "student_V11": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 6.9,
+    "p90_ms": 12.3,
+    "per_second": 123.7,
+    "tokens_per_second": 516.6
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 6.6,
+    "p90_ms": 9.5,
+    "per_second": 174.5
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 25.5,
+    "p90_ms": 36.3,
+    "per_second": 38.7,
+    "tokens_per_second": 755.7
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 25.5,
+    "p90_ms": 34.8,
+    "per_second": 40.2
+   }
+  }
+ },
+ "student_V12": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 6.6,
+    "p90_ms": 10.3,
+    "per_second": 135.5,
+    "tokens_per_second": 565.8
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 6.2,
+    "p90_ms": 8.3,
+    "per_second": 186.3
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 23.2,
+    "p90_ms": 31.8,
+    "per_second": 42.9,
+    "tokens_per_second": 838.6
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 24.2,
+    "p90_ms": 33.8,
+    "per_second": 42.1
+   }
+  }
+ },
+ "student_V13": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 10.4,
+    "p90_ms": 15.2,
+    "per_second": 91.7,
+    "tokens_per_second": 383.0
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 8.9,
+    "p90_ms": 13.5,
+    "per_second": 123.2
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 29.0,
+    "p90_ms": 42.4,
+    "per_second": 33.7,
+    "tokens_per_second": 658.9
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 32.5,
+    "p90_ms": 50.4,
+    "per_second": 30.2
+   }
+  }
+ },
+ "student_V14": {
+  "labels": {
+   "alone": {
+    "n": 320,
+    "median_ms": 9.6,
+    "p90_ms": 14.1,
+    "per_second": 97.8,
+    "tokens_per_second": 408.2
+   },
+   "system": {
+    "n": 320,
+    "median_ms": 7.9,
+    "p90_ms": 12.2,
+    "per_second": 138.8
+   }
+  },
+  "names": {
+   "alone": {
+    "n": 330,
+    "median_ms": 31.7,
+    "p90_ms": 50.5,
+    "per_second": 29.6,
+    "tokens_per_second": 578.2
+   },
+   "system": {
+    "n": 330,
+    "median_ms": 37.0,
+    "p90_ms": 56.0,
+    "per_second": 26.8
+   }
+  }
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "model": "student_JG",
+ "base": {
+  "bt_chrF": 30.15,
+  "bt_exact": 0.0078,
+  "gaz_chrF": 22.24,
+  "gaz_exact": 0.0233,
+  "gold_exact": 0.0219,
+  "gold_chrF": 19.37
+ },
+ "tried": [
+  {
+   "edit": "dec2.ffn",
+   "with": [],
+   "bt_chrF": 29.91,
+   "bt_exact": 0.0067,
+   "gaz_chrF": 25.11,
+   "gaz_exact": 0.0433,
+   "kept": true
+  },
+  {
+   "edit": "dec1.ffn",
+   "with": [
+    "dec2.ffn"
+   ],
+   "bt_chrF": 28.78,
+   "bt_exact": 0.0022,
+   "gaz_chrF": 27.14,
+   "gaz_exact": 0.05,
+   "kept": false
+  },
+  {
+   "edit": "enc0.self.head5",
+   "with": [
+    "dec2.ffn"
+   ],
+   "bt_chrF": 29.86,
+   "bt_exact": 0.0056,
+   "gaz_chrF": 25.33,
+   "gaz_exact": 0.0467,
+   "kept": false
+  },
+  {
+   "edit": "enc3.self.head2",
+   "with": [
+    "dec2.ffn"
+   ],
+   "bt_chrF": 30.25,
+   "bt_exact": 0.0056,
+   "gaz_chrF": 25.29,
+   "gaz_exact": 0.0467,
+   "kept": true
+  },
+  {
+   "edit": "enc0.self.head2",
+   "with": [
+    "dec2.ffn",
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 30.17,
+   "bt_exact": 0.0056,
+   "gaz_chrF": 25.09,
+   "gaz_exact": 0.0467,
+   "kept": false
+  },
+  {
+   "edit": "dec1.self.head0",
+   "with": [
+    "dec2.ffn",
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 30.06,
+   "bt_exact": 0.0078,
+   "gaz_chrF": 25.32,
+   "gaz_exact": 0.0467,
+   "kept": false
+  },
+  {
+   "edit": "enc1.self.head2",
+   "with": [
+    "dec2.ffn",
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 29.82,
+   "bt_exact": 0.0022,
+   "gaz_chrF": 25.3,
+   "gaz_exact": 0.05,
+   "kept": false
+  },
+  {
+   "edit": "dec0.cross.head4",
+   "with": [
+    "dec2.ffn",
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 30.41,
+   "bt_exact": 0.0044,
+   "gaz_chrF": 24.88,
+   "gaz_exact": 0.0367,
+   "kept": false
+  },
+  {
+   "edit": "enc0.self.head1",
+   "with": [
+    "dec2.ffn",
+    "enc3.self.head2"
+   ],
+   "bt_chrF": 29.99,
+   "bt_exact": 0.0056,
+   "gaz_chrF": 25.79,
+   "gaz_exact": 0.0567,
+   "kept": false
+  }
+ ],
+ "kept": [
+  "dec2.ffn",
+  "enc3.self.head2"
+ ],
+ "edited": {
+  "bt_chrF": 30.25,
+  "bt_exact": 0.0056,
+  "gaz_chrF": 25.29,
+  "gaz_exact": 0.0467,
+  "gold_exact": 0.0125,
+  "gold_chrF": 17.99
+ },
+ "finetuned": {
+  "bt_chrF": 29.95,
+  "bt_exact": 0.01,
+  "gaz_chrF": 25.68,
+  "gaz_exact": 0.0433,
+  "gold_exact": 0.0156,
+  "gold_chrF": 18.6,
+  "steps": 286,
+  "minutes": 15.0,
+  "used": true
+ },
+ "decision": "keep original weights"
+}

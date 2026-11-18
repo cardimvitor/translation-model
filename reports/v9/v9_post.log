@@ -1,0 +1,20 @@
+[1/6] start from student_V8
+post-training from student_V8: 199525 new pairs | pieces the model cannot read: source 0.15%, English 0.09% | language experts: yes
+[2/6] fine-tune 300 minutes (log: build/work/post_student_V9.log)
+[2/6] fine-tune 300 minutes (log: build/work/post_student_V9.log)
+[3/6] export 8-bit
+step loop:  ['wireless headphones', "women's leather bag", 'electric kettle', 'wireless mouse', 'mens cotton shirt', 'yoga mat']
+decoder_int8.onnx 21.79 MB
+encoder_int8.onnx 34.99 MB
+[4/6] retune the decision rule
+chosen {'keep_cov': True, 'need_known': False, 'tau': 0.1, 'need_english': False, 'addr_max_words': 8, 'addr_long_cov': 0.6, 'keep_gaz': True} (84.15, {'labels': {'exact': 0.6823, 'chrF': 85.19}, 'pla
+[5/6] tests against student_V8
+test                 student_V8     student_V9
+tuning_labels     66.7% /  83.5  68.2% /  85.2  ok
+test_labels       68.8% /  83.1  72.5% /  86.0  ok
+real_names        11.5% /  67.7  11.3% /  67.2  ok
+cases                        70             70  ok
+blind                        44             45  ok
+VERDICT: PASS (new model kept)
+[6/6] done: models/student_V9 is ready
+post_train exit 0

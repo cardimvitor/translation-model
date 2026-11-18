@@ -1,0 +1,117 @@
+[11:51] u1: ABO real names: held-out test + OPUS-MT filter
+[12:34] u2: OPUS-MT translations of 60k ABO names
+[13:34] u3: bigger product word list (ESCI + ABO terms)
+[14:08]    bigger word list: tuned PASS 70/70 (need PASS 70/70), blind PASS 44/48 (before PASS 43/48)
+[14:08]    Fast           exact 64/320 (20.0%)  chrF  42.6  2.5 ms/item
+[14:08] t3: pure Hy-MT2 data (20k titles)
+[14:18] t3: pure Hy-MT2 data (12k titles)
+[21:51] data HY
+[21:51] train HY: 180 min
+[22:57] train HY: resume for 118 min
+[01:01] weight analysis HY
+[02:38] weight edits HY
+[02:38]    HY: 
+[02:38] data MAX
+[02:39] train MAX: 600 min
+[06:07] weight edits HY
+[06:25]    HY: DECISION: use edited model
+[06:25] train MAX: 600 min
+[16:32] weight analysis MAX
+[18:36] weight edits MAX
+[19:55]    MAX: DECISION: use edited model
+[19:55] f1: final evaluation of every model
+== none
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.4 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.6 ms/item
+cases PASS 70/70 | blind PASS 44/48
+== student_edited
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.5 ms/item
+gold Student only   exact 28/320 (8.8%)  chrF  26.2  6.4 ms/item
+gold Accurate       exact 70/320 (21.9%)  chrF  43.2  5.7 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.9 ms/item
+abo  Student only   exact 0/993 (0.0%)  chrF  11.1  19.6 ms/item
+abo  Accurate       exact 4/993 (0.4%)  chrF  33.6  18.9 ms/item
+cases PASS 70/70 | blind PASS 44/48
+size 4.2M 2.9M 
+== student_A
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.3 ms/item
+gold Student only   exact 65/320 (20.3%)  chrF  39.9  9.4 ms/item
+gold Accurate       exact 90/320 (28.1%)  chrF  49.6  7.3 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.6 ms/item
+abo  Student only   exact 1/993 (0.1%)  chrF  31.8  32.0 ms/item
+abo  Accurate       exact 2/993 (0.2%)  chrF  37.7  30.9 ms/item
+cases PASS 70/70 | blind PASS 44/48
+size 8.9M 4.4M 
+== student_B
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.6 ms/item
+gold Student only   exact 28/320 (8.8%)  chrF  29.0  9.8 ms/item
+gold Accurate       exact 77/320 (24.1%)  chrF  46.5  8.4 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  2.1 ms/item
+abo  Student only   exact 3/993 (0.3%)  chrF  30.1  34.1 ms/item
+abo  Accurate       exact 4/993 (0.4%)  chrF  37.4  33.6 ms/item
+cases PASS 70/70 | blind PASS 44/48
+size 8.9M 4.4M 
+== student_C
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.8 ms/item
+gold Student only   exact 66/320 (20.6%)  chrF  40.7  9.8 ms/item
+gold Accurate       exact 98/320 (30.6%)  chrF  51.0  8.9 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.6 ms/item
+abo  Student only   exact 4/993 (0.4%)  chrF  33.4  34.1 ms/item
+abo  Accurate       exact 5/993 (0.5%)  chrF  38.4  30.3 ms/item
+cases PASS 70/70 | blind PASS 44/48
+size 9.0M 4.4M 
+== student_B2
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.7 ms/item
+gold Student only   exact 51/320 (15.9%)  chrF  36.6  16.3 ms/item
+gold Accurate       exact 90/320 (28.1%)  chrF  49.8  11.6 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.7 ms/item
+abo  Student only   exact 3/993 (0.3%)  chrF  34.0  50.5 ms/item
+abo  Accurate       exact 4/993 (0.4%)  chrF  38.4  46.4 ms/item
+cases PASS 70/70 | blind PASS 43/48
+size 13M 8.3M 
+== student_C2_edited
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.2 ms/item
+gold Student only   exact 59/320 (18.4%)  chrF  39.6  14.3 ms/item
+gold Accurate       exact 93/320 (29.1%)  chrF  51.0  11.2 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.7 ms/item
+abo  Student only   exact 5/993 (0.5%)  chrF  35.1  51.5 ms/item
+abo  Accurate       exact 5/993 (0.5%)  chrF  38.6  48.3 ms/item
+cases PASS 70/70 | blind PASS 43/48
+size 14M 8.3M 
+== student_H
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.6 ms/item
+gold Student only   exact 39/320 (12.2%)  chrF  33.4  14.8 ms/item
+gold Accurate       exact 84/320 (26.2%)  chrF  48.8  13.3 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.6 ms/item
+abo  Student only   exact 3/993 (0.3%)  chrF  34.4  51.1 ms/item
+abo  Accurate       exact 4/993 (0.4%)  chrF  38.4  49.6 ms/item
+cases PASS 70/70 | blind PASS 43/48
+size 13M 8.3M 
+== student_ALL3_edited
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.9 ms/item
+gold Student only   exact 36/320 (11.2%)  chrF  33.1  17.4 ms/item
+gold Accurate       exact 86/320 (26.9%)  chrF  49.2  13.8 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.7 ms/item
+abo  Student only   exact 5/993 (0.5%)  chrF  34.4  53.0 ms/item
+abo  Accurate       exact 6/993 (0.6%)  chrF  38.5  48.5 ms/item
+cases PASS 70/70 | blind PASS 44/48
+size 14M 8.3M 
+== student_HY_edited
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.3 ms/item
+gold Student only   exact 48/320 (15.0%)  chrF  31.4  14.4 ms/item
+gold Accurate       exact 75/320 (23.4%)  chrF  45.5  12.7 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.8 ms/item
+abo  Student only   exact 0/993 (0.0%)  chrF  23.8  54.0 ms/item
+abo  Accurate       exact 4/993 (0.4%)  chrF  35.9  47.3 ms/item
+cases PASS 70/70 | blind PASS 43/48
+size 13M 8.2M 
+== student_MAX_edited
+gold Fast           exact 64/320 (20.0%)  chrF  42.6  2.2 ms/item
+gold Student only   exact 43/320 (13.4%)  chrF  32.3  15.2 ms/item
+gold Accurate       exact 91/320 (28.4%)  chrF  49.1  11.3 ms/item
+abo  Fast           exact 6/993 (0.6%)  chrF  39.1  1.8 ms/item
+abo  Student only   exact 37/993 (3.7%)  chrF  52.5  67.6 ms/item
+abo  Accurate       exact 27/993 (2.7%)  chrF  45.7  65.3 ms/item
+cases PASS 70/70 | blind PASS 43/48
+size 14M 8.3M 
+[20:12] pipeline 6 done

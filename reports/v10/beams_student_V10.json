@@ -1,0 +1,68 @@
+{
+ "model": "student_V10",
+ "chosen": {
+  "beams": 2,
+  "lp": 1.0,
+  "labels": 88.61,
+  "labels_ms": 8.1,
+  "titles": 65.41,
+  "titles_ms": 13.2,
+  "mean": 77.01
+ },
+ "all": [
+  {
+   "beams": 1,
+   "lp": 1.0,
+   "labels": 85.96,
+   "labels_ms": 9.2,
+   "titles": 64.71,
+   "titles_ms": 11.6,
+   "mean": 75.33
+  },
+  {
+   "beams": 2,
+   "lp": 1.0,
+   "labels": 88.61,
+   "labels_ms": 8.1,
+   "titles": 65.41,
+   "titles_ms": 13.2,
+   "mean": 77.01
+  },
+  {
+   "beams": 3,
+   "lp": 1.0,
+   "labels": 88.45,
+   "labels_ms": 8.6,
+   "titles": 65.33,
+   "titles_ms": 12.9,
+   "mean": 76.89
+  },
+  {
+   "beams": 4,
+   "lp": 1.0,
+   "labels": 88.7,
+   "labels_ms": 8.4,
+   "titles": 65.68,
+   "titles_ms": 12.6,
+   "mean": 77.19
+  },
+  {
+   "beams": 4,
+   "lp": 0.6,
+   "labels": 88.86,
+   "labels_ms": 8.2,
+   "titles": 65.13,
+   "titles_ms": 14.1,
+   "mean": 77.0
+  },
+  {
+   "beams": 5,
+   "lp": 1.0,
+   "labels": 88.63,
+   "labels_ms": 9.9,
+   "titles": 65.59,
+   "titles_ms": 13.9,
+   "mean": 77.11
+  }
+ ]
+}

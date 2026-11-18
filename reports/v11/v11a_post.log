@@ -1,0 +1,21 @@
+[1/6] start from student_V10
+post-training from student_V10: 26679 new pairs | pieces the model cannot read: source 0.67%, English 0.19% | language experts: yes
+[2/6] fine-tune 180 minutes (log: build/work/post_student_V11.log)
+[3/6] export 8-bit
+step loop:  ['wireless headphones', 'bag leather women', 'electric kettle', 'wireless mouse', "men's cotton shirt", 'yoga mat']
+decoder_int8.onnx 21.81 MB
+encoder_int8.onnx 34.99 MB
+[4/6] choose the beam width, retune the decision rule
+chosen {'beams': 3, 'lp': 1.0, 'labels': 90.12, 'labels_ms': 12.5, 'titles': 67.13, 'titles_ms': 18.3, 'mean': 78.62}
+tuned cases with the chosen setting: 70 of 70
+chosen {'keep_cov': True, 'need_known': False, 'tau': 0.2, 'need_english': False, 'addr_max_words': 8, 'addr_long_cov': 0.6, 'keep_gaz': True} (86.08, {'labels': {'exact': 0.7552, 'chrF': 89.99}, 'pla
+[5/6] tests against student_V10
+test                student_V10    student_V11
+tuning_labels     71.9% /  88.5  75.5% /  90.0  ok
+test_labels       72.8% /  86.8  71.6% /  86.5  ok
+real_names        10.9% /  67.3  10.9% /  67.4  ok
+cases                        70             70  ok
+blind                        45             45  ok
+VERDICT: PASS (new model kept)
+[6/6] done: models/student_V11 is ready
+post_train exit 0

@@ -1,0 +1,6 @@
+A {'read_nllb': 109603, 'kept_nllb': 90269}
+A counts {('train', 'bt'): 85848, ('train', 'noise'): 7077, ('dev', 'bt'): 4421, ('train', 'gaz'): 27399, ('train', 'gloss'): 10967, ('dev', 'gaz'): 1314}
+B {'read_opus': 117021, 'kept_opus': 71717}
+B counts {('train', 'bt'): 68115, ('train', 'gaz'): 27399, ('dev', 'bt'): 3602, ('train', 'noise'): 6358, ('train', 'gloss'): 10967, ('dev', 'gaz'): 1314}
+C {'read_nllb': 109603, 'kept_nllb': 90269, 'read_opus': 117021, 'kept_opus': 67151}
+C counts {('train', 'bt'): 149627, ('train', 'gaz'): 27399, ('dev', 'bt'): 7793, ('train', 'gloss'): 10967, ('train', 'noise'): 12735, ('dev', 'gaz'): 1314}

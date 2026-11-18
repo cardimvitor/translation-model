@@ -1,0 +1,98 @@
+<p>Every model, in the order it was made: what the goal was, the steps taken, and what came out. Scores are for the full system on the 320 hand-written labels (chrF) unless stated.</p>
+
+<h3>Step 0. English check (Nov 4)</h3>
+<ol>
+<li>Goal: say in microseconds whether a label is already English, so it can be left alone.</li>
+<li>Built a character n-gram scorer from public multilingual text; 100 KB of data.</li>
+<li>Wrote it twice (Python and JavaScript) and checked both give identical answers on 12,072 inputs.</li>
+<li>Result: about 11 µs per call. Used by every later model.</li>
+</ol>
+
+<h3>Step 1. Fast, the rules-only model (v1–v2, Nov 4–5)</h3>
+<ol>
+<li>Goal: translate places, addresses and common product words with no neural network.</li>
+<li>Place names: built a gazetteer from GeoNames and Unicode CLDR (cities, countries, their names in every script), split per script so a phone loads only what it needs.</li>
+<li>Transliteration: wrote rules for 9 writing systems (Cyrillic, Arabic, Greek, Devanagari, Thai, Hangul, kana, Han with pinyin, and a fallback).</li>
+<li>Language detection: a small n-gram detector for Latin and Han text; other scripts identify the language directly.</li>
+<li>Product word list: started with 91 hand-written terms in 16 languages; address rules for street, district, number patterns.</li>
+<li>Wrote 70 tuned test cases, then 48 "blind" cases after tuning. Python and JavaScript runtimes checked identical on 3,018 inputs.</li>
+<li>Later improvements: replaced a GPL Japanese dictionary with an Apache-licensed one (v4); grew the word list automatically to about 890 terms (v4) and 1,841 (v5) by mining catalogue titles and keeping only translations that survive a round trip.</li>
+<li>Result: 42.6 chrF on labels, 70/70 tuned, 44/48 blind, about 2 ms per label.</li>
+</ol>
+
+<h3>Step 2. v3, the first neural model (Nov 5–6)</h3>
+<ol>
+<li>Goal: translate what Fast does not know, in a model small enough for a phone (7 MB).</li>
+<li>Data: 2.7k English product titles, translated into the 16 languages by NLLB-600M (the "teacher"), filtered by script, English check and confidence: 24k pairs.</li>
+<li>Model: a 7M-parameter character-level encoder-decoder, trained from nothing for 100 minutes on CPU.</li>
+<li>Exported to ONNX, converted to 8-bit, wired into "Accurate": Fast first, the neural model only for unknown words, its answer accepted only if it keeps Fast's known words.</li>
+<li>Weight study: switched off each attention head in turn; removing one decoder head helped on two separate held-out slices, so it was kept.</li>
+<li>Result: 43.2. Lesson: too little data and training; the teacher (NLLB) is non-commercial.</li>
+</ol>
+
+<h3>Step 3. v4 A, B and C (Nov 6–8)</h3>
+<ol>
+<li>Goal: more data, longer training, and a version whose teachers allow commercial use.</li>
+<li>Data: 81k English titles from Amazon ESCI. A = translated by NLLB; B = by OPUS-MT (plus M2M100 for Korean and Thai), keeping only translations that translate back to the title; C = both.</li>
+<li>Made training restart-safe (the cloud machine restarts often): a checkpoint every 5 minutes and a learning-rate schedule that continues across restarts.</li>
+<li>Trained 13M-parameter character models for 4–5 hours each; added a cached decoder (35% faster).</li>
+<li>After training: averaged the last 3 checkpoints; tested switching off every head and block; kept a change only if a second held-out slice and the hand-written labels agreed. A stayed as trained, B lost 2 heads, C lost 1.</li>
+<li>Results: A 49.6, B 46.5, C 51.0. Lesson: NLLB data teaches better than OPUS-MT data at this size; both together are best.</li>
+</ol>
+
+<h3>Step 4. v5 B2, C2, H, ALL3 and HY (Nov 8–10)</h3>
+<ol>
+<li>Goal: learn more from the teachers and add a third, stronger teacher (Tencent Hy-MT2).</li>
+<li>Scored the teachers themselves on the labels: Hy-MT2-7B 95.1, Hy-MT2-1.8B 79.1, OPUS-MT 76.2, NLLB 70.9.</li>
+<li>Knowledge distillation: besides the real English title, each teacher's own English answer became an extra training target when it was English and close to the title.</li>
+<li>Tried word pieces (BPE) instead of characters, and a 52M-parameter model: both learned too slowly on 4 CPU cores and were dropped. Settled on 22M-parameter character models.</li>
+<li>Trained B2 (OPUS-MT), C2 (OPUS-MT + NLLB), H (OPUS-MT + Hy-MT2 answers), ALL3 (all three), each 5 hours; HY (Hy-MT2 writes everything, only 8k pairs because it is slow), 3 hours.</li>
+<li>Same weight tests as v4 on each model.</li>
+<li>Results: B2 49.8, C2 51.0, H 48.8, ALL3 49.2, HY 45.5. Lesson: teacher answers helped the OPUS-only model (+3 over v4 B); Hy-MT2 answers did not add more; a great teacher with little data loses to an average teacher with a lot.</li>
+</ol>
+
+<h3>Step 5. v5 MAX and the new decision rule (Nov 10)</h3>
+<ol>
+<li>Goal: one model with no limit on data, from commercial-friendly sources only.</li>
+<li>Found real paired data: Amazon Berkeley Objects, 55.8k product names written by people in 12 languages with an English name. Held out 993 as a second test set; kept 35k clean pairs for training.</li>
+<li>Added 60k more English titles from the same catalogue, translated by OPUS-MT.</li>
+<li>Trained for 10 hours on OPUS-MT + Hy-MT2 answers + the real names; switched off 2 heads and retrained 15 minutes.</li>
+<li>Decision rule v2: instead of using the neural model only for unknown words, let it translate the whole label whenever Fast did not understand it and it is not an address. Tuned on held-out data.</li>
+<li>Result: 49.1 on labels and 45.7 on real names (others about 38.5). Lesson: real data that looks like the task is worth more than anything else so far.</li>
+</ol>
+
+<h3>Step 6. JEPA-Gen, JEPA-Lookup and their baseline (Nov 10–11)</h3>
+<ol>
+<li>Goal: test a Joint-Embedding Predictive Architecture, which learns by predicting the meaning vector of a label instead of its text.</li>
+<li>Built it: an encoder, a slowly-updated copy as target, and a predictor, trained to match a label with its English name and to fill in hidden spans.</li>
+<li>First run collapsed (every label got the same vector); fixed with centering and a variance penalty. Tuned 4 settings for 30 minutes each, then a 3-hour main run: the right English name out of 1,000 was found 19% of the time (chance 0.1%).</li>
+<li>JEPA-Gen: a translator whose encoder starts from the JEPA encoder, 3 more hours of training.</li>
+<li>Baseline: the same model and data with 6 hours of ordinary training, so both had equal total time.</li>
+<li>JEPA-Lookup: return the nearest known English name by vector similarity.</li>
+<li>Results: JEPA-Gen 43.5, Baseline 45.9; lookup never beat Fast. Lesson: with 400k translated pairs, ordinary training uses the time better.</li>
+</ol>
+
+<h3>Step 7. v6, the pretrained translator (Nov 11–12)</h3>
+<ol>
+<li>Review of everything showed the weak point: the neural part, trained from nothing, scored about 32 alone while big translators score 76–95.</li>
+<li>Took a compact pretrained translator, OPUS-MT mul-en (77M parameters, CC BY 4.0). Untrained by us it scored only 34 on labels.</li>
+<li>Cut its vocabulary from 64k to 39k pieces (only what our languages use) and added 3,091 pieces it lacked, mostly Korean.</li>
+<li>Pilot: 30 minutes of fine-tuning on the MAX data already beat every earlier model.</li>
+<li>Noticed the test labels are short but the training text is long titles; made 58k short-label pairs from Amazon search queries translated by OPUS-MT (queries equal to a test answer left out).</li>
+<li>Fine-tuned 8.5 hours. Found and fixed a bug that silently dropped training to one CPU thread.</li>
+<li>Wrote the model's tokenizer (SentencePiece) in pure Python and JavaScript; it matches the original library on 60,000 of 60,000 strings.</li>
+<li>8-bit conversion: the default lost 5 chrF on short labels; converting each output channel separately got most of it back at the same size.</li>
+<li>Decision rule v3, tuned on 192 new hand-written tuning labels: places, addresses and English stay with Fast; long product names with a number are no longer mistaken for addresses; the English check on the answer was dropped.</li>
+<li>Result: 79.6 on labels, 66.9 on real names, 106 MB. Lesson: starting from a pretrained model mattered more than everything before it combined.</li>
+</ol>
+
+<h3>Step 8. v7, one expert per language (Nov 12)</h3>
+<ol>
+<li>Goal: a mixture of experts where only the needed language's parameters are active.</li>
+<li>Froze v6. Added to each of its 12 layers a small extra pair of matrices per language (3 MB per language), starting as a no-op.</li>
+<li>Routing by the Fast model's language detector; experts were trained on what the detector sends them, so training and phone route identically. Unsure labels use plain v6.</li>
+<li>Trained the experts 4 hours; exported with the expert as an input to the model, one small file per language loaded on first use.</li>
+<li>Result: 80.8 on labels (+1.2 over v6), 67.2 on real names. Lesson: experts trained on the same data add little; they need language-specific data.</li>
+</ol>
+
+{{STEPS_V8}}

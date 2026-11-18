@@ -1,0 +1,54 @@
+[19:18] 1 OPUS back-translation (variant B)
+[21:04] restart after disk full (freed 16G)
+[21:04] 1 OPUS back-translation (variant B)
+[21:25] 2 grow the product glossary (OPUS / M2M100, round trip)
+[21:34]    with auto glossary: tuned PASS 69/70, blind PASS 42/48
+[21:34]    regression: auto glossary rejected
+Fast           exact 44/320 (13.8%)  chrF  37.0  2.0 ms/item
+[21:34] 3 NLLB back-translation (variant A)
+[21:38]    auto glossary re-accepted after phrase-order fix: tuned 70/70, blind 42/48, gold exact 17.8% chrF 41.5
+[00:24] restart after container restart
+[00:24] 1 OPUS back-translation (variant B)
+[00:25] 3 NLLB back-translation (variant A)
+[08:50] restart after container restart
+[08:50] 1 OPUS back-translation (variant B)
+[08:50] 3 NLLB back-translation (variant A)
+[09:01] restart after container restart
+[09:01] 1 OPUS back-translation (variant B)
+[09:01] 3 NLLB back-translation (variant A)
+[10:57] restart; NLLB stopped at 85k new lines (enough), checkpoints every 15 min
+[10:57] 1 OPUS back-translation (variant B)
+[10:58] 4 training pairs A
+[10:58] 4 training pairs B
+[10:58] 4 training pairs C
+[10:59] 5 train B: 240 min
+[11:26] restart; training saves latest.pt every 5 min, one LR schedule across restarts
+[11:26] 1 OPUS back-translation (variant B)
+[11:26] 5 train B: 240 min
+[13:59] restart after container restart
+[13:59] 1 OPUS back-translation (variant B)
+[14:00] 5 train B: 240 min
+[14:00] relaunch (fixed resume check)
+[14:00] 1 OPUS back-translation (variant B)
+[14:00] 5 train B: resume for 235 min
+[17:58] 6 weight analysis B
+[18:28] 6 weight edits B
+[19:14]    B: DECISION: use edited model
+[19:14] 5 train A: 240 min
+[20:23] restart after container restart
+[20:23] 1 OPUS back-translation (variant B)
+[20:24]    B: DECISION: use edited model
+[20:24] 5 train A: resume for 175 min
+[23:21] 6 weight analysis A
+[23:50] 6 weight edits A
+[00:22]    A: DECISION: keep original weights
+[00:22] 5 train C: 300 min
+[03:46] restart after container restart
+[03:46] 1 OPUS back-translation (variant B)
+[03:47]    B: DECISION: use edited model
+[03:47]    A: DECISION: keep original weights
+[03:47] 5 train C: resume for 98 min
+[05:27] 6 weight analysis C
+[05:56] 6 weight edits C
+[06:20]    C: DECISION: use edited model
+[06:20] pipeline done

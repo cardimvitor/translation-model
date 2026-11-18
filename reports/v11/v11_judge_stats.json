@@ -1,0 +1,8 @@
+{
+ "7B agrees with the model (old target was wrong)": 1791,
+ "7B gives a third answer": 4185,
+ "7B agrees with the old target (hard example)": 2039,
+ "7B answer unusable": 316,
+ "real query pairs": 1558,
+ "mixed pairs": 9600
+}

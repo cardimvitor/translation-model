@@ -1,0 +1,65 @@
+{
+ "model": "student_HY",
+ "base": {
+  "bt_chrF": 23.5,
+  "bt_exact": 0.0,
+  "gaz_chrF": 31.58,
+  "gaz_exact": 0.0667,
+  "gold_exact": 0.15,
+  "gold_chrF": 31.53
+ },
+ "tried": [
+  {
+   "edit": "enc4.whole",
+   "with": [],
+   "bt_chrF": 22.55,
+   "bt_exact": 0.0,
+   "gaz_chrF": 34.08,
+   "gaz_exact": 0.0933,
+   "kept": false
+  },
+  {
+   "edit": "enc0.self.head3",
+   "with": [],
+   "bt_chrF": 23.54,
+   "bt_exact": 0.0,
+   "gaz_chrF": 32.25,
+   "gaz_exact": 0.0733,
+   "kept": true
+  },
+  {
+   "edit": "enc4.self.head3",
+   "with": [
+    "enc0.self.head3"
+   ],
+   "bt_chrF": 22.62,
+   "bt_exact": 0.0,
+   "gaz_chrF": 33.98,
+   "gaz_exact": 0.0867,
+   "kept": false
+  }
+ ],
+ "kept": [
+  "enc0.self.head3"
+ ],
+ "edited": {
+  "bt_chrF": 23.54,
+  "bt_exact": 0.0,
+  "gaz_chrF": 32.25,
+  "gaz_exact": 0.0733,
+  "gold_exact": 0.15,
+  "gold_chrF": 31.45
+ },
+ "finetuned": {
+  "bt_chrF": 22.2,
+  "bt_exact": 0.0,
+  "gaz_chrF": 34.03,
+  "gaz_exact": 0.0767,
+  "gold_exact": 0.1531,
+  "gold_chrF": 31.66,
+  "steps": 431,
+  "minutes": 15.0,
+  "used": false
+ },
+ "decision": "use edited model"
+}

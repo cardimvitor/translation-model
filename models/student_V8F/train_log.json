@@ -1,0 +1,57 @@
+{
+ "evals": [
+  {
+   "titles": 0.98,
+   "labels": 0.69,
+   "step": 0
+  },
+  {
+   "titles": 36.56,
+   "labels": 56.4,
+   "step": 3174
+  },
+  {
+   "titles": 44.58,
+   "labels": 69.78,
+   "step": 6247
+  },
+  {
+   "titles": 50.0,
+   "labels": 72.71,
+   "step": 9184
+  },
+  {
+   "titles": 51.24,
+   "labels": 72.62,
+   "step": 12630
+  },
+  {
+   "titles": 52.63,
+   "labels": 73.27,
+   "step": 16055
+  },
+  {
+   "titles": 53.31,
+   "labels": 73.25,
+   "step": 19359
+  }
+ ],
+ "args": {
+  "mode": "train",
+  "tag": "v8f",
+  "rank": 64,
+  "dec_keep": "0,5",
+  "enc_keep": "0,2,5",
+  "from_tag": "v8",
+  "minutes": 180.0,
+  "total_min": 180.0,
+  "lr": 0.0001,
+  "ex_lr": 0.001,
+  "warmup": 300,
+  "max_tok": 1400,
+  "ckpt_min": 30,
+  "threads": 4,
+  "resume": true,
+  "ckpt": null
+ }
+}

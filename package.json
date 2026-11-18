@@ -1,0 +1,16 @@
+{
+  "name": "en-normalizer",
+  "version": "0.4.0",
+  "description": "Translate / transliterate e-commerce and shipping labels into English in the browser or Node, offline. 16 languages.",
+  "main": "runtime/index.js",
+  "types": "runtime/index.d.ts",
+  "files": ["runtime/*.js", "runtime/index.d.ts", "data", "models"],
+  "scripts": {
+    "test": "node test/parity.js && node test/parity_lazy.js && node test/parity_encheck.js",
+    "test:accurate": "node test/parity_accurate.js"
+  },
+  "peerDependencies": { "onnxruntime-web": "1.20.1" },
+  "peerDependenciesMeta": { "onnxruntime-web": { "optional": true } },
+  "devDependencies": { "onnxruntime-web": "1.20.1" },
+  "license": "MIT"
+}

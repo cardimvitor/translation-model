@@ -1,0 +1,830 @@
+{
+ "by": {
+  "town": [
+   27,
+   38
+  ],
+  "address": [
+   29,
+   41
+  ],
+  "translit": [
+   19,
+   22
+  ]
+ },
+ "total": [
+  75,
+  101
+ ],
+ "rows": [
+  {
+   "kind": "town",
+   "in": "Σαντορίνη",
+   "out": "samsung",
+   "want": "Santorini",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "Μύκονος",
+   "out": "Mykonos",
+   "want": "Mykonos",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "ปาย",
+   "out": "pen",
+   "want": "Pai",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "เกาะพีพี",
+   "out": "pea",
+   "want": "Ko Phi Phi",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "ภูเก็ต",
+   "out": "Phuket",
+   "want": "Phuket",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Бали",
+   "out": "bali",
+   "want": "Bali",
+   "ok": true,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "Мальдивы",
+   "out": "Maldives",
+   "want": "Maldives",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "巴厘岛",
+   "out": "Bali",
+   "want": "Bali",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "済州島",
+   "out": "guinea",
+   "want": "Jeju",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "제주도",
+   "out": "Jeju-do",
+   "want": "Jeju",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "渋谷区",
+   "out": "Shibuya",
+   "want": "Shibuya",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "銀座",
+   "out": "Ginza",
+   "want": "Ginza",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "강남구",
+   "out": "garmin",
+   "want": "Gangnam-gu",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "Kadıköy",
+   "out": "Kadıköy",
+   "want": "Kadıköy",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Beşiktaş",
+   "out": "Beşiktaş",
+   "want": "Beşiktaş",
+   "ok": true,
+   "method": "transliteration(neural rejected)"
+  },
+  {
+   "kind": "town",
+   "in": "朝阳区",
+   "out": "Chaoyang District",
+   "want": "Chaoyang District",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "town",
+   "in": "浦东新区",
+   "out": "Pudong",
+   "want": "Pudong",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Хамовники",
+   "out": "hammocks",
+   "want": "Khamovniki",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "Переделкино",
+   "out": "Peredelkino",
+   "want": "Peredelkino",
+   "ok": true,
+   "method": "transliteration(neural rejected)"
+  },
+  {
+   "kind": "town",
+   "in": "Листвянка",
+   "out": "Listvyanka",
+   "want": "Listvyanka",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Hallstatt",
+   "out": "Hallstatt",
+   "want": "Hallstatt",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Oia",
+   "out": "Oia",
+   "want": "Oia",
+   "ok": true,
+   "method": "transliteration(neural rejected)"
+  },
+  {
+   "kind": "town",
+   "in": "Οία",
+   "out": "Oía",
+   "want": "Oia",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "白川郷",
+   "out": "Shiro Kawa Go",
+   "want": "Shirakawa-go",
+   "ok": false,
+   "method": "transliteration(neural rejected)"
+  },
+  {
+   "kind": "town",
+   "in": "由布院",
+   "out": "by the pot",
+   "want": "Yufuin",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "九份",
+   "out": "Jiufen",
+   "want": "Jiufen",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "丽江",
+   "out": "Lijiang",
+   "want": "Lijiang",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "حلب",
+   "out": "Aleppo",
+   "want": "Aleppo",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "الأقصر",
+   "out": "Luxor",
+   "want": "Luxor",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "شرم الشيخ",
+   "out": "Sharm el-Sheikh",
+   "want": "Sharm El Sheikh",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "जैसलमेर",
+   "out": "Jaisalmer",
+   "want": "Jaisalmer",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "लेह",
+   "out": "Leh",
+   "want": "Leh",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Sicília",
+   "out": "Sicily",
+   "want": "Sicily",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Kreta",
+   "out": "Chaniá",
+   "want": "Crete",
+   "ok": false,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Majorque",
+   "out": "mayorque",
+   "want": "Mallorca",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "town",
+   "in": "Теннесси",
+   "out": "Tennessee",
+   "want": "Tennessee",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Новая Зеландия",
+   "out": "New Zealand",
+   "want": "New Zealand",
+   "ok": true,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "town",
+   "in": "Гонконг",
+   "out": "Hong Kong SAR China",
+   "want": "Hong Kong",
+   "ok": false,
+   "method": "gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "ул. Тверская, д. 7, кв. 12, Москва",
+   "out": "Tverskaya Street, 7, Apt 12, Moscow",
+   "want": "Tverskaya Street, 7, Apt 12, Moscow",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "пер. Столешников 11, Москва",
+   "out": "Stoleshnikov Lane 11, Moscow",
+   "want": "Stoleshnikov Lane 11, Moscow",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "наб. реки Фонтанки 20, Санкт-Петербург",
+   "out": "Reki Fontanki Embankment 20, Saint Petersburg",
+   "want": "reki Fontanki Embankment 20, Saint Petersburg",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "б-р Гагарина 3, Иркутск",
+   "out": "Gagarina Boulevard 3, Irkutsk",
+   "want": "Gagarina Boulevard 3, Irkutsk",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Av. Corrientes 1234, Buenos Aires",
+   "out": "Corrientes Avenue 1234, Buenos Aires",
+   "want": "Corrientes Avenue 1234, Buenos Aires",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "C/ Gran Vía 28, 28013 Madrid",
+   "out": "Gran Vía Street 28, 28013 Madrid",
+   "want": "Gran Vía Street 28, 28013 Madrid",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Pza. Mayor 1, Salamanca",
+   "out": "Pza. Mayor 1, Salamanca",
+   "want": "Mayor Square 1, Salamanca",
+   "ok": false,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Carrer de Mallorca 401, Barcelona",
+   "out": "Carrer de Mallorca 401, Barcelona",
+   "want": "de Mallorca Street 401, Barcelona",
+   "ok": false,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "R. Augusta 2690, São Paulo",
+   "out": "Augusta Street 2690, São Paulo",
+   "want": "Augusta Street 2690, São Paulo",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Av. da Liberdade 110, 1250-146 Lisboa",
+   "out": "Liberdade Avenue 110, 1250-146 Lisboa",
+   "want": "da Liberdade Avenue 110, 1250-146 Lisbon",
+   "ok": false,
+   "method": "dictionary+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Praça do Comércio, Lisboa",
+   "out": "do Comércio Square, Lisbon",
+   "want": "do Comércio Square, Lisbon",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Bd Saint-Germain 170, 75006 Paris",
+   "out": "Saint-Germain Boulevard 170, 75006 Paris",
+   "want": "Saint-Germain Boulevard 170, 75006 Paris",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "3 place de la Concorde, Paris",
+   "out": "3 de la Concorde Square, Paris",
+   "want": "3 de la Concorde Square, Paris",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "15 quai des Orfèvres, Paris",
+   "out": "15 des Orfèvres Quay, Paris",
+   "want": "15 des Orfèvres Quay, Paris",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Corso Buenos Aires 33, Milano",
+   "out": "Buenos Aires Avenue 33, Milan",
+   "want": "Buenos Aires Avenue 33, Milan",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Viale Europa 5, Roma",
+   "out": "Europa Avenue 5, Rome",
+   "want": "Europa Avenue 5, Rome",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Friedrichstr. 43, 10117 Berlin",
+   "out": "Friedrichstr. 43, 10117 Berlin",
+   "want": "Friedrichstr. 43, 10117 Berlin",
+   "ok": true,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Marienplatz 8, 80331 München",
+   "out": "Marienplatz 8, 80331 Munich",
+   "want": "Marienplatz 8, 80331 Munich",
+   "ok": true,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "Schillerweg 2a, 50667 Köln",
+   "out": "Schillerweg 2a, 50667 Cologne",
+   "want": "Schillerweg 2a, 50667 Cologne",
+   "ok": true,
+   "method": "gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "ul. Floriańska 3, 31-019 Kraków",
+   "out": "Floriańska Street 3, 31-019 Krakow",
+   "want": "Floriańska Street 3, 31-019 Krakow",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "pl. Zamkowy 4, Warszawa",
+   "out": "Zamkowy Square 4, Warsaw",
+   "want": "Zamkowy Square 4, Warsaw",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Bağdat Cad. No:120 Kadıköy/İstanbul",
+   "out": "Bağdat Avenue No:120 Kadıköy/İstanbul",
+   "want": "Bağdat Avenue No. 120 Kadıköy/Istanbul",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "Gül Sk. No:4 D:3 Çankaya Ankara",
+   "out": "Gül Street No:4 D:3 Çankaya Ankara",
+   "want": "Gül Street No. 4 Apt 3 Çankaya Ankara",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "Jl. Malioboro No. 60, Yogyakarta",
+   "out": "Malioboro Street No. 60, Yogyakarta",
+   "want": "Malioboro Street No. 60, Yogyakarta",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Gg. Mawar No. 7, Bandung",
+   "out": "Mawar Alley No. 7, Bandung",
+   "want": "Mawar Alley No. 7, Bandung",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "Ngõ 12 Phố Huế, Hai Bà Trưng, Hà Nội",
+   "out": "Lane 12 Huế Street, Hai Bà Trưng, Hanoi",
+   "want": "Lane 12 Huế Street, Hai Bà Trưng, Hanoi",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "45 Hẻm 3, Phường 5, Quận 3, TP. Hồ Chí Minh",
+   "out": "45 Alley 3, Ward 5, Quận Ba, Ho Chi Minh City",
+   "want": "45 Alley 3, Ward 5, District 3, Ho Chi Minh City",
+   "ok": false,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "广州市天河区天河路208号",
+   "out": "Guangzhou Tianhe District Tianhe Road No. 208",
+   "want": "Guangzhou Tianhe District Tianhe Road No. 208",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "深圳市南山区科技园",
+   "out": "Shenzhen Nanshan District Kejiyuan",
+   "want": "Shenzhen Nanshan District Kejiyuan",
+   "ok": true,
+   "method": "dictionary(neural rejected)"
+  },
+  {
+   "kind": "address",
+   "in": "成都市锦江区春熙路1号",
+   "out": "Chengdu Jinjiang District Chunxi Road No. 1",
+   "want": "Chengdu Jinjiang District Chunxi Road No. 1",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "京都府京都市中京区河原町通",
+   "out": "kyottokyu-bikkuzirukonia",
+   "want": "Kyoto Kyoto City Nakagyo Ward Kawaramachi Street",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "address",
+   "in": "東京都港区六本木6-10-1",
+   "out": "Tokyo Minato Ward Liu Pon Ki 6-10-1",
+   "want": "Tokyo Minato Ward Roppongi 6-10-1",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "경기도 성남시 분당구 판교역로 235",
+   "out": "bourge samsung galaxy buds 235",
+   "want": "Gyeonggi-do Seongnam Bundang-gu Pangyoyeok-ro 235",
+   "ok": false,
+   "method": "neural"
+  },
+  {
+   "kind": "address",
+   "in": "제주특별자치도 제주시 첨단로 242",
+   "out": "Jeju-do Jeju City Cheomdan-ro 242",
+   "want": "Jeju Jeju Cheomdan-ro 242",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "طريق الملك عبدالله، جدة",
+   "out": "King Abdullah Road, Jeddah",
+   "want": "King Abdullah Road, Jeddah",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "شارع الشيخ زايد، دبي",
+   "out": "Sheikh Zayed Street, Dubai",
+   "want": "Sheikh Zayed Street, Dubai",
+   "ok": true,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "ميدان التحرير، القاهرة",
+   "out": "Al-thryr Square, Cairo",
+   "want": "Tahrir Square, Cairo",
+   "ok": false,
+   "method": "dictionary+gazetteer"
+  },
+  {
+   "kind": "address",
+   "in": "लिंक रोड, अंधेरी, मुंबई",
+   "out": "Link Road, Andheri, Mumbai",
+   "want": "Link Road, Andheri, Mumbai",
+   "ok": true,
+   "method": "dictionary+gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "गली नंबर 5, करोल बाग, नई दिल्ली",
+   "out": "Lane Nambar 5, Karol Bag, New Delhi",
+   "want": "Lane Number 5, Karol Bagh, New Delhi",
+   "ok": false,
+   "method": "dictionary+gazetteer+transliteration"
+  },
+  {
+   "kind": "address",
+   "in": "ซอยสุขุมวิท 55 แขวงคลองตันเหนือ เขตวัฒนา กรุงเทพมหานคร",
+   "out": "Soi Sukhumwit 55 Khwaeng Khlong Tan Nuea Khet Watthana Bangkok",
+   "want": "Soi Sukhumvit 55 Khwaeng Khlong Tan Nuea Khet Watthana Bangkok",
+   "ok": true,
+   "method": "dictionary"
+  },
+  {
+   "kind": "address",
+   "in": "99 หมู่ 4 ตำบลป่าตอง อำเภอกะทู้ จังหวัดภูเก็ต",
+   "out": "99 Moo 4 Tmabl Patong Omaeph Ok A Thu Phuket",
+   "want": "99 Moo 4 Tambon Patong Amphoe Kathu Phuket Province",
+   "ok": false,
+   "method": "dictionary"
+  },
+  {
+   "kind": "translit",
+   "in": "Дмитрий Менделеев",
+   "out": "Dmitriy Mendeleyev",
+   "want": "Dmitriy Mendeleev",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Харків",
+   "out": "Kharkiv",
+   "want": "Kharkiv",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Володимир Зеленський",
+   "out": "Volodimir Zelenskiy",
+   "want": "Volodymyr Zelenskyi",
+   "ok": false,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "李娜",
+   "out": "Li Na",
+   "want": "Li Na",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "张伟",
+   "out": "Zhang Wei",
+   "want": "Zhang Wei",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "陈静怡",
+   "out": "Chen Jingyi",
+   "want": "Chen Jingyi",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "鈴木一郎",
+   "out": "Suzuki Ichiro",
+   "want": "Suzuki Ichiro",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "田中美咲",
+   "out": "Tanaka Misaki",
+   "want": "Tanaka Misaki",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "こんにちは",
+   "out": "Konnichiha",
+   "want": "Konnichiwa",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "최지우",
+   "out": "Choi Jiu",
+   "want": "Choi Jiwoo",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "정수빈",
+   "out": "Jung Subin",
+   "want": "Jung Subin",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "부산광역시",
+   "out": "Busan-gwangyeoksi",
+   "want": "Busan-gwangyeoksi",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "أحمد حسن",
+   "out": "Ahmed Hassan",
+   "want": "Ahmad Hasan",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "خالد",
+   "out": "Khalid",
+   "want": "Khalid",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "يوسف",
+   "out": "Yousef",
+   "want": "Yusuf",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "مريم",
+   "out": "Maryam",
+   "want": "Maryam",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Νίκος Καζαντζάκης",
+   "out": "Nikos Kazantzakis",
+   "want": "Nikos Kazantzakis",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "Ελευθέριος",
+   "out": "Eleytherios",
+   "want": "Eleftherios",
+   "ok": false,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "अमित शाह",
+   "out": "Amit Shah",
+   "want": "Amit Shah",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "सुनीता विलियम्स",
+   "out": "Sunita Viliyams",
+   "want": "Sunita Williams",
+   "ok": true,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "สมชาย",
+   "out": "Som Chai",
+   "want": "Somchai",
+   "ok": false,
+   "method": "transliteration"
+  },
+  {
+   "kind": "translit",
+   "in": "เชียงราย",
+   "out": "Chiangrai",
+   "want": "Chiang Rai",
+   "ok": true,
+   "method": "transliteration"
+  }
+ ]
+}

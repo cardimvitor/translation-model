@@ -1,0 +1,201 @@
+opus jobs left 49188
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+32/49188 done, 80 ms/item, lang tr
+672/49188 done, 682 ms/item, lang tr
+1312/49188 done, 354 ms/item, lang tr
+1952/49188 done, 242 ms/item, lang tr
+2592/49188 done, 186 ms/item, lang tr
+3232/49188 done, 152 ms/item, lang tr
+3872/49188 done, 130 ms/item, lang tr
+4512/49188 done, 114 ms/item, lang tr
+5152/49188 done, 102 ms/item, lang tr
+5792/49188 done, 93 ms/item, lang tr
+6432/49188 done, 86 ms/item, lang tr
+7072/49188 done, 81 ms/item, lang tr
+7712/49188 done, 76 ms/item, lang tr
+7798/49188 done, 76 ms/item, lang zh
+8438/49188 done, 71 ms/item, lang zh
+9078/49188 done, 67 ms/item, lang zh
+9718/49188 done, 64 ms/item, lang zh
+10358/49188 done, 61 ms/item, lang zh
+10998/49188 done, 58 ms/item, lang zh
+11638/49188 done, 56 ms/item, lang zh
+12278/49188 done, 54 ms/item, lang zh
+12918/49188 done, 53 ms/item, lang zh
+13558/49188 done, 51 ms/item, lang zh
+14198/49188 done, 50 ms/item, lang zh
+14838/49188 done, 49 ms/item, lang zh
+15478/49188 done, 48 ms/item, lang zh
+15523/49188 done, 48 ms/item, lang pt
+16163/49188 done, 47 ms/item, lang pt
+16803/49188 done, 46 ms/item, lang pt
+17443/49188 done, 44 ms/item, lang pt
+18083/49188 done, 43 ms/item, lang pt
+18723/49188 done, 43 ms/item, lang pt
+18936/49188 done, 42 ms/item, lang ja
+19576/49188 done, 42 ms/item, lang ja
+20216/49188 done, 41 ms/item, lang ja
+20361/49188 done, 41 ms/item, lang fr
+21001/49188 done, 40 ms/item, lang fr
+21641/49188 done, 39 ms/item, lang fr
+22281/49188 done, 38 ms/item, lang fr
+22921/49188 done, 37 ms/item, lang fr
+23561/49188 done, 37 ms/item, lang fr
+24201/49188 done, 36 ms/item, lang fr
+24841/49188 done, 36 ms/item, lang fr
+25481/49188 done, 35 ms/item, lang fr
+26121/49188 done, 35 ms/item, lang fr
+26761/49188 done, 34 ms/item, lang fr
+27187/49188 done, 34 ms/item, lang it
+27827/49188 done, 34 ms/item, lang it
+28467/49188 done, 34 ms/item, lang it
+28629/49188 done, 34 ms/item, lang de
+29269/49188 done, 33 ms/item, lang de
+29909/49188 done, 33 ms/item, lang de
+30549/49188 done, 32 ms/item, lang de
+31189/49188 done, 32 ms/item, lang de
+31829/49188 done, 31 ms/item, lang de
+32469/49188 done, 31 ms/item, lang de
+33109/49188 done, 31 ms/item, lang de
+33749/49188 done, 31 ms/item, lang de
+34389/49188 done, 30 ms/item, lang de
+35029/49188 done, 30 ms/item, lang de
+35669/49188 done, 30 ms/item, lang de
+36309/49188 done, 30 ms/item, lang de
+36646/49188 done, 30 ms/item, lang es
+37286/49188 done, 30 ms/item, lang es
+37926/49188 done, 29 ms/item, lang es
+38566/49188 done, 29 ms/item, lang es
+39206/49188 done, 29 ms/item, lang es
+39846/49188 done, 28 ms/item, lang es
+40486/49188 done, 28 ms/item, lang es
+41126/49188 done, 28 ms/item, lang es
+41403/49188 done, 28 ms/item, lang pl
+42043/49188 done, 28 ms/item, lang pl
+42683/49188 done, 28 ms/item, lang pl
+43323/49188 done, 27 ms/item, lang pl
+43963/49188 done, 27 ms/item, lang pl
+44603/49188 done, 27 ms/item, lang pl
+45243/49188 done, 27 ms/item, lang pl
+45883/49188 done, 27 ms/item, lang pl
+46523/49188 done, 27 ms/item, lang pl
+47163/49188 done, 27 ms/item, lang pl
+47803/49188 done, 27 ms/item, lang pl
+48443/49188 done, 27 ms/item, lang pl
+49083/49188 done, 27 ms/item, lang pl
+nllb jobs left 80000
+32/80000 done, 76 ms/item, lang hi
+672/80000 done, 83 ms/item, lang hi
+1312/80000 done, 84 ms/item, lang hi
+1952/80000 done, 89 ms/item, lang hi
+2592/80000 done, 94 ms/item, lang hi
+3232/80000 done, 97 ms/item, lang hi
+3872/80000 done, 102 ms/item, lang hi
+4512/80000 done, 108 ms/item, lang hi
+5152/80000 done, 114 ms/item, lang hi
+5792/80000 done, 123 ms/item, lang hi
+6432/80000 done, 127 ms/item, lang hi
+7072/80000 done, 132 ms/item, lang hi
+7712/80000 done, 136 ms/item, lang hi
+opus jobs left 0
+nllb jobs left 44878
+32/44878 done, 217 ms/item, lang hi
+672/44878 done, 199 ms/item, lang hi
+1312/44878 done, 202 ms/item, lang hi
+1952/44878 done, 213 ms/item, lang hi
+2059/44878 done, 220 ms/item, lang th
+2699/44878 done, 197 ms/item, lang th
+3339/44878 done, 187 ms/item, lang th
+3979/44878 done, 183 ms/item, lang th
+4619/44878 done, 182 ms/item, lang th
+5259/44878 done, 184 ms/item, lang th
+5899/44878 done, 184 ms/item, lang th
+6539/44878 done, 185 ms/item, lang th
+7179/44878 done, 187 ms/item, lang th
+7819/44878 done, 190 ms/item, lang th
+8459/44878 done, 198 ms/item, lang th
+9099/44878 done, 206 ms/item, lang th
+9256/44878 done, 210 ms/item, lang ru
+9896/44878 done, 203 ms/item, lang ru
+10536/44878 done, 199 ms/item, lang ru
+11176/44878 done, 195 ms/item, lang ru
+11816/44878 done, 193 ms/item, lang ru
+12456/44878 done, 191 ms/item, lang ru
+13096/44878 done, 191 ms/item, lang ru
+13736/44878 done, 190 ms/item, lang ru
+14376/44878 done, 190 ms/item, lang ru
+15016/44878 done, 191 ms/item, lang ru
+15656/44878 done, 193 ms/item, lang ru
+16296/44878 done, 195 ms/item, lang ru
+16564/44878 done, 197 ms/item, lang ko
+17204/44878 done, 194 ms/item, lang ko
+17844/44878 done, 193 ms/item, lang ko
+18484/44878 done, 192 ms/item, lang ko
+19124/44878 done, 191 ms/item, lang ko
+19764/44878 done, 191 ms/item, lang ko
+20404/44878 done, 191 ms/item, lang ko
+21044/44878 done, 191 ms/item, lang ko
+21684/44878 done, 192 ms/item, lang ko
+22324/44878 done, 194 ms/item, lang ko
+22964/44878 done, 195 ms/item, lang ko
+23604/44878 done, 197 ms/item, lang ko
+23789/44878 done, 198 ms/item, lang vi
+24429/44878 done, 196 ms/item, lang vi
+25069/44878 done, 194 ms/item, lang vi
+25709/44878 done, 192 ms/item, lang vi
+26349/44878 done, 192 ms/item, lang vi
+26989/44878 done, 191 ms/item, lang vi
+27629/44878 done, 190 ms/item, lang vi
+28269/44878 done, 190 ms/item, lang vi
+28909/44878 done, 191 ms/item, lang vi
+29549/44878 done, 191 ms/item, lang vi
+30189/44878 done, 191 ms/item, lang vi
+30637/44878 done, 192 ms/item, lang ar
+31277/44878 done, 191 ms/item, lang ar
+31917/44878 done, 189 ms/item, lang ar
+32557/44878 done, 188 ms/item, lang ar
+33197/44878 done, 187 ms/item, lang ar
+33837/44878 done, 187 ms/item, lang ar
+34477/44878 done, 187 ms/item, lang ar
+35117/44878 done, 187 ms/item, lang ar
+35757/44878 done, 187 ms/item, lang ar
+36397/44878 done, 188 ms/item, lang ar
+37037/44878 done, 188 ms/item, lang ar
+37677/44878 done, 189 ms/item, lang ar
+37847/44878 done, 190 ms/item, lang id
+38487/44878 done, 189 ms/item, lang id
+39127/44878 done, 188 ms/item, lang id
+39767/44878 done, 187 ms/item, lang id
+40407/44878 done, 186 ms/item, lang id
+41047/44878 done, 185 ms/item, lang id
+41687/44878 done, 185 ms/item, lang id
+42327/44878 done, 185 ms/item, lang id
+42967/44878 done, 185 ms/item, lang id
+43607/44878 done, 186 ms/item, lang id
+44247/44878 done, 186 ms/item, lang id
+44878/44878 done, 187 ms/item, lang id
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+ar {'nllb': 46.79, 'opus': 44.46, 'hy': 43.62, 'best': 'nllb', 'n': 120}
+de {'nllb': 66.87, 'opus': 76.92, 'hy': 66.09, 'best': 'opus', 'n': 120}
+es {'nllb': 58.11, 'opus': 65.95, 'hy': 59.02, 'best': 'opus', 'n': 120}
+fr {'nllb': 62.17, 'opus': 66.0, 'hy': 63.43, 'best': 'opus', 'n': 120}
+hi {'nllb': 61.35, 'opus': 39.33, 'hy': 50.46, 'best': 'nllb', 'n': 120}
+opus jobs left 0
+nllb jobs left 0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+ar {'n': 120, 'nllb_on_nllb': 48.13, 'nllb_on_opus': 45.44, 'opus_on_nllb': 44.56, 'opus_on_opus': 44.36, 'hy_on_nllb': 43.25, 'hy_on_opus': 43.99, 'nllb': 45.44, 'opus': 44.56, 'hy': 43.62, 'best_opus_hy': 'opus', 'best': 'nllb'}
+de {'n': 120, 'nllb_on_nllb': 63.99, 'nllb_on_opus': 69.74, 'opus_on_nllb': 73.5, 'opus_on_opus': 80.34, 'hy_on_nllb': 63.19, 'hy_on_opus': 68.99, 'nllb': 69.74, 'opus': 73.5, 'hy': 66.09, 'best_opus_hy': 'opus', 'best': 'opus'}
+es {'n': 120, 'nllb_on_nllb': 52.25, 'nllb_on_opus': 63.97, 'opus_on_nllb': 58.49, 'opus_on_opus': 73.4, 'hy_on_nllb': 55.59, 'hy_on_opus': 62.44, 'nllb': 63.97, 'opus': 58.49, 'hy': 59.02, 'best_opus_hy': 'opus', 'best': 'opus'}
+fr {'n': 120, 'nllb_on_nllb': 59.12, 'nllb_on_opus': 65.22, 'opus_on_nllb': 61.93, 'opus_on_opus': 70.06, 'hy_on_nllb': 61.71, 'hy_on_opus': 65.15, 'nllb': 65.22, 'opus': 61.93, 'hy': 63.43, 'best_opus_hy': 'opus', 'best': 'opus'}
+hi {'n': 120, 'nllb_on_nllb': 78.09, 'nllb_on_opus': 44.61, 'opus_on_nllb': 40.84, 'opus_on_opus': 37.81, 'hy_on_nllb': 63.21, 'hy_on_opus': 37.72, 'nllb': 44.61, 'opus': 40.84, 'hy': 50.47, 'best_opus_hy': 'hy', 'best': 'nllb'}
+id {'n': 120, 'nllb_on_nllb': 71.48, 'nllb_on_opus': 72.49, 'opus_on_nllb': 69.3, 'opus_on_opus': 73.39, 'hy_on_nllb': 66.3, 'hy_on_opus': 67.37, 'nllb': 72.49, 'opus': 69.3, 'hy': 66.84, 'best_opus_hy': 'opus', 'best': 'nllb'}
+it {'n': 60, 'nllb_on_nllb': 0.0, 'nllb_on_opus': 59.04, 'opus_on_nllb': 0.0, 'opus_on_opus': 71.09, 'hy_on_nllb': 0.0, 'hy_on_opus': 64.88, 'nllb': 59.04, 'opus': 0.0, 'hy': 32.44, 'best_opus_hy': 'opus', 'best': 'opus'}
+ja {'n': 60, 'nllb_on_nllb': 0.0, 'nllb_on_opus': 38.47, 'opus_on_nllb': 0.0, 'opus_on_opus': 39.23, 'hy_on_nllb': 0.0, 'hy_on_opus': 46.11, 'nllb': 38.47, 'opus': 0.0, 'hy': 23.05, 'best_opus_hy': 'opus', 'best': 'opus'}
+ko {'n': 120, 'nllb_on_nllb': 61.49, 'nllb_on_opus': 62.52, 'opus_on_nllb': 47.99, 'opus_on_opus': 52.25, 'hy_on_nllb': 59.4, 'hy_on_opus': 61.98, 'nllb': 62.52, 'opus': 47.99, 'hy': 60.69, 'best_opus_hy': 'hy', 'best': 'nllb'}
+pl {'n': 120, 'nllb_on_nllb': 57.6, 'nllb_on_opus': 51.28, 'opus_on_nllb': 59.88, 'opus_on_opus': 56.36, 'hy_on_nllb': 56.79, 'hy_on_opus': 52.66, 'nllb': 51.28, 'opus': 59.88, 'hy': 54.72, 'best_opus_hy': 'opus', 'best': 'opus'}
+pt {'n': 120, 'nllb_on_nllb': 56.0, 'nllb_on_opus': 61.6, 'opus_on_nllb': 67.45, 'opus_on_opus': 67.43, 'hy_on_nllb': 59.66, 'hy_on_opus': 58.28, 'nllb': 61.6, 'opus': 67.45, 'hy': 58.97, 'best_opus_hy': 'opus', 'best': 'opus'}
+ru {'n': 120, 'nllb_on_nllb': 55.32, 'nllb_on_opus': 43.23, 'opus_on_nllb': 50.16, 'opus_on_opus': 41.93, 'hy_on_nllb': 53.31, 'hy_on_opus': 41.3, 'nllb': 43.23, 'opus': 50.16, 'hy': 47.3, 'best_opus_hy': 'hy', 'best': 'nllb'}
+th {'n': 120, 'nllb_on_nllb': 40.8, 'nllb_on_opus': 58.98, 'opus_on_nllb': 39.01, 'opus_on_opus': 46.98, 'hy_on_nllb': 47.93, 'hy_on_opus': 58.85, 'nllb': 58.98, 'opus': 39.01, 'hy': 53.39, 'best_opus_hy': 'hy', 'best': 'nllb'}
+tr {'n': 120, 'nllb_on_nllb': 69.2, 'nllb_on_opus': 64.84, 'opus_on_nllb': 70.3, 'opus_on_opus': 70.35, 'hy_on_nllb': 64.6, 'hy_on_opus': 64.41, 'nllb': 64.84, 'opus': 70.3, 'hy': 64.5, 'best_opus_hy': 'opus', 'best': 'opus'}
+vi {'n': 120, 'nllb_on_nllb': 59.81, 'nllb_on_opus': 41.26, 'opus_on_nllb': 56.11, 'opus_on_opus': 39.4, 'hy_on_nllb': 60.55, 'hy_on_opus': 37.4, 'nllb': 41.26, 'opus': 56.11, 'hy': 48.97, 'best_opus_hy': 'hy', 'best': 'nllb'}
+zh {'n': 120, 'nllb_on_nllb': 46.45, 'nllb_on_opus': 37.87, 'opus_on_nllb': 41.8, 'opus_on_opus': 45.23, 'hy_on_nllb': 47.79, 'hy_on_opus': 44.89, 'nllb': 37.87, 'opus': 41.8, 'hy': 46.34, 'best_opus_hy': 'hy', 'best': 'hy'}

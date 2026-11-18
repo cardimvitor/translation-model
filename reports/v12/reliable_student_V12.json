@@ -1,0 +1,2585 @@
+{
+ "model": "student_V12",
+ "target": 0.97,
+ "rel_tau": 0.82,
+ "tuning": {
+  "n": 192,
+  "reliable_share": 0.5312,
+  "reliable_exact": 0.9216,
+  "reliable_good": 0.9314,
+  "reliable_chrF": 96.85,
+  "rest_chrF": 82.94,
+  "all_chrF": 90.33
+ },
+ "test": {
+  "n": 320,
+  "reliable_share": 0.6781,
+  "reliable_exact": 0.8848,
+  "reliable_good": 0.9032,
+  "reliable_chrF": 95.94,
+  "rest_chrF": 70.65,
+  "all_chrF": 87.8
+ },
+ "test_rows": [
+  {
+   "lang": "zh",
+   "src": "无线鼠标",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "ratón inalámbrico",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "mouse sem fio",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "فأرة لاسلكية",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "беспроводная мышь",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "ワイヤレスマウス",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "무선 마우스",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "kabellose Maus",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "souris sans fil",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "वायरलेस माउस",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "kablosuz fare",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "mouse nirkabel",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "chuột không dây",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "mouse senza fili",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "mysz bezprzewodowa",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "เมาส์ไร้สาย",
+   "out": "wireless mouse",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "手机壳",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "funda para móvil",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "capa de celular",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "غطاء هاتف",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "чехол для телефона",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "スマホケース",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "휴대폰 케이스",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Handyhülle",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "fr",
+   "src": "coque de téléphone",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "फ़ोन कवर",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "telefon kılıfı",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "casing ponsel",
+   "out": "cell phone casing",
+   "exact": false,
+   "chrf": 86.83793406167966,
+   "reliable": false
+  },
+  {
+   "lang": "vi",
+   "src": "ốp lưng điện thoại",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "custodia per telefono",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "etui na telefon",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "เคสโทรศัพท์",
+   "out": "phone case",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "跑步鞋",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "zapatillas para correr",
+   "out": "running sneakers",
+   "exact": false,
+   "chrf": 55.750492982614205,
+   "reliable": false
+  },
+  {
+   "lang": "pt",
+   "src": "tênis de corrida",
+   "out": "running sneakers",
+   "exact": false,
+   "chrf": 55.750492982614205,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "حذاء جري",
+   "out": "jerry shoes",
+   "exact": false,
+   "chrf": 26.19112701558508,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "кроссовки для бега",
+   "out": "runner sneakers",
+   "exact": false,
+   "chrf": 20.117621811963023,
+   "reliable": false
+  },
+  {
+   "lang": "ja",
+   "src": "ランニングシューズ",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "러닝화",
+   "out": "Reoninghwa",
+   "exact": false,
+   "chrf": 21.6229280563621,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Laufschuhe",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "chaussures de course",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "रनिंग जूते",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "koşu ayakkabısı",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "id",
+   "src": "sepatu lari",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "giày chạy bộ",
+   "out": "sneakers",
+   "exact": false,
+   "chrf": 7.440476190476191,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "scarpe da corsa",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "buty do biegania",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "th",
+   "src": "รองเท้าวิ่ง",
+   "out": "running shoes",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "咖啡机",
+   "out": "coffee machine",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "cafetera",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "cafeteira",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "ماكينة قهوة",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "кофеварка",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "コーヒーメーカー",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "커피 메이커",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Kaffeemaschine",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "cafetière",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "कॉफ़ी मेकर",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "kahve makinesi",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "id",
+   "src": "mesin kopi",
+   "out": "coffee machine",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "vi",
+   "src": "máy pha cà phê",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "macchina da caffè",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "ekspres do kawy",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "เครื่องชงกาแฟ",
+   "out": "coffee maker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "婴儿推车",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "carrito de bebé",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "pt",
+   "src": "carrinho de bebê",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "عربة أطفال",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "детская коляска",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ja",
+   "src": "ベビーカー",
+   "out": "baby car",
+   "exact": false,
+   "chrf": 18.378112657072418,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "유모차",
+   "out": "Yumocha",
+   "exact": false,
+   "chrf": 14.66510405057891,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Kinderwagen",
+   "out": "stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "fr",
+   "src": "poussette",
+   "out": "stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "hi",
+   "src": "बेबी स्ट्रोलर",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "bebek arabası",
+   "out": "baby car",
+   "exact": false,
+   "chrf": 18.378112657072418,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "kereta bayi",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "xe đẩy em bé",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "passeggino",
+   "out": "stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "wózek dziecięcy",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "th",
+   "src": "รถเข็นเด็ก",
+   "out": "baby stroller",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "瑜伽垫",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "esterilla de yoga",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "tapete de ioga",
+   "out": "iwaga rug",
+   "exact": false,
+   "chrf": 9.632759353741497,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "حصيرة يوغا",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "коврик для йоги",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "ヨガマット",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "요가 매트",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Yogamatte",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "tapis de yoga",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "योगा मैट",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "yoga matı",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "matras yoga",
+   "out": "yoga mats",
+   "exact": false,
+   "chrf": 95.15349630471859,
+   "reliable": false
+  },
+  {
+   "lang": "vi",
+   "src": "thảm tập yoga",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "tappetino da yoga",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "mata do jogi",
+   "out": "yoga mat",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "เสื่อโยคะ",
+   "out": "yoka",
+   "exact": false,
+   "chrf": 16.354669887278583,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "厨房刀具套装",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "juego de cuchillos de cocina",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "pt",
+   "src": "conjunto de facas de cozinha",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "طقم سكاكين مطبخ",
+   "out": "kitchen knives set",
+   "exact": false,
+   "chrf": 75.05826539988783,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "набор кухонных ножей",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "キッチンナイフセット",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "주방 칼 세트",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Küchenmesser-Set",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "ensemble de couteaux de cuisine",
+   "out": "kitchen knives set",
+   "exact": false,
+   "chrf": 75.05826539988783,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "किचन चाकू सेट",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "mutfak bıçağı seti",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "set pisau dapur",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "bộ dao nhà bếp",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "set di coltelli da cucina",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "zestaw noży kuchennych",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "ชุดมีดทำครัว",
+   "out": "kitchen knife set",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "LED台灯",
+   "out": "led light",
+   "exact": false,
+   "chrf": 11.942048883740222,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "lámpara de escritorio LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "luminária de mesa LED",
+   "out": "led desk light",
+   "exact": false,
+   "chrf": 61.7037440251737,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "مصباح مكتب LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "светодиодная настольная лампа",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "LEDデスクライト",
+   "out": "led desk light",
+   "exact": false,
+   "chrf": 61.7037440251737,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "LED 책상 스탠드",
+   "out": "led desk stand",
+   "exact": false,
+   "chrf": 51.22151958702646,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "LED-Schreibtischlampe",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "lampe de bureau LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "एलईडी डेस्क लैंप",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "LED masa lambası",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "lampu meja LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "đèn bàn LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "lampada da scrivania LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "lampka biurkowa LED",
+   "out": "led desk lamp",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "โคมไฟตั้งโต๊ะ LED",
+   "out": "led table lamp",
+   "exact": false,
+   "chrf": 27.542404691239796,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "水瓶",
+   "out": "bottle",
+   "exact": false,
+   "chrf": 44.02582537713412,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "botella de agua",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "garrafa de água",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "زجاجة ماء",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "бутылка для воды",
+   "out": "bottle for water",
+   "exact": false,
+   "chrf": 60.924710685115166,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "ウォーターボトル",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "물병",
+   "out": "bottle",
+   "exact": false,
+   "chrf": 44.02582537713412,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Trinkflasche",
+   "out": "drinking bottle",
+   "exact": false,
+   "chrf": 37.605231967404876,
+   "reliable": false
+  },
+  {
+   "lang": "fr",
+   "src": "bouteille d'eau",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "पानी की बोतल",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "su şişesi",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "botol air",
+   "out": "bottle water",
+   "exact": false,
+   "chrf": 64.96693121693123,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "bình nước",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "borraccia",
+   "out": "eraser",
+   "exact": false,
+   "chrf": 8.519660755589822,
+   "reliable": false
+  },
+  {
+   "lang": "pl",
+   "src": "butelka na wodę",
+   "out": "water bottle",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "ขวดน้ำ",
+   "out": "bottle water",
+   "exact": false,
+   "chrf": 64.96693121693123,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "笔记本电脑背包",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "mochila para portátil",
+   "out": "backpack for laptop",
+   "exact": false,
+   "chrf": 71.79917138317967,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "mochila para notebook",
+   "out": "backpack for notebook",
+   "exact": false,
+   "chrf": 45.15940503792748,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "حقيبة ظهر للابتوب",
+   "out": "backpack for laptop",
+   "exact": false,
+   "chrf": 71.79917138317967,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "рюкзак для ноутбука",
+   "out": "backpack for laptop",
+   "exact": false,
+   "chrf": 71.79917138317967,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "ノートパソコン用リュック",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "노트북 백팩",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Laptop-Rucksack",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "sac à dos pour ordinateur portable",
+   "out": "backpack for laptop",
+   "exact": false,
+   "chrf": 71.79917138317967,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "लैपटॉप बैकपैक",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "laptop sırt çantası",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "tas ransel laptop",
+   "out": "bag laptop backpack",
+   "exact": false,
+   "chrf": 94.9566147882592,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "ba lô laptop",
+   "out": "backpack laptop",
+   "exact": false,
+   "chrf": 75.46879046879047,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "zaino porta pc",
+   "out": "pc door backpack",
+   "exact": false,
+   "chrf": 49.01043401043401,
+   "reliable": false
+  },
+  {
+   "lang": "pl",
+   "src": "plecak na laptopa",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "กระเป๋าเป้ใส่โน้ตบุ๊ก",
+   "out": "laptop backpack",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "蓝牙音箱",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "altavoz bluetooth",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "caixa de som bluetooth",
+   "out": "bluetooth sound box",
+   "exact": false,
+   "chrf": 54.02244087932759,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "سماعة بلوتوث",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "блютуз колонка",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "Bluetoothスピーカー",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "블루투스 스피커",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Bluetooth-Lautsprecher",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "enceinte bluetooth",
+   "out": "bluetooth kindle",
+   "exact": false,
+   "chrf": 50.11478304014055,
+   "reliable": false
+  },
+  {
+   "lang": "hi",
+   "src": "ब्लूटूथ स्पीकर",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "bluetooth hoparlör",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "speaker bluetooth",
+   "out": "speaker bluetooth",
+   "exact": false,
+   "chrf": 79.53046953046953,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "loa bluetooth",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "altoparlante bluetooth",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "głośnik bluetooth",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "ลำโพงบลูทูธ",
+   "out": "bluetooth speaker",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "冬季夹克",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "chaqueta de invierno",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "jaqueta de inverno",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "جاكيت شتوي",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "зимняя куртка",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ja",
+   "src": "冬用ジャケット",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "겨울 재킷",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Winterjacke",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "veste d'hiver",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "सर्दियों की जैकेट",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "tr",
+   "src": "kış montu",
+   "out": "winter montu",
+   "exact": false,
+   "chrf": 36.81419713558071,
+   "reliable": false
+  },
+  {
+   "lang": "id",
+   "src": "jaket musim dingin",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "vi",
+   "src": "áo khoác mùa đông",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "giacca invernale",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "kurtka zimowa",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "th",
+   "src": "แจ็คเก็ตกันหนาว",
+   "out": "winter jacket",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "男士纯棉T恤",
+   "out": "men's pure cotton t-shirt",
+   "exact": false,
+   "chrf": 78.41604461375645,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "camiseta de algodón para hombre",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "camiseta masculina de algodão",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "تي شيرت قطن رجالي",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "мужская хлопковая футболка",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "メンズ綿Tシャツ",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "남성 면 티셔츠",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Herren Baumwoll-T-Shirt",
+   "out": "Herren Baumwoll-T-Shirt",
+   "exact": false,
+   "chrf": 31.282207660035343,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "t-shirt en coton pour homme",
+   "out": "t-shirt en coton pour homme",
+   "exact": false,
+   "chrf": 41.01682643346201,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "पुरुषों की सूती टी-शर्ट",
+   "out": "men's t-shirt",
+   "exact": false,
+   "chrf": 46.76275969065322,
+   "reliable": false
+  },
+  {
+   "lang": "tr",
+   "src": "erkek pamuklu tişört",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "kaos katun pria",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "áo thun cotton nam",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "maglietta in cotone da uomo",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "męska bawełniana koszulka",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "เสื้อยืดผ้าฝ้ายผู้ชาย",
+   "out": "men's cotton t-shirt",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "皮革钱包",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "cartera de cuero",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "carteira de couro",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "محفظة جلدية",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "кожаный кошелёк",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "革財布",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "가죽 지갑",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "de",
+   "src": "Lederbörse",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "fr",
+   "src": "portefeuille en cuir",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "चमड़े का बटुआ",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "deri cüzdan",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "dompet kulit",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "ví da",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "portafoglio in pelle",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "skórzany portfel",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "กระเป๋าสตางค์หนัง",
+   "out": "leather wallet",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "电动牙刷",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "cepillo de dientes eléctrico",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "escova de dentes elétrica",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "فرشاة أسنان كهربائية",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "электрическая зубная щётка",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "電動歯ブラシ",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "전동 칫솔",
+   "out": "toddler toothbrush",
+   "exact": false,
+   "chrf": 53.108229623117374,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "elektrische Zahnbürste",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "brosse à dents électrique",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "इलेक्ट्रिक टूथब्रश",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "elektrikli diş fırçası",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "sikat gigi elektrik",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "bàn chải đánh răng điện",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "spazzolino elettrico",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "elektryczna szczoteczka do zębów",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "แปรงสีฟันไฟฟ้า",
+   "out": "electric toothbrush",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "zh",
+   "src": "车载手机支架",
+   "out": "car phone holder",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "soporte de móvil para coche",
+   "out": "mobile stand for car",
+   "exact": false,
+   "chrf": 27.961511527687993,
+   "reliable": false
+  },
+  {
+   "lang": "pt",
+   "src": "suporte de celular para carro",
+   "out": "cell phone holder for car",
+   "exact": false,
+   "chrf": 94.71645469954271,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "حامل هاتف للسيارة",
+   "out": "phone holder for car",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "автомобильный держатель для телефона",
+   "out": "car phone holder",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ja",
+   "src": "車載スマホホルダー",
+   "out": "car sma holder",
+   "exact": false,
+   "chrf": 37.60366814135397,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "차량용 휴대폰 거치대",
+   "out": "cell phone mount",
+   "exact": false,
+   "chrf": 70.56139473756097,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Handyhalterung fürs Auto",
+   "out": "cell phone mount for car",
+   "exact": false,
+   "chrf": 69.60196376458485,
+   "reliable": false
+  },
+  {
+   "lang": "fr",
+   "src": "support de téléphone pour voiture",
+   "out": "phone holder for car",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "कार फ़ोन होल्डर",
+   "out": "cars phone hold",
+   "exact": false,
+   "chrf": 64.15343373444158,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "araç telefon tutucu",
+   "out": "car phone holder",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "id",
+   "src": "holder ponsel mobil",
+   "out": "car cell phone holder",
+   "exact": false,
+   "chrf": 75.60716327475721,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "giá đỡ điện thoại ô tô",
+   "out": "price of car phone",
+   "exact": false,
+   "chrf": 50.43810077063322,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "porta cellulare per auto",
+   "out": "cell phone holder for car",
+   "exact": false,
+   "chrf": 94.71645469954271,
+   "reliable": false
+  },
+  {
+   "lang": "pl",
+   "src": "uchwyt samochodowy na telefon",
+   "out": "car phone holder",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "th",
+   "src": "ที่วางโทรศัพท์ในรถ",
+   "out": "phone stand in car",
+   "exact": false,
+   "chrf": 31.329943755300533,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "狗窝",
+   "out": "dog poop",
+   "exact": false,
+   "chrf": 18.44529140860727,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "cama para perro",
+   "out": "dog bed",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "cama para cachorro",
+   "out": "dog bed",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ar",
+   "src": "سرير كلب",
+   "out": "dog bed",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "лежанка для собаки",
+   "out": "dog leash",
+   "exact": false,
+   "chrf": 20.38499251690148,
+   "reliable": false
+  },
+  {
+   "lang": "ja",
+   "src": "犬用ベッド",
+   "out": "beds for dogs",
+   "exact": false,
+   "chrf": 32.10645800125585,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "강아지 침대",
+   "out": "puppy bed",
+   "exact": false,
+   "chrf": 17.780076526072254,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Hundebett",
+   "out": "dog bed",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "lit pour chien",
+   "out": "dog bed",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "कुत्ते का बिस्तर",
+   "out": "dog beds",
+   "exact": false,
+   "chrf": 93.25876662636034,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "köpek yatağı",
+   "out": "dog bed",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "kasur anjing",
+   "out": "dog mattress",
+   "exact": false,
+   "chrf": 18.4365348872958,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "giường cho chó",
+   "out": "dog beds",
+   "exact": false,
+   "chrf": 93.25876662636034,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "cuccia per cani",
+   "out": "dog scissors",
+   "exact": false,
+   "chrf": 16.053229000627926,
+   "reliable": false
+  },
+  {
+   "lang": "pl",
+   "src": "legowisko dla psa",
+   "out": "dog leggings",
+   "exact": false,
+   "chrf": 18.4365348872958,
+   "reliable": false
+  },
+  {
+   "lang": "th",
+   "src": "ที่นอนสุนัข",
+   "out": "dog mattress",
+   "exact": false,
+   "chrf": 18.4365348872958,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "挂钟",
+   "out": "hanging clock",
+   "exact": false,
+   "chrf": 32.794584628243165,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "reloj de pared",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "relógio de parede",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "ساعة حائط",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "настенные часы",
+   "out": "wall clocks",
+   "exact": false,
+   "chrf": 96.82300673862483,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "壁掛け時計",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "벽시계",
+   "out": "Byeoksigye",
+   "exact": false,
+   "chrf": 3.6231884057971016,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Wanduhr",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "horloge murale",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "दीवार घड़ी",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "duvar saati",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "jam dinding",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "vi",
+   "src": "đồng hồ treo tường",
+   "out": "wall hanging clock",
+   "exact": false,
+   "chrf": 46.189490095948535,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "orologio da parete",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "zegar ścienny",
+   "out": "wall clock",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "นาฬิกาแขวนผนัง",
+   "out": "wall hanging clock",
+   "exact": false,
+   "chrf": 46.189490095948535,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "不粘煎锅",
+   "out": "nonstick pan",
+   "exact": false,
+   "chrf": 66.70467087283252,
+   "reliable": false
+  },
+  {
+   "lang": "es",
+   "src": "sartén antiadherente",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "frigideira antiaderente",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "مقلاة غير لاصقة",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "ru",
+   "src": "сковорода с антипригарным покрытием",
+   "out": "anti frying pan",
+   "exact": false,
+   "chrf": 50.802487601984545,
+   "reliable": false
+  },
+  {
+   "lang": "ja",
+   "src": "焦げ付かないフライパン",
+   "out": "frying pan without anxiety",
+   "exact": false,
+   "chrf": 44.36658770291507,
+   "reliable": false
+  },
+  {
+   "lang": "ko",
+   "src": "논스틱 프라이팬",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "antihaftbeschichtete Bratpfanne",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "fr",
+   "src": "poêle antiadhésive",
+   "out": "nonstick pan",
+   "exact": false,
+   "chrf": 66.70467087283252,
+   "reliable": false
+  },
+  {
+   "lang": "hi",
+   "src": "नॉन-स्टिक फ्राइंग पैन",
+   "out": "non-stick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "tr",
+   "src": "yapışmaz tava",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "wajan anti lengket",
+   "out": "nonstick rain",
+   "exact": false,
+   "chrf": 45.06403120410152,
+   "reliable": false
+  },
+  {
+   "lang": "vi",
+   "src": "chảo chống dính",
+   "out": "nonstick pans",
+   "exact": false,
+   "chrf": 65.3162578162578,
+   "reliable": false
+  },
+  {
+   "lang": "it",
+   "src": "padella antiaderente",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "patelnia nieprzywierająca",
+   "out": "nonstick frying pan",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "th",
+   "src": "กระทะเคลือบกันติด",
+   "out": "Kratha Kheluep Kan Tit",
+   "exact": false,
+   "chrf": 10.151296028479253,
+   "reliable": false
+  },
+  {
+   "lang": "zh",
+   "src": "办公椅",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "es",
+   "src": "silla de oficina",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pt",
+   "src": "cadeira de escritório",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ar",
+   "src": "كرسي مكتب",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ru",
+   "src": "офисное кресло",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ja",
+   "src": "オフィスチェア",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "ko",
+   "src": "사무용 의자",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": false
+  },
+  {
+   "lang": "de",
+   "src": "Bürostuhl",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "fr",
+   "src": "chaise de bureau",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "hi",
+   "src": "ऑफिस कुर्सी",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "tr",
+   "src": "ofis koltuğu",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "id",
+   "src": "kursi kantor",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "vi",
+   "src": "ghế văn phòng",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "it",
+   "src": "sedia da ufficio",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "pl",
+   "src": "krzesło biurowe",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  },
+  {
+   "lang": "th",
+   "src": "เก้าอี้สำนักงาน",
+   "out": "office chair",
+   "exact": true,
+   "chrf": 100.0,
+   "reliable": true
+  }
+ ]
+}
