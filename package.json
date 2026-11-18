@@ -1,7 +1,7 @@
 {
   "name": "en-normalizer",
   "version": "0.4.0",
-  "description": "Translate / transliterate e-commerce and shipping labels into English in the browser or Node, offline. 16 languages.",
+  "description": "An experiment in translating city, place and product names from 16 languages into English with small offline models, in the browser or Node; transliteration included.",
   "main": "runtime/index.js",
   "types": "runtime/index.d.ts",
   "files": ["runtime/*.js", "runtime/index.d.ts", "data", "models"],
